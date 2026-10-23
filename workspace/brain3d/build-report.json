@@ -1,0 +1,33 @@
+{
+ "live": [
+  "AdminPage-CnoKsHWf.js",
+  "AnatomyViewer-C5q0xwNu.js",
+  "DictionaryPage-DlS4hjTR.js",
+  "LabPage-zPU8vhVB.js",
+  "LessonPlayerPage-DKkvH1Ng.js",
+  "QuizPage-Ca-aKRIy.js",
+  "SearchBox-CXYvX0ai.js",
+  "TutorPage-C4YcKkov.js",
+  "ViewerPreview-D6qEvvvM.js",
+  "assetManifest-D3o27EUe.js",
+  "index-D5yXBwUi.css",
+  "index-DAxCahJm.js",
+  "info-iXqhKiJV.js",
+  "rolldown-runtime-XKyaHtl9.js",
+  "three-Bl2eHk-_.js"
+ ],
+ "renamed": {
+  "assetManifest-D3o27EUe.js": "assetManifest-D3o27EUe-b12.js",
+  "TutorPage-C4YcKkov.js": "TutorPage-C4YcKkov-b12.js",
+  "ViewerPreview-D6qEvvvM.js": "ViewerPreview-D6qEvvvM-b12.js",
+  "LabPage-zPU8vhVB.js": "LabPage-zPU8vhVB-b12.js",
+  "AnatomyViewer-C5q0xwNu.js": "AnatomyViewer-C5q0xwNu-b12.js",
+  "index-DAxCahJm.js": "index-DAxCahJm-b12.js",
+  "info-iXqhKiJV.js": "info-iXqhKiJV-b12.js",
+  "QuizPage-Ca-aKRIy.js": "QuizPage-Ca-aKRIy-b12.js",
+  "SearchBox-CXYvX0ai.js": "SearchBox-CXYvX0ai-b12.js",
+  "AdminPage-CnoKsHWf.js": "AdminPage-CnoKsHWf-b12.js",
+  "LessonPlayerPage-DKkvH1Ng.js": "LessonPlayerPage-DKkvH1Ng-b12.js",
+  "DictionaryPage-DlS4hjTR.js": "DictionaryPage-DlS4hjTR-b12.js"
+ }
+}
