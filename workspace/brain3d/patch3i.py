@@ -42,7 +42,7 @@ sm_={'id':'anatomyverse-limbsupply','name':'Limb arteries, veins and nerves (sch
 tail='],D=`schematic-body-v1`'; assert m.count(tail)==1
 m=m.replace(tail,','+json.dumps(om,ensure_ascii=False)+','+json.dumps(sm_,ensure_ascii=False)+tail)
 def both(base): return [base+'_L',base+'_R']
-REPO=['oesophagus','stomach','liver','gallbladder','pancreas','small_intestine','large_intestine','rectum','urinary_bladder','spleen','thymus','aorta','inferior_vena_cava','rib_cage','sternum','vertebral_column']+both('kidney')+both('adrenal_gland')+both('ureter')+both('eye')+both('common_carotid')+both('common_iliac')
+REPO=['skull','oesophagus','stomach','liver','gallbladder','pancreas','small_intestine','large_intestine','rectum','urinary_bladder','spleen','thymus','aorta','inferior_vena_cava','rib_cage','sternum','vertebral_column']+both('kidney')+both('adrenal_gland')+both('ureter')+both('eye')+both('common_carotid')+both('common_iliac')
 REPS=[]
 for b_ in ('brachial_artery','femoral_artery','sciatic_nerve','axillary_nerve','radial_nerve','musculocutaneous_nerve','femoral_nerve','tibial_nerve','common_fibular_nerve'): REPS+=both(b_)
 a='"alveoli_cluster"]}]}'; assert m.count(a)==1

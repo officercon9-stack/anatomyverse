@@ -34,6 +34,10 @@ SPEC=[
  ('urinary_bladder','urinary-bladder',r'urinary bladder',0xD9B38A,2000),
  ('eye','eye',r'eyeball',0xDDE3E8,1500),
  ('thymus','thymus',r'(right|left) lobe of thymus',0xE6D3A8,2500),
+ ('skull','skull',r'frontal bone|occipital bone|sphenoid bone|ethmoid|vomer|(right|left) (parietal bone|temporal bone|zygomatic bone|maxilla|nasal bone|lacrimal bone|palatine bone|inferior nasal concha)',0xE3DAC4,13000),
+ ('mandible','mandible',r'mandible',0xE3DAC4,3500),
+ ('teeth','teeth',r'(right|left) (upper|lower) .*tooth',0xF7F3E8,5000),
+ ('hyoid','hyoid-bone',r'hyoid bone',0xE3DAC4,300),
  # vessels
  ('aorta','aorta',r'ascending aorta|arch of aorta|descending aorta|brachiocephalic artery, nsn',ART,4000),
  ('common_carotid','common-carotid-artery',r'(right|left) common carotid artery',ART,600),
