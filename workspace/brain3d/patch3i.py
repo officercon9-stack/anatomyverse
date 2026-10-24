@@ -128,7 +128,7 @@ wr(MAN,m)
 for ch in (V,L):
     t=rd(ch); t=sub1(t,'pop:null,dia:!1,nv:!1}','pop:null,dia:!1,nv:!1,ld_org:!1,ld_brain:!1,ld_limb:!1,ld_lung:!1,ld_sup:!1}'); wr(ch,t)
 v=rd(V)
-v=sub1(v,'function _BrainFlow(){','function _BrainFlow(){(0,k.useEffect)(()=>{let _u=D.subscribe(_s=>{_s.selectedId&&_avb.set({ld_org:!0,ld_limb:!0})});return()=>_u()},[]);')
+v=sub1(v,'function _BrainFlow(){','function _BrainFlow(){(0,k.useEffect)(()=>{let _u=D.subscribe(_s=>{_s.selectedId&&_avb.set({ld_limb:!0})});return()=>_u()},[]);')
 wr(V,v)
 l=rd(L)
 # views ask for what they need right away
@@ -137,3 +137,9 @@ l=sub1(l,'_s.restoreVisibility();_s.select(null);_foc||_s.resetCamera();','_s.re
 l=sub1(l,'function _diaShow(){let _s=D.getState();_s.restoreVisibility();','function _diaShow(){let _s=D.getState();_avb.set({ld_lung:!0});_s.restoreVisibility();')
 l=sub1(l,'onClick:()=>{let _n=!_nv;_snv(_n);_view(_a,_n,!0)}','onClick:()=>{let _n=!_nv;_snv(_n);_n&&_avb.set({ld_sup:!0});_view(_a,_n,!0)}')
 wr(L,l)
+# ---------- lighter shading + lower pixel density ----------
+v=rd(V)
+v=sub1(v,'meshPhysicalMaterial','meshStandardMaterial')
+v=sub1(v,'clearcoat:d?0:u.clearcoat,clearcoatRoughness:u.clearcoatRoughness,sheen:d?0:u.sheen,sheenColor:`#ffd9d0`,','')
+v=sub1(v,'dpr:i?1:[1,2]','dpr:1')
+wr(V,v)

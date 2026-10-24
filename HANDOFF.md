@@ -41,3 +41,6 @@ Heavy overlays now carry `gate` flags (ld_org, ld_brain, ld_limb, ld_lung, ld_su
 
 ## v33 (build -b21): on-demand loading
 Timed staging removed. At start only the schematic body, heart and small data load (~3 MB). Each view button, search command or diaphragm view sets the ld_* flags it needs; selecting any part loads limbs + organs. Brain/lung/supply models load only from their own views.
+
+## v34 (build -b23): lighter rendering
+Profiling showed taps were GPU-bound: all parts used meshPhysicalMaterial (clearcoat, sheen). Now meshStandardMaterial, dpr fixed at 1. Selecting a part loads only the limb model. Test with a CPU-rendered browser only; real phone speed unmeasured.
