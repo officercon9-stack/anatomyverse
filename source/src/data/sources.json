@@ -1,0 +1,25 @@
+{
+ "openstax-ap2e": {
+  "id": "openstax-ap2e",
+  "title": "Anatomy and Physiology 2e (Betts JG, Young KA, Wise JA, et al.)",
+  "publisher": "OpenStax, Rice University",
+  "year": 2022,
+  "url": "https://openstax.org/details/books/anatomy-and-physiology-2e",
+  "license": "CC BY 4.0"
+ },
+ "z-anatomy": {
+  "id": "z-anatomy",
+  "title": "Z-Anatomy — the libre 3D atlas of anatomy (TA2 terminology list, 3D models)",
+  "publisher": "Z-Anatomy project (G. Kervyn et al.), derived from BodyParts3D (DBCLS)",
+  "url": "https://github.com/Z-Anatomy/Models-of-human-anatomy",
+  "license": "CC BY-SA 4.0"
+ },
+ "fipat-ta2": {
+  "id": "fipat-ta2",
+  "title": "Terminologia Anatomica, 2nd edition (Latin terminology)",
+  "publisher": "Federative International Programme for Anatomical Terminology (FIPAT)",
+  "year": 2019,
+  "url": "https://fipat.library.dal.ca/ta2/",
+  "license": "Terminology reference — consulted for Latin terms only; no text reproduced"
+ }
+}
