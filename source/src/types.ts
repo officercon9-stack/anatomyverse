@@ -23,6 +23,9 @@ export interface Structure {
   sources: SourceRef[];
   reviewStatus: ReviewStatus;
   // muscles only
+  secondarySystems?: string[];
+  childIds?: string[];
+  venousDrainage?: string;
   origin?: string; insertion?: string; innervation?: string; actions?: string; bloodSupply?: string;
 }
 

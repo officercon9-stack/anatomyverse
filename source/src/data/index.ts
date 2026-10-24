@@ -4,7 +4,7 @@ import sourcesJson from './sources.json';
 import chaptersJson from './chapters.json';
 import type { Structure, ModelAsset, Source } from '../types';
 
-/** All anatomy structures (teaching records). Generated from the shipped app, edit freely. */
+/** All anatomy structures (teaching records). Edit src/data/structures.json to change teaching content. */
 export const structures = structuresJson as unknown as Structure[];
 export const models = modelsJson as unknown as ModelAsset[];
 export const sources = sourcesJson as unknown as Record<string, Source>;
@@ -13,11 +13,11 @@ export const chapters = chaptersJson as Record<string, string>;
 
 export const SCHEMATIC_MODEL_ID = 'schematic-body-v1';
 
-const structureById = new Map(structures.map((s) => [s.id, s]));
+export const structureById: Record<string, Structure> = Object.fromEntries(structures.map((s) => [s.id, s]));
 export const modelById = Object.fromEntries(models.map((m) => [m.id, m])) as Record<string, ModelAsset>;
 
 export function getStructure(id: string | null | undefined): Structure | undefined {
-  return id ? structureById.get(id) : undefined;
+  return id ? structureById[id] : undefined;
 }
 
 /** A structure and all of its descendants (children, grand-children ...). */

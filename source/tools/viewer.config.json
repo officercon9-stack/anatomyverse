@@ -1,0 +1,471 @@
+{
+ "input": "tools/viewer.decompiled.js",
+ "outDir": "src",
+ "rename": {
+  "Ie": "ecgValue",
+  "Le": "enableHeartAudio",
+  "Re": "playHeartSound",
+  "ze": "vibrateHeart",
+  "Be": "canVibrate",
+  "Ve": "PHASE_TEXT",
+  "z": "cardiacPhaseAt",
+  "Ue": "chamberScale",
+  "We": "AV_VALVES",
+  "Ge": "SEMILUNAR_VALVES",
+  "Ke": "valveClosure",
+  "qe": "heartSoundAt",
+  "V": "heartClock",
+  "H": "ATRIA",
+  "U": "VENTRICLES",
+  "P": "useRegistryVersion",
+  "Pe": "registerObject",
+  "I": "objectsOf",
+  "L": "boundsOf",
+  "Fe": "visibleBounds",
+  "Je": "HeartAnimator",
+  "nt": "BloodFlow",
+  "rt": "EcgTrace",
+  "st": "CameraRig",
+  "ct": "Labels",
+  "Z": "COLORS",
+  "pt": "SCHEMATIC_PARTS",
+  "k": "React",
+  "y": "Vector3",
+  "x": "CatmullRomCurve3",
+  "i": "SphereGeometry",
+  "l": "CapsuleGeometry",
+  "c": "Quaternion",
+  "d": "CylinderGeometry",
+  "g": "BoxGeometry",
+  "o": "Vector2",
+  "le": "LatheGeometry",
+  "r": "TubeGeometry",
+  "ie": "mergeGeometries",
+  "te": "Box3",
+  "ce": "Object3D",
+  "S": "Color",
+  "n": "MeshBasicMaterial",
+  "s": "Mesh",
+  "h": "BufferAttribute",
+  "v": "create",
+  "ee": "Html",
+  "ae": "OrbitControls",
+  "se": "Canvas",
+  "re": "Environment",
+  "_": "Lightformer",
+  "ne": "GLTFLoader",
+  "oe": "MeshoptDecoder",
+  "p": "useFrame",
+  "b": "useThree",
+  "f": "useProgress",
+  "m": "useLoader",
+  "ue": "structures",
+  "w": "structureById",
+  "T": "modelById",
+  "de": "structureWithDescendants",
+  "D": "useViewerStore",
+  "me": "resolveVisibility",
+  "E": "isWithin",
+  "M": "useShallow",
+  "pe": "TriangleAlert",
+  "he": "LoaderCircle",
+  "ge": "Eye",
+  "_e": "Box",
+  "fe": "Info",
+  "ye": "EyeOff",
+  "xe": "Gauge",
+  "O": "HeartPulse",
+  "we": "RotateCcw",
+  "Ee": "ScanEye",
+  "Oe": "Tag",
+  "mt": "noRaycast",
+  "ht": "SELECTED_COLOR",
+  "gt": "HOVER_COLOR",
+  "_t": "EMPHASIS_COLOR",
+  "vt": "NO_EMISSIVE",
+  "yt": "HEART_CHAMBERS",
+  "bt": "MATERIAL_BY_LAYER",
+  "xt": "StructureMesh",
+  "St": "MemoStructureMesh",
+  "Ct": "OverlayErrorBoundary",
+  "$": "loadStatus",
+  "wt": "setLoadStatus",
+  "Tt": "useLoadStatus",
+  "_avb": "viewFlags",
+  "_useAvb": "useViewFlags",
+  "_bfc": "cachedBrainFlow",
+  "_Dots": "RouteDots",
+  "_Stream": "ParticleStream",
+  "_LungFlow": "LungAirflow",
+  "_GDots": "AirDots",
+  "_AlvFlow": "AlveolarFlow",
+  "_popToggle": "togglePopOut",
+  "_PopHud": "PopOutHud",
+  "_SelCard": "SelectionCard",
+  "_Attach": "MuscleAttachments",
+  "_MI": "FADEABLE_MUSCLES",
+  "_REL": "MUSCLE_SUPPLY",
+  "_BrainFlow": "BrainFlow",
+  "Et": "SchematicBody",
+  "Dt": "ensureFloatAttributes",
+  "Ot": "extractParts",
+  "kt": "GlbJsonLoader",
+  "At": "base64ToBytes",
+  "jt": "GltfModel",
+  "Mt": "webglAvailable",
+  "Nt": "ModelErrorBoundary",
+  "Pt": "LoadingTracker",
+  "Ft": "ModelScene",
+  "It": "VIEW_BUTTONS",
+  "Lt": "Toolbar",
+  "Rt": "FidelityBadge",
+  "zt": "HeartPanel",
+  "Bt": "HoverCard",
+  "Vt": "AssetStatusOverlay",
+  "Ht": "AnatomyViewer",
+  "u": "ContactShadows"
+ },
+ "modules": {
+  "viewer/StructureMesh.tsx": [
+   "noRaycast",
+   "SELECTED_COLOR",
+   "HOVER_COLOR",
+   "EMPHASIS_COLOR",
+   "NO_EMISSIVE",
+   "HEART_CHAMBERS",
+   "MATERIAL_BY_LAYER",
+   "StructureMesh",
+   "MemoStructureMesh"
+  ],
+  "viewer/viewFlags.ts": [
+   "loadStatus",
+   "setLoadStatus",
+   "useLoadStatus",
+   "viewFlags",
+   "useViewFlags"
+  ],
+  "viewer/ErrorBoundaries.tsx": [
+   "OverlayErrorBoundary",
+   "ModelErrorBoundary"
+  ],
+  "viewer/flows/ParticleFlows.tsx": [
+   "RouteDots",
+   "ParticleStream",
+   "LungAirflow",
+   "AirDots",
+   "AlveolarFlow"
+  ],
+  "viewer/PopOut.tsx": [
+   "togglePopOut",
+   "PopOutHud"
+  ],
+  "viewer/SelectionCard.tsx": [
+   "SelectionCard"
+  ],
+  "viewer/MuscleAttachments.tsx": [
+   "MuscleAttachments"
+  ],
+  "viewer/muscleSupply.ts": [
+   "FADEABLE_MUSCLES",
+   "MUSCLE_SUPPLY"
+  ],
+  "viewer/flows/BrainFlow.tsx": [
+   "cachedBrainFlow",
+   "BrainFlow"
+  ],
+  "viewer/SchematicBody.tsx": [
+   "SchematicBody"
+  ],
+  "viewer/gltf.tsx": [
+   "ensureFloatAttributes",
+   "extractParts",
+   "GlbJsonLoader",
+   "base64ToBytes",
+   "GltfModel"
+  ],
+  "viewer/webgl.ts": [
+   "webglAvailable"
+  ],
+  "viewer/ModelScene.tsx": [
+   "LoadingTracker",
+   "ModelScene"
+  ],
+  "viewer/Toolbar.tsx": [
+   "VIEW_BUTTONS",
+   "Toolbar"
+  ],
+  "viewer/FidelityBadge.tsx": [
+   "FidelityBadge"
+  ],
+  "viewer/HeartPanel.tsx": [
+   "HeartPanel"
+  ],
+  "viewer/HoverCard.tsx": [
+   "HoverCard"
+  ],
+  "viewer/AssetStatusOverlay.tsx": [
+   "AssetStatusOverlay"
+  ],
+  "viewer/AnatomyViewer.tsx": [
+   "AnatomyViewer"
+  ]
+ },
+ "provided": {
+  "ecgValue": {
+   "from": "@/viewer/heartCycle"
+  },
+  "enableHeartAudio": {
+   "from": "@/viewer/heartCycle"
+  },
+  "playHeartSound": {
+   "from": "@/viewer/heartCycle"
+  },
+  "vibrateHeart": {
+   "from": "@/viewer/heartCycle"
+  },
+  "canVibrate": {
+   "from": "@/viewer/heartCycle"
+  },
+  "PHASE_TEXT": {
+   "from": "@/viewer/heartCycle"
+  },
+  "cardiacPhaseAt": {
+   "from": "@/viewer/heartCycle"
+  },
+  "chamberScale": {
+   "from": "@/viewer/heartCycle"
+  },
+  "AV_VALVES": {
+   "from": "@/viewer/heartCycle"
+  },
+  "SEMILUNAR_VALVES": {
+   "from": "@/viewer/heartCycle"
+  },
+  "valveClosure": {
+   "from": "@/viewer/heartCycle"
+  },
+  "heartSoundAt": {
+   "from": "@/viewer/heartCycle"
+  },
+  "heartClock": {
+   "from": "@/viewer/heartCycle"
+  },
+  "ATRIA": {
+   "from": "@/viewer/heartCycle"
+  },
+  "VENTRICLES": {
+   "from": "@/viewer/heartCycle"
+  },
+  "useRegistryVersion": {
+   "from": "@/viewer/meshRegistry"
+  },
+  "registerObject": {
+   "from": "@/viewer/meshRegistry"
+  },
+  "objectsOf": {
+   "from": "@/viewer/meshRegistry"
+  },
+  "boundsOf": {
+   "from": "@/viewer/meshRegistry"
+  },
+  "visibleBounds": {
+   "from": "@/viewer/meshRegistry"
+  },
+  "HeartAnimator": {
+   "from": "@/viewer/HeartAnimator"
+  },
+  "BloodFlow": {
+   "from": "@/viewer/BloodFlow"
+  },
+  "EcgTrace": {
+   "from": "@/viewer/EcgTrace"
+  },
+  "CameraRig": {
+   "from": "@/viewer/CameraRig"
+  },
+  "Labels": {
+   "from": "@/viewer/Labels"
+  },
+  "COLORS": {
+   "from": "@/viewer/schematic/parts"
+  },
+  "SCHEMATIC_PARTS": {
+   "from": "@/viewer/schematic/parts"
+  }
+ },
+ "externals": {
+  "Vector3": {
+   "from": "three"
+  },
+  "CatmullRomCurve3": {
+   "from": "three"
+  },
+  "SphereGeometry": {
+   "from": "three"
+  },
+  "CapsuleGeometry": {
+   "from": "three"
+  },
+  "Quaternion": {
+   "from": "three"
+  },
+  "CylinderGeometry": {
+   "from": "three"
+  },
+  "BoxGeometry": {
+   "from": "three"
+  },
+  "Vector2": {
+   "from": "three"
+  },
+  "LatheGeometry": {
+   "from": "three"
+  },
+  "TubeGeometry": {
+   "from": "three"
+  },
+  "Box3": {
+   "from": "three"
+  },
+  "Object3D": {
+   "from": "three"
+  },
+  "Color": {
+   "from": "three"
+  },
+  "MeshBasicMaterial": {
+   "from": "three"
+  },
+  "Mesh": {
+   "from": "three"
+  },
+  "BufferAttribute": {
+   "from": "three"
+  },
+  "mergeGeometries": {
+   "from": "three/examples/jsm/utils/BufferGeometryUtils.js"
+  },
+  "create": {
+   "from": "zustand"
+  },
+  "useShallow": {
+   "from": "zustand/react/shallow"
+  },
+  "Html": {
+   "from": "@react-three/drei"
+  },
+  "OrbitControls": {
+   "from": "@react-three/drei"
+  },
+  "Environment": {
+   "from": "@react-three/drei"
+  },
+  "Lightformer": {
+   "from": "@react-three/drei"
+  },
+  "useProgress": {
+   "from": "@react-three/drei"
+  },
+  "Canvas": {
+   "from": "@react-three/fiber"
+  },
+  "useFrame": {
+   "from": "@react-three/fiber"
+  },
+  "useThree": {
+   "from": "@react-three/fiber"
+  },
+  "useLoader": {
+   "from": "@react-three/fiber"
+  },
+  "GLTFLoader": {
+   "from": "three/examples/jsm/loaders/GLTFLoader.js"
+  },
+  "MeshoptDecoder": {
+   "from": "three/examples/jsm/libs/meshopt_decoder.module.js"
+  },
+  "structures": {
+   "from": "@/data"
+  },
+  "structureById": {
+   "from": "@/data"
+  },
+  "modelById": {
+   "from": "@/data"
+  },
+  "structureWithDescendants": {
+   "from": "@/data"
+  },
+  "useViewerStore": {
+   "from": "@/store/viewerStore"
+  },
+  "resolveVisibility": {
+   "from": "@/store/visibility"
+  },
+  "isWithin": {
+   "from": "@/store/visibility"
+  },
+  "TriangleAlert": {
+   "from": "lucide-react"
+  },
+  "LoaderCircle": {
+   "from": "lucide-react"
+  },
+  "Eye": {
+   "from": "lucide-react"
+  },
+  "Box": {
+   "from": "lucide-react"
+  },
+  "Info": {
+   "from": "lucide-react"
+  },
+  "EyeOff": {
+   "from": "lucide-react"
+  },
+  "Gauge": {
+   "from": "lucide-react"
+  },
+  "HeartPulse": {
+   "from": "lucide-react"
+  },
+  "RotateCcw": {
+   "from": "lucide-react"
+  },
+  "ScanEye": {
+   "from": "lucide-react"
+  },
+  "Tag": {
+   "from": "lucide-react"
+  },
+  "React": {
+   "from": "react",
+   "ns": true
+  },
+  "ContactShadows": {
+   "from": "@react-three/drei"
+  }
+ },
+ "remove": [
+  "ve",
+  "be",
+  "Se",
+  "Ce",
+  "Te",
+  "De",
+  "ke",
+  "Ae",
+  "j",
+  "je",
+  "Me",
+  "ye",
+  "xe",
+  "O",
+  "we",
+  "Ee",
+  "Oe",
+  "A",
+  "k"
+ ],
+ "fn": {}
+}
