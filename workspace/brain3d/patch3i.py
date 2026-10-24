@@ -128,7 +128,7 @@ wr(MAN,m)
 for ch in (V,L):
     t=rd(ch); t=sub1(t,'pop:null,dia:!1,nv:!1}','pop:null,dia:!1,nv:!1,ld_org:!1,ld_brain:!1,ld_limb:!1,ld_lung:!1,ld_sup:!1}'); wr(ch,t)
 v=rd(V)
-v=sub1(v,'function _BrainFlow(){','function _BrainFlow(){(0,k.useEffect)(()=>{let _t=[[`ld_org`,500],[`ld_brain`,1800],[`ld_limb`,3200],[`ld_lung`,5500],[`ld_sup`,7500]].map(([_k,_m])=>setTimeout(()=>_avb.set({[_k]:!0}),_m)),_u=D.subscribe(_s=>{_s.selectedId&&_avb.set({ld_org:!0,ld_brain:!0,ld_limb:!0,ld_lung:!0,ld_sup:!0})});return()=>{_t.forEach(clearTimeout);_u()}},[]);')
+v=sub1(v,'function _BrainFlow(){','function _BrainFlow(){(0,k.useEffect)(()=>{let _u=D.subscribe(_s=>{_s.selectedId&&_avb.set({ld_org:!0,ld_limb:!0})});return()=>_u()},[]);')
 wr(V,v)
 l=rd(L)
 # views ask for what they need right away

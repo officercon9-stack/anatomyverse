@@ -38,3 +38,6 @@ Doctors' round 4:
 
 ## v32 (build -b20): staged loading
 Heavy overlays now carry `gate` flags (ld_org, ld_brain, ld_limb, ld_lung, ld_sup) in the `_avb` store, default off. `_BrainFlow` turns them on in turn (0.5/1.8/3.2/5.5/7.5 s) and all at once when a part is selected; view buttons, search commands, diaphragm view and the nerves/vessels switch request what they need immediately. Brain-only and lungs models decimated (5.5→1.7 MB, 6.8→1.8 MB; originals in workspace/brain3d/slim/orig). Real-device speed not measured.
+
+## v33 (build -b21): on-demand loading
+Timed staging removed. At start only the schematic body, heart and small data load (~3 MB). Each view button, search command or diaphragm view sets the ld_* flags it needs; selecting any part loads limbs + organs. Brain/lung/supply models load only from their own views.
