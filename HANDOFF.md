@@ -50,3 +50,6 @@ Floating click card hidden on screens under 700 px (bottom sheet shows the same 
 
 ## v36 (build -b26)
 Realistic skull from BodyParts3D (cranial and facial bones, mandible, teeth, hyoid) added to the organs model (build_organs.py SPEC); loads with Bones/Internal organs views. New records: mandible, teeth, hyoid-bone.
+
+## Source code status
+The original React/Vite source does not exist in this work (compiled files only, no source maps). `reconstructed-src/` has a Prettier-formatted copy of the current compiled chunks for a developer to rebuild from. Real source: workspace/brain3d.
