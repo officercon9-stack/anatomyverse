@@ -35,3 +35,6 @@ Doctors' round 4:
 - Smooth shading: glbtools `write_glb` accepts `smooth=True` (writes NORMAL).
 - Pending: expert review of all new texts; replace remaining schematic organs (thyroid, reproductive, skull, brain stays); labels overlap in some views; limbs model is 8.9 MB.
 - v31 speed: brain vessels/CSF overlays now load only on the Brain view (defaults off), limb model 8.9 -> 5.0 MB (fewer triangles, byte normals), startup download about 22 MB instead of 35 MB.
+
+## v32 (build -b20): staged loading
+Heavy overlays now carry `gate` flags (ld_org, ld_brain, ld_limb, ld_lung, ld_sup) in the `_avb` store, default off. `_BrainFlow` turns them on in turn (0.5/1.8/3.2/5.5/7.5 s) and all at once when a part is selected; view buttons, search commands, diaphragm view and the nerves/vessels switch request what they need immediately. Brain-only and lungs models decimated (5.5→1.7 MB, 6.8→1.8 MB; originals in workspace/brain3d/slim/orig). Real-device speed not measured.

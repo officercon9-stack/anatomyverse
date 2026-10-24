@@ -118,3 +118,22 @@ wr(SB,t)
 
 for ch in (V,L):
     t=rd(ch); t=sub1(t,'{vessels:!0,flow:!0,csf:!0,csfFlow:!0,','{vessels:!1,flow:!1,csf:!1,csfFlow:!1,'); wr(ch,t)
+# ---------- staged loading: heavy overlays load one after another ----------
+m=rd(MAN)
+for aid,flag in (('bodyparts3d-lungs','ld_lung'),('bodyparts3d-brain-in-body','ld_brain')):
+    a='{assetId:`%s`,replacesParts:'%aid; assert m.count(a)==1,aid; m=m.replace(a,'{assetId:`%s`,gate:`%s`,replacesParts:'%(aid,flag))
+for aid,flag in (('anatomyverse-limbs','ld_limb'),('anatomyverse-organs','ld_org'),('anatomyverse-limbsupply','ld_sup')):
+    a='{assetId:`%s`,replacesParts:'%aid; assert m.count(a)==1,aid; m=m.replace(a,'{assetId:`%s`,gate:`%s`,replacesParts:'%(aid,flag))
+wr(MAN,m)
+for ch in (V,L):
+    t=rd(ch); t=sub1(t,'pop:null,dia:!1,nv:!1}','pop:null,dia:!1,nv:!1,ld_org:!1,ld_brain:!1,ld_limb:!1,ld_lung:!1,ld_sup:!1}'); wr(ch,t)
+v=rd(V)
+v=sub1(v,'function _BrainFlow(){','function _BrainFlow(){(0,k.useEffect)(()=>{let _t=[[`ld_org`,500],[`ld_brain`,1800],[`ld_limb`,3200],[`ld_lung`,5500],[`ld_sup`,7500]].map(([_k,_m])=>setTimeout(()=>_avb.set({[_k]:!0}),_m)),_u=D.subscribe(_s=>{_s.selectedId&&_avb.set({ld_org:!0,ld_brain:!0,ld_limb:!0,ld_lung:!0,ld_sup:!0})});return()=>{_t.forEach(clearTimeout);_u()}},[]);')
+wr(V,v)
+l=rd(L)
+# views ask for what they need right away
+l=sub1(l,'_s.restoreVisibility();for(let _l in _o){','_avb.set(_k===`all`?{}:_k===`inside`?{ld_org:!0,ld_lung:!0,ld_brain:!0}:_k===`skeleton`?{ld_org:!0,ld_limb:!0}:_k===`nv`?{ld_limb:!0,ld_sup:!0}:{ld_limb:!0});_s.restoreVisibility();for(let _l in _o){')
+l=sub1(l,'_s.restoreVisibility();_s.select(null);_foc||_s.resetCamera();','_s.restoreVisibility();_s.select(null);_foc||_s.resetCamera();_avb.set(_id===`brain`?{ld_brain:!0}:_id===`lungs`?{ld_lung:!0}:_id===`bones`?{ld_org:!0,ld_limb:!0}:_id===`gut`||_id===`kidney`?{ld_org:!0}:{});')
+l=sub1(l,'function _diaShow(){let _s=D.getState();_s.restoreVisibility();','function _diaShow(){let _s=D.getState();_avb.set({ld_lung:!0});_s.restoreVisibility();')
+l=sub1(l,'onClick:()=>{let _n=!_nv;_snv(_n);_view(_a,_n,!0)}','onClick:()=>{let _n=!_nv;_snv(_n);_n&&_avb.set({ld_sup:!0});_view(_a,_n,!0)}')
+wr(L,l)
