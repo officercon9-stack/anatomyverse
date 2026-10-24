@@ -44,3 +44,6 @@ Timed staging removed. At start only the schematic body, heart and small data lo
 
 ## v34 (build -b23): lighter rendering
 Profiling showed taps were GPU-bound: all parts used meshPhysicalMaterial (clearcoat, sheen). Now meshStandardMaterial, dpr fixed at 1. Selecting a part loads only the limb model. Test with a CPU-rendered browser only; real phone speed unmeasured.
+
+## v35 (build -b24)
+Floating click card hidden on screens under 700 px (bottom sheet shows the same info and the card covered the body on phones).

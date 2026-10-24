@@ -263,7 +263,7 @@ for ch in (V,L):
 v=rd(V)
 SEL=r'''function _SelCard(){let _id=D(e=>e.selectedId),_md=D(e=>e.mode),_sel=D(e=>e.select),[_p,_sp]=(0,k.useState)(null);
 (0,k.useEffect)(()=>{if(!_id)return _sp(null);let _lc=globalThis.__lcp;globalThis.__lcp=null;_sp(_lc?[Math.min(_lc[0]+16,window.innerWidth-380),Math.min(Math.max(_lc[1]-40,70),window.innerHeight-330)]:[Math.min(600,window.innerWidth-380),90])},[_id]);
-let _n=_id?w[_id]:null;if(!_n||!_p||_md===`identify`)return null;
+let _n=_id?w[_id]:null;if(!_n||!_p||_md===`identify`||window.innerWidth<700)return null;
 let _cl=(_n.clinicalRelevance||``).split(/(?<=[.!?])\s+/).filter(Boolean).slice(0,4);
 return(0,A.jsxs)(`div`,{role:`dialog`,"aria-label":_n.name+` summary`,style:{position:`fixed`,left:_p[0],top:_p[1],width:360,maxHeight:`min(60vh,420px)`,overflowY:`auto`,zIndex:55,background:`var(--av-surface)`,border:`1px solid var(--av-border)`,borderRadius:14,padding:`12px 14px`,boxShadow:`0 12px 36px rgba(0,0,0,.45)`,color:`var(--av-text)`,fontSize:13,lineHeight:1.45},children:[
 (0,A.jsxs)(`div`,{style:{display:`flex`,justifyContent:`space-between`,gap:8,alignItems:`flex-start`},children:[(0,A.jsxs)(`div`,{children:[(0,A.jsx)(`div`,{style:{fontWeight:700,fontSize:16},children:_n.name}),_n.latinName&&(0,A.jsx)(`div`,{style:{fontStyle:`italic`,opacity:.7,fontSize:12},children:_n.latinName})]}),(0,A.jsx)(`button`,{type:`button`,"aria-label":`Close`,onClick:()=>_sel(null),style:{border:0,background:`transparent`,color:`inherit`,fontSize:20,lineHeight:1,cursor:`pointer`,opacity:.7},children:`×`})]}),

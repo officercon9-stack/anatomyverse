@@ -130,7 +130,7 @@ while grew:
     for f in list(live)+['index.html']:
         if f in R_: continue
         if refs(f)&R_: R_.add(f); grew=True
-ren={f:re.sub(r'\.(js|css)$',r'-b23.\1',f) for f in R_ if f!='index.html'}
+ren={f:re.sub(r'\.(js|css)$',r'-b24.\1',f) for f in R_ if f!='index.html'}
 for f in list(live)+['index.html']:
     p=DST+'/'+('assets/'+f if f!='index.html' else f); t=open(p).read()
     for a,b in ren.items(): t=t.replace(a,b)
