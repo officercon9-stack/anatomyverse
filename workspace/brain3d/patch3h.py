@@ -17,6 +17,11 @@ def recb(mid,name,latin,region,loc,desc,fn,clin):
     js=json.dumps(d,ensure_ascii=False); return js[:-1]+',"sources":y(v.skeletal),"reviewStatus":b}'
 MR.append(recb('hand-bones','Bones of the hand','Ossa manus','upper-limb','Distal to the forearm bones.','Eight carpal bones in two rows (scaphoid, lunate, triquetral, pisiform; trapezium, trapezoid, capitate, hamate), five metacarpals and fourteen phalanges.','Form the wrist, palm and fingers; give attachment to the forearm and hand muscles.','The scaphoid is the most commonly fractured carpal bone (fall on an outstretched hand) and may heal poorly because of its blood supply. A boxer\'s fracture affects the fifth metacarpal neck.'))
 MR.append(recb('foot-bones','Bones of the foot','Ossa pedis','lower-limb','Distal to the leg bones.','Seven tarsal bones (talus, calcaneus, navicular, cuboid and three cuneiforms), five metatarsals and fourteen phalanges.','Form the arches of the foot and give attachment to the leg and foot muscles.','Stress fractures of the metatarsals are common in runners. A fracture of the base of the fifth metatarsal follows sudden inversion of the ankle.'))
+from fibrous_data import FIB
+def recf(i,nm,lat,reg,loc,desc,fn,clin,o,ins):
+    d={'id':i,'name':nm,'latinName':lat,'synonyms':[],'system':'muscular','region':reg,'layer':'muscles','location':loc,'description':desc,'function':fn,'origin':o,'insertion':ins,'clinicalRelevance':clin}
+    js=json.dumps(d,ensure_ascii=False); return js[:-1]+',"sources":y(v.muscular),"reviewStatus":b}'
+MR+= [recf(*f) for f in FIB]
 m=rd(MAN)
 st=m.index('S=[{id:`skull`'); depth=0; i=st+2; instr=False
 while True:
