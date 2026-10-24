@@ -1,0 +1,359 @@
+{
+ "input": "tools/LabPage.decompiled.js",
+ "outDir": "src",
+ "rename": {
+  "r": "structures",
+  "i": "getStructure",
+  "o": "structuresInModel",
+  "s": "models",
+  "c": "structureById",
+  "l": "modelById",
+  "u": "EyeOff",
+  "d": "HeartPulse",
+  "f": "useLoadStatus",
+  "p": "RotateCcw",
+  "m": "AnatomyViewer",
+  "h": "SYSTEMS",
+  "g": "resolveVisibility",
+  "ee": "relationsOf",
+  "_": "MousePointerClick",
+  "v": "Stethoscope",
+  "y": "Layers",
+  "b": "useProgressStore",
+  "x": "QUESTIONS",
+  "te": "cardsForMistake",
+  "ne": "Zap",
+  "S": "Target",
+  "C": "GraduationCap",
+  "w": "Languages",
+  "T": "Eye",
+  "re": "ReviewBadge",
+  "E": "Link",
+  "D": "useViewerStore",
+  "ie": "CLINICAL_CASES",
+  "ae": "SourceList",
+  "oe": "systemById",
+  "O": "TA2_SOURCE",
+  "k": "useContentStore",
+  "A": "Box",
+  "j": "REFERENCES",
+  "se": "ListChecks",
+  "ce": "Bookmark",
+  "M": "useSearchParams",
+  "N": "Brain",
+  "P": "SequencePlayer",
+  "F": "LAYERS",
+  "I": "useHasModel3D",
+  "L": "X",
+  "R": "SearchBox",
+  "Y": "React",
+  "le": "BookmarkCheck",
+  "V": "ChevronDown",
+  "ue": "ChevronRight",
+  "de": "ChevronUp",
+  "fe": "Crosshair",
+  "me": "Focus",
+  "he": "ListPlus",
+  "ge": "ListTree",
+  "_e": "PanelLeftClose",
+  "ve": "PanelLeftOpen",
+  "be": "Undo2",
+  "Ae": "LabPage",
+  "xe": "TRANSLATION_LANGUAGES",
+  "Se": "TranslationsSection",
+  "Be": "BRAIN_IDS",
+  "_LS": "LUNG_IDS",
+  "Ce": "HEART_IDS",
+  "Z": "Field",
+  "we": "RelatedChip",
+  "Q": "StructureDetails",
+  "De": "StructureList",
+  "Oe": "useMediaQuery",
+  "$": "LabTabs",
+  "ke": "ExploreIntro",
+  "Ee": "ViewAndLayersPanel",
+  "_EeFull": "LayersControls",
+  "Te": "DetailedModelToggle",
+  "_Tip": "TipsBubble",
+  "_Chk": "Checkbox",
+  "_goModel": "switchModel",
+  "_limbShow": "showLimbs",
+  "_diaShow": "showDiaphragm",
+  "_UP": "UPPER_LIMB_IDS",
+  "_LO": "LOWER_LIMB_IDS",
+  "_UPF": "UPPER_LIMB_FOCUS",
+  "_LOF": "LOWER_LIMB_FOCUS",
+  "_regIds": "regionIds",
+  "_view": "applyView",
+  "_viewCmd": "runViewCommand",
+  "_avb": "avFlags",
+  "_useAvb": "useAvFlags",
+  "_csfSys": "CSF_SYSTEM",
+  "_menSys": "MENINGES_SYSTEM",
+  "_cordSys": "SPINAL_CORD_SYSTEM",
+  "_BrainLayers": "BrainLayers",
+  "_LungLayers": "LungLayers"
+ },
+ "modules": {
+  "pages/lab/flags.ts": [
+   "avFlags",
+   "useAvFlags"
+  ],
+  "pages/lab/regions.ts": [
+   "CSF_SYSTEM",
+   "MENINGES_SYSTEM",
+   "SPINAL_CORD_SYSTEM",
+   "BRAIN_IDS",
+   "LUNG_IDS",
+   "HEART_IDS"
+  ],
+  "pages/lab/views.ts": [
+   "switchModel",
+   "showLimbs",
+   "showDiaphragm",
+   "UPPER_LIMB_IDS",
+   "LOWER_LIMB_IDS",
+   "UPPER_LIMB_FOCUS",
+   "LOWER_LIMB_FOCUS",
+   "regionIds",
+   "applyView",
+   "runViewCommand"
+  ],
+  "pages/lab/Checkbox.tsx": [
+   "Checkbox"
+  ],
+  "pages/lab/BrainLayers.tsx": [
+   "BrainLayers"
+  ],
+  "pages/lab/LungLayers.tsx": [
+   "LungLayers"
+  ],
+  "pages/lab/DetailedModelToggle.tsx": [
+   "DetailedModelToggle"
+  ],
+  "pages/lab/LayersControls.tsx": [
+   "LayersControls"
+  ],
+  "pages/lab/ViewAndLayersPanel.tsx": [
+   "ViewAndLayersPanel"
+  ],
+  "pages/lab/TipsBubble.tsx": [
+   "TipsBubble"
+  ],
+  "pages/lab/StructureDetails.tsx": [
+   "TRANSLATION_LANGUAGES",
+   "TranslationsSection",
+   "Field",
+   "RelatedChip",
+   "StructureDetails"
+  ],
+  "pages/lab/StructureList.tsx": [
+   "StructureList"
+  ],
+  "pages/lab/useMediaQuery.ts": [
+   "useMediaQuery"
+  ],
+  "pages/lab/LabTabs.tsx": [
+   "LabTabs"
+  ],
+  "pages/lab/ExploreIntro.tsx": [
+   "ExploreIntro"
+  ],
+  "pages/LabPage.tsx": [
+   "LabPage"
+  ]
+ },
+ "externals": {
+  "structures": {
+   "from": "@/data"
+  },
+  "getStructure": {
+   "from": "@/data"
+  },
+  "structuresInModel": {
+   "from": "@/data"
+  },
+  "models": {
+   "from": "@/data"
+  },
+  "structureById": {
+   "from": "@/data"
+  },
+  "modelById": {
+   "from": "@/data"
+  },
+  "EyeOff": {
+   "from": "lucide-react"
+  },
+  "HeartPulse": {
+   "from": "lucide-react"
+  },
+  "useLoadStatus": {
+   "from": "@/viewer/viewFlags"
+  },
+  "RotateCcw": {
+   "from": "lucide-react"
+  },
+  "AnatomyViewer": {
+   "from": "@/viewer/AnatomyViewer"
+  },
+  "SYSTEMS": {
+   "from": "@/data/systems"
+  },
+  "resolveVisibility": {
+   "from": "@/store/visibility"
+  },
+  "relationsOf": {
+   "from": "@/data/relationships"
+  },
+  "MousePointerClick": {
+   "from": "lucide-react"
+  },
+  "Stethoscope": {
+   "from": "lucide-react"
+  },
+  "Layers": {
+   "from": "lucide-react"
+  },
+  "useProgressStore": {
+   "from": "@/store/progress"
+  },
+  "QUESTIONS": {
+   "from": "@/data/questions"
+  },
+  "cardsForMistake": {
+   "from": "@/lib/flashcards"
+  },
+  "Zap": {
+   "from": "lucide-react"
+  },
+  "Target": {
+   "from": "lucide-react"
+  },
+  "GraduationCap": {
+   "from": "lucide-react"
+  },
+  "Languages": {
+   "from": "lucide-react"
+  },
+  "Eye": {
+   "from": "lucide-react"
+  },
+  "ReviewBadge": {
+   "from": "@/components/ReviewBadge"
+  },
+  "Link": {
+   "from": "react-router-dom"
+  },
+  "useViewerStore": {
+   "from": "@/store/viewerStore"
+  },
+  "CLINICAL_CASES": {
+   "from": "@/data/clinicalCases"
+  },
+  "SourceList": {
+   "from": "@/components/SourceList"
+  },
+  "systemById": {
+   "from": "@/data/systems"
+  },
+  "TA2_SOURCE": {
+   "from": "@/data/references"
+  },
+  "useContentStore": {
+   "from": "@/store/content"
+  },
+  "Box": {
+   "from": "lucide-react"
+  },
+  "REFERENCES": {
+   "from": "@/data/references"
+  },
+  "ListChecks": {
+   "from": "lucide-react"
+  },
+  "Bookmark": {
+   "from": "lucide-react"
+  },
+  "useSearchParams": {
+   "from": "react-router-dom"
+  },
+  "Brain": {
+   "from": "lucide-react"
+  },
+  "SequencePlayer": {
+   "from": "@/components/SequencePlayer"
+  },
+  "LAYERS": {
+   "from": "@/store/visibility"
+  },
+  "useHasModel3D": {
+   "from": "@/store/viewerHooks"
+  },
+  "X": {
+   "from": "lucide-react"
+  },
+  "SearchBox": {
+   "from": "@/components/SearchBox"
+  },
+  "BookmarkCheck": {
+   "from": "lucide-react"
+  },
+  "ChevronDown": {
+   "from": "lucide-react"
+  },
+  "ChevronRight": {
+   "from": "lucide-react"
+  },
+  "ChevronUp": {
+   "from": "lucide-react"
+  },
+  "Crosshair": {
+   "from": "lucide-react"
+  },
+  "Focus": {
+   "from": "lucide-react"
+  },
+  "ListPlus": {
+   "from": "lucide-react"
+  },
+  "ListTree": {
+   "from": "lucide-react"
+  },
+  "PanelLeftClose": {
+   "from": "lucide-react"
+  },
+  "PanelLeftOpen": {
+   "from": "lucide-react"
+  },
+  "Undo2": {
+   "from": "lucide-react"
+  }
+ },
+ "remove": [
+  "Y",
+  "X",
+  "le",
+  "z",
+  "V",
+  "B",
+  "ue",
+  "H",
+  "de",
+  "U",
+  "fe",
+  "W",
+  "me",
+  "pe",
+  "he",
+  "G",
+  "ge",
+  "K",
+  "_e",
+  "q",
+  "ve",
+  "J",
+  "be",
+  "ye"
+ ]
+}

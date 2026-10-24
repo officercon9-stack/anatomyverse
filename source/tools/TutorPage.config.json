@@ -1,0 +1,101 @@
+{
+ "input": "tools/TutorPage.decompiled.js",
+ "outDir": "src",
+ "rename": {
+  "r": "structures",
+  "i": "getStructure",
+  "o": "Info",
+  "s": "relationsOf",
+  "c": "LoaderCircle",
+  "l": "api",
+  "u": "useAuthStore",
+  "d": "QUESTIONS",
+  "f": "PageHeader",
+  "p": "Link",
+  "m": "searchStructures",
+  "h": "useSearchParams",
+  "g": "PageContainer",
+  "_": "X",
+  "v": "SearchBox",
+  "C": "React",
+  "b": "Bot",
+  "S": "Send",
+  "w": "STOP_WORDS",
+  "T": "scoreMatch",
+  "E": "buildAnswer",
+  "O": "SUGGESTED_QUESTIONS",
+  "k": "AnswerText",
+  "A": "TutorPage"
+ },
+ "modules": {
+  "pages/TutorPage.tsx": [
+   "STOP_WORDS",
+   "scoreMatch",
+   "buildAnswer",
+   "SUGGESTED_QUESTIONS",
+   "AnswerText",
+   "TutorPage"
+  ]
+ },
+ "externals": {
+  "structures": {
+   "from": "@/data"
+  },
+  "getStructure": {
+   "from": "@/data"
+  },
+  "Info": {
+   "from": "lucide-react"
+  },
+  "relationsOf": {
+   "from": "@/data/relationships"
+  },
+  "LoaderCircle": {
+   "from": "lucide-react"
+  },
+  "api": {
+   "from": "@/lib/api"
+  },
+  "useAuthStore": {
+   "from": "@/store/auth"
+  },
+  "QUESTIONS": {
+   "from": "@/data/questions"
+  },
+  "PageHeader": {
+   "from": "@/components/PageLayout"
+  },
+  "Link": {
+   "from": "react-router-dom"
+  },
+  "searchStructures": {
+   "from": "@/lib/search"
+  },
+  "useSearchParams": {
+   "from": "react-router-dom"
+  },
+  "PageContainer": {
+   "from": "@/components/PageLayout"
+  },
+  "X": {
+   "from": "lucide-react"
+  },
+  "SearchBox": {
+   "from": "@/components/SearchBox"
+  },
+  "Bot": {
+   "from": "lucide-react"
+  },
+  "Send": {
+   "from": "lucide-react"
+  }
+ },
+ "remove": [
+  "C",
+  "D",
+  "b",
+  "y",
+  "S",
+  "x"
+ ]
+}

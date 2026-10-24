@@ -1,0 +1,145 @@
+{
+ "input": "tools/QuizPage.decompiled.js",
+ "outDir": "src",
+ "rename": {
+  "r": "structures",
+  "i": "getStructure",
+  "o": "structureById",
+  "s": "modelById",
+  "c": "RotateCcw",
+  "l": "AnatomyViewer",
+  "u": "CircleX",
+  "d": "SYSTEMS",
+  "f": "useProgressStore",
+  "p": "QUESTIONS",
+  "m": "cardsForMistake",
+  "h": "Clock",
+  "g": "Zap",
+  "_": "PageHeader",
+  "v": "buildExam",
+  "y": "Link",
+  "b": "useViewerStore",
+  "x": "shuffle",
+  "S": "CircleCheck",
+  "C": "QUIZ_TYPES",
+  "w": "systemById",
+  "T": "scoreExam",
+  "E": "correctAnswerText",
+  "D": "QuestionView",
+  "O": "filterQuestions",
+  "k": "useSearchParams",
+  "A": "PageContainer",
+  "N": "React",
+  "M": "Timer",
+  "P": "build3DQuestions",
+  "I": "QUIZ_MODES",
+  "L": "QuizSetup",
+  "R": "useCountdown",
+  "z": "QuizSummary",
+  "B": "QuizRunner",
+  "V": "QuizPage"
+ },
+ "modules": {
+  "pages/QuizPage.tsx": [
+   "build3DQuestions",
+   "QUIZ_MODES",
+   "QuizSetup",
+   "useCountdown",
+   "QuizSummary",
+   "QuizRunner",
+   "QuizPage"
+  ]
+ },
+ "externals": {
+  "structures": {
+   "from": "@/data"
+  },
+  "getStructure": {
+   "from": "@/data"
+  },
+  "structureById": {
+   "from": "@/data"
+  },
+  "modelById": {
+   "from": "@/data"
+  },
+  "RotateCcw": {
+   "from": "lucide-react"
+  },
+  "AnatomyViewer": {
+   "from": "@/viewer/AnatomyViewer"
+  },
+  "CircleX": {
+   "from": "lucide-react"
+  },
+  "SYSTEMS": {
+   "from": "@/data/systems"
+  },
+  "useProgressStore": {
+   "from": "@/store/progress"
+  },
+  "QUESTIONS": {
+   "from": "@/data/questions"
+  },
+  "cardsForMistake": {
+   "from": "@/lib/flashcards"
+  },
+  "Clock": {
+   "from": "lucide-react"
+  },
+  "Zap": {
+   "from": "lucide-react"
+  },
+  "PageHeader": {
+   "from": "@/components/PageLayout"
+  },
+  "buildExam": {
+   "from": "@/lib/quizEngine"
+  },
+  "Link": {
+   "from": "react-router-dom"
+  },
+  "useViewerStore": {
+   "from": "@/store/viewerStore"
+  },
+  "shuffle": {
+   "from": "@/lib/quizEngine"
+  },
+  "CircleCheck": {
+   "from": "lucide-react"
+  },
+  "QUIZ_TYPES": {
+   "from": "@/lib/quizEngine"
+  },
+  "systemById": {
+   "from": "@/data/systems"
+  },
+  "scoreExam": {
+   "from": "@/lib/quizEngine"
+  },
+  "correctAnswerText": {
+   "from": "@/lib/quizEngine"
+  },
+  "QuestionView": {
+   "from": "@/components/QuestionView"
+  },
+  "filterQuestions": {
+   "from": "@/lib/quizEngine"
+  },
+  "useSearchParams": {
+   "from": "react-router-dom"
+  },
+  "PageContainer": {
+   "from": "@/components/PageLayout"
+  },
+  "Timer": {
+   "from": "lucide-react"
+  }
+ },
+ "remove": [
+  "N",
+  "F",
+  "M",
+  "j"
+ ]
+}

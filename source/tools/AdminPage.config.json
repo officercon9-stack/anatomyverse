@@ -1,0 +1,91 @@
+{
+ "input": "tools/AdminPage.decompiled.js",
+ "outDir": "src",
+ "rename": {
+  "r": "structures",
+  "a": "models",
+  "o": "structureById",
+  "s": "TriangleAlert",
+  "c": "LESSONS",
+  "l": "ApiError",
+  "u": "api",
+  "d": "useAuthStore",
+  "f": "QUESTIONS",
+  "p": "PageHeader",
+  "m": "ShieldAlert",
+  "h": "CircleCheck",
+  "g": "useContentStore",
+  "_": "mergeServerStructures",
+  "v": "PageContainer",
+  "x": "React",
+  "b": "Save",
+  "C": "StructureEditor",
+  "w": "AssetMappingCheck",
+  "T": "ReviewStatusPanel",
+  "E": "AdminPage"
+ },
+ "modules": {
+  "pages/AdminPage.tsx": [
+   "StructureEditor",
+   "AssetMappingCheck",
+   "ReviewStatusPanel",
+   "AdminPage"
+  ]
+ },
+ "externals": {
+  "structures": {
+   "from": "@/data"
+  },
+  "models": {
+   "from": "@/data"
+  },
+  "structureById": {
+   "from": "@/data"
+  },
+  "TriangleAlert": {
+   "from": "lucide-react"
+  },
+  "LESSONS": {
+   "from": "@/data/lessons"
+  },
+  "ApiError": {
+   "from": "@/lib/api"
+  },
+  "api": {
+   "from": "@/lib/api"
+  },
+  "useAuthStore": {
+   "from": "@/store/auth"
+  },
+  "QUESTIONS": {
+   "from": "@/data/questions"
+  },
+  "PageHeader": {
+   "from": "@/components/PageLayout"
+  },
+  "ShieldAlert": {
+   "from": "lucide-react"
+  },
+  "CircleCheck": {
+   "from": "lucide-react"
+  },
+  "useContentStore": {
+   "from": "@/store/content"
+  },
+  "mergeServerStructures": {
+   "from": "@/store/content"
+  },
+  "PageContainer": {
+   "from": "@/components/PageLayout"
+  },
+  "Save": {
+   "from": "lucide-react"
+  }
+ },
+ "remove": [
+  "x",
+  "S",
+  "b",
+  "y"
+ ]
+}

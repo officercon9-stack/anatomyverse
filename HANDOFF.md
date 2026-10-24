@@ -53,3 +53,6 @@ Realistic skull from BodyParts3D (cranial and facial bones, mandible, teeth, hyo
 
 ## Source code status
 The original React/Vite source does not exist in this work (compiled files only, no source maps). `reconstructed-src/` has a Prettier-formatted copy of the current compiled chunks for a developer to rebuild from. Real source: workspace/brain3d.
+
+## Source rebuild (milestone 2)
+`source/` now contains the whole app as readable code (viewer, app shell, all pages incl. the lab). Built output matches the live app screenshot-for-screenshot on lab, systems, lessons, quiz, flashcards, dictionary, account, clinical. Remaining: local variable renaming, types, model-build scripts into the build.

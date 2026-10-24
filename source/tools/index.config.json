@@ -1,0 +1,869 @@
+{
+ "input": "tools/index.decompiled.js",
+ "outDir": "src",
+ "rename": {
+  "Bn": "ArrowRight",
+  "Hn": "BookOpen",
+  "Wn": "Bookmark",
+  "Kn": "Box",
+  "Jn": "Boxes",
+  "Xn": "Brain",
+  "R": "CircleCheck",
+  "$n": "CircleX",
+  "tr": "Clock",
+  "rr": "Download",
+  "ar": "ExternalLink",
+  "sr": "Eye",
+  "lr": "FileText",
+  "dr": "Flame",
+  "pr": "GraduationCap",
+  "hr": "Languages",
+  "_r": "Layers",
+  "yr": "LayoutDashboard",
+  "xr": "ListChecks",
+  "Cr": "LoaderCircle",
+  "Tr": "LogOut",
+  "Dr": "Menu",
+  "kr": "Moon",
+  "jr": "MousePointerClick",
+  "Nr": "Pause",
+  "Fr": "Play",
+  "Lr": "Plus",
+  "zr": "Search",
+  "Vr": "ServerOff",
+  "Ur": "ShieldAlert",
+  "Gr": "ShieldCheck",
+  "qr": "SkipBack",
+  "Yr": "SkipForward",
+  "Zr": "Sparkles",
+  "$r": "Stethoscope",
+  "ti": "Sun",
+  "ri": "Target",
+  "ai": "Trash",
+  "si": "TriangleAlert",
+  "li": "User",
+  "di": "Users",
+  "pi": "X",
+  "hi": "Zap",
+  "_": "React",
+  "L": "Link",
+  "On": "NavLink",
+  "F": "useLocation",
+  "I": "Route",
+  "Rt": "Outlet",
+  "Bt": "Routes",
+  "Lt": "Navigate",
+  "Dn": "HashRouter",
+  "Nn": "useSearchParams",
+  "dt": "useNavigate",
+  "ht": "useParams",
+  "i": "create",
+  "a": "structures",
+  "o": "getStructure",
+  "s": "openstax",
+  "c": "createLucideIcon",
+  "l": "structuresInModel",
+  "u": "chapters",
+  "d": "models",
+  "f": "structureById",
+  "p": "modelById",
+  "m": "structureWithDescendants",
+  "h": "DEFAULT_MODEL_ID",
+  "g": "sources",
+  "ga": "LAYERS",
+  "va": "ancestorsOf",
+  "ya": "resolveVisibility",
+  "ba": "isWithin",
+  "$": "useViewerStore",
+  "_i": "THEME_KEY",
+  "vi": "readTheme",
+  "yi": "applyTheme",
+  "bi": "useTheme",
+  "xi": "ApiError",
+  "Si": "API_BASE",
+  "z": "api",
+  "Ci": "parseJsonSafe",
+  "wi": "syncToServer",
+  "Ei": "toThenable",
+  "Di": "persist",
+  "B": "relation",
+  "Oi": "RELATIONSHIPS",
+  "ki": "RELATION_LABELS",
+  "Ai": "relationsOf",
+  "ji": "GRADE_DAYS",
+  "Mi": "DAY_MS",
+  "Ni": "initialSrs",
+  "Pi": "gradeCard",
+  "Fi": "isDue",
+  "Ii": "cardId",
+  "Li": "cardsForStructure",
+  "Ri": "cardsForLesson",
+  "zi": "cardsForMistake",
+  "Bi": "newCardSet",
+  "Vi": "todayKey",
+  "Hi": "initialProgress",
+  "V": "useProgressStore",
+  "Ui": "progressSnapshot",
+  "Wi": "importLocalProgress",
+  "H": "useAuthStore",
+  "W": "Logo",
+  "Gi": "NAV_ITEMS",
+  "Ki": "NavList",
+  "qi": "UserBox",
+  "Ji": "ThemeToggle",
+  "Yi": "AppLayout",
+  "G": "SYSTEMS",
+  "K": "systemById",
+  "q": "PENDING_REVIEW",
+  "J": "options",
+  "Xi": "QUESTIONS",
+  "Zi": "questionById",
+  "Qi": "QUESTION_TOPICS",
+  "Y": "LESSONS",
+  "$i": "lessonById",
+  "aa": "ViewerPreview",
+  "oa": "HOME_FEATURES",
+  "sa": "HOME_FEATURES_2",
+  "ca": "HOME_AUDIENCES",
+  "la": "HomePage",
+  "ua": "LEGAL_DOCS",
+  "da": "LegalPage",
+  "Z": "PageHeader",
+  "Q": "PageContainer",
+  "fa": "StructureChips",
+  "pa": "Card",
+  "ma": "ActivityHeatmap",
+  "ha": "DashboardPage",
+  "wa": "useHasModel3D",
+  "Ta": "SequencePlayer",
+  "Ea": "ReviewBadge",
+  "Da": "systemContent",
+  "Oa": "completeness",
+  "ka": "SystemsPage",
+  "Aa": "SystemDetailPage",
+  "ja": "GRADES",
+  "Ma": "FlashcardReview",
+  "Na": "FlashcardAdd",
+  "Pa": "RevisionPage",
+  "Fa": "AuthForm",
+  "Ia": "LocalDataSection",
+  "La": "ProfilePage",
+  "Ra": "NotFoundPage",
+  "za": "PENDING_REVIEW_CASE",
+  "Ba": "CLINICAL_CASES",
+  "Va": "clinicalCaseById",
+  "Ha": "SourceList",
+  "Ua": "TA2_SOURCE",
+  "Wa": "REFERENCES",
+  "Ga": "normalizeText",
+  "Ka": "editDistance",
+  "qa": "scoreEntry",
+  "Ja": "searchStructures",
+  "Ya": "SEARCH_SUGGESTIONS",
+  "Xa": "QUIZ_TYPES",
+  "Za": "shuffle",
+  "Qa": "filterQuestions",
+  "$a": "buildExam",
+  "eo": "isCorrect",
+  "to": "scoreExam",
+  "no": "correctAnswerText",
+  "ro": "structureName",
+  "io": "QuestionView",
+  "ao": "ClinicalDisclaimer",
+  "oo": "ClinicalListPage",
+  "so": "ClinicalCasePage",
+  "co": "LessonsPage",
+  "lo": "useContentStore",
+  "uo": "mergeServerStructures",
+  "fo": "fetchServerContent",
+  "po": "ErrorBoundary",
+  "mo": "LabPage",
+  "ho": "LessonPlayerPage",
+  "go": "QuizPage",
+  "_o": "TutorPage",
+  "vo": "AdminPage",
+  "yo": "DictionaryPage",
+  "bo": "Loading",
+  "xo": "App",
+  "Ti": "createJSONStorage"
+ },
+ "modules": {
+  "lib/theme.ts": [
+   "THEME_KEY",
+   "readTheme",
+   "applyTheme",
+   "useTheme"
+  ],
+  "lib/api.ts": [
+   "ApiError",
+   "API_BASE",
+   "api",
+   "parseJsonSafe",
+   "syncToServer"
+  ],
+  "lib/persist.ts": [
+   "createJSONStorage",
+   "toThenable",
+   "persist"
+  ],
+  "data/relationships.ts": [
+   "relation",
+   "RELATIONSHIPS",
+   "RELATION_LABELS",
+   "relationsOf"
+  ],
+  "lib/srs.ts": [
+   "GRADE_DAYS",
+   "DAY_MS",
+   "initialSrs",
+   "gradeCard",
+   "isDue"
+  ],
+  "lib/flashcards.ts": [
+   "cardId",
+   "cardsForStructure",
+   "cardsForLesson",
+   "cardsForMistake",
+   "newCardSet"
+  ],
+  "store/progress.ts": [
+   "todayKey",
+   "initialProgress",
+   "useProgressStore",
+   "progressSnapshot",
+   "importLocalProgress"
+  ],
+  "store/auth.ts": [
+   "useAuthStore"
+  ],
+  "components/Logo.tsx": [
+   "Logo"
+  ],
+  "layout/AppLayout.tsx": [
+   "NAV_ITEMS",
+   "NavList",
+   "UserBox",
+   "ThemeToggle",
+   "AppLayout"
+  ],
+  "data/systems.ts": [
+   "SYSTEMS",
+   "systemById"
+  ],
+  "data/helpers.ts": [
+   "PENDING_REVIEW",
+   "options"
+  ],
+  "data/questions.ts": [
+   "QUESTIONS",
+   "questionById",
+   "QUESTION_TOPICS"
+  ],
+  "data/lessons.ts": [
+   "LESSONS",
+   "lessonById"
+  ],
+  "pages/HomePage.tsx": [
+   "ViewerPreview",
+   "HOME_FEATURES",
+   "HOME_FEATURES_2",
+   "HOME_AUDIENCES",
+   "HomePage"
+  ],
+  "pages/LegalPage.tsx": [
+   "LEGAL_DOCS",
+   "LegalPage"
+  ],
+  "components/PageLayout.tsx": [
+   "PageHeader",
+   "PageContainer",
+   "StructureChips",
+   "Card",
+   "ActivityHeatmap"
+  ],
+  "pages/DashboardPage.tsx": [
+   "DashboardPage"
+  ],
+  "store/viewerHooks.ts": [
+   "useHasModel3D"
+  ],
+  "components/SequencePlayer.tsx": [
+   "SequencePlayer"
+  ],
+  "components/ReviewBadge.tsx": [
+   "ReviewBadge"
+  ],
+  "lib/systemContent.ts": [
+   "systemContent",
+   "completeness"
+  ],
+  "pages/SystemsPage.tsx": [
+   "SystemsPage"
+  ],
+  "pages/SystemDetailPage.tsx": [
+   "SystemDetailPage"
+  ],
+  "pages/RevisionPage.tsx": [
+   "GRADES",
+   "FlashcardReview",
+   "FlashcardAdd",
+   "RevisionPage"
+  ],
+  "pages/ProfilePage.tsx": [
+   "AuthForm",
+   "LocalDataSection",
+   "ProfilePage"
+  ],
+  "pages/NotFoundPage.tsx": [
+   "NotFoundPage"
+  ],
+  "data/clinicalCases.ts": [
+   "PENDING_REVIEW_CASE",
+   "CLINICAL_CASES",
+   "clinicalCaseById"
+  ],
+  "components/SourceList.tsx": [
+   "SourceList"
+  ],
+  "data/references.ts": [
+   "TA2_SOURCE",
+   "REFERENCES"
+  ],
+  "lib/search.ts": [
+   "normalizeText",
+   "editDistance",
+   "scoreEntry",
+   "searchStructures",
+   "SEARCH_SUGGESTIONS"
+  ],
+  "lib/quizEngine.ts": [
+   "QUIZ_TYPES",
+   "shuffle",
+   "filterQuestions",
+   "buildExam",
+   "isCorrect",
+   "scoreExam",
+   "correctAnswerText"
+  ],
+  "components/QuestionView.tsx": [
+   "structureName",
+   "QuestionView"
+  ],
+  "pages/ClinicalPages.tsx": [
+   "ClinicalDisclaimer",
+   "ClinicalListPage",
+   "ClinicalCasePage"
+  ],
+  "pages/LessonsPage.tsx": [
+   "LessonsPage"
+  ],
+  "store/content.ts": [
+   "useContentStore",
+   "mergeServerStructures",
+   "fetchServerContent"
+  ],
+  "components/ErrorBoundary.tsx": [
+   "ErrorBoundary"
+  ],
+  "app/App.tsx": [
+   "LabPage",
+   "LessonPlayerPage",
+   "QuizPage",
+   "TutorPage",
+   "AdminPage",
+   "DictionaryPage",
+   "Loading",
+   "App"
+  ]
+ },
+ "externals": {
+  "ArrowRight": {
+   "from": "lucide-react"
+  },
+  "BookOpen": {
+   "from": "lucide-react"
+  },
+  "Bookmark": {
+   "from": "lucide-react"
+  },
+  "Box": {
+   "from": "lucide-react"
+  },
+  "Boxes": {
+   "from": "lucide-react"
+  },
+  "Brain": {
+   "from": "lucide-react"
+  },
+  "CircleCheck": {
+   "from": "lucide-react"
+  },
+  "CircleX": {
+   "from": "lucide-react"
+  },
+  "Clock": {
+   "from": "lucide-react"
+  },
+  "Download": {
+   "from": "lucide-react"
+  },
+  "ExternalLink": {
+   "from": "lucide-react"
+  },
+  "Eye": {
+   "from": "lucide-react"
+  },
+  "FileText": {
+   "from": "lucide-react"
+  },
+  "Flame": {
+   "from": "lucide-react"
+  },
+  "GraduationCap": {
+   "from": "lucide-react"
+  },
+  "Languages": {
+   "from": "lucide-react"
+  },
+  "Layers": {
+   "from": "lucide-react"
+  },
+  "LayoutDashboard": {
+   "from": "lucide-react"
+  },
+  "ListChecks": {
+   "from": "lucide-react"
+  },
+  "LoaderCircle": {
+   "from": "lucide-react"
+  },
+  "LogOut": {
+   "from": "lucide-react"
+  },
+  "Menu": {
+   "from": "lucide-react"
+  },
+  "Moon": {
+   "from": "lucide-react"
+  },
+  "MousePointerClick": {
+   "from": "lucide-react"
+  },
+  "Pause": {
+   "from": "lucide-react"
+  },
+  "Play": {
+   "from": "lucide-react"
+  },
+  "Plus": {
+   "from": "lucide-react"
+  },
+  "Search": {
+   "from": "lucide-react"
+  },
+  "ServerOff": {
+   "from": "lucide-react"
+  },
+  "ShieldAlert": {
+   "from": "lucide-react"
+  },
+  "ShieldCheck": {
+   "from": "lucide-react"
+  },
+  "SkipBack": {
+   "from": "lucide-react"
+  },
+  "SkipForward": {
+   "from": "lucide-react"
+  },
+  "Sparkles": {
+   "from": "lucide-react"
+  },
+  "Stethoscope": {
+   "from": "lucide-react"
+  },
+  "Sun": {
+   "from": "lucide-react"
+  },
+  "Target": {
+   "from": "lucide-react"
+  },
+  "Trash": {
+   "from": "lucide-react"
+  },
+  "TriangleAlert": {
+   "from": "lucide-react"
+  },
+  "User": {
+   "from": "lucide-react"
+  },
+  "Users": {
+   "from": "lucide-react"
+  },
+  "X": {
+   "from": "lucide-react"
+  },
+  "Zap": {
+   "from": "lucide-react"
+  },
+  "Link": {
+   "from": "react-router-dom"
+  },
+  "NavLink": {
+   "from": "react-router-dom"
+  },
+  "useLocation": {
+   "from": "react-router-dom"
+  },
+  "Route": {
+   "from": "react-router-dom"
+  },
+  "Outlet": {
+   "from": "react-router-dom"
+  },
+  "Routes": {
+   "from": "react-router-dom"
+  },
+  "Navigate": {
+   "from": "react-router-dom"
+  },
+  "HashRouter": {
+   "from": "react-router-dom"
+  },
+  "useSearchParams": {
+   "from": "react-router-dom"
+  },
+  "useNavigate": {
+   "from": "react-router-dom"
+  },
+  "useParams": {
+   "from": "react-router-dom"
+  },
+  "create": {
+   "from": "zustand"
+  },
+  "structures": {
+   "from": "@/data"
+  },
+  "getStructure": {
+   "from": "@/data"
+  },
+  "openstax": {
+   "from": "@/data"
+  },
+  "structuresInModel": {
+   "from": "@/data"
+  },
+  "chapters": {
+   "from": "@/data"
+  },
+  "models": {
+   "from": "@/data"
+  },
+  "structureById": {
+   "from": "@/data"
+  },
+  "modelById": {
+   "from": "@/data"
+  },
+  "structureWithDescendants": {
+   "from": "@/data"
+  },
+  "sources": {
+   "from": "@/data"
+  },
+  "DEFAULT_MODEL_ID": {
+   "from": "@/data",
+   "name": "SCHEMATIC_MODEL_ID"
+  },
+  "LAYERS": {
+   "from": "@/store/visibility"
+  },
+  "ancestorsOf": {
+   "from": "@/store/visibility"
+  },
+  "resolveVisibility": {
+   "from": "@/store/visibility"
+  },
+  "isWithin": {
+   "from": "@/store/visibility"
+  },
+  "useViewerStore": {
+   "from": "@/store/viewerStore"
+  }
+ },
+ "remove": [
+  "Bn",
+  "zn",
+  "Hn",
+  "Vn",
+  "Wn",
+  "Un",
+  "Kn",
+  "Gn",
+  "Jn",
+  "qn",
+  "Xn",
+  "Yn",
+  "R",
+  "Zn",
+  "$n",
+  "Qn",
+  "tr",
+  "er",
+  "rr",
+  "nr",
+  "ar",
+  "ir",
+  "sr",
+  "or",
+  "lr",
+  "cr",
+  "dr",
+  "ur",
+  "pr",
+  "fr",
+  "hr",
+  "mr",
+  "_r",
+  "gr",
+  "yr",
+  "vr",
+  "xr",
+  "br",
+  "Cr",
+  "Sr",
+  "Tr",
+  "wr",
+  "Dr",
+  "Er",
+  "kr",
+  "Or",
+  "jr",
+  "Ar",
+  "Nr",
+  "Mr",
+  "Fr",
+  "Pr",
+  "Lr",
+  "Ir",
+  "zr",
+  "Rr",
+  "Vr",
+  "Br",
+  "Ur",
+  "Hr",
+  "Gr",
+  "Wr",
+  "qr",
+  "Kr",
+  "Yr",
+  "Jr",
+  "Zr",
+  "Xr",
+  "$r",
+  "Qr",
+  "ti",
+  "ei",
+  "ri",
+  "ni",
+  "ai",
+  "ii",
+  "si",
+  "oi",
+  "li",
+  "ci",
+  "di",
+  "ui",
+  "pi",
+  "fi",
+  "hi",
+  "mi",
+  "__vite__mapDeps",
+  "_",
+  "v",
+  "y",
+  "b",
+  "x",
+  "S",
+  "C",
+  "w",
+  "T",
+  "ee",
+  "te",
+  "ne",
+  "E",
+  "D",
+  "re",
+  "ie",
+  "ae",
+  "oe",
+  "se",
+  "ce",
+  "le",
+  "ue",
+  "de",
+  "fe",
+  "pe",
+  "me",
+  "he",
+  "ge",
+  "_e",
+  "ve",
+  "ye",
+  "be",
+  "xe",
+  "Se",
+  "Ce",
+  "we",
+  "O",
+  "Te",
+  "Ee",
+  "De",
+  "Oe",
+  "ke",
+  "Ae",
+  "je",
+  "k",
+  "A",
+  "Me",
+  "Ne",
+  "Pe",
+  "Fe",
+  "Ie",
+  "Le",
+  "Re",
+  "ze",
+  "Be",
+  "Ve",
+  "He",
+  "Ue",
+  "We",
+  "Ge",
+  "Ke",
+  "qe",
+  "Je",
+  "j",
+  "Ye",
+  "Xe",
+  "Ze",
+  "Qe",
+  "$e",
+  "et",
+  "M",
+  "tt",
+  "N",
+  "nt",
+  "rt",
+  "it",
+  "at",
+  "ot",
+  "st",
+  "ct",
+  "P",
+  "F",
+  "lt",
+  "ut",
+  "dt",
+  "ft",
+  "pt",
+  "mt",
+  "ht",
+  "gt",
+  "_t",
+  "vt",
+  "yt",
+  "bt",
+  "xt",
+  "St",
+  "Ct",
+  "wt",
+  "Tt",
+  "Et",
+  "Dt",
+  "Ot",
+  "kt",
+  "At",
+  "jt",
+  "Mt",
+  "Nt",
+  "Pt",
+  "Ft",
+  "It",
+  "Lt",
+  "Rt",
+  "I",
+  "zt",
+  "Bt",
+  "Vt",
+  "Ht",
+  "Ut",
+  "Wt",
+  "Gt",
+  "Kt",
+  "qt",
+  "Jt",
+  "Yt",
+  "Xt",
+  "Zt",
+  "Qt",
+  "$t",
+  "en",
+  "tn",
+  "nn",
+  "rn",
+  "an",
+  "on",
+  "sn",
+  "cn",
+  "ln",
+  "un",
+  "dn",
+  "fn",
+  "pn",
+  "mn",
+  "hn",
+  "gn",
+  "_n",
+  "vn",
+  "yn",
+  "bn",
+  "xn",
+  "Sn",
+  "Cn",
+  "wn",
+  "Tn",
+  "En",
+  "Dn",
+  "L",
+  "On",
+  "kn",
+  "An",
+  "jn",
+  "Mn",
+  "Nn",
+  "Pn",
+  "Fn",
+  "In",
+  "Ln",
+  "Rn",
+  "gi",
+  "U",
+  "ea",
+  "ta",
+  "na",
+  "ra",
+  "ia",
+  "X",
+  "ga",
+  "_a",
+  "va",
+  "ya",
+  "ba",
+  "$",
+  "xa",
+  "Sa",
+  "Ca"
+ ],
+ "fn": {}
+}

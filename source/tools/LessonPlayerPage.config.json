@@ -1,0 +1,85 @@
+{
+ "input": "tools/LessonPlayerPage.decompiled.js",
+ "outDir": "src",
+ "rename": {
+  "r": "getStructure",
+  "a": "AnatomyViewer",
+  "o": "lessonById",
+  "s": "useProgressStore",
+  "c": "Target",
+  "l": "ReviewBadge",
+  "u": "Link",
+  "d": "useViewerStore",
+  "f": "CircleCheck",
+  "p": "SourceList",
+  "m": "ArrowRight",
+  "h": "questionById",
+  "g": "useParams",
+  "_": "QuestionView",
+  "v": "useHasModel3D",
+  "x": "React",
+  "b": "ArrowLeft",
+  "C": "LessonPlayerPage"
+ },
+ "modules": {
+  "pages/LessonPlayerPage.tsx": [
+   "LessonPlayerPage"
+  ]
+ },
+ "externals": {
+  "getStructure": {
+   "from": "@/data"
+  },
+  "AnatomyViewer": {
+   "from": "@/viewer/AnatomyViewer"
+  },
+  "lessonById": {
+   "from": "@/data/lessons"
+  },
+  "useProgressStore": {
+   "from": "@/store/progress"
+  },
+  "Target": {
+   "from": "lucide-react"
+  },
+  "ReviewBadge": {
+   "from": "@/components/ReviewBadge"
+  },
+  "Link": {
+   "from": "react-router-dom"
+  },
+  "useViewerStore": {
+   "from": "@/store/viewerStore"
+  },
+  "CircleCheck": {
+   "from": "lucide-react"
+  },
+  "SourceList": {
+   "from": "@/components/SourceList"
+  },
+  "ArrowRight": {
+   "from": "lucide-react"
+  },
+  "questionById": {
+   "from": "@/data/questions"
+  },
+  "useParams": {
+   "from": "react-router-dom"
+  },
+  "QuestionView": {
+   "from": "@/components/QuestionView"
+  },
+  "useHasModel3D": {
+   "from": "@/store/viewerHooks"
+  },
+  "ArrowLeft": {
+   "from": "lucide-react"
+  }
+ },
+ "remove": [
+  "x",
+  "S",
+  "b",
+  "y"
+ ]
+}

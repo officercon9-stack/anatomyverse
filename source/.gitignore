@@ -1,5 +1,4 @@
 node_modules
 dist
-public/models
-public/data
-public/icons
+public
+package-lock.json

@@ -1,0 +1,31 @@
+{
+ "input": "tools/ViewerPreview.decompiled.js",
+ "outDir": "src",
+ "rename": {
+  "r": "AnatomyViewer",
+  "i": "Link",
+  "a": "useViewerStore",
+  "o": "React",
+  "c": "ViewerPreview"
+ },
+ "modules": {
+  "viewer/ViewerPreview.tsx": [
+   "ViewerPreview"
+  ]
+ },
+ "externals": {
+  "AnatomyViewer": {
+   "from": "@/viewer/AnatomyViewer"
+  },
+  "Link": {
+   "from": "react-router-dom"
+  },
+  "useViewerStore": {
+   "from": "@/store/viewerStore"
+  }
+ },
+ "remove": [
+  "o",
+  "s"
+ ]
+}

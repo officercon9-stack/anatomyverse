@@ -1,6 +1,15 @@
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { HashRouter } from 'react-router-dom';
 import './styles/app.css';
-import { AnatomyViewer } from './viewer/AnatomyViewer';
+import { applyTheme } from './lib/theme';
+import { App } from './app/App';
 
-// temporary harness: just the 3D viewer, until the app shell is rebuilt
-createRoot(document.getElementById('root')!).render(<AnatomyViewer className="h-screen w-screen" />);
+applyTheme();
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <HashRouter>
+      <App />
+    </HashRouter>
+  </StrictMode>,
+);

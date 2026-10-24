@@ -1,0 +1,65 @@
+{
+ "input": "tools/DictionaryPage.decompiled.js",
+ "outDir": "src",
+ "rename": {
+  "r": "LoaderCircle",
+  "i": "PageHeader",
+  "a": "Search",
+  "o": "Languages",
+  "s": "Link",
+  "c": "normalizeText",
+  "l": "TA2_SOURCE",
+  "u": "Box",
+  "d": "REFERENCES",
+  "f": "PageContainer",
+  "p": "useHasModel3D",
+  "m": "React",
+  "g": "DICTIONARY_FILTERS",
+  "_": "DictionaryPage"
+ },
+ "modules": {
+  "pages/DictionaryPage.tsx": [
+   "DICTIONARY_FILTERS",
+   "DictionaryPage"
+  ]
+ },
+ "externals": {
+  "LoaderCircle": {
+   "from": "lucide-react"
+  },
+  "PageHeader": {
+   "from": "@/components/PageLayout"
+  },
+  "Search": {
+   "from": "lucide-react"
+  },
+  "Languages": {
+   "from": "lucide-react"
+  },
+  "Link": {
+   "from": "react-router-dom"
+  },
+  "normalizeText": {
+   "from": "@/lib/search"
+  },
+  "TA2_SOURCE": {
+   "from": "@/data/references"
+  },
+  "Box": {
+   "from": "lucide-react"
+  },
+  "REFERENCES": {
+   "from": "@/data/references"
+  },
+  "PageContainer": {
+   "from": "@/components/PageLayout"
+  },
+  "useHasModel3D": {
+   "from": "@/store/viewerHooks"
+  }
+ },
+ "remove": [
+  "m",
+  "h"
+ ]
+}

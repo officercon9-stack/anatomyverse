@@ -1,0 +1,33 @@
+import { r as e } from "./rolldown-runtime-XKyaHtl9.js";
+import { A as t, N as n } from "./three-Bl2eHk-_.js";
+import { t as r } from "./AnatomyViewer-C5q0xwNu-b26.js";
+import { at as i, b as a } from "./index-DAxCahJm-b26.js";
+var o = e(n(), 1);
+var s = t();
+function c() {
+  (0, o.useEffect)(() => {
+    let e = setTimeout(() => {
+      let e = a.getState();
+      e.setLayerVisible(`muscles`, false);
+      e.setView(`oblique`);
+      e.select(`heart`);
+    }, 300);
+    return () => {
+      clearTimeout(e);
+      a.getState().resetAll();
+    };
+  }, []);
+  return (0, s.jsxs)(`div`, {
+    className: `relative h-full`,
+    children: [(0, s.jsx)(r, {
+      className: `h-full w-full`,
+      minimal: true,
+      ariaLabel: `Interactive preview of the 3D anatomy model`
+    }), (0, s.jsx)(i, {
+      to: `/app/lab`,
+      className: `av-btn av-btn--primary av-btn--sm absolute bottom-3 right-3 z-10`,
+      children: `Open in the lab`
+    })]
+  });
+}
+export { c as default };

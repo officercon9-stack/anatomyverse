@@ -36,3 +36,6 @@ export function structuresInModel(model: ModelAsset): Set<string> {
   }
   return ids;
 }
+
+/** Source reference for a chapter of OpenStax Anatomy & Physiology 2e. */
+export const openstax = (locator: string) => [{ sourceId: 'openstax-ap2e', locator }];

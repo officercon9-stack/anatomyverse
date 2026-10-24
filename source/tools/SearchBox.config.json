@@ -1,0 +1,61 @@
+{
+ "input": "tools/SearchBox.decompiled.js",
+ "outDir": "src",
+ "rename": {
+  "r": "structures",
+  "i": "Search",
+  "a": "searchStructures",
+  "o": "systemById",
+  "s": "useContentStore",
+  "c": "Box",
+  "l": "SEARCH_SUGGESTIONS",
+  "u": "useHasModel3D",
+  "d": "X",
+  "f": "React",
+  "m": "SearchBox",
+  "_CMD": "VIEW_COMMANDS",
+  "_cmds": "matchCommands",
+  "_runCmd": "runCommand"
+ },
+ "modules": {
+  "components/SearchBox.tsx": [
+   "VIEW_COMMANDS",
+   "matchCommands",
+   "runCommand",
+   "SearchBox"
+  ]
+ },
+ "externals": {
+  "structures": {
+   "from": "@/data"
+  },
+  "Search": {
+   "from": "lucide-react"
+  },
+  "searchStructures": {
+   "from": "@/lib/search"
+  },
+  "systemById": {
+   "from": "@/data/systems"
+  },
+  "useContentStore": {
+   "from": "@/store/content"
+  },
+  "Box": {
+   "from": "lucide-react"
+  },
+  "SEARCH_SUGGESTIONS": {
+   "from": "@/lib/search"
+  },
+  "useHasModel3D": {
+   "from": "@/store/viewerHooks"
+  },
+  "X": {
+   "from": "lucide-react"
+  }
+ },
+ "remove": [
+  "f",
+  "p"
+ ]
+}
