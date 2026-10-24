@@ -17,3 +17,10 @@ Brain, skull base, vessels, CSF flow, meninges, tracts and cord; hover card and 
 
 ## Ideas for next
 Expert review of teaching text (all "pending review"); simplify top view buttons; licence check (BodyParts3D CC BY-SA 2.1 Japan); thin vessels are hard to click; floating stray objects beside the body (pre-existing).
+
+## Update 2026-10-24 (version 29)
+- Removed non-working items: Tutor, Sign in / Create account, Admin link, offline badge, "Ask tutor" buttons, "Demo content" label.
+- Added "Touch and explore" tip (lab, bottom right, remembers dismissal).
+- Added BodyParts3D limb, trunk, neck and head muscles (128 muscles, both sides) plus limb bones, hand and foot bones: `workspace/brain3d/build_limbs.py`, `muscles_data.py` (origin, insertion, nerve, action, blood supply, clinical text), `patch3h.py`. Tap a muscle: other muscles fade and origin (green) and insertion (orange) dots appear. Simple-mode buttons "Arm and hand muscles", "Leg and foot muscles".
+- Source STL files (BodyParts3D 3.0, GitHub Kevin-Mattheus-Moerman/BodyParts3D) were cloned to /home/claude/bp3d-src (not stored here, 1.3 GB). `/tmp/named.json` (stem, name, size) was generated from its parts_list_e.txt; a copy is in workspace/brain3d.
+- Pending: expert review of all text; facial muscles; organ name labels; floating skin-layer block at the right of the body.

@@ -280,3 +280,5 @@ v=sub1(v,'if(!n||t===`identify`)return null;let _d=','if(!n||t===`identify`||e==
 wr(V,v)
 exec(open('/home/claude/brain3d/patch3e.py').read())
 exec(open('/home/claude/brain3d/patch3f.py').read())
+exec(open('/home/claude/brain3d/patch3g.py').read())
+exec(open('/home/claude/brain3d/patch3h.py').read())
