@@ -56,3 +56,6 @@ The original React/Vite source does not exist in this work (compiled files only,
 
 ## Source rebuild (milestone 2)
 `source/` now contains the whole app as readable code (viewer, app shell, all pages incl. the lab). Built output matches the live app screenshot-for-screenshot on lab, systems, lessons, quiz, flashcards, dictionary, account, clinical. Remaining: local variable renaming, types, model-build scripts into the build.
+
+## Version 37 (touch delay)
+Cause found by profiling a tap: the first tap compiled new shader variants (opaque/transparent, front/double side, no-normals, basic) and, for any selected part, also started downloading the whole limb-muscle model. Fix (patch3j.py): pre-compile those variants 1.5 s and 7 s after the viewer mounts (`_Warm`), and only load the limb model when the selected part is a limb muscle/bone (`_LIMBSEL`). Chunk suffix now -b27. Doctors link: ?v=37.
