@@ -25,7 +25,7 @@ Expert review of teaching text (all "pending review"); simplify top view buttons
 - Source STL files (BodyParts3D 3.0, GitHub Kevin-Mattheus-Moerman/BodyParts3D) were cloned to /home/claude/bp3d-src (not stored here, 1.3 GB). `/tmp/named.json` (stem, name, size) was generated from its parts_list_e.txt; a copy is in workspace/brain3d.
 - Pending: expert review of all text; facial muscles; organ name labels; floating skin-layer block at the right of the body.
 
-## Update 2026-10-24 (version 30, suffix -b18)
+## Update 2026-10-24 (version 31, suffix -b19)
 Doctors' round 4:
 - Search bar commands (SearchBox chunk, `_CMD`): "internal organs", "upper limb", "lower limb", "full model" (also skeleton, muscles, nerves and vessels). Implemented as `_view()` / `_viewCmd()` in LabPage (patch3i.py): layer opacities plus `isolate(ids by region)` plus camera frame. Simple-panel buttons added: Internal organs, Upper limb, Lower limb, Nerves and blood vessels.
 - One switch "Show nerves and blood vessels" under Muscles / Upper limb / Lower limb: muscles go see-through, tubes show; tapping a muscle highlights its own nerve and artery (`_REL` map built from muscles_data nerve/blood text).
@@ -34,3 +34,4 @@ Doctors' round 4:
 - Tendons and ligaments: muscle meshes are split by shape in build_limbs.py (`split_tendon`) and the tendon ends are drawn pearl white (nodes `t_*`); BodyParts3D ligaments (inguinal, iliotibial, linea alba, flexor retinaculum, interosseous membranes, long plantar) plus authored patellar, collateral and cruciate knee ligaments (`fibrous_data.py`).
 - Smooth shading: glbtools `write_glb` accepts `smooth=True` (writes NORMAL).
 - Pending: expert review of all new texts; replace remaining schematic organs (thyroid, reproductive, skull, brain stays); labels overlap in some views; limbs model is 8.9 MB.
+- v31 speed: brain vessels/CSF overlays now load only on the Brain view (defaults off), limb model 8.9 -> 5.0 MB (fewer triangles, byte normals), startup download about 22 MB instead of 35 MB.

@@ -79,7 +79,7 @@ function _view(_k,_nv,_keep){let _s=D.getState(),_o;
  else if(_k===`skeleton`)_o={skin:.05,muscles:.05,bones:1,vessels:.05,nerves:.05,organs:.05};
  else _o={skin:.05,muscles:_nv?.5:1,bones:_nv?.3:_k===`muscles`?.2:.6,vessels:_nv?1:.12,nerves:_nv?1:.12,organs:.08};
  _s.restoreVisibility();for(let _l in _o){_s.setLayerVisible(_l,!0);_s.setLayerOpacity(_l,_o[_l])}
- _avb.set({inside:!1,dia:!1,nv:!!_nv,...(_k===`all`||_k===`inside`?{vessels:!0,flow:!0,csf:!0,csfFlow:!0,airflow:!0}:{vessels:!1,flow:!1,csf:!1,csfFlow:!1,airflow:!1})});globalThis.__cv=_k;
+ _avb.set({inside:!1,dia:!1,nv:!!_nv,...(_k===`all`||_k===`inside`?{vessels:!1,flow:!1,csf:!1,csfFlow:!1,airflow:!0}:{vessels:!1,flow:!1,csf:!1,csfFlow:!1,airflow:!1})});globalThis.__cv=_k;
  let _ids=_k===`inside`?_regIds(_e=>_e.region!==`upper-limb`&&_e.region!==`lower-limb`):_k===`upper`?_regIds(_e=>_e.region===`upper-limb`||_UP.includes(_e.id)):_k===`lower`?_regIds(_e=>_e.region===`lower-limb`||_LO.includes(_e.id)):null;
  _ids&&_s.isolate(_ids);
  if(!_keep){_s.select(null);_k===`upper`?_s.frame(_UPF,`anterior`):_k===`lower`?_s.frame(_LOF,`anterior`):_s.resetCamera()}}
@@ -90,7 +90,7 @@ l=sub1(l,'function _EeFull(){',VIEW+'function _EeFull(){')
 i0=l.index('function _limbShow(_k){'); i1=l.index('function _diaShow(){')
 l=l[:i0]+'function _limbShow(_k){_view(_k,!1)}\n'+l[i1:]
 l=sub1(l,'function Ee(){let[_a,_sa]=(0,Y.useState)(`all`),[_m,_sm]=(0,Y.useState)(!1);','function Ee(){let[_a,_sa]=(0,Y.useState)(`all`),[_m,_sm]=(0,Y.useState)(!1),[_nv,_snv]=(0,Y.useState)(!1);globalThis.__sa=_sa;globalThis.__snv=_snv;')
-l=sub1(l,'let _go=(_id,_sys,_foc,_fn)=>{let _s=D.getState();','let _go=(_id,_sys,_foc,_fn)=>{let _s=D.getState();_s.restoreVisibility();_s.select(null);_foc||_s.resetCamera();globalThis.__cv=_id;_snv(!1);_avb.set({vessels:!0,flow:!0,csf:!0,csfFlow:!0,airflow:!0});')
+l=sub1(l,'let _go=(_id,_sys,_foc,_fn)=>{let _s=D.getState();','let _go=(_id,_sys,_foc,_fn)=>{let _s=D.getState();_s.restoreVisibility();_s.select(null);_foc||_s.resetCamera();globalThis.__cv=_id;_snv(!1);_avb.set({vessels:_id===`brain`,flow:_id===`brain`,csf:_id===`brain`,csfFlow:_id===`brain`,airflow:!0});')
 l=sub1(l,'_avb.set({inside:!1,dia:!1});_s.setSystemFocus(_sys)','_avb.set({inside:!1,dia:!1,nv:!1});_s.setSystemFocus(_sys)')
 l=sub1(l,'function _diaShow(){let _s=D.getState();','function _diaShow(){let _s=D.getState();_s.restoreVisibility();')
 l=sub1(l,'[`muscles`,`Muscles`,`muscular`,null]','[`muscles`,`Muscles`,null,null,`muscles`]')
@@ -115,3 +115,6 @@ t=sub1(t,'S(e.structure.id)?(0,p.jsxs)(`span`,{className:`av-badge av-badge--acc
 t=sub1(t,'children:[o[e.structure.system]?.name,` · `,e.structure.region.replace(`-`,` `),','children:[e.cmd?`Quick view`:o[e.structure.system]?.name,e.cmd?``:` · `,e.cmd?``:e.structure.region.replace(`-`,` `),')
 t=sub1(t,'children:l.map(e=>(0,p.jsx)(`button`,{type:`button`,className:`av-badge hover:text-[var(--av-teal)]`','children:[...l,`internal organs`,`upper limb`,`lower limb`,`full model`].map(e=>(0,p.jsx)(`button`,{type:`button`,className:`av-badge hover:text-[var(--av-teal)]`')
 wr(SB,t)
+
+for ch in (V,L):
+    t=rd(ch); t=sub1(t,'{vessels:!0,flow:!0,csf:!0,csfFlow:!0,','{vessels:!1,flow:!1,csf:!1,csfFlow:!1,'); wr(ch,t)

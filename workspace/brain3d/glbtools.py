@@ -41,9 +41,10 @@ def write_glb(nodes,path_glb,path_json,generator='AnatomyVerse vessel builder'):
         attrs=dict(POSITION=pa)
         if nd.get('smooth'):
             import trimesh
-            Nn=np.asarray(trimesh.Trimesh(P.astype(float),Fi,process=False).vertex_normals,dtype=np.float32)
-            pad(); o=len(bin_); bin_+=Nn.tobytes(); bviews.append(dict(buffer=0,byteOffset=o,byteLength=Nn.nbytes,target=34962))
-            accs.append(dict(bufferView=len(bviews)-1,componentType=5126,count=len(Nn),type='VEC3')); attrs['NORMAL']=len(accs)-1
+            Nf=np.asarray(trimesh.Trimesh(P.astype(float),Fi,process=False).vertex_normals,dtype=np.float32)
+            Nn=np.zeros((len(Nf),4),np.int8); Nn[:,:3]=np.clip(np.round(Nf*127),-127,127).astype(np.int8)
+            pad(); o=len(bin_); bin_+=Nn.tobytes(); bviews.append(dict(buffer=0,byteOffset=o,byteLength=Nn.nbytes,byteStride=4,target=34962))
+            accs.append(dict(bufferView=len(bviews)-1,componentType=5120,normalized=True,count=len(Nf),type='VEC3')); attrs['NORMAL']=len(accs)-1
         pad(); o=len(bin_); bin_+=I.tobytes(); bviews.append(dict(buffer=0,byteOffset=o,byteLength=I.nbytes,target=34963))
         accs.append(dict(bufferView=len(bviews)-1,componentType=5123 if it==np.uint16 else 5125,count=len(I),type='SCALAR')); ia=len(accs)-1
         c=nd['color']; a=nd.get('alpha',1.0)

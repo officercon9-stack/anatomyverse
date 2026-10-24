@@ -128,7 +128,7 @@ def split_tendon(V,F,nb=24,frac_thr=0.5,maxfrac=0.42,minfrac=0.07):
     return (V,F[~isT]),(V,F[isT]) if isT.any() else None
 groups={};tgroups={}
 for s,mid,sd,n in parts:
-    V,F=load(s); sz=size[s]; tgt=int(np.clip(sz*0.45,150,2200)); o,i=ends(V,mid,sd)
+    V,F=load(s); sz=size[s]; tgt=int(np.clip(sz*0.28,120,1300)); o,i=ends(V,mid,sd)
     lm=LM[sd][limb_for(n,V,sd)]
     V,F=decim(V,F,tgt)
     if GROUP.get(mid) not in GROUPS_NOSKIN: V=skin(V,lm); o=skin(o[None],lm)[0]; i=skin(i[None],lm)[0]
@@ -151,9 +151,9 @@ for s_,fid,sd,n,sk in fparts:
 bg={}
 for s,bid,sd,n in bparts:
     V,F=load(s); lm=LM[sd][limb_for(n,V,sd) if bid not in ('humerus','radius','ulna','femur','tibia','fibula','patella') else ('arm' if bid in('humerus','radius','ulna') else 'leg')]
-    if bid in ('scapula','clavicle','hip-bone'): tg=2500
+    if bid in ('scapula','clavicle','hip-bone'): tg=1800
     elif bid in ('hand-bones','foot-bones'): tg=260
-    else: tg=3500
+    else: tg=2200
     V,F=decim(V,F,tg)
     if bid not in ('scapula','clavicle','hip-bone'): V=skin(V,lm)
     bg.setdefault((bid,sd),[]).append((V,F))
