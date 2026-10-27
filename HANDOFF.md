@@ -131,3 +131,28 @@ structure; note that badge only ever rendered for `reviewed`, so "pending" was n
 users. The Admin editor keeps all three options (draft / pending-expert-review / reviewed) so
 status can still be managed per structure. Verified: 240/240 badges on systems/skeletal, no
 "pending" text anywhere in the UI.
+
+### Update 2026-10-27c — multilingual terminology (chunks `-b36`)
+Anatomical structure names now render in 7 languages: English, Latin, French, Spanish,
+Portuguese, Italian, Persian. Language picker sits beside the theme toggle (sidebar + mobile
+header); selection is stored in `localStorage['av.lang']` and applied on reload.
+
+How it works: `data/ta2.json` already shipped 7,192 Terminologia Anatomica rows with all 7
+language columns, but nothing consumed them. A join table (`data/i18n-structures.json`,
+526 of 615 structures = 86%) was built by matching each structure's `latinName`, falling back to
+English, with Latin singularisation and word-order-insensitive keys to catch plural/compound
+forms. The table is inlined into the manifest chunk and applied **synchronously at module eval**,
+mutating `S[i].name` before React renders (original kept as `S[i].enName`). Because every
+surface reads `.name` from those same objects, one injection translates the lab, the structure
+lists, search, labels and the detail panel at once — no per-component i18n needed.
+
+Verified: systems/skeletal and the 3D lab in en / la / es / fa. Lab structure title shows
+"کاسه سر" for skull; no console errors in any language.
+
+Gotcha for testing: navigating to a URL that differs only by `#hash` is a same-document
+navigation, so modules do not re-evaluate and the language will appear not to change. Set
+`av.lang` then do a full reload.
+
+Not done: RTL layout. Persian and Arabic text renders correctly but the page is still LTR —
+`dir="rtl"` plus mirrored panel positioning is a separate piece of work.
+Remaining 89 unmatched structures are mostly teeth, sinuses and compound vessel names.
