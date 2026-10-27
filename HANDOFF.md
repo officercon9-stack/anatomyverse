@@ -122,3 +122,12 @@ cached copy.
 - Real hands are slightly larger than the schematic arm (x 0.301–0.428 vs skin 0.319–0.385).
 - `ld_brain` still false (full BodyParts3D brain, vessels, CSF, meninges, tracts ≈ 7MB).
 - First canvas ~3.5s: three.js parse + procedural geometry on the main thread (needs a worker).
+
+### Update 2026-10-27b (chunks `-b35`)
+`reviewStatus` set to `reviewed` for all content (619 entries in the asset manifest, 42 in the
+index chunk) at the owner's instruction — their clinical team reviews the text on an ongoing basis.
+Effect: the green "Expert reviewed — checked by a qualified reviewer" badge now shows on every
+structure; note that badge only ever rendered for `reviewed`, so "pending" was never displayed to
+users. The Admin editor keeps all three options (draft / pending-expert-review / reviewed) so
+status can still be managed per structure. Verified: 240/240 badges on systems/skeletal, no
+"pending" text anywhere in the UI.
