@@ -59,3 +59,66 @@ The original React/Vite source does not exist in this work (compiled files only,
 
 ## Version 37 (touch delay)
 Cause found by profiling a tap: the first tap compiled new shader variants (opaque/transparent, front/double side, no-normals, basic) and, for any selected part, also started downloading the whole limb-muscle model. Fix (patch3j.py): pre-compile those variants 1.5 s and 7 s after the viewer mounts (`_Warm`), and only load the limb model when the selected part is a limb muscle/bone (`_LIMBSEL`). Chunk suffix now -b27. Doctors link: ?v=37.
+
+## Update 2026-10-27 (chunks `-b28` … `-b34`)
+
+Published preview: https://claude.ai/artifact/GCq2VDSG77nEURcda9abLk (version 11).
+Current entry chunks: `index-DAxCahJm-b33.js`, `AnatomyViewer-C5q0xwNu-b34.js`,
+`LabPage-zPU8vhVB-b31.js`, `assetManifest-D3o27EUe-b32.js`, `index-D5yXBwUi-b29.css`.
+
+### Neuron inspector (rewritten)
+Was a giant object parked in the body scene at `[.82,1.26,.38]`, sharing the body camera.
+Three faults: it swung with the body on orbit; `frame(['neuron-demo'])` moved OrbitControls'
+**target** onto it so every later drag pivoted around the neuron and threw the body off-screen;
+and `Pe('neuron-demo', …)` polluted the registry that `Fe()` uses for the whole-body bbox, so the
+Ant/Post/L/R view presets mis-framed the body.
+Now `_NeuronViewer` is its own `<Canvas>` with its own camera and OrbitControls, model centred at
+origin, auto-scaled by bbox (`fit = 1.2 / maxDim`). Body view is never touched.
+- Dendrite was entirely **inside** the soma (extent ~0.013 vs soma r=0.034) — rebuilt as 5 tapering
+  branches. Proximal axon was likewise buried (7 of the first 10 points inside the soma) — whole
+  axon side offset `+0.03` in x. Terminal twigs were 3.2% of model width — rebuilt ~2.5x longer.
+- Labels: the old 7 floating captions overlapped into mush. Replaced by tap-to-name
+  (`_NeuronPicker`) using **screen-space nearest-part** picking, not mesh raycasts — at 176px tall
+  the axon tube is ~2px wide and mesh picking only ever reached 4 of 7 parts. Verified all 7
+  reachable with a 90-point tap sweep.
+- **`_NeuronRig` begins with a zero-size transparent `Html` spacer — do not delete it.** The first
+  drei `Html` child mounted into a group never attaches its DOM container in this bundled drei.
+  Proven by reversing pin order (gap followed the first slot) and by a sentinel-first test.
+  Removing the spacer regresses to 6 of 7 pins.
+
+### Anatomical fidelity
+`_avb` defaults flipped: `ld_limb`, `ld_org`, `ld_sup` → true (was false). This enables the
+scan-derived assets that were shipped but switched off: `anatomyverse-limbs` (472 named
+structures incl. every intrinsic hand/foot muscle, and `b_hand-bones`/`b_foot-bones` at ~3,560
+verts each), organs and limb supply. Payload 9.3MB → 17.3MB; overlays each have their own
+Suspense so the body still renders before detail lands.
+- Added schematic `hand_bones_*`/`foot_bones_*` as a fallback, then registered them **and**
+  `skin_hand_*`/`skin_foot_*` in `anatomyverse-limbs.replacesParts`. Without that the schematic
+  skin foot (y 0–0.06) stayed drawn under the real foot (y 0.067–0.140) as a stray ball.
+- Fidelity badge reworded: "Anatomical model … trunk outline is schematic".
+
+### UI fixes
+- Animate menu: wrapper lifted to `zIndex 40` — its inner `z-30` was trapped in a `z-20` stacking
+  context and lost to the sex switch (`z-25`). Added `maxHeight`+scroll so it cannot run off a
+  phone screen. Switching a system on now closes the menu **on a later tick** (`_closeSoon`,
+  180ms) — closing it in the same handler batched with the viewer mount and broke all pins.
+- `av-toolbar-dock` reserves 5.9rem on ≤560px so the Animate button can no longer cover "Obl".
+- Panels (`_NeuronPanel`, `zt` heart, `_LungsPanel`, `_KidneyPanel`, `_AnimateMenu`) are draggable
+  by their header via `_useDragPanel`; presses on buttons are ignored.
+- **`bg-[var(--av-surface)]/85` and `/92` do not exist in the compiled CSS.** Every side panel had
+  *no background*. Fixed with inline `background: var(--av-surface)`. Check this before adding any
+  new Tailwind class — the stylesheet is prebuilt and arbitrary classes silently do nothing.
+- Systems page: the "3D" pills were `<span>`s, never buttons. Now real buttons calling the existing
+  `/app/lab?structure=<id>` navigator. 240/240 clickable on the skeletal page.
+
+### Process note
+Chunk filenames **must** be bumped on every content change. Three rounds of fixes never reached
+the user because files were edited in place under an unchanged hash-name and browsers served the
+cached copy.
+
+### Known open
+- Selecting a structure opens two panels with the same content (`_SelCard` floating card + LabPage
+  detail sheet). Card says "detail is in the panel on the right"; on narrow windows you get both.
+- Real hands are slightly larger than the schematic arm (x 0.301–0.428 vs skin 0.319–0.385).
+- `ld_brain` still false (full BodyParts3D brain, vessels, CSF, meninges, tracts ≈ 7MB).
+- First canvas ~3.5s: three.js parse + procedural geometry on the main thread (needs a worker).
