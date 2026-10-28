@@ -156,3 +156,20 @@ navigation, so modules do not re-evaluate and the language will appear not to ch
 Not done: RTL layout. Persian and Arabic text renders correctly but the page is still LTR —
 `dir="rtl"` plus mirrored panel positioning is a separate piece of work.
 Remaining 89 unmatched structures are mostly teeth, sinuses and compound vessel names.
+
+### Update 2026-10-28 — eye close-up (chunk LabPage `-b37`)
+The detailed eye was already fully built and shipping: `zanatomy-eye.glb.json` (42 meshes) with a
+complete `objectMap` binding each mesh to its own structure — cornea, iris, lens, retina, sclera,
+vitreous body, anterior chamber, lacrimal gland/apparatus, levator palpebrae, optic chiasm and all
+six extraocular muscles. All 18 ids exist in the structures array with function, location and
+clinical text. It was invisible because the only way in was to know a term and search for it.
+
+Added an "Eye close-up (Z-Anatomy)" button to the structure panel, mirroring the existing heart
+and brain close-up pattern: `_EyeSet` (27 eye ids) gates it, and it calls
+`_goModel('zanatomy-eye', id)` to load the eye as a standalone model, with a matching
+"Back to the full-body model" button. Verified: button appears for cornea, loads the eye alone,
+all parts keep their meshes (2 each, vitreous 4), no errors.
+
+Known limitation: in close-up you are still looking at an opaque sclera from outside, so lens,
+retina and vitreous are hidden until you use the existing Hide or Isolate buttons on the sclera.
+Making the sclera translucent by default in this model would be the obvious next improvement.
