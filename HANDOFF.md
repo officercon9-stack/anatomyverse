@@ -173,3 +173,37 @@ all parts keep their meshes (2 each, vitreous 4), no errors.
 Known limitation: in close-up you are still looking at an opaque sclera from outside, so lens,
 retina and vitreous are hidden until you use the existing Hide or Isolate buttons on the sclera.
 Making the sclera translucent by default in this model would be the obvious next improvement.
+
+### Update 2026-10-28b — nose and ear close-up (manifest `-b39`, LabPage `-b38`)
+New asset `models/bodyparts3d-nose-ear.glb.json` (2.7 MB, 16 meshes) built from BodyParts3D STL by
+`workspace/brain3d/build_nose_ear.py`, registered by `patch_nose_ear.py`. Reached by a
+"Nose and ear close-up" button on any nose/ear structure, mirroring the heart/brain/eye pattern.
+
+Contents: nasal bones L/R, nasal cartilages, inferior conchae L/R, ethmoid, vomer, nasalis L/R,
+auricle, plus maxilla, palatine and temporal bones L/R that wall the nasal cavity and house the ear.
+
+Build notes (the converter is dependency-free, numpy only):
+- BodyParts3D is millimetres, Z-up, -Y anterior. App space is metres, Y-up, +Z anterior, so the
+  transform is `(x, z, -y)/1000`. Verified against the existing brain-skull asset.
+- Standalone close-up models are centred on their own bbox (brain-skull sits at the origin), not
+  placed in body coordinates — this asset is centred the same way.
+- Raw meshes are 134k triangles / 403k verts, far too heavy. `cluster_decimate()` snaps verts to a
+  grid, drops degenerate tris and indexes: 403k -> 43.7k verts with per-part budgets.
+
+4 new structures added with full teaching content including `innervation` and `bloodSupply`:
+external-ear, inferior-concha, nasal-cartilages, nasalis. Supply fields were also added to the
+existing `ear`, `nasal-cavity` and `olfactory-epithelium` entries (nasal-cavity notes Kiesselbach
+plexus). Counts moved: Skeletal 240->242, Muscular 148->149, Special senses 17->18.
+
+Gotcha hit while patching: inserting fields after a regex group that already ended in a comma
+produced `,,` and a missing separator before the next key. `node --check` passed but the browser
+threw "Unexpected token ','" — node does not fully validate these module chunks, so always load
+the page after a manifest edit.
+
+NOT included, because the source has no meshes for them: tympanic membrane, auditory ossicles,
+cochlea, bony labyrinth, Eustachian tube, paranasal sinuses, and the cranial nerves and vessels
+themselves. BodyParts3D has one outer-ear mesh and, of the cranial nerves, only the optic nerve.
+Z-Anatomy (cloned, 893 MB Unity project) does contain cochlea, ossicles, bony labyrinth and
+CN VI/VII/IX, but its models are binary FBX v7400 and converting them needs a tool that is not
+installed; its repo LICENSE is also GPL-3.0 with no separate asset licence, and its descriptions
+are Wikipedia-derived, so licensing needs checking before that content is used commercially.
