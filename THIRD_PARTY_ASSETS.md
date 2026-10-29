@@ -45,6 +45,7 @@ derived from BodyParts3D. Deed: https://creativecommons.org/licenses/by-sa/4.0/
 | `zanatomy-heart` | Heart close-up (Z-Anatomy) | CC BY-SA 4.0 — Z-Anatomy, derived from BodyParts3D (CC BY-SA 2.1 JP) |
 | `zanatomy-limbbones` | Limb and girdle bones (Z-Anatomy) | CC BY-SA 4.0 — Z-Anatomy, derived from BodyParts3D (CC BY-SA 2.1 JP) |
 | `zanatomy-skull` | Skull, jaws and teeth (Z-Anatomy) | CC BY-SA 4.0 — Z-Anatomy, derived from BodyParts3D (CC BY-SA 2.1 JP) |
+| `zanatomy-ear` | Ear: auricle, ossicles, tympanic membrane, cochlea, vestibule and nerves | Middle/inner ear: CC BY-SA 4.0 — Z-Anatomy. Auricle: CC BY-SA 2.1 JP — BodyParts3D, registered onto the Z-Anatomy temporal bone |
 
 **Check before release:** the Z-Anatomy *repository* carries GPL-3.0 while its
 *assets* are published CC BY-SA 4.0. Only the assets are used here, and that
