@@ -1,0 +1,11 @@
+const {chromium}=require('playwright');const http=require('http'),fs=require('fs'),path=require('path');
+const root=path.resolve(process.argv[2]),port=+process.argv[3];
+http.createServer((q,r)=>{let p=decodeURIComponent(q.url.split('?')[0]);if(p.endsWith('/'))p+='index.html';let f=path.join(root,p);fs.readFile(f,(e,d)=>{if(e){r.writeHead(404);r.end();return}const t={'.js':'text/javascript','.html':'text/html','.css':'text/css','.json':'application/json','.woff2':'font/woff2','.glb':'model/gltf-binary','.svg':'image/svg+xml'}[path.extname(f)]||'application/octet-stream';r.writeHead(200,{'content-type':t});r.end(d)})}).listen(port);
+(async()=>{const b=await chromium.launch({args:['--use-gl=swiftshader','--enable-unsafe-swiftshader']});const ctx=await b.newContext({viewport:{width:1280,height:800}});await ctx.addInitScript(()=>{try{localStorage.setItem('av.disclaimerSeen','1')}catch(e){}});
+const pg=await ctx.newPage();const errs=[];pg.on('pageerror',e=>errs.push(e.message));
+await pg.goto(`http://localhost:${port}/#/app/lab`);await pg.waitForTimeout(14000);
+const names=async()=>pg.evaluate(()=>{const s=globalThis.__scn;const o={};s&&s.traverse(x=>{if(x.isMesh&&x.visible)o[x.name||x.parent?.name]=1});return Object.keys(o).length});
+console.log('meshes visible female',await names());await pg.screenshot({path:'sx_f.png'});
+await pg.getByRole('button',{name:/male body/i}).last().click();await pg.waitForTimeout(3000);
+console.log('meshes visible male',await names());await pg.screenshot({path:'sx_m.png'});
+console.log('ERRS',errs.slice(0,3));await b.close();process.exit(0)})();

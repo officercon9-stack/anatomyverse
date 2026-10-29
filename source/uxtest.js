@@ -1,0 +1,28 @@
+const {chromium}=require('playwright');const http=require('http'),fs=require('fs'),path=require('path');
+const root=path.resolve(process.argv[2]),W=+process.argv[3]||1280,H=+process.argv[4]||800,tag=process.argv[5]||'ux';
+http.createServer((q,r)=>{let p=decodeURIComponent(q.url.split('?')[0]);if(p.endsWith('/'))p+='index.html';let f=path.join(root,p);fs.readFile(f,(e,d)=>{if(e){r.writeHead(404);r.end();return}const t={'.js':'text/javascript','.html':'text/html','.css':'text/css','.json':'application/json','.woff2':'font/woff2','.glb':'model/gltf-binary','.svg':'image/svg+xml'}[path.extname(f)]||'application/octet-stream';r.writeHead(200,{'content-type':t});r.end(d)})}).listen(8790+W%50);
+(async()=>{const b=await chromium.launch({args:['--use-gl=swiftshader','--enable-unsafe-swiftshader']});const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:W<600,isMobile:W<600});await ctx.addInitScript(()=>{try{localStorage.setItem('av.disclaimerSeen','1');localStorage.setItem('av.tourSeen','1')}catch(e){}});
+const pg=await ctx.newPage();const errs=[];pg.on('pageerror',e=>errs.push(e.message));
+await pg.goto(`http://localhost:${8790+W%50}/#/app/lab`);await pg.waitForTimeout(13000);
+await pg.evaluate(()=>[...document.querySelectorAll('button')].filter(b=>/got it/i.test(b.textContent)).forEach(b=>b.click()));
+const S=()=>pg.evaluate(()=>{const s=__avStore.getState();return JSON.stringify({sel:s.selectedId,hid:s.hidden.length,iso:s.isolated,sex:s.sex,xray:s.xray,sk:s.layerOpacity.skin,crumb:[...document.querySelectorAll('#avx-crumb li')].map(l=>l.textContent).join(' > ')})});
+console.log('bar',await pg.evaluate(()=>!!document.getElementById('avux')));
+await pg.screenshot({path:tag+'_a.png'});
+await pg.evaluate(()=>__avStore.getState().select('scapula'));await pg.waitForTimeout(800);console.log('select',await S());
+await pg.getByRole('button',{name:'Isolate selected'}).click();await pg.waitForTimeout(500);console.log('isolate',await S());
+await pg.getByRole('button',{name:'Undo',exact:true}).click();await pg.waitForTimeout(400);console.log('undo',await S());
+await pg.getByRole('button',{name:'Hide selected'}).click();await pg.waitForTimeout(400);console.log('hide',await S());
+await pg.getByRole('button',{name:'Show all'}).first().click();await pg.waitForTimeout(400);console.log('showall',await S());
+await pg.evaluate(()=>__avStore.getState().select('heart'));await pg.waitForTimeout(500);
+await pg.getByRole('button',{name:'Reveal selected'}).click();await pg.waitForTimeout(800);console.log('reveal',await S());await pg.screenshot({path:tag+'_b.png'});
+await pg.getByRole('button',{name:'Fade surroundings'}).click();await pg.waitForTimeout(300);console.log('fade',await S());
+await pg.getByRole('button',{name:'Visibility manager'}).click();await pg.waitForTimeout(800);await pg.screenshot({path:tag+'_c.png'});
+await pg.getByRole('searchbox',{name:'Search structures'}).fill('cochlea');await pg.waitForTimeout(500);console.log('mgr rows',await pg.evaluate(()=>[...document.querySelectorAll('#avux-dlg .row')].slice(0,5).map(r=>r.innerText.replace(/\n/g,' | '))));
+await pg.keyboard.press('Escape');
+await pg.getByRole('button',{name:'Full-width body'}).click();await pg.waitForTimeout(500);await pg.screenshot({path:tag+'_d.png'});
+await pg.getByRole('button',{name:'Full-width body'}).click();
+// sex
+await pg.evaluate(()=>__avStore.getState().select('uterus'));await pg.waitForTimeout(500);console.log('uterus',await S());
+await pg.evaluate(()=>__avStore.getState().setSex('male'));await pg.waitForTimeout(500);console.log('male',await S());
+await pg.evaluate(()=>__avStore.getState().select('prostate'));await pg.waitForTimeout(300);console.log('prostate',await S());
+console.log('ERRS',errs.slice(0,3));await b.close();process.exit(0)})();
