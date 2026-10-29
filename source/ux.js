@@ -291,6 +291,7 @@
     if (side) { fab.style.right = (sheetEl.getBoundingClientRect().width + 14) + 'px'; fab.style.bottom = '16px'; }
     else { fab.style.right = ''; fab.style.bottom = (innerHeight - top + (top < innerHeight ? 12 : 30)) + 'px'; }
   }
+
   /* lifecycle */
   function tick() {
     if (!globalThis.__avStore) return; S = globalThis.__avStore; F = globalThis.__avF;
@@ -302,7 +303,22 @@
     if (!onLab || !row) { if (bar) { bar.remove(); B = {}; mounted = null; } var fb = $('#avux-fab'); if (fb) fb.remove(); closeSheet(); return; }
     mountFab(); markMobile(sec); applyRail();
     if (!bar || mounted !== row) { if (bar) bar.remove(); B = {}; mounted = row; css(); mountBar(row); last = JSON.stringify(snap()); }
-    track(); var k = st().selectedId + '|' + st().systemFocus + '|' + st().xray; if (k !== lastSel) { lastSel = k; refresh(); }
+    light();
+  }
+  function light() { if (!S || !B.hide) return; track(); var k = st().selectedId + '|' + st().systemFocus + '|' + st().xray; if (k !== lastSel) { lastSel = k; refresh(); } }
+  /* scheduling: cheap state sync soon after a change, full page checks at most a few times a second */
+  var tL = 0, tF = 0;
+  function soon() { if (!tL) tL = setTimeout(function () { tL = 0; try { light(); } catch (e) {} }, 60); if (!tF) tF = setTimeout(function () { tF = 0; try { tick(); } catch (e) {} }, 350); }
+  /* hover: ignore on touch screens (no hover there) and batch mouse hover to one update per frame */
+  var lastPT = 'mouse', hv = { id: undefined, raf: 0 };
+  addEventListener('pointerdown', function (e) { lastPT = e.pointerType || 'mouse'; }, true);
+  addEventListener('pointermove', function (e) { if (e.pointerType) lastPT = e.pointerType; }, true);
+  function wrapHover() {
+    var s = globalThis.__avStore; if (!s || s.getState().__avxHover) return; var orig = s.getState().hover; if (typeof orig !== 'function') return;
+    s.setState({ __avxHover: true, hover: function (id) {
+      if (lastPT !== 'mouse' || drag.off) { if (id == null && s.getState().hoveredId != null) orig(null); return; }
+      hv.id = id; if (hv.raf) return; hv.raf = requestAnimationFrame(function () { hv.raf = 0; orig(hv.id); });
+    } });
   }
   /* smoother dragging: stop per-move hit-testing of every 3D part while the view is being dragged */
   var drag = { on: false, x: 0, y: 0, off: false };
@@ -315,6 +331,7 @@
   var lastSel = '';
   addEventListener('resize', function () { try { syncToggles(); } catch (e) {} });
   addEventListener('keydown', function (e) { if (e.key !== 'Escape' || !S || !/#\/app\/lab/.test(location.hash)) return; if ($('#avux-dlg') || $('#avux-sheet') || document.querySelector('[role=dialog][aria-modal=true]')) return; var a = document.activeElement; if (a && /INPUT|SELECT|TEXTAREA/.test(a.tagName)) return; if (st().selectedId) { st().select(null); toast('Selection cleared'); } });
-  setInterval(tick, 400);
-  var iv = setInterval(function () { if (globalThis.__avStore) { clearInterval(iv); globalThis.__avStore.subscribe(function () { try { tick(); } catch (e) {} }); } }, 300);
+  setInterval(function () { if (!document.hidden) { try { tick(); } catch (e) {} } }, 900);
+  addEventListener('hashchange', function () { setTimeout(function () { try { tick(); } catch (e) {} }, 50); });
+  var iv = setInterval(function () { if (globalThis.__avStore) { clearInterval(iv); wrapHover(); globalThis.__avStore.subscribe(soon); tick(); } }, 200);
 })();

@@ -12,5 +12,5 @@
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(show,1200)});else setTimeout(show,1200);
 })();
 if('serviceWorker' in navigator && !window.Capacitor && (location.protocol==='https:'||location.hostname==='localhost')){
-  window.addEventListener('load',function(){navigator.serviceWorker.register('./sw.js').then(function(){return navigator.serviceWorker.ready}).then(function(reg){setTimeout(function(){var u=performance.getEntriesByType('resource').map(function(e){return e.name});if(reg.active)reg.active.postMessage({cache:u.concat([location.href.split('#')[0]])})},4000)}).catch(function(){})});
+  window.addEventListener('load',function(){navigator.serviceWorker.register('./sw.js').then(function(){return navigator.serviceWorker.ready}).then(function(reg){setTimeout(function(){var u=performance.getEntriesByType('resource').map(function(e){return e.name}).filter(function(x){return !/\/models\//.test(x)});if(reg.active)reg.active.postMessage({cache:u.concat([location.href.split('#')[0]])})},4000)}).catch(function(){})});
 }

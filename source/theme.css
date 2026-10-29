@@ -75,3 +75,50 @@ ol.grid.gap-3.md\:grid-cols-3 > li > a::after{content:"";position:absolute;right
 :root:not([data-theme=light]) .av-panel.fixed,:root:not([data-theme=light]) .av-panel.absolute{background:linear-gradient(180deg,#13234a,#0c1834)}
 .avx-badge{bottom:20px!important}
 @media (min-width:768px) and (min-height:501px){:root[data-theme=light] #avux{background:var(--av-surface)!important;border-color:var(--av-border)!important}}
+
+/* ---------- performance on phones and low-end devices ---------- */
+/* blurred glass over a moving 3D view is expensive on phone GPUs: use solid glass there */
+@media (pointer:coarse),(max-width:767px),(max-height:500px){
+  *,*::before,*::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+  :root:not([data-theme=light]) .av-toolbar{background:rgba(10,22,50,.94)!important}
+  :root:not([data-theme=light]) body{background-attachment:scroll}
+}
+/* the attention glow on "Animate" stops after three pulses instead of repainting forever */
+.av-tool--pulse{animation-iteration-count:3!important}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+/* ---------- more colour ---------- */
+/* system list: coloured dots with a soft glow and a coloured edge on hover */
+main aside ul.flex.flex-col > li > button > span.rounded-full{width:12px!important;height:12px!important;box-shadow:0 0 0 3px rgba(255,255,255,.07)}
+main aside ul.flex.flex-col > li > button{border-radius:10px;transition:background .15s}
+main aside ul.flex.flex-col > li > button:hover{background:linear-gradient(90deg,rgba(23,107,255,.22),rgba(155,77,255,.10) 70%,transparent)!important}
+/* section labels in gradient colour */
+.av-kicker,.av-section-title{background:linear-gradient(90deg,#00e5ff,#7aa8ff 45%,#c77dff);-webkit-background-clip:text;background-clip:text;color:transparent!important;width:fit-content}
+:root[data-theme=light] .av-kicker,:root[data-theme=light] .av-section-title{background:linear-gradient(90deg,#0a5bea,#7b3ff0);-webkit-background-clip:text;background-clip:text}
+/* quick-pick chips (Heart, Femur...) each in its own colour */
+.grid.grid-cols-2.gap-2.text-sm > .av-btn{border-width:1px;border-style:solid}
+.grid.grid-cols-2.gap-2.text-sm > .av-btn:nth-child(6n+1){border-color:rgba(255,79,200,.55)!important;background:linear-gradient(135deg,rgba(255,79,200,.18),rgba(22,39,75,.85))!important}
+.grid.grid-cols-2.gap-2.text-sm > .av-btn:nth-child(6n+2){border-color:rgba(0,229,255,.55)!important;background:linear-gradient(135deg,rgba(0,229,255,.16),rgba(22,39,75,.85))!important}
+.grid.grid-cols-2.gap-2.text-sm > .av-btn:nth-child(6n+3){border-color:rgba(155,77,255,.6)!important;background:linear-gradient(135deg,rgba(155,77,255,.2),rgba(22,39,75,.85))!important}
+.grid.grid-cols-2.gap-2.text-sm > .av-btn:nth-child(6n+4){border-color:rgba(23,107,255,.65)!important;background:linear-gradient(135deg,rgba(23,107,255,.22),rgba(22,39,75,.85))!important}
+.grid.grid-cols-2.gap-2.text-sm > .av-btn:nth-child(6n+5){border-color:rgba(52,211,153,.55)!important;background:linear-gradient(135deg,rgba(52,211,153,.16),rgba(22,39,75,.85))!important}
+.grid.grid-cols-2.gap-2.text-sm > .av-btn:nth-child(6n+6){border-color:rgba(251,191,36,.55)!important;background:linear-gradient(135deg,rgba(251,191,36,.15),rgba(22,39,75,.85))!important}
+/* cards get a colour strip along the top, cycling through the palette */
+:root:not([data-theme=light]) .av-card{position:relative}
+:root:not([data-theme=light]) .av-card::before{content:"";position:absolute;left:16px;right:16px;top:0;height:3px;border-radius:0 0 6px 6px;background:var(--av-grad);opacity:.9;pointer-events:none}
+:root:not([data-theme=light]) :nth-child(4n+2) > .av-card::before,:root:not([data-theme=light]) .av-card:nth-child(4n+2)::before{background:linear-gradient(90deg,#00e5ff,#34d399)}
+:root:not([data-theme=light]) :nth-child(4n+3) > .av-card::before,:root:not([data-theme=light]) .av-card:nth-child(4n+3)::before{background:var(--av-grad-violet)}
+:root:not([data-theme=light]) :nth-child(4n+4) > .av-card::before,:root:not([data-theme=light]) .av-card:nth-child(4n+4)::before{background:linear-gradient(90deg,#ff4fc8,#fbbf24)}
+/* menu icons in colour */
+.av-nav-link:not([aria-current=page]):nth-child(8n+1) svg{color:#5fa8ff}
+.av-nav-link:not([aria-current=page]):nth-child(8n+2) svg{color:#00e5ff}
+.av-nav-link:not([aria-current=page]):nth-child(8n+3) svg{color:#c77dff}
+.av-nav-link:not([aria-current=page]):nth-child(8n+4) svg{color:#ff4fc8}
+.av-nav-link:not([aria-current=page]):nth-child(8n+5) svg{color:#34d399}
+.av-nav-link:not([aria-current=page]):nth-child(8n+6) svg{color:#fbbf24}
+.av-nav-link:not([aria-current=page]):nth-child(8n+7) svg{color:#ff7a8a}
+.av-nav-link:not([aria-current=page]):nth-child(8n+8) svg{color:#7dd3fc}
+/* Female / Male switch in palette colours */
+.avx-sex button[aria-pressed=true],.avx-sex button.bg-pink-500,.avx-sex button.bg-blue-500{box-shadow:0 8px 20px -10px currentColor}
+/* phones: the tips button lives in the Tools sheet ("Quick tour"), so keep it off the 3D view straight away */
+@media (max-width:767px),(max-height:500px){section button[aria-label="Open tips"]{display:none!important}}
