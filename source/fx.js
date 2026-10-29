@@ -4,6 +4,7 @@ const FX=globalThis.__avFx={jaw:0,jawT:0,exp:0,expT:0,xray:false,labels:false,hi
 const P=[0,1.573,0.008];            /* temporomandibular axis (metres, Y-up, +Z anterior) */
 const C=[0,1.572,0.03];             /* skull centre for the exploded view */
 const BASE_DY=-0.0095,BASE_A=0.13;  /* bite correction: lower arch sits 9.5 mm lower and tilts 0.13 rad about the TMJ axis */
+const FIXED={pupil_L:[0,0.0047,-0.0057],ear_L:[0,-0.045,0],nasal_cavity:[0,-0.06,0],olfactory_epithelium:[0,-0.05,0]};  /* schematic head parts that sat too high: ears at brow level, nasal cavity on the forehead */
 const OPEN_A=0.42;                  /* ~24 degrees of opening */
 const nm=id=>{let s=id.replace(/-bone/,'').replace(/-left$/,' (L)').replace(/-right$/,' (R)').replace(/-/g,' ');return s.charAt(0).toUpperCase()+s.slice(1)};
 const CRANIAL=['frontal-bone','parietal-bone-left','parietal-bone-right','temporal-bone-left','temporal-bone-right','occipital-bone','sphenoid-bone','ethmoid-bone'];
@@ -36,7 +37,7 @@ function buildUI(s){
 }
 function collect(sc){
   const L=[];const col=globalThis.__avBoneCol||{};
-  sc.traverse(m=>{if(m.isMesh&&m.name==='pupil_L'){L.push(m);return}if(!m.isMesh||!m.name||m.name.indexOf('za_')!==0)return;const id=m.userData&&m.userData.structureId;const low=/^za_tooth_l/.test(m.name);if(!(col[id]||low))return;L.push(m)});
+  sc.traverse(m=>{if(m.isMesh&&FIXED[m.name]){L.push(m);return}if(!m.isMesh||!m.name||m.name.indexOf('za_')!==0)return;const id=m.userData&&m.userData.structureId;const low=/^za_tooth_l/.test(m.name);if(!(col[id]||low))return;L.push(m)});
   return L;
 }
 function prep(sc,L){
@@ -44,8 +45,8 @@ function prep(sc,L){
   const sums={};
   L.forEach(m=>{if(m.userData.__fx)return;m.updateWorldMatrix(true,false);const pos=m.geometry.attributes.position,nor=m.geometry.attributes.normal;const n=pos.count,step=Math.max(1,Math.floor(n/260));const S=[],N=[];const v=new V3(),w=new V3();const c=new V3();let cnt=0;
     for(let i=0;i<n;i+=step){v.fromBufferAttribute(pos,i).applyMatrix4(m.matrixWorld);S.push(v.x,v.y,v.z);if(nor){w.fromBufferAttribute(nor,i).transformDirection(m.matrixWorld);N.push(w.x,w.y,w.z)}else N.push(0,0,0);c.add(v);cnt++}
-    c.multiplyScalar(1/cnt);const low=/^za_tooth_l/.test(m.name);const pup=m.name==='pupil_L';const bone=pup?'__pupil':low?'mandible':m.userData.structureId;
-    m.userData.__fx={m0:m.matrix.clone(),bone:bone,jaw:bone==='mandible',fixed:pup?[0,0.0047,-0.0057]:null,S:new Float32Array(S),N:new Float32Array(N),c:c,own:!low&&!pup};
+    c.multiplyScalar(1/cnt);const low=/^za_tooth_l/.test(m.name);const pup=!!FIXED[m.name];const bone=pup?'__fix_'+m.name:low?'mandible':m.userData.structureId;
+    m.userData.__fx={m0:m.matrix.clone(),bone:bone,jaw:bone==='mandible',fixed:pup?FIXED[m.name]:null,S:new Float32Array(S),N:new Float32Array(N),c:c,own:!low&&!pup};
     const q=sums[bone]||(sums[bone]={c:new V3(),k:0});q.c.add(c);q.k++;
     if(!m.userData.__rc){m.userData.__rc=m.raycast}
   });
