@@ -1,4 +1,4 @@
-# AnatomyVerse 3D: developer guide
+# 3D Anatomy: developer guide
 
 Read this first. The README in the root is older.
 

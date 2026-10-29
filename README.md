@@ -1,4 +1,4 @@
-# AnatomyVerse 3D/4D
+# 3D Anatomy/4D
 
 > Developers: start with [DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md). Licences and credits: [THIRD_PARTY_ASSETS.md](THIRD_PARTY_ASSETS.md).
 
@@ -10,7 +10,7 @@ Educational use only. The body is an original schematic model (not anatomically 
 The compiled app is in the root; `build-scripts/` holds the Python/Node scripts used to generate the models and patch the app (they need the BodyParts3D source files, which are not included).
 
 ## Third-party 3D content
-`models/zanatomy-heart.glb.json` (a GLB stored as base64 JSON) is derived from **Z-Anatomy — The libre 3D atlas of anatomy** (CC BY-SA 4.0), itself derived from **BodyParts3D, The Database Center for Life Science** (CC BY-SA 2.1 Japan). Converted and optimised for AnatomyVerse; this derived model is shared under **CC BY-SA 4.0**.
+`models/zanatomy-heart.glb.json` (a GLB stored as base64 JSON) is derived from **Z-Anatomy — The libre 3D atlas of anatomy** (CC BY-SA 4.0), itself derived from **BodyParts3D, The Database Center for Life Science** (CC BY-SA 2.1 Japan). Converted and optimised for 3D Anatomy; this derived model is shared under **CC BY-SA 4.0**.
 `data/ta2.json` is from the Z-Anatomy TA2 terminology list (CC BY-SA 4.0).
 
-`models/bodyparts3d-*.glb.json` (brain, skull base, vessels, lungs, airways, diaphragm) are derived from **BodyParts3D** (CC BY-SA 2.1 Japan; Database Center for Life Science), re-centred, smoothed and partly generated for AnatomyVerse; shared under the same licence. Verify licence terms before wider distribution.
+`models/bodyparts3d-*.glb.json` (brain, skull base, vessels, lungs, airways, diaphragm) are derived from **BodyParts3D** (CC BY-SA 2.1 Japan; Database Center for Life Science), re-centred, smoothed and partly generated for 3D Anatomy; shared under the same licence. Verify licence terms before wider distribution.

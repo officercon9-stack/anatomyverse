@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">AnatomyVerse 3D</string>
-    <string name="title_activity_main">AnatomyVerse 3D</string>
+    <string name="app_name">3D Anatomy</string>
+    <string name="title_activity_main">3D Anatomy</string>
     <string name="package_name">com.officercon9.anatomyverse</string>
     <string name="custom_url_scheme">com.officercon9.anatomyverse</string>
 </resources>

@@ -1,6 +1,6 @@
 # Third-party assets, licences and attribution
 
-Everything AnatomyVerse ships that was not written for it, what each licence
+Everything 3D Anatomy ships that was not written for it, what each licence
 requires, and **where that requirement has to be satisfied**. Generated from
 the asset manifest; re-check it whenever models are added.
 
@@ -20,13 +20,13 @@ converted to glTF, re-centred and re-oriented.
 |---|---|---|
 | `anatomyverse-limbs` | Limb muscles and bones (BodyParts3D) | CC BY-SA 2.1 Japan — BodyParts3D |
 | `anatomyverse-organs` | Detailed organs, vessels and trunk bones (BodyParts3D) | CC BY-SA 2.1 Japan — BodyParts3D |
-| `bodyparts3d-brain-csf` | Brain CSF spaces (inside full-body model) | CC BY-SA 2.1 Japan — BodyParts3D (schematic parts by AnatomyVerse) |
-| `bodyparts3d-brain-fossae` | Cranial fossae (inside full-body model) | CC BY-SA 2.1 Japan — BodyParts3D (schematic parts by AnatomyVerse) |
+| `bodyparts3d-brain-csf` | Brain CSF spaces (inside full-body model) | CC BY-SA 2.1 Japan — BodyParts3D (schematic parts by 3D Anatomy) |
+| `bodyparts3d-brain-fossae` | Cranial fossae (inside full-body model) | CC BY-SA 2.1 Japan — BodyParts3D (schematic parts by 3D Anatomy) |
 | `bodyparts3d-brain-in-body` | Detailed brain (inside full-body skull) | CC BY-SA 2.1 Japan — BodyParts3D |
-| `bodyparts3d-brain-mening` | Meninges (inside full-body model) | CC BY-SA 2.1 Japan — BodyParts3D (schematic parts by AnatomyVerse) |
+| `bodyparts3d-brain-mening` | Meninges (inside full-body model) | CC BY-SA 2.1 Japan — BodyParts3D (schematic parts by 3D Anatomy) |
 | `bodyparts3d-brain-skull` | Brain and skull close-up (BodyParts3D) | CC BY-SA 2.1 Japan — BodyParts3D |
-| `bodyparts3d-brain-tracts` | Brain and spinal cord tracts (inside full-body model) | CC BY-SA 2.1 Japan — BodyParts3D (schematic parts by AnatomyVerse) |
-| `bodyparts3d-brain-vessels` | Brain blood vessels (inside full-body model) | CC BY-SA 2.1 Japan — BodyParts3D (schematic parts by AnatomyVerse) |
+| `bodyparts3d-brain-tracts` | Brain and spinal cord tracts (inside full-body model) | CC BY-SA 2.1 Japan — BodyParts3D (schematic parts by 3D Anatomy) |
+| `bodyparts3d-brain-vessels` | Brain blood vessels (inside full-body model) | CC BY-SA 2.1 Japan — BodyParts3D (schematic parts by 3D Anatomy) |
 | `bodyparts3d-lungs` | Lungs, airways and diaphragm (inside full-body model) | CC BY-SA 2.1 Japan — BodyParts3D |
 | `bodyparts3d-nose-ear` | Nose and ear close-up | CC BY-SA 2.1 Japan — BodyParts3D |
 
@@ -45,7 +45,7 @@ derived from BodyParts3D. Deed: https://creativecommons.org/licenses/by-sa/4.0/
 | `zanatomy-heart` | Heart close-up (Z-Anatomy) | CC BY-SA 4.0 — Z-Anatomy, derived from BodyParts3D (CC BY-SA 2.1 JP) |
 | `zanatomy-limbbones` | Limb and girdle bones (Z-Anatomy) | CC BY-SA 4.0 — Z-Anatomy, derived from BodyParts3D (CC BY-SA 2.1 JP) |
 | `zanatomy-skull` | Skull, jaws and teeth (Z-Anatomy) | CC BY-SA 4.0 — Z-Anatomy, derived from BodyParts3D (CC BY-SA 2.1 JP) |
-| `zanatomy-ear` | Ear: auricle, ossicles, tympanic membrane, chorda tympani (+ original cochlea, vestibule, canals, VIII nerve branches) | Ossicles, tympanic membrane, chorda tympani: CC BY-SA 4.0 — Z-Anatomy. Auricle: CC BY-SA 2.1 JP — BodyParts3D, registered onto the Z-Anatomy temporal bone. Cochlea, vestibule, canals, nerve branches: original AnatomyVerse drawings |
+| `zanatomy-ear` | Ear: auricle, ossicles, tympanic membrane, chorda tympani (+ original cochlea, vestibule, canals, VIII nerve branches) | Ossicles, tympanic membrane, chorda tympani: CC BY-SA 4.0 — Z-Anatomy. Auricle: CC BY-SA 2.1 JP — BodyParts3D, registered onto the Z-Anatomy temporal bone. Cochlea, vestibule, canals, nerve branches: original 3D Anatomy drawings |
 
 **Licence status (checked 29 Oct 2026).** The official models repository
 (`github.com/Z-Anatomy/Models-of-human-anatomy`) states: "All the code and
@@ -69,22 +69,22 @@ confirmation of origin: auditory ossicles, tympanic membrane, chorda tympani,
 eyelid tarsal plates, zonular fibres, optic nerves, and the heart, skull and
 limb-bone meshes. If they cannot confirm, replace or remove those parts.
 
-## 3. Original AnatomyVerse work — MIT
+## 3. Original 3D Anatomy work — MIT
 
 Written for this project; no third-party obligation.
 
 | asset id | name | licence as recorded |
 |---|---|---|
-| `anatomyverse-alveoli` | Alveoli close-up (gas exchange) | AnatomyVerse schematic model |
-| `anatomyverse-diasupply` | Diaphragm blood and nerve supply (schematic) | AnatomyVerse schematic model |
-| `anatomyverse-limbsupply` | Limb arteries, veins and nerves (schematic) | AnatomyVerse schematic model |
+| `anatomyverse-alveoli` | Alveoli close-up (gas exchange) | 3D Anatomy schematic model |
+| `anatomyverse-diasupply` | Diaphragm blood and nerve supply (schematic) | 3D Anatomy schematic model |
+| `anatomyverse-limbsupply` | Limb arteries, veins and nerves (schematic) | 3D Anatomy schematic model |
 | `detailed-anatomy-placeholder` | Detailed anatomical model (not installed) | Requires a licensed asset — none is bundled |
 | `sample-gltf-femur` | GLB pipeline sample — schematic femur & hip bone | Original work — MIT (exported from the schematic body) |
 
 ## 4. Text and terminology
 
 - **OpenStax Anatomy & Physiology 2e** — CC BY 4.0. Attribution required where
-  used. All AnatomyVerse educational text is original wording; OpenStax is cited
+  used. All 3D Anatomy educational text is original wording; OpenStax is cited
   as a verification reference.
 - **Terminologia Anatomica, 2nd ed. (FIPAT, 2019)** — consulted for Latin terms
   only, no text reproduced. Individual Latin terms are not themselves

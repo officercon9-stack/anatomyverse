@@ -1,4 +1,4 @@
-# AnatomyVerse 3D — handoff (state at 2026-10-23, app version 32)
+# 3D Anatomy — handoff (state at 2026-10-23, app version 32)
 
 Live: https://officercon9-stack.github.io/anatomyverse/ (root of this repo = compiled app, Pages from `main`).
 Private preview artifact: https://claude.ai/artifact/11PWYusfL14VhUeMHZqjoR

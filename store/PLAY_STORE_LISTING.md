@@ -1,6 +1,6 @@
-# Google Play listing: AnatomyVerse 3D
+# Google Play listing: 3D Anatomy
 
-App name (max 30): **AnatomyVerse 3D**
+App name (max 30): **3D Anatomy**
 Package name: `com.officercon9.anatomyverse` (cannot change after the first upload)
 Category: Education (or Medical; Education is safer for a study tool)
 Contact email: officercon9@gmail.com
@@ -11,7 +11,7 @@ Content sources and licences URL: https://officercon9-stack.github.io/anatomyver
 Explore the human body in 3D: bones, muscles, organs, eye, ear and skull.
 
 ## Full description (max 4000)
-AnatomyVerse 3D is a study tool for students of anatomy, medicine, nursing, dentistry and the health sciences. Rotate, zoom and tap the human body to see what each structure is and what it does.
+3D Anatomy is a study tool for students of anatomy, medicine, nursing, dentistry and the health sciences. Rotate, zoom and tap the human body to see what each structure is and what it does.
 
 WHAT YOU CAN DO
 - Explore a 3D body with skeleton, muscles, nerves, blood vessels and internal organs.
@@ -25,7 +25,7 @@ WHAT YOU CAN DO
 - Works offline once installed. No account, no ads and no tracking.
 
 FOR EDUCATION ONLY
-AnatomyVerse 3D is a learning aid. It is not medical advice and does not diagnose or treat any condition. Models are simplified for teaching and some structures are schematic. Explanatory text is pending expert review; always check facts against your course materials.
+3D Anatomy is a learning aid. It is not medical advice and does not diagnose or treat any condition. Models are simplified for teaching and some structures are schematic. Explanatory text is pending expert review; always check facts against your course materials.
 
 CREDITS
 Many 3D models are derived from Z-Anatomy and BodyParts3D, licensed under Creative Commons Attribution-ShareAlike (CC BY-SA 4.0 and 2.1 Japan), and were modified for this app. Full credits and licences are in the app under Content sources.

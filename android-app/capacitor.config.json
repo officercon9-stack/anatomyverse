@@ -1,6 +1,6 @@
 {
   "appId": "com.officercon9.anatomyverse",
-  "appName": "AnatomyVerse 3D",
+  "appName": "3D Anatomy",
   "webDir": "www",
   "server": {
     "androidScheme": "https"
