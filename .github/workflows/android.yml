@@ -42,8 +42,8 @@ jobs:
           ./gradlew --no-daemon bundleRelease assembleDebug > build.log 2>&1
           rc=$?
           if [ $rc -ne 0 ]; then
-            grep -nE "error|Error|FAILED|What went wrong|Caused by|not found|No such" build.log | head -25 | cut -c1-300 | while IFS= read -r l; do echo "::error::$l"; done
-            tail -n 25 build.log | cut -c1-300 | while IFS= read -r l; do echo "::warning::$l"; done
+            msg=$(sed -n '/What went wrong/,/Try:/p' build.log | head -14 | tr '\n' ' ' | cut -c1-1500)
+            echo "::error::$msg"
           fi
           exit $rc
       - uses: actions/upload-artifact@v4
