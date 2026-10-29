@@ -3,7 +3,7 @@
    per-structure hide/show and leader-line labels. Also repositions schematic head parts that sat too high. */
 const FX=globalThis.__avFx={jaw:0,jawT:0,exp:0,expT:0,xray:false,labels:false,section:false,hidden:{},sig:'',list:null,n:0,occ:{},rr:0,bar:null,svg:null,pop:null,popOpen:false,grp:null,builtGrp:null,btns:{}};
 const P=[0,1.573,0.008];            /* temporomandibular axis (metres, Y-up, +Z anterior) */
-const BASE_DY=-0.0095,BASE_A=0.13;  /* bite correction: lower arch sits 9.5 mm lower and tilts 0.13 rad about the TMJ axis */
+const BASE_DY=0,BASE_A=0;           /* closed bite: the source arches already occlude (upper and lower crown tips within 2 mm), so no correction */
 const OPEN_A=0.42;                  /* ~24 degrees of jaw opening */
 const EYE_CUT_Y=1.5912;             /* horizontal section through the centre of the cornea and iris */
 const FIXED={pupil_L:[0,0.0047,-0.0057],ear_L:[0,-0.045,0],ear_R:[0,-0.045,0],nasal_cavity:[0,-0.06,0],olfactory_epithelium:[0,-0.05,0]};
