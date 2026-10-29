@@ -1,5 +1,5 @@
 /* 3D Anatomy offline cache. Hashed /assets and /fonts are cache-first; everything else is network-first with a cached fallback. */
-const V = 'av-v7';
+const V = 'av-v8';
 self.addEventListener('install', e => { self.skipWaiting(); e.waitUntil(caches.open(V).then(c => c.addAll(['./', './manifest.webmanifest', './fonts/fonts.css']).catch(() => {}))); });
 self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== V).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
 self.addEventListener('message', e => {

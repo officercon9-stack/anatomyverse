@@ -1,0 +1,12 @@
+const H=require('./h');H.serve(process.argv[2],8881);
+(async()=>{const {b,pg,errs}=await H.open(8881,1280,800,'/app/lab',12000);
+await pg.evaluate(()=>{const S=__avStore.getState();S.isolate(['femur']);S.frame(['femur'])});await pg.waitForTimeout(3000);
+const info=await pg.evaluate(()=>{const s=globalThis.__r3s,cv=document.querySelector('canvas').getBoundingClientRect();const out=[];s.scene.updateMatrixWorld(true);s.scene.traverse(o=>{if(!o.isMesh)return;let v=true;for(let p=o;p;p=p.parent)if(!p.visible)v=false;let sid;for(let p=o;p;p=p.parent)if(p.userData&&p.userData.structureId){sid=p.userData.structureId;break}if(sid!=='femur')return;o.geometry.computeBoundingSphere();const c=o.geometry.boundingSphere.center.clone().applyMatrix4(o.matrixWorld);const q=c.clone().project(s.camera);out.push({n:o.name,v,c:[c.x,c.y,c.z].map(x=>+x.toFixed(3)),sx:Math.round(cv.x+(q.x+1)/2*cv.width),sy:Math.round(cv.y+(1-q.y)/2*cv.height)})});
+let vis=0;s.scene.traverse(o=>{if(o.isMesh){let v=true;for(let p=o;p;p=p.parent)if(!p.visible)v=false;if(v)vis++}});return {out,vis,cam:s.camera.position.toArray().map(x=>+x.toFixed(2))}});
+console.log(JSON.stringify(info));await pg.screenshot({path:'t4d.png'});
+for(const [x,y,l] of [[570,420,'iso R femur'],[745,420,'iso L femur'],[660,420,'gap']]){await pg.evaluate(()=>__avStore.getState().select(null));await pg.mouse.click(x,y);await pg.waitForTimeout(500);console.log(l,await pg.evaluate(()=>__avStore.getState().selectedId))}
+await pg.evaluate(()=>{const S=__avStore.getState();S.restoreVisibility();S.select(null)});await pg.waitForTimeout(1500);await pg.screenshot({path:'t4e.png'});
+for(const [x,y,l] of [[570,420,'full: thigh R'],[745,420,'full: thigh L']]){await pg.evaluate(()=>__avStore.getState().select(null));await pg.mouse.click(x,y);await pg.waitForTimeout(500);console.log(l,await pg.evaluate(()=>__avStore.getState().selectedId))}
+await pg.evaluate(()=>{const S=__avStore.getState();S.select(null);S.setLayerVisible('muscles',false);S.setLayerVisible('skin',false);S.setLayerVisible('vessels',false);S.setLayerVisible('nerves',false)});await pg.waitForTimeout(1500);
+for(const [x,y,l] of [[570,420,'muscles hidden: R'],[745,420,'muscles hidden: L']]){await pg.evaluate(()=>__avStore.getState().select(null));await pg.mouse.click(x,y);await pg.waitForTimeout(500);console.log(l,await pg.evaluate(()=>__avStore.getState().selectedId))}
+await b.close();process.exit(0)})();

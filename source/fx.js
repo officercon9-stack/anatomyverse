@@ -43,7 +43,7 @@ function buildUI(){
   document.body.appendChild(bar);document.body.appendChild(pop);
   const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');css(svg,{position:'fixed',left:'0',top:'0',width:'100vw',height:'100vh',pointerEvents:'none',zIndex:'35'});document.body.appendChild(svg);
   const cr=document.createElement('a');cr.href='#/legal/sources';cr.textContent='3D models: Z-Anatomy and BodyParts3D, CC BY-SA \u00b7 Credits and licences';css(cr,{position:'fixed',zIndex:'30',font:'10px system-ui,sans-serif',color:'rgba(190,205,225,.78)',textDecoration:'underline',textAlign:'right',whiteSpace:'nowrap',pointerEvents:'auto'});cr.addEventListener('pointerdown',e=>e.stopPropagation());document.body.appendChild(cr);
-  FX.bar=bar;FX.pop=pop;FX.svg=svg;FX.cr=cr;setInterval(()=>{if(Date.now()-(FX.last||0)>1500){cr.style.display='none';bar.style.display='none';pop.style.display='none';svg.innerHTML=''}},1000);
+  FX.bar=bar;FX.pop=pop;FX.svg=svg;FX.cr=cr;setInterval(()=>{if(!FX.s||!FX.s.gl||!document.contains(FX.s.gl.domElement)){cr.style.display='none';bar.style.display='none';pop.style.display='none';svg.innerHTML=''}},1000);
 }
 function buildPop(g){
   const pop=FX.pop,G=GR[g];pop.innerHTML='';
