@@ -71,7 +71,11 @@ def process(path_in, path_out, ratio=1.0, abs_err=0.0008, min_tris=240):
             views[-1].pop("byteStride")      # index views carry no vertex stride
         return len(views) - 1
 
+    import os
+    DROP=set(filter(None,os.environ.get('DROP','').split(',')))
     for node in g["nodes"]:
+        if "mesh" in node and node.get('name') in DROP:
+            nodes_out.append({k:v for k,v in node.items() if k!='mesh'}); continue
         if "mesh" not in node:
             nodes_out.append(node); continue
         T = np.array(node.get("translation", [0, 0, 0]), dtype=np.float64)
