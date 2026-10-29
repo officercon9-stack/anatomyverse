@@ -76,6 +76,10 @@ Written for this project; no third-party obligation.
   permitted use of terminology rather than reproduction of the compilation.
   This is the one item here with real legal exposure.
 
+## 4b. Fonts
+
+Inter (SIL Open Font License 1.1) and JetBrains Mono (SIL OFL 1.1), self-hosted from the `@fontsource` packages in `fonts/`; licence texts are in the same folder. No fonts are loaded from third parties.
+
 ## 5. Where attribution must appear
 
 | where | status | note |

@@ -157,6 +157,8 @@ globalThis.__avFxTick=function(s){
   const iso=(D.getState().isolated)||[];const g=groupOf(iso);
   if(!FX.list||(++FX.n%120===0)){const l=collect(sc);if(l.length){FX.list=l;prep(sc,l)}else if(!FX.list)return}
   if(FX.list.some(m=>!m.userData.__fx))prep(sc,FX.list);
+  if(!FX.pt||FX.n%60===1){const l=[];sc.traverse(o=>{if(o.isInstancedMesh||o.isPoints||o.name==='brain-flow')l.push(o)});FX.pt=l}
+  for(const o of FX.pt)if(o.visible===!!g)o.visible=!g;
   if(!FX.rc&&s.raycaster)FX.rc=new s.raycaster.constructor();
   if(g!==FX.grp){FX.grp=g;resetToggles();FX.dirty=true}
   if(FX.bar){FX.bar.style.display=g?'flex':'none';
