@@ -1,0 +1,17 @@
+{
+  "appId": "com.officercon9.anatomyverse",
+  "appName": "AnatomyVerse 3D",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": false
+  },
+  "plugins": {
+    "SystemBars": {
+      "insetsHandling": "css",
+      "style": "DARK"
+    }
+  }
+}
