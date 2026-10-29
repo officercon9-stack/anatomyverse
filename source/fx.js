@@ -14,10 +14,11 @@ const EAR2=['cochlea','vestibule','vestibulocochlear-nerve','cochlear-nerve','ve
 const EYE1=['sclera','cornea','iris','lens','retina','vitreous-body','anterior-chamber'];
 const EYE2=['superior-rectus','inferior-rectus','medial-rectus','lateral-rectus','superior-oblique','inferior-oblique','levator-palpebrae'];
 const EYE3=['lacrimal-gland','lacrimal-apparatus','optic-chiasm','optic-nerve'];
+const EYE4=['tarsal-plates','orbicularis-oculi-palpebral','zonular-fibres'];
 const GR={
  skull:{root:'skull',title:'22 skull bones',ids:CRANIAL.concat(FACIAL),secs:[['Cranial (8)',CRANIAL],['Facial (14)',FACIAL]],xray:null,tools:['jaw','explode','xray','labels','parts'],expl:0.055,pop:'Bones'},
  ear:{root:'ear',title:'Ear structures',ids:EAR1.concat(EAR2),secs:[['External and middle ear',EAR1],['Inner ear and nerves',EAR2]],xray:['auricle'],tools:['explode','xray','labels','parts'],expl:0.035,pop:'Parts'},
- eye:{root:'eye',title:'Eye structures',ids:EYE1.concat(EYE2,EYE3),secs:[['Globe',EYE1],['Muscles',EYE2],['Other',EYE3]],xray:['sclera','cornea','vitreous-body','anterior-chamber'],tools:['section','xray','labels','parts'],expl:0,pop:'Parts'}
+ eye:{root:'eye',title:'Eye structures',ids:EYE1.concat(EYE2,EYE3,EYE4),secs:[['Globe',EYE1],['Muscles',EYE2],['Other',EYE3],['Eyelids and lens support',EYE4]],xray:['sclera','cornea','vitreous-body','anterior-chamber'],tools:['section','xray','labels','parts'],expl:0,pop:'Parts'}
 };
 const OF={};Object.keys(GR).forEach(g=>GR[g].ids.forEach(i=>OF[i]=g));
 const LAB={jaw:'Open jaw',explode:'Explode',xray:'See-through',labels:'Labels',section:'Cut section',parts:'Parts'};
