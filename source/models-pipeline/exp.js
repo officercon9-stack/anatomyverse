@@ -1,0 +1,6 @@
+const {chromium}=require('playwright');const http=require('http'),fs=require('fs'),path=require('path');
+const Z='/tmp/claude-0/-home-claude/f7d7ef6f-0b20-52fe-a210-678745f291ac/scratchpad/zanat/Assets/Models/1.0 Models/';
+const srv=http.createServer((q,r)=>{let p=decodeURIComponent(q.url.split('?')[0]);let f=p.startsWith('/fbx/')?Z+p.slice(5):path.join(__dirname,p==='/'?'exp.html':p);fs.readFile(f,(e,d)=>{if(e){r.writeHead(404);r.end();return}const t={'.js':'text/javascript','.html':'text/html'}[path.extname(f)]||'application/octet-stream';r.writeHead(200,{'content-type':t});r.end(d)})}).listen(8302);
+const spec=JSON.parse(fs.readFileSync(process.argv[2]));const raws=process.argv[4]?JSON.parse(fs.readFileSync(process.argv[4])):[];
+(async()=>{const b=await chromium.launch();const pg=await b.newPage();pg.on('pageerror',e=>console.log('ERR',e.message));pg.on('console',m=>{if(m.type()==='error')console.log('console',m.text())});await pg.goto('http://localhost:8302/'+(process.env.FLIP?'?flip':''));await pg.waitForFunction('window.ready');
+const r=await pg.evaluate(s=>window.build(s[0],s[1]),[spec,raws]);console.log(r.report.join('\n'));fs.writeFileSync(process.argv[3],Buffer.from(r.b64,'base64'));await b.close();srv.close()})();

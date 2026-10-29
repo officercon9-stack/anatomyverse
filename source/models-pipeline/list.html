@@ -1,0 +1,6 @@
+<!doctype html><script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+<script type="module">
+import {FBXLoader} from 'three/addons/loaders/FBXLoader.js';
+window.loadList=async(url)=>{const g=await new FBXLoader().loadAsync(url);const out=[];g.traverse(o=>{if(o.isMesh)out.push([o.name,o.geometry.attributes.position.count])});return out}
+window.ready=true;
+</script>

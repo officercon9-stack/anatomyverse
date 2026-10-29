@@ -5,7 +5,7 @@ ROOT = sys.argv[1]
 Z = "Z-Anatomy (G. Kervyn et al.), CC BY-SA 4.0 https://creativecommons.org/licenses/by-sa/4.0/ , derived from BodyParts3D (c) DBCLS, CC BY-SA 2.1 Japan. Converted, simplified and modified for AnatomyVerse; derived files remain under CC BY-SA. Source: https://github.com/LluisV/Z-Anatomy"
 B = "BodyParts3D (c) The Database Center for Life Science, CC BY-SA 2.1 Japan https://creativecommons.org/licenses/by-sa/2.1/jp/deed.en . Decimated, converted and modified for AnatomyVerse; derived files remain under CC BY-SA. Source: https://lifesciencedb.jp/bp3d/"
 def credit(n):
-    if n == 'zanatomy-ear.glb': return Z + " Auricle: " + B
+    if n == 'zanatomy-ear.glb': return "Ossicles, tympanic membrane and chorda tympani: " + Z + " Auricle: " + B + " Cochlea, vestibule, semicircular canals and VIII nerve branches: original AnatomyVerse work."
     if n.startswith('zanatomy-'): return Z
     if n.startswith('bodyparts3d-') or n in ('anatomyverse-organs.glb', 'anatomyverse-limbs.glb'): return B
 for f in glob.glob(ROOT + '/models/**/*.glb', recursive=True):

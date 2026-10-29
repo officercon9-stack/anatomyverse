@@ -1,0 +1,18 @@
+<!doctype html><script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';import {FBXLoader} from 'three/addons/loaders/FBXLoader.js';import {mergeVertices} from 'three/addons/utils/BufferGeometryUtils.js';import {GLTFExporter} from 'three/addons/exporters/GLTFExporter.js';
+// spec: [[fbxFile, fbxMeshName, outName, color, opacity]]
+window.build=async(spec,raws)=>{const cache={};const scene=new THREE.Scene();const report=[];
+ for(const [file,name,out,col,op,mir] of spec){if(!cache[file]){const g=await new FBXLoader().loadAsync('/fbx/'+file);g.updateMatrixWorld(true);cache[file]=g}
+  let found=null;cache[file].traverse(o=>{if(o.isMesh&&o.name===name)found=o});if(!found){report.push('MISSING '+name);continue}
+  let geo=found.geometry.clone();geo.applyMatrix4(found.matrixWorld);geo.scale(0.01,0.01,0.01);
+  // keep only position+normal+index
+  for(const k of Object.keys(geo.attributes))if(k!=='position'&&k!=='normal')geo.deleteAttribute(k);
+  if(!geo.attributes.normal)geo.computeVertexNormals();geo=mergeVertices(geo,1e-6);if(mir){const p=geo.attributes.position;for(let k=0;k<p.count;k++)p.setX(k,-p.getX(k));const ix=geo.index.array;for(let k=0;k<ix.length;k+=3){const t=ix[k+1];ix[k+1]=ix[k+2];ix[k+2]=t}}if(window.FLIP){const ix=geo.index.array;for(let i=0;i<ix.length;i+=3){const t=ix[i+1];ix[i+1]=ix[i+2];ix[i+2]=t}}geo.deleteAttribute('normal');geo.computeVertexNormals();
+  const mat=new THREE.MeshStandardMaterial({color:col,roughness:0.62,metalness:0,transparent:op<1,opacity:op,side:THREE.DoubleSide});
+  const m=new THREE.Mesh(geo,mat);m.name=out;scene.add(m);geo.computeBoundingBox();const b=geo.boundingBox;report.push(out+' n='+geo.attributes.position.count+' min='+b.min.toArray().map(v=>v.toFixed(4))+' max='+b.max.toArray().map(v=>v.toFixed(4)))}
+ for(const r of raws||[]){const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(r.pos,3));g.setIndex(r.idx);g.computeVertexNormals();const m=new THREE.Mesh(g,new THREE.MeshStandardMaterial({color:r.color||'#d9b6a0',roughness:0.7,metalness:0,side:THREE.DoubleSide}));m.name=r.name;scene.add(m);report.push(r.name+' n='+r.pos.length/3)}
+ const ab=await new GLTFExporter().parseAsync(scene,{binary:true});
+ let s='';const u=new Uint8Array(ab);for(let i=0;i<u.length;i+=32768)s+=String.fromCharCode.apply(null,u.subarray(i,i+32768));
+ return {report,b64:btoa(s)}};
+window.FLIP=new URLSearchParams(location.search).has('flip');window.ready=true;</script>

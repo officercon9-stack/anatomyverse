@@ -45,12 +45,29 @@ derived from BodyParts3D. Deed: https://creativecommons.org/licenses/by-sa/4.0/
 | `zanatomy-heart` | Heart close-up (Z-Anatomy) | CC BY-SA 4.0 — Z-Anatomy, derived from BodyParts3D (CC BY-SA 2.1 JP) |
 | `zanatomy-limbbones` | Limb and girdle bones (Z-Anatomy) | CC BY-SA 4.0 — Z-Anatomy, derived from BodyParts3D (CC BY-SA 2.1 JP) |
 | `zanatomy-skull` | Skull, jaws and teeth (Z-Anatomy) | CC BY-SA 4.0 — Z-Anatomy, derived from BodyParts3D (CC BY-SA 2.1 JP) |
-| `zanatomy-ear` | Ear: auricle, ossicles, tympanic membrane, cochlea, vestibule and nerves | Middle/inner ear: CC BY-SA 4.0 — Z-Anatomy. Auricle: CC BY-SA 2.1 JP — BodyParts3D, registered onto the Z-Anatomy temporal bone |
+| `zanatomy-ear` | Ear: auricle, ossicles, tympanic membrane, chorda tympani (+ original cochlea, vestibule, canals, VIII nerve branches) | Ossicles, tympanic membrane, chorda tympani: CC BY-SA 4.0 — Z-Anatomy. Auricle: CC BY-SA 2.1 JP — BodyParts3D, registered onto the Z-Anatomy temporal bone. Cochlea, vestibule, canals, nerve branches: original AnatomyVerse drawings |
 
-**Check before release:** the Z-Anatomy *repository* carries GPL-3.0 while its
-*assets* are published CC BY-SA 4.0. Only the assets are used here, and that
-distinction should be confirmed in writing by whoever signs off the release,
-because GPL-3.0 on shipped files would be a materially different obligation.
+**Licence status (checked 29 Oct 2026).** The official models repository
+(`github.com/Z-Anatomy/Models-of-human-anatomy`) states: "All the code and
+content shared by 'Z-Anatomy' is under Creative Commons Attribution-ShareAlike
+4.0 International License", and credits BodyParts3D (CC BY-SA 2.1 Japan) as the
+base. The Unity project repository we downloaded carries a GPL-3.0 `LICENSE`
+file but no README statement about the models. We rely on the models
+repository's explicit CC BY-SA 4.0 statement. Ask the maintainers to confirm in
+writing (draft in `store/LICENCE_QUESTIONS.md`).
+
+**Non-commercial reference models.** The same page lists reference models that
+Z-Anatomy used and adapted, including *Anatomy of the Inner Ear* (University of
+Dundee, **CC BY-NC-SA 4.0**) and *Kidney* (Lissie Cowley, **CC BY-NC 4.0**).
+Non-commercial material cannot be used in a paid app. Because the provenance of
+Z-Anatomy's individual inner-ear meshes is not stated, **we removed all
+Z-Anatomy inner-ear meshes** (cochlea, vestibule and semicircular canals,
+vestibulocochlear/cochlear/vestibular nerves) and replaced them with simplified
+original drawings (`source/ear/mkinner.py`). No Z-Anatomy kidney is used (kidneys
+come from BodyParts3D). Still taken from Z-Anatomy and awaiting the maintainers'
+confirmation of origin: auditory ossicles, tympanic membrane, chorda tympani,
+eyelid tarsal plates, zonular fibres, optic nerves, and the heart, skull and
+limb-bone meshes. If they cannot confirm, replace or remove those parts.
 
 ## 3. Original AnatomyVerse work — MIT
 

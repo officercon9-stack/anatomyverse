@@ -1,5 +1,7 @@
 # AnatomyVerse 3D/4D
 
+> Developers: start with [DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md). Licences and credits: [THIRD_PARTY_ASSETS.md](THIRD_PARTY_ASSETS.md).
+
 Interactive living-anatomy learning app for medical students — **pilot test build**.
 
 ▶ Open the app: https://officercon9-stack.github.io/anatomyverse/

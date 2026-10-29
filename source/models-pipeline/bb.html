@@ -1,0 +1,5 @@
+<!doctype html><script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';import {FBXLoader} from 'three/addons/loaders/FBXLoader.js';
+window.bbs=async(url,names)=>{const g=await new FBXLoader().loadAsync(url);g.updateMatrixWorld(true);const out={};g.traverse(o=>{if(o.isMesh&&names.includes(o.name)){const b=new THREE.Box3().setFromObject(o);out[o.name]={min:b.min.toArray(),max:b.max.toArray(),n:o.geometry.attributes.position.count}}});out.__root={scale:g.scale.toArray(),rot:g.rotation.toArray()};return out}
+window.ready=true;</script>
