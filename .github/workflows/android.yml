@@ -39,11 +39,13 @@ jobs:
         run: |
           chmod +x gradlew
           set +e
-          ./gradlew --no-daemon bundleRelease assembleDebug > build.log 2>&1
+          ./gradlew --no-daemon --stacktrace bundleRelease assembleDebug > build.log 2>&1
           rc=$?
           if [ $rc -ne 0 ]; then
             msg=$(sed -n '/What went wrong/,/Try:/p' build.log | head -14 | tr '\n' ' ' | cut -c1-1500)
             echo "::error::$msg"
+            c=$(grep -nE "Caused by|at build_|build.gradle" build.log | head -8 | cut -c1-260 | tr '\n' ' ')
+            echo "::error::$c"
           fi
           exit $rc
       - uses: actions/upload-artifact@v4
