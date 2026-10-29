@@ -42,7 +42,8 @@ function buildUI(){
   pop.addEventListener('pointerdown',e=>e.stopPropagation());bar.addEventListener('pointerdown',e=>e.stopPropagation());
   document.body.appendChild(bar);document.body.appendChild(pop);
   const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');css(svg,{position:'fixed',left:'0',top:'0',width:'100vw',height:'100vh',pointerEvents:'none',zIndex:'35'});document.body.appendChild(svg);
-  FX.bar=bar;FX.pop=pop;FX.svg=svg;
+  const cr=document.createElement('a');cr.href='#/legal/sources';cr.textContent='3D models: Z-Anatomy and BodyParts3D, CC BY-SA \u00b7 Credits and licences';css(cr,{position:'fixed',zIndex:'30',font:'10px system-ui,sans-serif',color:'rgba(190,205,225,.78)',textDecoration:'underline',textAlign:'right',whiteSpace:'nowrap',pointerEvents:'auto'});cr.addEventListener('pointerdown',e=>e.stopPropagation());document.body.appendChild(cr);
+  FX.bar=bar;FX.pop=pop;FX.svg=svg;FX.cr=cr;setInterval(()=>{if(Date.now()-(FX.last||0)>1500){cr.style.display='none';bar.style.display='none';pop.style.display='none';svg.innerHTML=''}},1000);
 }
 function buildPop(g){
   const pop=FX.pop,G=GR[g];pop.innerHTML='';
@@ -162,6 +163,7 @@ globalThis.__avFxTick=function(s){
     if(g){if(FX.builtGrp!==g)buildPop(g);const T=GR[g].tools;Object.keys(FX.btns).forEach(k=>{FX.btns[k].style.display=T.indexOf(k)>=0?'':'none'});FX.btns.parts.textContent=GR[g].pop}
     else{FX.svg.innerHTML='';FX.pop.style.display='none'}
     const r=s.gl.domElement.getBoundingClientRect();
+    if(FX.cr){FX.last=Date.now();css(FX.cr,{display:'block',right:Math.max(6,innerWidth-r.right+8)+'px',top:(r.bottom-15)+'px',left:'auto',fontSize:innerWidth<600?'9px':'10px'})}
     if(innerWidth<600){css(FX.bar,{flexDirection:'row',left:'50%',transform:'translateX(-50%)',top:'232px',gap:'4px',padding:'4px'});css(FX.pop,{left:'50%',transform:'translateX(-50%)',top:'282px',width:'calc(100vw - 16px)'})}
     else{css(FX.bar,{flexDirection:'column',left:(r.left+10)+'px',transform:'none',top:'184px',gap:'6px',padding:'6px'});css(FX.pop,{left:(r.left+108)+'px',transform:'none',top:'184px',width:'min(400px,calc(100vw - 122px))'})}}
   let moving=false;

@@ -80,10 +80,11 @@ Written for this project; no third-party obligation.
 
 | where | status | note |
 |---|---|---|
-| In the app | **done** | `/legal/sources` lists every model with its credit, licence and deed links. |
+| In the app | **done** | `/legal/sources` lists every model with its credit, licence and deed links, links to the Z-Anatomy and BodyParts3D projects, and states the models were modified. A credit line ('3D models: Z-Anatomy and BodyParts3D, CC BY-SA, Credits and licences') sits on the 3D view and links to it. |
+| Inside each model file | **done** | the credit is written into every third-party `.glb` (`asset.copyright`); `source/embed_credit.py` re-applies it. |
 | Repository | **done** | this file. |
 | Google Play listing | **to do** | Play requires third-party licence compliance. The in-app page satisfies it; link to it from the listing or surface it in app settings. |
-| Model files redistributed on their own | **to do** | if the `.glb` files are ever distributed outside the app, each needs its licence and credit travelling with it. |
+| Model files redistributed on their own | **done** | the credit now travels inside each file. |
 
 ## 6. What share-alike does and does not stop
 
