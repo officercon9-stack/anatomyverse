@@ -38,7 +38,14 @@ jobs:
           KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         run: |
           chmod +x gradlew
-          ./gradlew --no-daemon bundleRelease assembleDebug
+          set +e
+          ./gradlew --no-daemon bundleRelease assembleDebug > build.log 2>&1
+          rc=$?
+          if [ $rc -ne 0 ]; then
+            grep -nE "error|Error|FAILED|What went wrong|Caused by|not found|No such" build.log | head -25 | cut -c1-300 | while IFS= read -r l; do echo "::error::$l"; done
+            tail -n 25 build.log | cut -c1-300 | while IFS= read -r l; do echo "::warning::$l"; done
+          fi
+          exit $rc
       - uses: actions/upload-artifact@v4
         with:
           name: anatomyverse-aab
