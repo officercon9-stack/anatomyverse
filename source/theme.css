@@ -1,0 +1,77 @@
+/* 3D Anatomy theme: midnight glass. Palette: Midnight #081329, Panel #111E3B, Electric blue #176BFF, Cyan #00E5FF, Purple #9B4DFF, Pink #FF4FC8.
+   Loaded after the app stylesheet; only overrides colours, surfaces and spacing. */
+:root,:root[data-theme=dark]{
+  --av-bg:#081329;--av-bg-elevated:#0c1834;--av-surface:#111e3b;--av-surface-2:#16274b;--av-viewport:#060f24;
+  --av-border:#1d3160;--av-border-strong:#2a4580;--av-text:#eef3ff;--av-text-muted:#aebcde;--av-text-faint:#7d8db4;
+  --av-teal:#00e5ff;--av-cyan:#00e5ff;--av-accent:#176bff;--av-accent-ink:#ffffff;--av-ok:#34d399;--av-warn:#fbbf24;--av-danger:#ff6b8b;--av-focus:#00e5ff;
+  --av-blue:#176bff;--av-purple:#9b4dff;--av-pink:#ff4fc8;
+  --av-grad:linear-gradient(135deg,#176bff 0%,#00c8ff 100%);
+  --av-grad-violet:linear-gradient(135deg,#9b4dff 0%,#ff4fc8 100%);
+  --av-glass:linear-gradient(180deg,rgba(20,36,72,.88),rgba(12,24,52,.9));
+  --av-shadow:0 1px 0 rgba(255,255,255,.05) inset,0 18px 40px -22px rgba(0,0,0,.85);
+}
+:root[data-theme=light]{--av-teal:#0a5bea;--av-accent:#176bff;--av-accent-ink:#fff;--av-focus:#176bff;--av-grad:linear-gradient(135deg,#176bff,#00b4e6);--av-grad-violet:linear-gradient(135deg,#8a3cf0,#e0399f)}
+:root:not([data-theme=light]) body{background:radial-gradient(900px 600px at 0% 0%,rgba(23,107,255,.16),transparent 60%),radial-gradient(900px 700px at 100% 100%,rgba(155,77,255,.14),transparent 60%),#081329;background-attachment:fixed}
+
+/* surfaces */
+:root:not([data-theme=light]) .av-panel{background:var(--av-glass);border-color:rgba(70,110,210,.22)}
+:root:not([data-theme=light]) .av-card{background:linear-gradient(180deg,rgba(23,40,80,.9),rgba(14,27,57,.92));border-color:rgba(70,110,210,.24);border-radius:18px}
+.av-card:hover,.av-card[role=button]:hover{border-color:rgba(0,229,255,.55);box-shadow:0 18px 40px -20px rgba(0,229,255,.35),var(--av-shadow)}
+.av-kicker{color:var(--av-teal)}
+
+/* buttons */
+.av-btn{border-radius:12px}
+.av-btn--primary{background:var(--av-grad);border-color:transparent;color:#fff;box-shadow:0 10px 26px -12px rgba(23,107,255,.85)}
+.av-btn--primary:hover{filter:brightness(1.08);box-shadow:0 12px 30px -10px rgba(0,229,255,.7)}
+:root:not([data-theme=light]) .av-btn:not(.av-btn--primary):not(.av-btn--ghost){background:rgba(22,39,75,.85);border-color:rgba(70,110,210,.35)}
+.av-btn:hover{border-color:var(--av-teal)}
+.av-input{border-radius:12px}
+:root:not([data-theme=light]) .av-input{background:rgba(6,15,36,.75);border-color:rgba(70,110,210,.35)}
+
+/* navigation: gradient pill for the current page */
+.av-nav-link{border-radius:12px}
+.av-nav-link[aria-current=page]{background:var(--av-grad)!important;color:#fff!important;box-shadow:0 10px 24px -12px rgba(0,200,255,.75)}
+.av-nav-link[aria-current=page] svg{color:#fff}
+
+/* 3D toolbar */
+:root:not([data-theme=light]) .av-toolbar{background:rgba(12,24,52,.78);border-color:rgba(70,110,210,.3);border-radius:14px}
+.av-tool[aria-pressed=true]{background:rgba(0,229,255,.16)!important;color:#00e5ff!important;border-color:rgba(0,229,255,.5)!important}
+.av-badge--accent{border-color:rgba(0,229,255,.5);color:#7ff3ff}
+
+/* lab: floating rounded panels around the body (desktop and tablet) */
+@media (min-width:768px) and (min-height:501px){
+  .avx-labrow{gap:10px;padding:10px;box-sizing:border-box}
+  .avx-labrow > aside.av-panel{border-radius:18px;border:1px solid rgba(70,110,210,.24)!important;overflow-y:auto}
+  .avx-labrow > section{border-radius:18px;overflow:hidden;border:1px solid rgba(70,110,210,.2)}
+}
+#avux{background:transparent!important;border-bottom:0!important}
+@media (min-width:768px) and (min-height:501px){#avux{margin:10px 10px 0;border-radius:16px;background:var(--av-glass)!important;border:1px solid rgba(70,110,210,.24)!important}}
+
+/* scrollbars */
+:root:not([data-theme=light]) *{scrollbar-color:#2a4580 transparent}
+
+/* keep the theme switch inside the menu (it was pushed outside and could not be clicked) */
+aside.av-panel.lg\:flex > div:first-child{flex-wrap:wrap;row-gap:8px}
+aside.av-panel.lg\:flex > div:first-child > div{flex-wrap:nowrap;min-width:0}
+aside.av-panel.lg\:flex > div:first-child select{max-width:120px}
+
+/* landing stats as gradient tiles */
+dl.grid-cols-3.text-sm{gap:12px!important}
+dl.grid-cols-3.text-sm > div{padding:12px 14px;border-radius:16px;color:#fff;box-shadow:0 14px 30px -18px rgba(0,0,0,.9);position:relative;overflow:hidden}
+dl.grid-cols-3.text-sm > div:nth-child(1){background:linear-gradient(140deg,#176bff,#3b8cff)}
+dl.grid-cols-3.text-sm > div:nth-child(2){background:linear-gradient(140deg,#00b8e6,#00e5ff);color:#04121f}
+dl.grid-cols-3.text-sm > div:nth-child(3){background:linear-gradient(140deg,#9b4dff,#c15cff)}
+dl.grid-cols-3.text-sm > div dt{color:inherit!important;opacity:.85}
+dl.grid-cols-3.text-sm > div::after{content:"";position:absolute;inset:auto -20% -60% auto;width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,.14)}
+
+/* dashboard: "three steps" as colourful tiles */
+ol.grid.gap-3.md\:grid-cols-3 > li > a{border:0!important;color:#fff!important;border-radius:18px!important;box-shadow:0 18px 36px -22px rgba(0,0,0,.95);position:relative;overflow:hidden;transition:transform .15s ease,filter .15s ease}
+ol.grid.gap-3.md\:grid-cols-3 > li > a:hover{transform:translateY(-2px);filter:brightness(1.07)}
+ol.grid.gap-3.md\:grid-cols-3 > li:nth-child(1) > a{background:linear-gradient(140deg,#176bff,#3d8dff)!important}
+ol.grid.gap-3.md\:grid-cols-3 > li:nth-child(2) > a{background:linear-gradient(140deg,#00a6d6,#00e5ff)!important;color:#03121f!important}
+ol.grid.gap-3.md\:grid-cols-3 > li:nth-child(3) > a{background:linear-gradient(140deg,#8b3dff,#c45cff)!important}
+ol.grid.gap-3.md\:grid-cols-3 > li > a *{color:inherit!important}
+ol.grid.gap-3.md\:grid-cols-3 > li > a::after{content:"";position:absolute;right:-30px;bottom:-40px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.13)}
+:root:not([data-theme=light]) .av-panel.fixed,:root:not([data-theme=light]) .av-panel.absolute{background:linear-gradient(180deg,#13234a,#0c1834)}
+.avx-badge{bottom:20px!important}
+@media (min-width:768px) and (min-height:501px){:root[data-theme=light] #avux{background:var(--av-surface)!important;border-color:var(--av-border)!important}}
