@@ -1,0 +1,14 @@
+const {chromium}=require('playwright');const http=require('http'),fs=require('fs'),path=require('path');
+const root=path.resolve(process.argv[2]),tag=process.argv[3]||'mb',W=+process.argv[4]||360,H=+process.argv[5]||740;
+http.createServer((q,r)=>{let p=decodeURIComponent(q.url.split('?')[0]);if(p.endsWith('/'))p+='index.html';let f=path.join(root,p);fs.readFile(f,(e,d)=>{if(e){r.writeHead(404);r.end();return}const t={'.js':'text/javascript','.html':'text/html','.css':'text/css','.json':'application/json','.woff2':'font/woff2','.glb':'model/gltf-binary','.svg':'image/svg+xml'}[path.extname(f)]||'application/octet-stream';r.writeHead(200,{'content-type':t});r.end(d)})}).listen(8810+W%40);
+(async()=>{const b=await chromium.launch({args:['--use-gl=swiftshader','--enable-unsafe-swiftshader']});const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:W<768,isMobile:W<768});await ctx.addInitScript(()=>{try{localStorage.setItem('av.disclaimerSeen','1')}catch(e){}});
+const pg=await ctx.newPage();const errs=[];pg.on('pageerror',e=>errs.push(e.message));await pg.goto(`http://localhost:${8810+W%40}/#/app/lab`);await pg.waitForTimeout(12000);
+await pg.evaluate(()=>[...document.querySelectorAll('button')].filter(b=>/got it/i.test(b.textContent)).forEach(b=>b.click()));await pg.waitForTimeout(600);
+await pg.screenshot({path:tag+'_1.png'});
+await pg.click('#avux-fab').catch(e=>console.log('nofab'));await pg.waitForTimeout(500);await pg.screenshot({path:tag+'_2.png'});
+await pg.keyboard.press('Escape');await pg.evaluate(()=>{const s=document.getElementById('avux-sheet');s&&s.remove()});
+await pg.evaluate(()=>__avStore.getState().select('heart'));await pg.waitForTimeout(1500);await pg.screenshot({path:tag+'_3.png'});
+await pg.click('#avux-fab').catch(e=>console.log('nofab2'));await pg.waitForTimeout(400);
+await pg.getByRole('button',{name:'Isolate selected'}).click().catch(e=>console.log('noiso'));await pg.waitForTimeout(1200);await pg.screenshot({path:tag+'_4.png'});
+console.log('state',await pg.evaluate(()=>JSON.stringify(__avStore.getState().isolated)));
+console.log('ERRS',errs.slice(0,3));await b.close();process.exit(0)})();
