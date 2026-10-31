@@ -491,5 +491,18 @@
   addEventListener('keydown', function (e) { if (e.key !== 'Escape' || !S || !/#\/app\/lab/.test(location.hash)) return; if ($('#avux-dlg') || $('#avux-sheet') || document.querySelector('[role=dialog][aria-modal=true]')) return; var a = document.activeElement; if (a && /INPUT|SELECT|TEXTAREA/.test(a.tagName)) return; if (st().selectedId) { st().select(null); toast('Selection cleared'); } });
   setInterval(function () { if (!document.hidden) { try { tick(); } catch (e) {} } }, 900);
   addEventListener('hashchange', function () { setTimeout(function () { try { tick(); } catch (e) {} }, 50); });
-  var iv = setInterval(function () { if (globalThis.__avStore) { clearInterval(iv); wrapHover(); wrapSex(); restoreSel(); globalThis.__avStore.subscribe(soon); tick(); } }, 200);
+
+  /* Structures whose 3D parts only load when a layer is on (brain vessels, CSF, meninges, tracts, fossae, detailed brain):
+     picking one from the list switches that layer on, then re-aims the camera once the part has loaded. */
+  var GATES = {"ld_brain":["brain","cerebellum","cerebral-aqueduct","cerebral-arterial-circle","deep-cerebral-structures","fourth-ventricle","frontal-lobe","hippocampus","hypothalamus","insula","lateral-ventricle","medulla-oblongata","midbrain","occipital-lobe","parietal-lobe","pituitary-gland","pons","spinal-cord","temporal-lobe","third-ventricle"],"vessels":["anterior-cerebral-artery","anterior-choroidal-artery","anterior-inferior-cerebellar-artery","anterior-spinal-artery","basilar-artery","cavernous-sinus","cerebral-capillary-bed","great-cerebral-vein","inferior-sagittal-sinus","internal-carotid-artery","internal-cerebral-veins","internal-jugular-vein","middle-cerebral-artery","ophthalmic-artery","petrosal-sinuses","pontine-arteries","posterior-cerebral-artery","posterior-choroidal-arteries","posterior-inferior-cerebellar-artery","sigmoid-sinus","straight-sinus","superficial-cerebral-veins","superior-cerebellar-artery","superior-sagittal-sinus","thalamic-perforating-arteries","transverse-sinus","vertebral-artery"],"csf":["arachnoid-granulations","choroid-plexus","subarachnoid-cisterns","subarachnoid-space"],"fossae":["anterior-cranial-fossa","calvaria","middle-cranial-fossa","posterior-cranial-fossa"],"tracts":["corticospinal-tract","dorsal-column-medial-lemniscus-pathway","spinothalamic-tract"],"mening":["arachnoid-mater","dura-mater","pia-mater"]}, gateOf = {}; Object.keys(GATES).forEach(function (g) { GATES[g].forEach(function (id) { gateOf[id] = g; }); });
+  var gLast = '';
+  function hasMesh(id) { var scn = globalThis.__scn, f = false; if (!scn) return false; scn.traverse(function (m) { if (f || !m.isMesh) return; for (var p = m; p; p = p.parent) { if (p.userData && p.userData.structureId === id) { f = true; return; } } }); return f; }
+  function gateSel() {
+    var st = function () { return globalThis.__avStore.getState(); };
+    var id = st().selectedId || ''; if (id === gLast) return; gLast = id; var g = gateOf[id]; if (!g || !globalThis.__avb) return;
+    if (hasMesh(id)) return;
+    var cur = globalThis.__avb.get(); var set = {}; set[g] = true; globalThis.__avb.set(set);
+    var n = 0, h = setInterval(function () { n++; if (st().selectedId !== id) { clearInterval(h); return; } if (hasMesh(id) || n > 40) { clearInterval(h); if (hasMesh(id)) { try { st().focusStructure(id); } catch (e) {} } } }, 400);
+  }
+  var iv = setInterval(function () { if (globalThis.__avStore) { clearInterval(iv); wrapHover(); globalThis.__avStore.subscribe(function () { try { gateSel(); } catch (e) {} }); wrapSex(); restoreSel(); globalThis.__avStore.subscribe(soon); tick(); } }, 200);
 })();
