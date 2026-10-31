@@ -141,3 +141,37 @@ header.av-panel a:has(svg), header.av-panel a[aria-label] { min-height: 44px; di
    Containment lets the browser skip layout and paint for rows that are scrolled
    out of view, so the page stays responsive on low-end phones. */
 .av-longlist { content-visibility: auto; contain-intrinsic-size: auto 44px; }
+
+/* ---- Vertical scroll bar down the left of the 3D view ----
+   The body is taller than the viewport; this moves the view up and down and
+   shows where you are. It sits above the existing up/down step buttons, the
+   way a scroll bar sits above its arrows. */
+#avx-scroll {
+  position: absolute; left: 12px; top: 150px; bottom: 170px;
+  width: 14px; z-index: 20;
+  border-radius: 999px;
+  border: 1px solid var(--av-border);
+  background: color-mix(in srgb, var(--av-surface) 72%, transparent);
+  box-shadow: var(--av-shadow);
+  backdrop-filter: blur(6px);
+  cursor: grab; touch-action: none;
+}
+#avx-scroll.on { cursor: grabbing; }
+#avx-scroll:focus-visible { outline: 2px solid var(--av-focus); outline-offset: 2px; }
+.avx-scroll-thumb {
+  position: absolute; left: 2px; right: 2px; height: 18%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--av-accent), var(--av-cyan));
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, .7);
+  transition: top .08s linear;
+  pointer-events: none;
+}
+#avx-scroll.on .avx-scroll-thumb { transition: none; }
+@media (hover: hover) { #avx-scroll:hover { border-color: var(--av-border-strong); } }
+/* phones: the viewport is shorter, so keep the track clear of the top pills
+   and the bottom navigation without squeezing it to nothing */
+@media (max-width: 767px) {
+  #avx-scroll { left: 8px; top: 124px; bottom: 176px; width: 16px; }
+  .avx-scroll-thumb { height: 22%; }
+}
+@media (prefers-reduced-motion: reduce) { .avx-scroll-thumb { transition: none; } }

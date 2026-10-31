@@ -431,6 +431,143 @@
     main.insertBefore(h, main.firstChild);
   }
 
+
+  /* ---- Vertical scroll bar -------------------------------------------
+     A tall model does not fit the viewport, and the only way to move up or
+     down was two step buttons. This is a proper scroll bar down the left of
+     the 3D view: drag the thumb, click the track, use the wheel over it, or
+     focus it and use the arrow keys. The thumb follows the camera, so it also
+     shows where you are in the body. */
+  var SCR = { lo: null, hi: null, drag: 0 };
+  function scrRange() {
+    if (SCR.lo != null) return true;
+    var scn = globalThis.__scn; if (!scn) return false;
+    var lo = Infinity, hi = -Infinity;
+    scn.updateMatrixWorld(true);
+    scn.traverse(function (m) {
+      if (!m.isMesh || !m.visible || !m.geometry) return;
+      if (!m.geometry.boundingBox) { try { m.geometry.computeBoundingBox(); } catch (e) { return; } }
+      var bb = m.geometry.boundingBox; if (!bb) return;
+      var b = bb.clone().applyMatrix4(m.matrixWorld);
+      if (b.min.y < lo) lo = b.min.y;
+      if (b.max.y > hi) hi = b.max.y;
+    });
+    if (!isFinite(lo) || !isFinite(hi) || hi - lo < 0.05) return false;
+    SCR.lo = lo; SCR.hi = hi;
+    return true;
+  }
+  /* How far the view can travel: stop once the head (or the feet) reaches the
+     edge of the viewport rather than carrying on into empty space. How much is
+     on screen depends on the zoom, so work it out from the camera each time. */
+  function scrSpan() {
+    if (!scrRange()) return null;
+    var lo = SCR.lo, hi = SCR.hi;
+    var full = hi - lo, vis = full;
+    try {
+      var s = globalThis.__r3s.get(), cam = s.camera, ctl = s.controls;
+      if (cam && cam.isPerspectiveCamera && ctl && ctl.target) {
+        var d = cam.position.distanceTo(ctl.target);
+        vis = 2 * Math.tan(cam.fov * Math.PI / 360) * d;
+        /* stop when the head or the feet reach the edge, but always leave
+           something to drag, so the bar never looks dead when zoomed out */
+        var inset = Math.min(vis * 0.42, full * 0.375);
+        lo += inset; hi -= inset;
+      }
+    } catch (e) {}
+    if (hi - lo < 1e-3) { var m = (hi + lo) / 2; lo = m - 1e-3; hi = m + 1e-3; }
+    return { lo: lo, hi: hi, vis: vis, full: full };
+  }
+  function scrY() {
+    try {
+      var s = globalThis.__r3s.get();
+      return s.controls && s.controls.target ? s.controls.target.y : s.camera.position.y;
+    } catch (e) { return null; }
+  }
+  function scrPanTo(y) {
+    var c = scrY(); if (c == null) return;
+    var dy = y - c; if (Math.abs(dy) < 1e-4) return;
+    try {
+      var b = globalThis.__avb; if (!b) return;
+      b.set({ panq: { dy: dy, seq: ((b.get().panq || {}).seq || 0) + 1 } });
+      var s = globalThis.__r3s.get(); s.invalidate && s.invalidate();
+    } catch (e) {}
+  }
+  function scrSet(frac) {
+    var sp = scrSpan(); if (!sp) return;
+    frac = Math.max(0, Math.min(1, frac));
+    scrPanTo(sp.hi - frac * (sp.hi - sp.lo));
+  }
+  function syncScroll() {
+    var sc = $('#avx-scroll'); if (!sc || SCR.drag) return;
+    var sp = scrSpan();
+    if (!sp) { sc.style.display = 'none'; return; }
+    sc.style.display = '';
+    var y = scrY(); if (y == null) return;
+    var f = Math.max(0, Math.min(1, (sp.hi - y) / (sp.hi - sp.lo)));
+    var th = sc.firstChild; if (!th) return;
+    /* thumb size shows how much of the body is on screen, as a scroll bar does */
+    var hPct = Math.max(14, Math.min(92, (sp.vis / sp.full) * 100));
+    th.style.height = hPct + '%';
+    th.style.top = (f * (100 - hPct)) + '%';
+    sc.setAttribute('aria-valuenow', String(Math.round((1 - f) * 100)));
+    sc.setAttribute('aria-valuetext', f < 0.25 ? 'Near the head' : f > 0.75 ? 'Near the feet' : 'Middle of the body');
+  }
+  function mountScroll() {
+    var onLab = /#\/app\/lab/.test(location.hash);
+    var sc = $('#avx-scroll');
+    if (!onLab) { if (sc) sc.remove(); SCR.lo = SCR.hi = null; return; }
+    var c = $('canvas'); if (!c) return;
+    var sec = c.closest('section'); if (!sec) return;
+    if (sc && sc.parentElement !== sec) { sc.remove(); sc = null; }
+    if (!sc) {
+      sc = el('div', { id: 'avx-scroll', role: 'slider', tabindex: '0', 'aria-orientation': 'vertical',
+        'aria-label': 'Move the view up and down', 'aria-valuemin': '0', 'aria-valuemax': '100', title: 'Drag to move the view up and down' });
+      sc.appendChild(el('div', { class: 'avx-scroll-thumb' }));
+      function fracFromEvent(e) {
+        var r = sc.getBoundingClientRect(), th = sc.firstChild.getBoundingClientRect();
+        var usable = r.height - th.height;
+        if (usable <= 0) return 0;
+        return (e.clientY - r.top - th.height / 2) / usable;
+      }
+      sc.addEventListener('pointerdown', function (e) {
+        if (!scrRange()) return;
+        SCR.drag = 1; sc.setPointerCapture && sc.setPointerCapture(e.pointerId);
+        try { sc.focus({ preventScroll: true }); } catch (x) {}   /* so the arrow keys work straight after a drag */
+        sc.classList.add('on'); scrSet(fracFromEvent(e)); syncThumbTo(fracFromEvent(e));
+        e.preventDefault();
+      });
+      sc.addEventListener('pointermove', function (e) {
+        if (!SCR.drag) return;
+        var f = fracFromEvent(e); scrSet(f); syncThumbTo(f); e.preventDefault();
+      });
+      function stop(e) { if (!SCR.drag) return; SCR.drag = 0; sc.classList.remove('on'); try { sc.releasePointerCapture(e.pointerId); } catch (x) {} syncScroll(); }
+      sc.addEventListener('pointerup', stop); sc.addEventListener('pointercancel', stop);
+      sc.addEventListener('wheel', function (e) {
+        var sp = scrSpan(); if (!sp) return;
+        var y = scrY(); if (y == null) return;
+        scrPanTo(Math.max(sp.lo, Math.min(sp.hi, y - Math.sign(e.deltaY) * (sp.hi - sp.lo) * 0.08)));
+        e.preventDefault(); syncScroll();
+      }, { passive: false });
+      sc.addEventListener('keydown', function (e) {
+        var sp = scrSpan(); if (!sp) return;
+        var y = scrY(); if (y == null) return;
+        var span = sp.hi - sp.lo, step = span * 0.08, big = span * 0.25, t = null;
+        if (e.key === 'ArrowUp') t = y + step; else if (e.key === 'ArrowDown') t = y - step;
+        else if (e.key === 'PageUp') t = y + big; else if (e.key === 'PageDown') t = y - big;
+        else if (e.key === 'Home') t = sp.hi; else if (e.key === 'End') t = sp.lo;
+        if (t == null) return;
+        scrPanTo(Math.max(sp.lo, Math.min(sp.hi, t))); e.preventDefault(); setTimeout(syncScroll, 0);
+      });
+      sec.appendChild(sc);
+    }
+    function syncThumbTo(f) {
+      var th = sc.firstChild; if (!th) return;
+      f = Math.max(0, Math.min(1, f));
+      var h = parseFloat(th.style.height) || 18;
+      th.style.top = (f * (100 - h)) + '%';
+    }
+    syncScroll();
+  }
   function tick() {
     if (!globalThis.__avStore) return; S = globalThis.__avStore; F = globalThis.__avF;
     if (!DEF) DEF = { layerVisible: Object.assign({}, st().layerVisible), layerOpacity: Object.assign({}, st().layerOpacity) };
@@ -439,7 +576,7 @@
     if (!onLab) document.documentElement.classList.remove('avx-rail', 'avx-sheet-open');
     document.documentElement.classList.toggle('avx-onlab', onLab); if (!onLab) Array.prototype.forEach.call(document.querySelectorAll('div[style*="position: fixed"]'), function (d) { if (/Drag the title bar/.test(d.textContent || '') && d.style.display !== 'none') d.style.setProperty('display', 'none', 'important'); });
     if (!onLab || !row) { if (bar) { bar.remove(); B = {}; mounted = null; } var fb = $('#avux-fab'); if (fb) fb.remove(); var nv = $('#avux-nav'); if (nv) nv.remove(); document.documentElement.classList.remove('avx-nav'); closeSheet(); return; }
-    mountFab(); markMobile(sec); applyRail(); mountNav(); try { labHeading(); } catch (e) {} try { fitPlaceholders(); } catch (e) {}
+    mountFab(); markMobile(sec); applyRail(); mountNav(); try { labHeading(); } catch (e) {} try { mountScroll(); } catch (e) {} try { fitPlaceholders(); } catch (e) {}
     if (!bar || mounted !== row) { if (bar) bar.remove(); B = {}; mounted = row; css(); mountBar(row); last = JSON.stringify(snap()); }
     light();
   }
