@@ -1,0 +1,13 @@
+const {chromium}=require('playwright');const H=require('./h');H.serve(process.argv[2],9022);
+(async()=>{const b=await chromium.launch({args:['--use-gl=swiftshader','--enable-unsafe-swiftshader']});const ctx=await b.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,serviceWorkers:'block'});await ctx.addInitScript(()=>{try{localStorage.setItem('av.disclaimerSeen','1')}catch(e){}});
+let block=true;await ctx.route(/zanatomy-skull\.glb|anatomyverse-organs\.glb/,r=>block?r.abort():r.continue());
+const pg=await ctx.newPage();const errs=[];pg.on('pageerror',e=>errs.push(e.message.slice(0,140)));
+await pg.goto('http://localhost:9022/#/app/lab');await pg.waitForTimeout(13000);
+await pg.evaluate(()=>[...document.querySelectorAll('button')].filter(b=>/got it/i.test(b.textContent)).forEach(b=>b.click()));
+const meshes=()=>pg.evaluate(()=>{let n=0;globalThis.__scn&&globalThis.__scn.traverse(o=>{if(o.isMesh)n++});return n});
+console.log('meshes with 2 models failing',await meshes(),'store err',await pg.evaluate(()=>__avStore.getState().assetError));
+console.log('ui texts',JSON.stringify(await pg.evaluate(()=>[...document.querySelectorAll('[role=alert],[role=status],.av-badge')].map(x=>x.textContent.trim()).filter(Boolean).slice(0,6))));
+await pg.screenshot({path:'fail_1.png'});
+await pg.evaluate(()=>{__avStore.getState().select('femur')});await pg.waitForTimeout(800);console.log('select still works',await pg.evaluate(()=>__avStore.getState().selectedId));
+const retry=await pg.evaluate(()=>[...document.querySelectorAll('button')].filter(b=>/retry|try again/i.test(b.textContent)).map(b=>b.textContent.trim()));console.log('retry buttons',JSON.stringify(retry));
+console.log('ERRS',JSON.stringify(errs.slice(0,4)));await b.close();process.exit(0)})();

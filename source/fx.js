@@ -43,7 +43,7 @@ function buildUI(){
   document.body.appendChild(bar);document.body.appendChild(pop);
   const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');css(svg,{position:'fixed',left:'0',top:'0',width:'100vw',height:'100vh',pointerEvents:'none',zIndex:'35'});document.body.appendChild(svg);
   const cr=document.createElement('a');cr.href='#/legal/sources';cr.textContent='3D models: Z-Anatomy and BodyParts3D, CC BY-SA \u00b7 Credits and licences';css(cr,{position:'fixed',zIndex:'30',font:'10px system-ui,sans-serif',color:'rgba(190,205,225,.78)',textDecoration:'underline',textAlign:'right',whiteSpace:'nowrap',pointerEvents:'auto'});cr.addEventListener('pointerdown',e=>e.stopPropagation());document.body.appendChild(cr);
-  FX.bar=bar;FX.pop=pop;FX.svg=svg;FX.cr=cr;setInterval(()=>{if(!FX.s||!FX.s.gl||!document.contains(FX.s.gl.domElement)){cr.style.display='none';bar.style.display='none';pop.style.display='none';svg.innerHTML=''}},1000);
+  FX.bar=bar;FX.pop=pop;FX.svg=svg;FX.cr=cr;setInterval(()=>{if(!FX.s||!FX.s.gl||!document.contains(FX.s.gl.domElement)){if(FX.s&&globalThis.__avMg)globalThis.__avMg.forEach(g=>{const q=g&&(g.isBufferGeometry?g:g.geometry);q&&q.dispose&&q.dispose()});FX.s=null;FX.sc=null;FX.list=null;FX.pt=null;FX.occ={};if(globalThis.__r3s&&!document.contains(globalThis.__r3s.gl&&globalThis.__r3s.gl.domElement)){globalThis.__r3s=null;globalThis.__scn=null}cr.style.display='none';bar.style.display='none';pop.style.display='none';svg.innerHTML=''}},1000);
 }
 function buildPop(g){
   const pop=FX.pop,G=GR[g];pop.innerHTML='';
@@ -153,7 +153,7 @@ function labels(s){
 }
 function groupOf(iso){for(const i of iso){if(OF[i])return OF[i];for(const g in GR)if(GR[g].root===i)return g}return null}
 globalThis.__avFxTick=function(s){
-  FX.s=s;const sc=s.scene;if(!FX.bar&&document.body)buildUI();
+  if(FX.sc!==s.scene){if(FX.sc&&globalThis.__avMg)globalThis.__avMg.forEach(g=>{const q=g&&(g.isBufferGeometry?g:g.geometry);q&&q.dispose&&q.dispose()});FX.sc=s.scene;FX.list=null;FX.pt=null;FX.occ={};FX.n=0;FX.grp=null}FX.s=s;const sc=s.scene;if(!FX.bar&&document.body)buildUI();
   const iso=(D.getState().isolated)||[];const g=groupOf(iso);
   if(!FX.list||(++FX.n%120===0)){const l=collect(sc);if(l.length){FX.list=l;prep(sc,l)}else if(!FX.list)return}
   if(FX.list.some(m=>!m.userData.__fx))prep(sc,FX.list);

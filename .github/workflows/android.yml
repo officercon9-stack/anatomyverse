@@ -17,8 +17,12 @@ jobs:
       - name: Assemble web content
         run: |
           mkdir -p android-app/www
-          cp index.html manifest.webmanifest first-run.js android-app/www/
+          cp index.html manifest.webmanifest first-run.js ux.js theme.css android-app/www/
           cp -r assets models data fonts icons android-app/www/
+          # the app always uses the phone-optimised (lite) models, so the full-detail desktop copies are left out
+          find android-app/www/models -maxdepth 1 -name '*.glb' -delete
+          test -f android-app/www/models/lite/anatomyverse-limbs.glb
+          du -sh android-app/www android-app/www/models
       - name: Sync Capacitor
         working-directory: android-app
         run: |
