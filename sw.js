@@ -3,7 +3,7 @@
    - Unversioned /models and /data files: served from cache at once and refreshed in the background.
    - Pages: always fetched fresh so design updates show; cached copy used offline.
    - Other files (ux.js, theme.css, first-run.js, manifest): revalidated with the server, cached copy used offline. */
-const V = 'av-v10';
+const V = 'av-v11';
 self.addEventListener('install', e => { self.skipWaiting(); e.waitUntil(caches.open(V).then(c => c.addAll(['./', './manifest.webmanifest', './fonts/fonts.css']).catch(() => {}))); });
 self.addEventListener('activate', e => {
   // keep downloaded models across app updates: copy them from older caches before deleting those caches

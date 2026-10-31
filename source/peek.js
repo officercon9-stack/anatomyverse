@@ -1,0 +1,11 @@
+const H=require('./h');H.serve(process.argv[2],9011);
+(async()=>{const {b,ctx,pg,errs}=await H.open(9011,390,844,'/app/lab',13000);const c=await ctx.newCDPSession(pg);
+await pg.evaluate(()=>{const S=__avStore.getState();S.select('eye');S.frame(['eye'])});await pg.waitForTimeout(2500);
+const hb=await pg.evaluate(()=>{const s=document.querySelector('.av-panel.fixed.inset-x-0.bottom-0');const r=s.firstElementChild.getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}});
+const swipe=async(dy)=>{await c.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:hb.x,y:hb.y}]});for(let i=1;i<=6;i++){await c.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:hb.x,y:hb.y+dy*i/6}]});await pg.waitForTimeout(16)}await c.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await pg.waitForTimeout(1200)};
+await swipe(120);const s1=await pg.evaluate(()=>{const s=document.querySelector('.av-panel.fixed.inset-x-0.bottom-0');return {sel:__avStore.getState().selectedId,h:Math.round(s.getBoundingClientRect().height),peek:s.classList.contains('avx-peek')}});console.log('after swipe down',JSON.stringify(s1));await pg.screenshot({path:'pk_1.png'});
+await pg.mouse.click(195,800);await pg.waitForTimeout(1200);
+const s2=await pg.evaluate(()=>{const s=document.querySelector('.av-panel.fixed.inset-x-0.bottom-0');return {sel:__avStore.getState().selectedId,h:Math.round(s.getBoundingClientRect().height),peek:s.classList.contains('avx-peek')}});console.log('after tap bar',JSON.stringify(s2));
+await pg.getByRole('button',{name:'Expand details'}).click();await pg.waitForTimeout(1500);await pg.screenshot({path:'pk_2.png'});
+console.log('expanded h',await pg.evaluate(()=>Math.round(document.querySelector('.av-panel.fixed.inset-x-0.bottom-0').getBoundingClientRect().height)));
+console.log('ERRS',errs.slice(0,3));await b.close();process.exit(0)})();

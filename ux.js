@@ -54,10 +54,11 @@
       'html.avx-rail aside.av-panel.lg\\:flex .av-nav-link{flex-direction:column;justify-content:center;gap:4px;padding:8px 2px!important;font-size:10.5px;line-height:1.15;text-align:center;height:auto!important;min-height:54px}',
       'html.avx-rail aside.av-panel.lg\\:flex .av-nav-link span{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;flex:none!important}',
       'html.avx-rail aside.av-panel.lg\\:flex > div:last-child p{display:none}',
+      '.av-panel.avx-peek{height:132px!important;overflow:hidden}.av-panel.avx-peek > div:last-child{overflow:hidden!important;pointer-events:none}',
       '#avux-fab{display:none}','html:not(.avx-onlab) .avx-qcard{display:none!important}',
       '@media(max-width:767px),(max-height:500px){#avux{padding:4px 10px;border-bottom:0;background:transparent;position:relative;z-index:25}#avux [role=toolbar],#avux .tg{display:none}#avux nav{font-size:12px}#avux .r:first-child{min-height:28px}',
       '#avux-fab{display:flex;position:fixed;right:14px;z-index:40;width:58px;height:58px;border-radius:50%;border:0;align-items:center;justify-content:center;flex-direction:column;gap:1px;color:#fff;font:700 10px/1 var(--font-sans,system-ui);background:conic-gradient(from 210deg,#00e5ff,#176bff,#9b4dff,#ff4fc8,#00e5ff);box-shadow:0 8px 22px -6px #000c,0 0 0 3px var(--av-bg);transition:bottom .2s}',
-      '#avux-fab span{background:#081329e6;border-radius:50%;width:48px;height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}',
+      '#avux-fab span{background:#0f2149e6;border-radius:50%;width:48px;height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}',
       '.av-toolbar-dock{justify-content:flex-start!important}',
       '.avx-sex{position:absolute!important;left:auto!important;right:10px!important;top:calc(4rem + 54px)!important;transform:none!important;margin:0!important;padding:3px!important;gap:2px!important;z-index:15}',
       '.avx-sex button{min-height:34px!important;padding:4px 11px!important;font-size:13px!important}',
@@ -285,13 +286,40 @@
     var fxb = document.getElementById('av-skull-tools'), sx = sec.querySelector('.avx-sex');
     if (fxb && fxb.style.display !== 'none' && sx && isMob()) { var pr = sx.getBoundingClientRect(); fxb.dataset.avx = '1'; fxb.style.setProperty('top', Math.round(pr.bottom + 8) + 'px', 'important'); fxb.style.setProperty('max-width', 'calc(100vw - 16px)', 'important'); fxb.style.setProperty('flex-wrap', 'wrap', 'important'); fxb.style.setProperty('justify-content', 'center', 'important'); var pp = FXpop(); if (pp) pp.style.setProperty('top', Math.round(pr.bottom + 8 + fxb.getBoundingClientRect().height + 6) + 'px', 'important'); }
     else if (fxb && fxb.dataset.avx) { delete fxb.dataset.avx; fxb.style.removeProperty('top'); fxb.style.removeProperty('max-width'); fxb.style.removeProperty('flex-wrap'); fxb.style.removeProperty('justify-content'); var pq = FXpop(); if (pq) pq.style.removeProperty('top'); }
+    sheetFit(sec, sheetEl, so);
     var fab = $('#avux-fab'); if (!fab) return;
     var top = innerHeight; Array.prototype.forEach.call(document.querySelectorAll('.av-panel'), function (p) { var cs = getComputedStyle(p); if (cs.position !== 'fixed' && cs.position !== 'absolute') return; var b = p.getBoundingClientRect(); if (b.width >= innerWidth * .9 && b.bottom >= innerHeight - 4 && b.top > innerHeight * .25 && b.height > 40) top = Math.min(top, b.top); });
     var side = so && sheetEl.getBoundingClientRect().width < innerWidth * .7;
     if (side) { fab.style.right = (sheetEl.getBoundingClientRect().width + 14) + 'px'; fab.style.bottom = '16px'; }
     else { fab.style.right = ''; fab.style.bottom = (innerHeight - top + (top < innerHeight ? 12 : 30)) + 'px'; }
+    fab.style.display = (so && !side && sheetEl.getBoundingClientRect().height > innerHeight * .5) ? 'none' : '';
   }
 
+
+  /* phone details sheet: swipe down to shrink it to a small bar (the part stays selected and highlighted),
+     swipe up or tap the bar to bring it back; the 3D view always fits in the space above the sheet */
+  var peek = false, peekSel = null;
+  function sheetFit(sec, sh, open) {
+    var portrait = isMob() && innerWidth < 768 && innerHeight > 500;
+    if (sh && !sh.dataset.avxSw) { sh.dataset.avxSw = '1'; wireSheet(sh); }
+    var sid = st().selectedId; if (sid !== peekSel) { peekSel = sid; peek = false; }
+    if (sh) sh.classList.toggle('avx-peek', !!(open && peek));
+    var h = open && portrait && sh ? Math.round(sh.getBoundingClientRect().height) : 0; if (h > innerHeight * .5) h = 0;
+    var want = h ? Math.max(0, h - 8) + 'px' : '';
+    if (sec.style.paddingBottom !== want) { sec.style.paddingBottom = want; sec.style.boxSizing = 'border-box'; setTimeout(function () { var s = r3(); if (s && s.invalidate) s.invalidate(); }, 60); }
+  }
+  function wireSheet(sh) {
+    var y0 = null, t0 = 0;
+    sh.addEventListener('touchstart', function (e) { var hd = sh.firstElementChild; if (!hd || !hd.contains(e.target) && !sh.classList.contains('avx-peek')) return; y0 = e.touches[0].clientY; t0 = Date.now(); }, { passive: true });
+    sh.addEventListener('touchend', function (e) { if (y0 == null) return; var dy = (e.changedTouches[0] || {}).clientY - y0; y0 = null;
+      if (dy > 40) { peek = true; } else if (dy < -40 || (Math.abs(dy) < 8 && peek && Date.now() - t0 < 400 && !(e.target.closest && e.target.closest('button')))) { peek = false; }
+      else return; soonFull(); }, { passive: true });
+    sh.addEventListener('click', function (e) { if (sh.classList.contains('avx-peek') && !(e.target.closest && e.target.closest('button[aria-label^="Close"]'))) { peek = false; soonFull(); } }, true);
+  }
+  function soonFull() { try { tick(); } catch (e) {} setTimeout(function () { try { tick(); } catch (e) {} }, 120); }
+  /* after choosing a part from the search box on a phone, close the keyboard so the 3D view is not hidden */
+  var lastSid = null;
+  function blurAfterPick() { var id = S && st().selectedId; if (id && id !== lastSid && isMob()) { var a = document.activeElement; if (a && a.tagName === 'INPUT') a.blur(); } lastSid = id; }
   /* lifecycle */
   function tick() {
     if (!globalThis.__avStore) return; S = globalThis.__avStore; F = globalThis.__avF;
@@ -305,7 +333,7 @@
     if (!bar || mounted !== row) { if (bar) bar.remove(); B = {}; mounted = row; css(); mountBar(row); last = JSON.stringify(snap()); }
     light();
   }
-  function light() { if (!S || !B.hide) return; track(); var k = st().selectedId + '|' + st().systemFocus + '|' + st().xray; if (k !== lastSel) { lastSel = k; refresh(); } }
+  function light() { blurAfterPick(); if (!S || !B.hide) return; track(); var k = st().selectedId + '|' + st().systemFocus + '|' + st().xray; if (k !== lastSel) { lastSel = k; refresh(); } }
   /* scheduling: cheap state sync soon after a change, full page checks at most a few times a second */
   var tL = 0, tF = 0;
   function soon() { if (!tL) tL = setTimeout(function () { tL = 0; try { light(); } catch (e) {} }, 60); if (!tF) tF = setTimeout(function () { tF = 0; try { tick(); } catch (e) {} }, 350); }
