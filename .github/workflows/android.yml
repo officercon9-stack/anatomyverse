@@ -19,9 +19,10 @@ jobs:
           mkdir -p android-app/www
           cp index.html manifest.webmanifest first-run.js ux.js theme.css android-app/www/
           cp -r assets models data fonts icons android-app/www/
-          # the app always uses the phone-optimised (lite) models, so the full-detail desktop copies are left out
-          find android-app/www/models -maxdepth 1 -name '*.glb' -delete
+          # the app uses the phone-optimised (lite) models, except the full-detail skull (jaw/teeth), so other full desktop copies are left out
+          find android-app/www/models -maxdepth 1 -name '*.glb' ! -name 'zanatomy-skull.glb' -delete
           test -f android-app/www/models/lite/anatomyverse-limbs.glb
+          test -f android-app/www/models/zanatomy-skull.glb
           du -sh android-app/www android-app/www/models
       - name: Sync Capacitor
         working-directory: android-app
