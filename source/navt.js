@@ -1,0 +1,16 @@
+const H=require('./h');H.serve(process.argv[2],9061);
+(async()=>{const {b,ctx,pg,errs}=await H.open(9061,390,844,'/app/lab',13000);
+await pg.screenshot({path:'nv_1.png'});
+const navBtn=k=>pg.locator(`#avux-nav button[data-k=${k}]`);
+await navBtn('view').click();await pg.waitForTimeout(500);await pg.screenshot({path:'nv_2.png'});
+await pg.locator('#avux-sheet .vc',{hasText:'Back'}).click();await pg.waitForTimeout(2000);console.log('view after Back:',await pg.evaluate(()=>JSON.stringify(__avStore.getState().cameraRequest)));
+await pg.waitForTimeout(700);await navBtn('view').click();await pg.waitForTimeout(400);await pg.locator('#avux-sheet').getByRole('button',{name:'Male',exact:true}).click();await pg.waitForTimeout(900);console.log('sex',await pg.evaluate(()=>__avStore.getState().sex));
+await pg.locator('#avux-sheet .vc',{hasText:'Labels'}).click();await pg.waitForTimeout(300);console.log('labels',await pg.evaluate(()=>__avStore.getState().labelsOn));
+await pg.locator('#avux-sheet .vc',{hasText:'Watch a system'}).click();await pg.waitForTimeout(600);console.log('sys menu',await pg.evaluate(()=>__avStore.getState().systemsMenuOpen));await pg.screenshot({path:'nv_3.png'});
+await pg.evaluate(()=>__avStore.getState().setSystemsMenuOpen(false));await pg.waitForTimeout(800);
+await navBtn('info').click();await pg.waitForTimeout(600);console.log('info w/o selection toast',await pg.evaluate(()=>document.getElementById('avux-toast')&&document.getElementById('avux-toast').textContent));
+await pg.waitForTimeout(500);await pg.evaluate(()=>{__avStore.getState().select('heart');__avStore.getState().frame(['heart'])});await pg.waitForTimeout(2500);await pg.screenshot({path:'nv_4.png'});
+await navBtn('info').click();await pg.waitForTimeout(1200);console.log('peek after info',await pg.evaluate(()=>document.querySelector('.av-panel.fixed.inset-x-0.bottom-0').classList.contains('avx-peek')));await pg.screenshot({path:'nv_5.png'});
+await pg.waitForTimeout(400);await navBtn('layers').click();await pg.waitForTimeout(800);await pg.screenshot({path:'nv_6.png'});console.log('layers dialog',await pg.evaluate(()=>!!document.querySelector('div.fixed.inset-0.z-40')));
+console.log('overlaps',JSON.stringify((await H.overlaps(pg)).slice(0,6)));
+console.log('ERRS',JSON.stringify(errs.slice(0,4)));await b.close();process.exit(0)})();
