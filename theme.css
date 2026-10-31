@@ -147,7 +147,7 @@ header.av-panel a:has(svg), header.av-panel a[aria-label] { min-height: 44px; di
    shows where you are. It sits above the existing up/down step buttons, the
    way a scroll bar sits above its arrows. */
 #avx-scroll {
-  position: absolute; left: 12px; top: 150px; bottom: 170px;
+  position: absolute; left: 12px; top: 150px; bottom: 74px;
   width: 14px; z-index: 20;
   border-radius: 999px;
   border: 1px solid var(--av-border);
@@ -159,7 +159,7 @@ header.av-panel a:has(svg), header.av-panel a[aria-label] { min-height: 44px; di
 #avx-scroll.on { cursor: grabbing; }
 #avx-scroll:focus-visible { outline: 2px solid var(--av-focus); outline-offset: 2px; }
 .avx-scroll-thumb {
-  position: absolute; left: 2px; right: 2px; height: 18%;
+  position: absolute; left: 2px; right: 2px; height: 14%;
   border-radius: 999px;
   background: linear-gradient(180deg, var(--av-accent), var(--av-cyan));
   box-shadow: 0 2px 8px -2px rgba(0, 0, 0, .7);
@@ -171,7 +171,27 @@ header.av-panel a:has(svg), header.av-panel a[aria-label] { min-height: 44px; di
 /* phones: the viewport is shorter, so keep the track clear of the top pills
    and the bottom navigation without squeezing it to nothing */
 @media (max-width: 767px) {
-  #avx-scroll { left: 8px; top: 124px; bottom: 176px; width: 16px; }
-  .avx-scroll-thumb { height: 22%; }
+  #avx-scroll { left: 8px; top: 124px; bottom: 78px; width: 16px; }
 }
 @media (prefers-reduced-motion: reduce) { .avx-scroll-thumb { transition: none; } }
+
+/* The scroll bar replaces the up/down step buttons, so hide them. */
+.avx-pan { display: none !important; }
+
+/* On laptop widths the view toolbar ran under the Animate button, covering the
+   last two toggles. Keep a lane clear for Animate and let the toolbar scroll
+   sideways instead of overflowing its own box. */
+@media (min-width: 768px) and (max-width: 1365px) {
+  .av-toolbar-dock { padding-right: 104px; }
+  .av-toolbar {
+    max-width: 100%; overflow-x: auto; overflow-y: hidden;
+    scrollbar-width: none; -ms-overflow-style: none;
+    overscroll-behavior-x: contain;
+  }
+  .av-toolbar::-webkit-scrollbar { display: none; }
+  .av-toolbar > * { flex: 0 0 auto; }
+  /* tighten the controls so the whole toolbar fits beside Animate */
+  .av-toolbar { gap: 2px; padding-left: 3px; padding-right: 3px; }
+  .av-toolbar button { padding-left: 7px; padding-right: 7px; }
+  .av-toolbar .av-tool { width: 32px; min-width: 32px; height: 32px; padding: 6px; }
+}

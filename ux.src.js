@@ -438,7 +438,7 @@
      the 3D view: drag the thumb, click the track, use the wheel over it, or
      focus it and use the arrow keys. The thumb follows the camera, so it also
      shows where you are in the body. */
-  var SCR = { lo: null, hi: null, drag: 0 };
+  var SCR = { lo: null, hi: null, drag: 0, th: 14 };   /* th = thumb height, percent of track */
   function scrRange() {
     if (SCR.lo != null) return true;
     var scn = globalThis.__scn; if (!scn) return false;
@@ -462,20 +462,14 @@
   function scrSpan() {
     if (!scrRange()) return null;
     var lo = SCR.lo, hi = SCR.hi;
-    var full = hi - lo, vis = full;
-    try {
-      var s = globalThis.__r3s.get(), cam = s.camera, ctl = s.controls;
-      if (cam && cam.isPerspectiveCamera && ctl && ctl.target) {
-        var d = cam.position.distanceTo(ctl.target);
-        vis = 2 * Math.tan(cam.fov * Math.PI / 360) * d;
-        /* stop when the head or the feet reach the edge, but always leave
-           something to drag, so the bar never looks dead when zoomed out */
-        var inset = Math.min(vis * 0.42, full * 0.375);
-        lo += inset; hi -= inset;
-      }
-    } catch (e) {}
+    var full = hi - lo;
+    /* the thumb runs the length of the body: top of the track is the head,
+       bottom is the feet, whatever the zoom. A small margin keeps the ends
+       from drifting into empty space. */
+    var inset = full * 0.07;
+    lo += inset; hi -= inset;
     if (hi - lo < 1e-3) { var m = (hi + lo) / 2; lo = m - 1e-3; hi = m + 1e-3; }
-    return { lo: lo, hi: hi, vis: vis, full: full };
+    return { lo: lo, hi: hi, full: full };
   }
   function scrY() {
     try {
@@ -505,10 +499,7 @@
     var y = scrY(); if (y == null) return;
     var f = Math.max(0, Math.min(1, (sp.hi - y) / (sp.hi - sp.lo)));
     var th = sc.firstChild; if (!th) return;
-    /* thumb size shows how much of the body is on screen, as a scroll bar does */
-    var hPct = Math.max(14, Math.min(92, (sp.vis / sp.full) * 100));
-    th.style.height = hPct + '%';
-    th.style.top = (f * (100 - hPct)) + '%';
+    th.style.top = (f * (100 - SCR.th)) + '%';
     sc.setAttribute('aria-valuenow', String(Math.round((1 - f) * 100)));
     sc.setAttribute('aria-valuetext', f < 0.25 ? 'Near the head' : f > 0.75 ? 'Near the feet' : 'Middle of the body');
   }
@@ -563,8 +554,7 @@
     function syncThumbTo(f) {
       var th = sc.firstChild; if (!th) return;
       f = Math.max(0, Math.min(1, f));
-      var h = parseFloat(th.style.height) || 18;
-      th.style.top = (f * (100 - h)) + '%';
+      th.style.top = (f * (100 - SCR.th)) + '%';
     }
     syncScroll();
   }
