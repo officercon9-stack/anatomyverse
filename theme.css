@@ -122,3 +122,22 @@ main aside ul.flex.flex-col > li > button:hover{background:linear-gradient(90deg
 .avx-sex button[aria-pressed=true],.avx-sex button.bg-pink-500,.avx-sex button.bg-blue-500{box-shadow:0 8px 20px -10px currentColor}
 /* phones: the tips button lives in the Tools sheet ("Quick tour"), so keep it off the 3D view straight away */
 @media (max-width:767px),(max-height:500px){section button[aria-label="Open tips"]{display:none!important}}
+
+/* ---- Touch target sizes (WCAG 2.5.8 / Android 48dp guidance) ----
+   Checkboxes were 16x16 and header controls under 44px. The hit area grows;
+   the visual size changes only slightly so the layout is unaffected. */
+.av-checkbox { width: 20px; height: 20px; flex: none; }
+label:has(> .av-checkbox) { min-height: 44px; }
+.av-badge:has(> .av-checkbox) { min-height: 40px; padding-top: .35rem; padding-bottom: .35rem; }
+@media (pointer: coarse) {
+  .av-checkbox { width: 24px; height: 24px; }
+  label:has(> .av-checkbox) { min-height: 48px; }
+}
+header.av-panel a:has(svg), header.av-panel a[aria-label] { min-height: 44px; display: inline-flex; align-items: center; }
+.av-btn.av-btn--sm { min-width: 44px; min-height: 44px; }
+.av-input { min-height: 44px; }
+
+/* The flashcard "add from structures" list renders every structure (650+ rows).
+   Containment lets the browser skip layout and paint for rows that are scrolled
+   out of view, so the page stays responsive on low-end phones. */
+.av-longlist { content-visibility: auto; contain-intrinsic-size: auto 44px; }

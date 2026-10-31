@@ -420,6 +420,17 @@
     if (n) { sc.__avxFit = 1; var s = r3(); if (s && s.invalidate) s.invalidate(); }
   }
   /* lifecycle */
+
+  /* The lab is the only screen with no <h1>, so a screen reader lands on it with no page title. */
+  function labHeading() {
+    if (!/#\/app\/lab/.test(location.hash)) return;
+    if (document.querySelector('h1')) return;
+    var main = document.querySelector('main') || document.body;
+    var h = document.createElement('h1');
+    h.className = 'sr-only'; h.id = 'avx-h1'; h.textContent = '3D anatomy lab';
+    main.insertBefore(h, main.firstChild);
+  }
+
   function tick() {
     if (!globalThis.__avStore) return; S = globalThis.__avStore; F = globalThis.__avF;
     if (!DEF) DEF = { layerVisible: Object.assign({}, st().layerVisible), layerOpacity: Object.assign({}, st().layerOpacity) };
@@ -428,7 +439,7 @@
     if (!onLab) document.documentElement.classList.remove('avx-rail', 'avx-sheet-open');
     document.documentElement.classList.toggle('avx-onlab', onLab); if (!onLab) Array.prototype.forEach.call(document.querySelectorAll('div[style*="position: fixed"]'), function (d) { if (/Drag the title bar/.test(d.textContent || '') && d.style.display !== 'none') d.style.setProperty('display', 'none', 'important'); });
     if (!onLab || !row) { if (bar) { bar.remove(); B = {}; mounted = null; } var fb = $('#avux-fab'); if (fb) fb.remove(); var nv = $('#avux-nav'); if (nv) nv.remove(); document.documentElement.classList.remove('avx-nav'); closeSheet(); return; }
-    mountFab(); markMobile(sec); applyRail(); mountNav(); try { fitPlaceholders(); } catch (e) {}
+    mountFab(); markMobile(sec); applyRail(); mountNav(); try { labHeading(); } catch (e) {} try { fitPlaceholders(); } catch (e) {}
     if (!bar || mounted !== row) { if (bar) bar.remove(); B = {}; mounted = row; css(); mountBar(row); last = JSON.stringify(snap()); }
     light();
   }
