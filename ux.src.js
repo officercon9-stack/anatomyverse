@@ -99,6 +99,7 @@
       '@media(max-width:767px),(max-height:500px){#avux{gap:4px}#avux .r{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}#avux .r::-webkit-scrollbar{display:none}.avx-b{flex:none;min-height:36px}#avux .hm{display:none}#avux nav{flex:1;min-width:0;white-space:nowrap;overflow-x:auto}#avux nav ol{flex-wrap:nowrap}}'
     ].join('\n') }));
   }
+  var lastSide = null;
   function st() { return S.getState(); }
   function snap() { var s = st(); return { hidden: s.hidden, isolated: s.isolated, layerVisible: s.layerVisible, layerOpacity: s.layerOpacity, systemFocus: s.systemFocus, xray: s.xray }; }
   function track() {
@@ -115,7 +116,9 @@
     reset: function () { S.getState().resetCamera(); },
     showAll: function () { var s = st(); s.restoreVisibility(); S.setState({ layerVisible: Object.assign({}, DEF.layerVisible), layerOpacity: Object.assign({}, DEF.layerOpacity) }); toast('All structures shown'); },
     hideSel: function () { var r = sel(); if (!r) return need(); st().hideStructure(r.id); st().select(null); toast(r.name + ' hidden. Use Undo or Show all to bring it back.'); },
-    isoSel: function () { var r = sel(); if (!r) return need(); st().isolate([r.id]); st().frame([r.id]); toast('Showing only ' + r.name); },
+    isoSel: function () { var r = sel(); if (!r) return need(); var t = r, ks = Object.keys(F).filter(function (k) { return F[k].parentId === r.id && (F[k].side === 'left' || F[k].side === 'right') && !/carved from/i.test(F[k].location || ''); });
+      if (ks.length === 2) { var want = lastSide || 'left'; t = F[ks.filter(function (k) { return F[k].side === want; })[0] || ks[0]]; }
+      st().isolate([t.id]); st().frame([t.id]); toast('Showing only ' + t.name + (t !== r ? '. Select the other side and press Isolate to switch.' : '')); },
     fade: function () { st().setXray(!st().xray); },
     reveal: function () { var r = sel(); if (!r) return need(); st().showStructure(r.id); chain(r.id).forEach(function (p) { st().showStructure(p.id); }); var lo = Object.assign({}, st().layerOpacity); if (r.layer !== 'skin') lo.skin = Math.min(lo.skin == null ? 1 : lo.skin, .15); if (r.layer === 'bones' || r.layer === 'organs' || r.layer === 'vessels' || r.layer === 'nerves') lo.muscles = Math.min(lo.muscles == null ? 1 : lo.muscles, .3); S.setState({ layerOpacity: lo }); st().frame([r.id]); toast('Surrounding layers faded so ' + r.name + ' is visible'); }
   };
@@ -835,7 +838,7 @@
     if (fem && fem.parentElement && !fem.parentElement.classList.contains('avx-sexl') && !fem.parentElement.classList.contains('avx-sex')) fem.parentElement.classList.add('avx-sexl');
   }
   function tick() {
-    if (!globalThis.__avStore) return; S = globalThis.__avStore; F = globalThis.__avF;
+    if (!globalThis.__avStore) return; S = globalThis.__avStore; F = globalThis.__avF; try { S.subscribe(function (s) { var q = s.selectedId && F[s.selectedId]; if (q && q.side) lastSide = q.side; }); } catch (e) {}
     if (!DEF) DEF = { layerVisible: Object.assign({}, st().layerVisible), layerOpacity: Object.assign({}, st().layerOpacity) };
     var onLab = /#\/app\/lab/.test(location.hash), c = $('canvas'), sec = c && c.closest('section'), row = sec && sec.parentElement;
     var bar = $('#avux');
