@@ -50,3 +50,18 @@ See `store/PLAY_STORE_STEPS.md`. The workflow `Android build` produces an AAB an
 - Labels crowd on narrow screens.
 - All explanatory text is pending expert review (`store/review/`).
 - Licence questions are open: see `THIRD_PARTY_ASSETS.md` and `store/LICENCE_QUESTIONS.md`.
+
+## Updating a model file (read this before touching any .glb)
+
+Model files are requested as `./models/<name>.glb?v=<MODEL_TOKEN>` and the
+service worker caches that URL **cache-first and never revalidates it**. The
+token is the only thing that makes a returning user fetch a changed file.
+
+So whenever a `.glb` changes, bump the token in BOTH places or the change
+reaches new installs only and everyone else silently keeps the old geometry:
+
+1. `sw.js` - `const MODEL_TOKEN = '...'`
+2. the viewer chunk - the `?v=...` appended to the model url
+
+Models cached under an older token are dropped when the service worker
+activates, so bumping it also cleans up.

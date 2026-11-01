@@ -3,11 +3,19 @@
    - Unversioned /models and /data files: served from cache at once and refreshed in the background.
    - Pages: always fetched fresh so design updates show; cached copy used offline.
    - Other files (ux.js, theme.css, first-run.js, manifest): revalidated with the server, cached copy used offline. */
-const V = 'av-v20';
+const V = 'av-v21';
+// Models are cached under a URL that carries this token. Bump it in BOTH this
+// file and the viewer whenever a .glb changes, or returning users keep the old
+// file for ever: the rule below is cache-first and never revalidates.
+const MODEL_TOKEN = 'lod4';
 self.addEventListener('install', e => { self.skipWaiting(); e.waitUntil(caches.open(V).then(c => c.addAll(['./', './manifest.webmanifest', './fonts/fonts.css']).catch(() => {}))); });
 self.addEventListener('activate', e => {
   // keep downloaded models across app updates: copy them from older caches before deleting those caches
-  e.waitUntil(caches.keys().then(ks => caches.open(V).then(cur => Promise.all(ks.filter(k => k !== V).map(k => caches.open(k).then(old => old.keys().then(reqs => Promise.all(reqs.filter(q => /\/(models|data)\//.test(new URL(q.url).pathname)).map(q => cur.match(q).then(have => have || old.match(q).then(res => res && cur.put(q, res))))))).then(() => caches.delete(k)))))).then(() => self.clients.claim()));
+  e.waitUntil(caches.keys().then(ks => caches.open(V).then(cur => Promise.all(ks.filter(k => k !== V).map(k => caches.open(k).then(old => old.keys().then(reqs => Promise.all(reqs.filter(q => { const u = new URL(q.url);
+        if (!/\/(models|data)\//.test(u.pathname)) return false;
+        const m = /[?&]v=([^&]*)/.exec(u.search);
+        return !m || m[1] === MODEL_TOKEN;   // drop models cached under an older token
+      }).map(q => cur.match(q).then(have => have || old.match(q).then(res => res && cur.put(q, res))))))).then(() => caches.delete(k)))))).then(() => self.clients.claim()));
 });
 self.addEventListener('message', e => {
   const urls = (e.data && e.data.cache) || [];
