@@ -195,3 +195,8 @@ header.av-panel a:has(svg), header.av-panel a[aria-label] { min-height: 44px; di
   .av-toolbar button { padding-left: 7px; padding-right: 7px; }
   .av-toolbar .av-tool { width: 32px; min-width: 32px; height: 32px; padding: 6px; }
 }
+
+#avx-scrollx{position:absolute;left:44px;bottom:66px;width:min(calc(100% - 44px - 170px),420px);height:14px;border-radius:7px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);touch-action:none;z-index:6;cursor:pointer}
+#avx-scrollx .avx-scroll-thumb{position:absolute;top:0;height:100%;right:auto;width:14%;left:43%;border-radius:7px;background:linear-gradient(90deg,var(--av-accent,#7c5cff),#22d3ee)}
+#avx-scrollx:focus-visible{outline:2px solid #22d3ee;outline-offset:2px}
+@media (max-width:767px){#avx-scrollx{left:50%;transform:translateX(-50%);bottom:84px;width:56%;height:16px}}

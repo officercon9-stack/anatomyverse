@@ -442,7 +442,7 @@
   function scrRange() {
     if (SCR.lo != null) return true;
     var scn = globalThis.__scn; if (!scn) return false;
-    var lo = Infinity, hi = -Infinity;
+    var lo = Infinity, hi = -Infinity, xl = Infinity, xh = -Infinity;
     scn.updateMatrixWorld(true);
     scn.traverse(function (m) {
       if (!m.isMesh || !m.visible || !m.geometry) return;
@@ -451,9 +451,11 @@
       var b = bb.clone().applyMatrix4(m.matrixWorld);
       if (b.min.y < lo) lo = b.min.y;
       if (b.max.y > hi) hi = b.max.y;
+      if (b.min.x < xl) xl = b.min.x;
+      if (b.max.x > xh) xh = b.max.x;
     });
     if (!isFinite(lo) || !isFinite(hi) || hi - lo < 0.05) return false;
-    SCR.lo = lo; SCR.hi = hi;
+    SCR.lo = lo; SCR.hi = hi; SCR.xl = xl; SCR.xh = xh;
     return true;
   }
   /* How far the view can travel: stop once the head (or the feet) reaches the
@@ -477,12 +479,21 @@
       return s.controls && s.controls.target ? s.controls.target.y : s.camera.position.y;
     } catch (e) { return null; }
   }
-  function scrPanTo(y) {
-    var c = scrY(); if (c == null) return;
-    var dy = y - c; if (Math.abs(dy) < 1e-4) return;
+  function scrX() {
+    try {
+      var s = globalThis.__r3s.get();
+      return s.controls && s.controls.target ? s.controls.target.x : s.camera.position.x;
+    } catch (e) { return null; }
+  }
+  function scrPanTo(y) { scrPanXY(null, y); }
+  function scrPanXY(x, y) {
+    var dx = 0, dy = 0;
+    if (x != null) { var cx = scrX(); if (cx == null) return; dx = (x || 0) - cx; }
+    if (y != null) { var c = scrY(); if (c == null) return; dy = y - c; }
+    if (Math.abs(dx) < 1e-4 && Math.abs(dy) < 1e-4) return;
     try {
       var b = globalThis.__avb; if (!b) return;
-      b.set({ panq: { dy: dy, seq: ((b.get().panq || {}).seq || 0) + 1 } });
+      b.set({ panq: { dx: dx, dy: dy, seq: ((b.get().panq || {}).seq || 0) + 1 } });
       var s = globalThis.__r3s.get(); s.invalidate && s.invalidate();
     } catch (e) {}
   }
@@ -506,7 +517,7 @@
   function mountScroll() {
     var onLab = /#\/app\/lab/.test(location.hash);
     var sc = $('#avx-scroll');
-    if (!onLab) { if (sc) sc.remove(); SCR.lo = SCR.hi = null; return; }
+    if (!onLab) { if (sc) sc.remove(); var sx0 = $('#avx-scrollx'); if (sx0) sx0.remove(); SCR.lo = SCR.hi = null; return; }
     var c = $('canvas'); if (!c) return;
     var sec = c.closest('section'); if (!sec) return;
     if (sc && sc.parentElement !== sec) { sc.remove(); sc = null; }
@@ -558,6 +569,72 @@
     }
     syncScroll();
   }
+
+  /* Sideways scroll bar along the bottom of the 3D view: moves the model left and right. */
+  function scrXSpan() {
+    if (!scrRange()) return null;
+    var w = SCR.xh - SCR.xl, m = w * 0.1, lo = SCR.xl + m, hi = SCR.xh - m;
+    if (hi - lo < 1e-3) { var c = (hi + lo) / 2; lo = c - 1e-3; hi = c + 1e-3; }
+    return { lo: lo, hi: hi };
+  }
+  function syncScrollX() {
+    var sc = $('#avx-scrollx'); if (!sc || SCR.dragx) return;
+    var sp = scrXSpan(); if (!sp) { sc.style.display = 'none'; return; }
+    sc.style.display = '';
+    var x = scrX(); if (x == null) return;
+    var f = Math.max(0, Math.min(1, (x - sp.lo) / (sp.hi - sp.lo)));
+    sc.firstChild.style.left = (f * (100 - SCR.th)) + '%';
+    sc.setAttribute('aria-valuenow', String(Math.round(f * 100)));
+    sc.setAttribute('aria-valuetext', f < 0.25 ? 'Towards the left' : f > 0.75 ? 'Towards the right' : 'Centre');
+  }
+  function mountScrollX() {
+    var sc = $('#avx-scrollx');
+    if (!/#\/app\/lab/.test(location.hash)) { if (sc) sc.remove(); return; }
+    var c = $('canvas'); if (!c) return;
+    var sec = c.closest('section'); if (!sec) return;
+    if (sc && sc.parentElement !== sec) { sc.remove(); sc = null; }
+    if (!sc) {
+      sc = el('div', { id: 'avx-scrollx', role: 'slider', tabindex: '0', 'aria-orientation': 'horizontal',
+        'aria-label': 'Move the view left and right', 'aria-valuemin': '0', 'aria-valuemax': '100', title: 'Drag to move the view left and right' });
+      sc.appendChild(el('div', { class: 'avx-scroll-thumb' }));
+      var fr = function (e) {
+        var r = sc.getBoundingClientRect(), tw = sc.firstChild.getBoundingClientRect().width, u = r.width - tw;
+        return u <= 0 ? 0 : (e.clientX - r.left - tw / 2) / u;
+      };
+      var setF = function (f) {
+        var sp = scrXSpan(); if (!sp) return;
+        f = Math.max(0, Math.min(1, f));
+        scrPanXY(sp.lo + f * (sp.hi - sp.lo), null);
+        sc.firstChild.style.left = (f * (100 - SCR.th)) + '%';
+      };
+      sc.addEventListener('pointerdown', function (e) {
+        if (!scrRange()) return;
+        SCR.dragx = 1; sc.setPointerCapture && sc.setPointerCapture(e.pointerId);
+        try { sc.focus({ preventScroll: true }); } catch (x) {}
+        sc.classList.add('on'); setF(fr(e)); e.preventDefault();
+      });
+      sc.addEventListener('pointermove', function (e) { if (SCR.dragx) { setF(fr(e)); e.preventDefault(); } });
+      var stopx = function (e) { if (!SCR.dragx) return; SCR.dragx = 0; sc.classList.remove('on'); try { sc.releasePointerCapture(e.pointerId); } catch (x) {} syncScrollX(); };
+      sc.addEventListener('pointerup', stopx); sc.addEventListener('pointercancel', stopx);
+      sc.addEventListener('wheel', function (e) {
+        var sp = scrXSpan(); if (!sp) return; var x = scrX(); if (x == null) return;
+        var d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+        scrPanXY(Math.max(sp.lo, Math.min(sp.hi, x + Math.sign(d) * (sp.hi - sp.lo) * 0.08)), null);
+        e.preventDefault(); syncScrollX();
+      }, { passive: false });
+      sc.addEventListener('keydown', function (e) {
+        var sp = scrXSpan(); if (!sp) return; var x = scrX(); if (x == null) return;
+        var span = sp.hi - sp.lo, t = null;
+        if (e.key === 'ArrowLeft') t = x - span * 0.08; else if (e.key === 'ArrowRight') t = x + span * 0.08;
+        else if (e.key === 'PageUp') t = x - span * 0.25; else if (e.key === 'PageDown') t = x + span * 0.25;
+        else if (e.key === 'Home') t = sp.lo; else if (e.key === 'End') t = sp.hi;
+        if (t == null) return;
+        scrPanXY(Math.max(sp.lo, Math.min(sp.hi, t)), null); e.preventDefault(); setTimeout(syncScrollX, 0);
+      });
+      sec.appendChild(sc);
+    }
+    syncScrollX();
+  }
   function tick() {
     if (!globalThis.__avStore) return; S = globalThis.__avStore; F = globalThis.__avF;
     if (!DEF) DEF = { layerVisible: Object.assign({}, st().layerVisible), layerOpacity: Object.assign({}, st().layerOpacity) };
@@ -566,7 +643,7 @@
     if (!onLab) document.documentElement.classList.remove('avx-rail', 'avx-sheet-open');
     document.documentElement.classList.toggle('avx-onlab', onLab); if (!onLab) Array.prototype.forEach.call(document.querySelectorAll('div[style*="position: fixed"]'), function (d) { if (/Drag the title bar/.test(d.textContent || '') && d.style.display !== 'none') d.style.setProperty('display', 'none', 'important'); });
     if (!onLab || !row) { if (bar) { bar.remove(); B = {}; mounted = null; } var fb = $('#avux-fab'); if (fb) fb.remove(); var nv = $('#avux-nav'); if (nv) nv.remove(); document.documentElement.classList.remove('avx-nav'); closeSheet(); return; }
-    mountFab(); markMobile(sec); applyRail(); mountNav(); try { labHeading(); } catch (e) {} try { mountScroll(); } catch (e) {} try { fitPlaceholders(); } catch (e) {}
+    mountFab(); markMobile(sec); applyRail(); mountNav(); try { labHeading(); } catch (e) {} try { mountScroll(); } catch (e) {} try { mountScrollX(); } catch (e) {} try { fitPlaceholders(); } catch (e) {}
     if (!bar || mounted !== row) { if (bar) bar.remove(); B = {}; mounted = row; css(); mountBar(row); last = JSON.stringify(snap()); }
     light();
   }
