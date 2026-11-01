@@ -139,3 +139,6 @@ or paid release.*
 
 ## Femur parts (derived work)
 The femur meshes in `anatomyverse-limbs.glb` / `zanatomy-limbbones.glb` (Z-Anatomy, CC BY-SA 4.0) are cut into nine named regions (head, neck, greater and lesser trochanter, body, medial and lateral condyle, medial epicondyle, patellar surface) by `source/femurparts.mjs`. The regions are approximate, assigned by position along the bone. The cut meshes remain under the same CC BY-SA 4.0 licence as the source. The older BodyParts3D femur nodes (`b_femur_*`) were removed because the Z-Anatomy femurs replace them.
+
+## Individually named hand and foot bones
+The BodyParts3D hand-bones and foot-bones meshes (CC BY-SA 2.1 Japan) are made of separate pieces, one per bone. They were split into 27 (hand) and 28 (foot) separately selectable bones per side and named; geometry is otherwise unchanged. See `source/handsplit.mjs` and `source/footsplit.mjs`.
