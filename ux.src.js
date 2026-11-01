@@ -638,66 +638,192 @@
     syncScrollX();
   }
 
-  /* Cross-section tool: slices the whole model with a movable plane so the inside shows.
-     Back faces are drawn while it is on, so cut structures read as hollow shells and anything
-     modelled inside (chambers, vessels, cavities) is revealed and can be touched and named. */
-  var CUT = { on: 0, axis: 'y', f: 0.5, saved: null, plane: null };
-  function cutApply() {
-    var r3; try { r3 = globalThis.__r3s.get(); } catch (e) { return; }
-    if (!r3 || !r3.gl || !scrRange()) return;
-    var V = r3.camera.position.constructor;
-    if (!CUT.on) {
-      r3.gl.clippingPlanes = [];
-      if (CUT.saved) { CUT.saved.forEach(function (rec) { rec.m.side = rec.s; rec.m.needsUpdate = true; }); CUT.saved = null; }
-      r3.invalidate(); return;
+  /* Cross-section of ONE organ. Select an organ (or part of one), press Cut, and the organ is
+     shown on its own with a movable cutting plane. Anything modelled inside it appears and can be
+     touched to read its name; the parts are also listed. Cut faces are painted a flat tissue tone so
+     a solid shell reads as a cut surface. Organs that have no interior model say so. */
+  var XS = { on: 0, id: null, axis: 'z', f: 0.45, saved: [], raycasts: [], plane: null, bb: null, ids: null, parts: [] };
+  function recMap() {
+    if (XS.R) return XS.R;
+    var R = {}; (Array.isArray(F) ? F : Object.values(F || {})).forEach(function (r) { if (r && r.id) R[r.id] = r; });
+    return (XS.R = R);
+  }
+  function meshCounts() {
+    var n = {}; (globalThis.__scn || { traverse: function () {} }).traverse(function (m) { var id = m.isMesh && m.userData && m.userData.structureId; if (id) n[id] = (n[id] || 0) + 1; });
+    return n;
+  }
+  function kids(R) {
+    if (XS.K) return XS.K;
+    var K = {}; Object.keys(R).forEach(function (id) { var p = R[id].parentId; if (p) (K[p] = K[p] || []).push(id); });
+    return (XS.K = K);
+  }
+  function subtree(id) {
+    var R = recMap(), K = kids(R), out = [id], st = [id];
+    while (st.length) { var c = st.pop(); (K[c] || []).forEach(function (k) { out.push(k); st.push(k); }); }
+    return out;
+  }
+  function organOf(id) {
+    var R = recMap(), mc = meshCounts(), cur = id;
+    function count(i) { return subtree(i).reduce(function (a, k) { return a + (mc[k] || 0); }, 0); }
+    while (R[cur] && R[cur].parentId && R[R[cur].parentId]) {
+      var p = R[cur].parentId;
+      if (R[cur].side && !R[p].side) break;        /* stay on the chosen side of a pair */
+      if (count(p) > 80) break;                    /* do not climb up to a whole body system */
+      cur = p;
     }
-    if (!CUT.saved) {
-      CUT.saved = [];
-      r3.scene.traverse(function (o) {
-        if (!o.isMesh || !o.material) return;
-        (Array.isArray(o.material) ? o.material : [o.material]).forEach(function (m) {
-          CUT.saved.push({ m: m, s: m.side }); m.side = 2; m.needsUpdate = true;
-        });
+    return cur;
+  }
+  function xsMeshes(ids) {
+    var set = {}; ids.forEach(function (i) { set[i] = 1; });
+    var out = []; globalThis.__scn.traverse(function (m) { var id = m.isMesh && m.userData && m.userData.structureId; if (id && set[id]) out.push(m); });
+    return out;
+  }
+  function xsBox(ms) {
+    var lo = [Infinity, Infinity, Infinity], hi = [-Infinity, -Infinity, -Infinity];
+    ms.forEach(function (m) {
+      m.updateWorldMatrix(true, false);
+      if (!m.geometry.boundingBox) m.geometry.computeBoundingBox();
+      var b = m.geometry.boundingBox.clone().applyMatrix4(m.matrixWorld);
+      [b.min, b.max].forEach(function (v) { ['x', 'y', 'z'].forEach(function (k, i) { if (v[k] < lo[i]) lo[i] = v[k]; if (v[k] > hi[i]) hi[i] = v[k]; }); });
+    });
+    return { lo: lo, hi: hi };
+  }
+  function xsDefaultF() {
+    var bb = XS.bb, c = XS.fc, i = XS.axis === 'x' ? 0 : XS.axis === 'y' ? 1 : 2, span = (bb.hi[i] - bb.lo[i]) || 1;
+    var f = XS.axis === 'x' ? (c[i] - bb.lo[i]) / span : (bb.hi[i] - c[i]) / span;
+    return Math.max(0.05, Math.min(0.95, f));
+  }
+  function xsPlane() {
+    var bb = XS.bb, a = XS.axis, f = XS.f, pl = XS.plane;
+    if (a === 'y') { pl.normal.set(0, -1, 0); pl.constant = bb.hi[1] + (bb.lo[1] - bb.hi[1]) * f; }     /* keeps what is below */
+    else if (a === 'x') { pl.normal.set(1, 0, 0); pl.constant = -(bb.lo[0] + (bb.hi[0] - bb.lo[0]) * f); } /* keeps x above the plane */
+    else { pl.normal.set(0, 0, -1); pl.constant = bb.hi[2] + (bb.lo[2] - bb.hi[2]) * f; }               /* keeps what is behind */
+    try { globalThis.__r3s.get().invalidate(); } catch (e) {}
+  }
+  function xsLook() {      /* turn the camera to face the cut surface */
+    try {
+      var s = globalThis.__r3s.get(), c = s.controls; if (!c || !c.target) return;
+      var d = s.camera.position.distanceTo(c.target) || 0.5, dir = XS.axis === 'y' ? [0, 0.93, 0.37] : XS.axis === 'x' ? [-0.97, 0.1, 0.22] : [0, 0.08, 1];
+      if (!XS.t0) XS.t0 = c.target.y;
+      var lift = (window.innerWidth < 768 ? 0.22 : 0) * d;        /* on a phone, hold the organ below the panel */
+      c.target.y = XS.t0 + lift;
+      s.camera.position.set(c.target.x + dir[0] * d, c.target.y + dir[1] * d, c.target.z + dir[2] * d); c.update(); s.invalidate();
+    } catch (e) {}
+  }
+  function xsStart(id) {
+    var r3 = globalThis.__r3s.get(), store = globalThis.__avStore.getState();
+    XS.id = organOf(id); XS.ids = subtree(XS.id);
+    var R0 = recMap(), me = R0[XS.id];
+    if (me && me.side && me.parentId && R0[me.parentId] && !R0[me.parentId].side) {      /* a left kidney takes the left renal pelvis, etc. */
+      subtree(me.parentId).forEach(function (k) { if (R0[k] && R0[k].side === me.side && XS.ids.indexOf(k) < 0) XS.ids.push(k); });
+    }
+    var ms = xsMeshes(XS.ids); if (!ms.length) return false;
+    XS.bb = xsBox(ms);
+    var fm = xsMeshes([id].filter(function (k) { return XS.ids.indexOf(k) >= 0; }).concat(subtree(id).filter(function (k) { return XS.ids.indexOf(k) >= 0; })));
+    var fb = fm.length ? xsBox(fm) : XS.bb;
+    XS.fc = [0, 1, 2].map(function (i) { return (fb.lo[i] + fb.hi[i]) / 2; });   /* start the cut through the part that was selected */
+    var V = r3.camera.position.constructor; XS.plane = { normal: new V(0, 0, -1), constant: 0 };
+    r3.gl.localClippingEnabled = true;
+    try { store.isolate([XS.id]); store.frame([XS.id]); } catch (e) {}
+    XS.saved = []; XS.raycasts = [];
+    ms.forEach(function (m) {
+      (Array.isArray(m.material) ? m.material : [m.material]).forEach(function (mt) {
+        var rec = { m: mt, side: mt.side, cp: mt.clippingPlanes, ob: mt.onBeforeCompile, ck: mt.customProgramCacheKey };
+        XS.saved.push(rec);
+        mt.clippingPlanes = [XS.plane]; mt.side = 2;
+        mt.onBeforeCompile = function (sh) {
+          if (rec.ob) rec.ob.apply(this, arguments);
+          sh.fragmentShader = sh.fragmentShader.replace('#include <dithering_fragment>', '#include <dithering_fragment>\n if(!gl_FrontFacing){ gl_FragColor = vec4(mix(gl_FragColor.rgb, vec3(0.88,0.58,0.54), 0.6), 1.0); }');
+        };
+        mt.customProgramCacheKey = function () { return 'avx-cap'; };
+        mt.needsUpdate = true;
       });
+      var own = Object.prototype.hasOwnProperty.call(m, 'raycast'), orig = m.raycast, pl = XS.plane;
+      XS.raycasts.push({ m: m, own: own, orig: orig });
+      m.raycast = function (rc, hits) {
+        var n = hits.length; orig.call(this, rc, hits);
+        for (var i = hits.length - 1; i >= n; i--) if (pl.normal.dot(hits[i].point) + pl.constant < 0) hits.splice(i, 1);   /* cannot touch what is cut away */
+      };
+    });
+    var mc = meshCounts();
+    XS.parts = XS.ids.filter(function (k) { return k !== XS.id && mc[k]; });
+    XS.on = 1; XS.f = xsDefaultF(); xsPlane(); xsLook();
+    return true;
+  }
+  function xsStop() {
+    if (!XS.on) return;
+    XS.on = 0; XS.t0 = 0;
+    XS.saved.forEach(function (r) { r.m.side = r.side; r.m.clippingPlanes = r.cp; r.m.onBeforeCompile = r.ob || function () {}; r.m.customProgramCacheKey = r.ck || function () { return ''; }; r.m.needsUpdate = true; });
+    XS.raycasts.forEach(function (r) { if (r.own) r.m.raycast = r.orig; else delete r.m.raycast; });
+    XS.saved = []; XS.raycasts = [];
+    try { globalThis.__avStore.getState().restoreVisibility(); globalThis.__r3s.get().invalidate(); } catch (e) {}
+  }
+  function nameOf(id) { var r = recMap()[id]; return (r && r.name) || id; }
+  function xsRender() {
+    var box = $('#avx-cut'); if (!box) return;
+    var pan = box.querySelector('.avx-cut-pan'), body = pan.querySelector('.avx-cut-body'), head = pan.querySelector('.avx-cut-head');
+    var sel = null; try { sel = globalThis.__avStore.getState().selectedId; } catch (e) {}
+    body.textContent = '';
+    if (!XS.on) {
+      head.textContent = 'Cross-section';
+      var go = el('button', { type: 'button', class: 'avx-cut-go', text: sel ? 'Cut ' + nameOf(organOf(sel)).toLowerCase() : 'Tap an organ first' });
+      if (!sel) go.disabled = true;
+      go.addEventListener('click', function () { if (xsStart(sel)) { try { globalThis.__avStore.getState().select(null); } catch (e) {} xsRender(); } });
+      body.appendChild(go);
+      body.appendChild(el('p', { class: 'avx-cut-note', text: 'Select an organ, then cut it to see and name what is inside.' }));
+      return;
     }
-    var a = CUT.axis, f = CUT.f, pl = CUT.plane || (CUT.plane = { normal: new V(0, 1, 0), constant: 0 });
-    if (a === 'y') { pl.normal.set(0, -1, 0); pl.constant = SCR.hi + (SCR.lo - SCR.hi) * f; }          /* keeps what is below the cut */
-    else if (a === 'x') { var xp = SCR.xl + (SCR.xh - SCR.xl) * f; pl.normal.set(1, 0, 0); pl.constant = -xp; }
-    else { var zp = SCR.zh + (SCR.zl - SCR.zh) * f; pl.normal.set(0, 0, -1); pl.constant = zp; }
-    r3.gl.clippingPlanes = [pl];
-    r3.invalidate();
+    head.textContent = 'Cut: ' + nameOf(XS.id);
+    var done = el('button', { type: 'button', class: 'avx-cut-off', text: 'Done' });
+    done.addEventListener('click', function () { xsStop(); xsRender(); });
+    head.appendChild(done);
+    var chips = el('div', { class: 'avx-cut-chips', role: 'group', 'aria-label': 'Cut direction' });
+    [['z', 'Front to back'], ['x', 'Side to side'], ['y', 'Across']].forEach(function (x) {
+      var b = el('button', { type: 'button', 'aria-pressed': XS.axis === x[0] ? 'true' : 'false', text: x[1] });
+      b.addEventListener('click', function () { XS.axis = x[0]; XS.f = xsDefaultF(); xsPlane(); xsLook(); xsRender(); });
+      chips.appendChild(b);
+    });
+    var rng = el('input', { type: 'range', min: '0', max: '100', value: String(Math.round(XS.f * 100)), 'aria-label': 'Cut position' });
+    rng.addEventListener('input', function () { XS.f = +rng.value / 100; xsPlane(); });
+    body.appendChild(chips); body.appendChild(rng);
+    if (XS.parts.length) {
+      body.appendChild(el('p', { class: 'avx-cut-note', text: 'Inside (touch one, or tap it in the view):' }));
+      var list = el('div', { class: 'avx-cut-parts' });
+      XS.parts.forEach(function (id) {
+        var b = el('button', { type: 'button', 'aria-pressed': sel === id ? 'true' : 'false', text: nameOf(id) });
+        b.addEventListener('click', function () { try { globalThis.__avStore.getState().select(id); } catch (e) {} setTimeout(xsRender, 50); });
+        list.appendChild(b);
+      });
+      body.appendChild(list);
+    } else {
+      body.appendChild(el('p', { class: 'avx-cut-note', text: 'This organ is modelled as a single solid shell, so the cut face is a flat tone with no named parts inside yet.' }));
+    }
   }
   function mountCut() {
     var box = $('#avx-cut');
-    if (!/#\/app\/lab/.test(location.hash)) { if (box) { CUT.on = 0; try { cutApply(); } catch (e) {} box.remove(); } return; }
+    if (!/#\/app\/lab/.test(location.hash)) { if (box) { xsStop(); box.remove(); document.documentElement.classList.remove('avx-xs'); } return; }
     var c = $('canvas'); if (!c) return;
     var sec = c.closest('section'); if (!sec) return;
-    if (box && box.parentElement !== sec) { box.remove(); box = null; }
-    if (box) return;
-    box = el('div', { id: 'avx-cut' });
-    var btn = el('button', { type: 'button', class: 'avx-cut-btn', 'aria-expanded': 'false', title: 'Cross-section: slice the model to see inside', text: 'Cut' });
-    var pan = el('div', { class: 'avx-cut-pan', hidden: 'hidden' });
-    var chips = el('div', { class: 'avx-cut-chips', role: 'group', 'aria-label': 'Cut direction' });
-    var AX = [['y', 'Across'], ['x', 'Side to side'], ['z', 'Front to back']];
-    var rng = el('input', { type: 'range', min: '0', max: '100', value: '50', 'aria-label': 'Cut position' });
-    function setAxis(a) {
-      CUT.axis = a; CUT.f = 0.5; rng.value = '50';
-      chips.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-a') === a ? 'true' : 'false'); });
-      cutApply();
+    if (box && box.parentElement !== sec) { xsStop(); box.remove(); box = null; }
+    if (box) {
+      var pan0 = box.querySelector('.avx-cut-pan');
+      if (!pan0.hidden && !XS.on) {                       /* keep the label for the current selection fresh */
+        var sel0 = null; try { sel0 = globalThis.__avStore.getState().selectedId; } catch (e) {}
+        if (sel0 !== XS.lastSel) { XS.lastSel = sel0; xsRender(); }
+      }
+      return;
     }
-    AX.forEach(function (x) {
-      var b = el('button', { type: 'button', 'data-a': x[0], 'aria-pressed': x[0] === 'y' ? 'true' : 'false', text: x[1] });
-      b.addEventListener('click', function () { setAxis(x[0]); });
-      chips.appendChild(b);
-    });
-    rng.addEventListener('input', function () { CUT.f = +rng.value / 100; cutApply(); });
-    var off = el('button', { type: 'button', class: 'avx-cut-off', text: 'Remove cut' });
-    off.addEventListener('click', function () { CUT.on = 0; pan.hidden = true; btn.setAttribute('aria-expanded', 'false'); btn.classList.remove('on'); cutApply(); });
-    var note = el('p', { class: 'avx-cut-note', text: 'Slice the whole model. Only structures that are modelled inside appear; solid organs without an interior stay hollow.' });
-    pan.appendChild(chips); pan.appendChild(rng); pan.appendChild(off); pan.appendChild(note);
+    box = el('div', { id: 'avx-cut' });
+    var btn = el('button', { type: 'button', class: 'avx-cut-btn', 'aria-expanded': 'false', title: 'Cross-section of the selected organ', text: 'Cut' });
+    var pan = el('div', { class: 'avx-cut-pan', hidden: 'hidden' });
+    var close = el('button', { type: 'button', class: 'avx-cut-x', 'aria-label': 'Close cross-section', text: '\u00d7' });
+    close.addEventListener('click', function () { btn.click(); });
+    pan.appendChild(close);
+    pan.appendChild(el('div', { class: 'avx-cut-head' }));
+    pan.appendChild(el('div', { class: 'avx-cut-body' }));
     btn.addEventListener('click', function () {
-      if (pan.hidden) { pan.hidden = false; CUT.on = 1; btn.setAttribute('aria-expanded', 'true'); btn.classList.add('on'); cutApply(); }
-      else { pan.hidden = true; btn.setAttribute('aria-expanded', 'false'); }
+      if (pan.hidden) { pan.hidden = false; document.documentElement.classList.add('avx-xs'); btn.setAttribute('aria-expanded', 'true'); btn.classList.add('on'); xsRender(); }
+      else { xsStop(); pan.hidden = true; document.documentElement.classList.remove('avx-xs'); btn.setAttribute('aria-expanded', 'false'); btn.classList.remove('on'); }
     });
     box.appendChild(btn); box.appendChild(pan); sec.appendChild(box);
   }

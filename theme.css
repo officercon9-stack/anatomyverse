@@ -225,3 +225,42 @@ header.av-panel a:has(svg), header.av-panel a[aria-label] { min-height: 44px; di
   .avx-cut-btn{top:180px}
 }
 html.avx-nav section .absolute.top-3.right-3 > button[aria-label="Animated systems menu"]{visibility:visible;pointer-events:auto}
+
+.avx-cut-head{font:700 14px system-ui,sans-serif;flex:1 0 100%}
+.avx-cut-body{display:flex;flex-wrap:wrap;align-items:center;gap:6px;flex:1 0 100%}
+.avx-cut-go{min-height:44px;padding:0 14px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--av-accent,#7c5cff),#22d3ee);color:#fff;font:600 14px system-ui,sans-serif;cursor:pointer}
+.avx-cut-go:disabled{opacity:.5;cursor:default}
+.avx-cut-note{display:block !important;flex:1 0 100%;margin:0;opacity:.8;font-size:12px;line-height:1.35}
+.avx-cut-parts{display:flex;flex-wrap:wrap;gap:4px;flex:1 0 100%;max-height:92px;overflow:auto}
+.avx-cut-parts button{min-height:36px;padding:0 10px;border-radius:999px;border:1px solid var(--av-border,rgba(255,255,255,.25));background:transparent;color:inherit;font:12px system-ui,sans-serif;cursor:pointer}
+.avx-cut-parts button[aria-pressed=true]{background:var(--av-accent,#7c5cff);border-color:transparent;color:#fff}
+
+/* cross-section panel: compact, at the top so the organ stays visible above the details sheet */
+.avx-cut-pan{top:76px !important;bottom:auto !important;left:34px;right:10px;z-index:9;background:rgba(14,28,64,.93);padding:8px;gap:4px}
+@media (min-width:768px){.avx-cut-pan{top:12px !important;left:56px;right:auto;width:calc(100% - 56px - 120px)}}
+.avx-cut-head{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:32px}
+.avx-cut-head .avx-cut-off{min-height:36px;padding:0 12px}
+.avx-cut-chips button{min-height:36px;padding:0 10px;font-size:13px}
+.avx-cut-pan input[type=range]{flex:1 1 100%;min-height:36px;margin:0}
+.avx-cut-parts{flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;max-height:none;padding-bottom:4px}
+.avx-cut-parts button{flex:0 0 auto;white-space:nowrap;min-height:34px}
+.avx-cut-note{font-size:12px}
+
+html.avx-xs div:has(> [aria-label="Animated systems menu"]),html.avx-xs .avx-cut-btn{display:none !important}
+.avx-cut-pan{overflow:hidden}
+.avx-cut-pan input[type=range]{width:100%;max-width:100%;box-sizing:border-box}
+.avx-cut-x{position:absolute;top:6px;right:6px;width:36px;height:36px;border-radius:50%;border:0;background:transparent;color:inherit;font:22px/1 system-ui;cursor:pointer;z-index:2}.avx-cut-head{padding-right:40px}
+
+.avx-cut-pan{top:128px !important}@media (min-width:768px){.avx-cut-pan{top:12px !important}}
+
+.avx-cut-pan{padding:6px 8px;gap:2px}
+.avx-cut-head{min-height:30px}
+.avx-cut-head .avx-cut-off{min-height:32px}
+.avx-cut-chips button{min-height:32px;padding:0 8px;font-size:12px}
+.avx-cut-pan input[type=range]{min-height:28px;height:28px}
+.avx-cut-parts button{min-height:30px;font-size:12px}
+.avx-cut-note{margin:2px 0}
+.avx-cut-pan input[type=range]{min-width:0;flex:1 1 100%;width:100%;margin:0;padding:0}
+.avx-cut-body{min-width:0;max-width:100%;width:100%}
+.avx-cut-parts{min-width:0;max-width:100%;width:100%}
+.avx-cut-chips{min-width:0;max-width:100%}
