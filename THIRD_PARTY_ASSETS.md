@@ -136,3 +136,6 @@ or paid release.*
 | ShareAlike | **Yes.** Derivative works must be distributed under CC BY-SA 4.0. This applies to the exported mesh data, not to the app's own code. |
 | Objects used | Tongue, Prostate, Testis.l, Testis.r, Epididymis.l, Epididymis.r |
 | Modifications made | Selected 6 objects, applied modifiers, exported to glTF with Y-up, meshopt-compressed and quantized. No geometry was altered. |
+
+## Femur parts (derived work)
+The femur meshes in `anatomyverse-limbs.glb` / `zanatomy-limbbones.glb` (Z-Anatomy, CC BY-SA 4.0) are cut into nine named regions (head, neck, greater and lesser trochanter, body, medial and lateral condyle, medial epicondyle, patellar surface) by `source/femurparts.mjs`. The regions are approximate, assigned by position along the bone. The cut meshes remain under the same CC BY-SA 4.0 licence as the source. The older BodyParts3D femur nodes (`b_femur_*`) were removed because the Z-Anatomy femurs replace them.

@@ -442,7 +442,7 @@
   function scrRange() {
     if (SCR.lo != null) return true;
     var scn = globalThis.__scn; if (!scn) return false;
-    var lo = Infinity, hi = -Infinity, xl = Infinity, xh = -Infinity;
+    var lo = Infinity, hi = -Infinity, xl = Infinity, xh = -Infinity, zl = Infinity, zh = -Infinity;
     scn.updateMatrixWorld(true);
     scn.traverse(function (m) {
       if (!m.isMesh || !m.visible || !m.geometry) return;
@@ -453,9 +453,11 @@
       if (b.max.y > hi) hi = b.max.y;
       if (b.min.x < xl) xl = b.min.x;
       if (b.max.x > xh) xh = b.max.x;
+      if (b.min.z < zl) zl = b.min.z;
+      if (b.max.z > zh) zh = b.max.z;
     });
     if (!isFinite(lo) || !isFinite(hi) || hi - lo < 0.05) return false;
-    SCR.lo = lo; SCR.hi = hi; SCR.xl = xl; SCR.xh = xh;
+    SCR.lo = lo; SCR.hi = hi; SCR.xl = xl; SCR.xh = xh; SCR.zl = zl; SCR.zh = zh;
     return true;
   }
   /* How far the view can travel: stop once the head (or the feet) reaches the
@@ -635,6 +637,70 @@
     }
     syncScrollX();
   }
+
+  /* Cross-section tool: slices the whole model with a movable plane so the inside shows.
+     Back faces are drawn while it is on, so cut structures read as hollow shells and anything
+     modelled inside (chambers, vessels, cavities) is revealed and can be touched and named. */
+  var CUT = { on: 0, axis: 'y', f: 0.5, saved: null, plane: null };
+  function cutApply() {
+    var r3; try { r3 = globalThis.__r3s.get(); } catch (e) { return; }
+    if (!r3 || !r3.gl || !scrRange()) return;
+    var V = r3.camera.position.constructor;
+    if (!CUT.on) {
+      r3.gl.clippingPlanes = [];
+      if (CUT.saved) { CUT.saved.forEach(function (rec) { rec.m.side = rec.s; rec.m.needsUpdate = true; }); CUT.saved = null; }
+      r3.invalidate(); return;
+    }
+    if (!CUT.saved) {
+      CUT.saved = [];
+      r3.scene.traverse(function (o) {
+        if (!o.isMesh || !o.material) return;
+        (Array.isArray(o.material) ? o.material : [o.material]).forEach(function (m) {
+          CUT.saved.push({ m: m, s: m.side }); m.side = 2; m.needsUpdate = true;
+        });
+      });
+    }
+    var a = CUT.axis, f = CUT.f, pl = CUT.plane || (CUT.plane = { normal: new V(0, 1, 0), constant: 0 });
+    if (a === 'y') { pl.normal.set(0, -1, 0); pl.constant = SCR.hi + (SCR.lo - SCR.hi) * f; }          /* keeps what is below the cut */
+    else if (a === 'x') { var xp = SCR.xl + (SCR.xh - SCR.xl) * f; pl.normal.set(1, 0, 0); pl.constant = -xp; }
+    else { var zp = SCR.zh + (SCR.zl - SCR.zh) * f; pl.normal.set(0, 0, -1); pl.constant = zp; }
+    r3.gl.clippingPlanes = [pl];
+    r3.invalidate();
+  }
+  function mountCut() {
+    var box = $('#avx-cut');
+    if (!/#\/app\/lab/.test(location.hash)) { if (box) { CUT.on = 0; try { cutApply(); } catch (e) {} box.remove(); } return; }
+    var c = $('canvas'); if (!c) return;
+    var sec = c.closest('section'); if (!sec) return;
+    if (box && box.parentElement !== sec) { box.remove(); box = null; }
+    if (box) return;
+    box = el('div', { id: 'avx-cut' });
+    var btn = el('button', { type: 'button', class: 'avx-cut-btn', 'aria-expanded': 'false', title: 'Cross-section: slice the model to see inside', text: 'Cut' });
+    var pan = el('div', { class: 'avx-cut-pan', hidden: 'hidden' });
+    var chips = el('div', { class: 'avx-cut-chips', role: 'group', 'aria-label': 'Cut direction' });
+    var AX = [['y', 'Across'], ['x', 'Side to side'], ['z', 'Front to back']];
+    var rng = el('input', { type: 'range', min: '0', max: '100', value: '50', 'aria-label': 'Cut position' });
+    function setAxis(a) {
+      CUT.axis = a; CUT.f = 0.5; rng.value = '50';
+      chips.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-a') === a ? 'true' : 'false'); });
+      cutApply();
+    }
+    AX.forEach(function (x) {
+      var b = el('button', { type: 'button', 'data-a': x[0], 'aria-pressed': x[0] === 'y' ? 'true' : 'false', text: x[1] });
+      b.addEventListener('click', function () { setAxis(x[0]); });
+      chips.appendChild(b);
+    });
+    rng.addEventListener('input', function () { CUT.f = +rng.value / 100; cutApply(); });
+    var off = el('button', { type: 'button', class: 'avx-cut-off', text: 'Remove cut' });
+    off.addEventListener('click', function () { CUT.on = 0; pan.hidden = true; btn.setAttribute('aria-expanded', 'false'); btn.classList.remove('on'); cutApply(); });
+    var note = el('p', { class: 'avx-cut-note', text: 'Slice the whole model. Only structures that are modelled inside appear; solid organs without an interior stay hollow.' });
+    pan.appendChild(chips); pan.appendChild(rng); pan.appendChild(off); pan.appendChild(note);
+    btn.addEventListener('click', function () {
+      if (pan.hidden) { pan.hidden = false; CUT.on = 1; btn.setAttribute('aria-expanded', 'true'); btn.classList.add('on'); cutApply(); }
+      else { pan.hidden = true; btn.setAttribute('aria-expanded', 'false'); }
+    });
+    box.appendChild(btn); box.appendChild(pan); sec.appendChild(box);
+  }
   function tick() {
     if (!globalThis.__avStore) return; S = globalThis.__avStore; F = globalThis.__avF;
     if (!DEF) DEF = { layerVisible: Object.assign({}, st().layerVisible), layerOpacity: Object.assign({}, st().layerOpacity) };
@@ -643,7 +709,7 @@
     if (!onLab) document.documentElement.classList.remove('avx-rail', 'avx-sheet-open');
     document.documentElement.classList.toggle('avx-onlab', onLab); if (!onLab) Array.prototype.forEach.call(document.querySelectorAll('div[style*="position: fixed"]'), function (d) { if (/Drag the title bar/.test(d.textContent || '') && d.style.display !== 'none') d.style.setProperty('display', 'none', 'important'); });
     if (!onLab || !row) { if (bar) { bar.remove(); B = {}; mounted = null; } var fb = $('#avux-fab'); if (fb) fb.remove(); var nv = $('#avux-nav'); if (nv) nv.remove(); document.documentElement.classList.remove('avx-nav'); closeSheet(); return; }
-    mountFab(); markMobile(sec); applyRail(); mountNav(); try { labHeading(); } catch (e) {} try { mountScroll(); } catch (e) {} try { mountScrollX(); } catch (e) {} try { fitPlaceholders(); } catch (e) {}
+    mountFab(); markMobile(sec); applyRail(); mountNav(); try { labHeading(); } catch (e) {} try { mountScroll(); } catch (e) {} try { mountScrollX(); } catch (e) {} try { mountCut(); } catch (e) {} try { fitPlaceholders(); } catch (e) {}
     if (!bar || mounted !== row) { if (bar) bar.remove(); B = {}; mounted = row; css(); mountBar(row); last = JSON.stringify(snap()); }
     light();
   }
