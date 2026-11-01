@@ -200,3 +200,6 @@ header.av-panel a:has(svg), header.av-panel a[aria-label] { min-height: 44px; di
 #avx-scrollx .avx-scroll-thumb{position:absolute;top:0;height:100%;right:auto;width:14%;left:43%;border-radius:7px;background:linear-gradient(90deg,var(--av-accent,#7c5cff),#22d3ee)}
 #avx-scrollx:focus-visible{outline:2px solid #22d3ee;outline-offset:2px}
 @media (max-width:767px){#avx-scrollx{left:50%;transform:translateX(-50%);bottom:84px;width:56%;height:16px}}
+
+/* phone: the Living heart panel sat over the chest; park it low on the right so the heart stays visible */
+@media (max-width:767px){[class*="top-[7.25rem]"][class*="w-[13rem]"]{top:auto !important;left:auto !important;right:10px;bottom:9.5rem;width:11.5rem !important;padding:8px !important}}
