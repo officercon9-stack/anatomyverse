@@ -219,3 +219,8 @@ header.av-panel a:has(svg), header.av-panel a[aria-label] { min-height: 44px; di
 .avx-cut-chips button[aria-pressed=true]{background:var(--av-accent,#7c5cff);border-color:transparent;color:#fff}
 .avx-cut-pan input[type=range]{flex:1 1 140px;min-width:120px;min-height:44px}
 .avx-cut-note{display:none}
+/* phone: the search bar sat on top of the Animate button; park it just below, with Cut under it */
+@media (max-width:767px){
+  div:has(> [aria-label="Animated systems menu"]){top:132px !important;right:10px !important;z-index:8}
+  .avx-cut-btn{top:180px}
+}
