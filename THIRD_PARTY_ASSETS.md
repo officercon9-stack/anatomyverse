@@ -120,3 +120,19 @@ Inter (SIL Open Font License 1.1) and JetBrains Mono (SIL OFL 1.1), self-hosted 
 
 *Not legal advice. Have a lawyer confirm section 4 and section 6 before any sale
 or paid release.*
+
+## zanatomy-organs2.glb (added 1 November 2026)
+
+| | |
+|---|---|
+| Source | Z-Anatomy, `Startup.blend` inside `Z-Anatomy.zip` |
+| Repository | https://github.com/Z-Anatomy/models-of-human-anatomy (commit 22d77228) |
+| Authors | Gauthier Kervyn (design, 3D, anatomy), Marcin Zielinski (script) |
+| Licence | CC BY-SA 4.0, stated in the repository's `License.txt` |
+| Upstream | Models derived from BodyParts3D, CC BY-SA 2.1 Japan |
+| Commercial use | Permitted |
+| Modification | Permitted |
+| Attribution | Required: "Z-Anatomy — the libre 3D atlas of anatomy, CC BY-SA 4.0, derived from BodyParts3D (CC BY-SA 2.1 Japan)" |
+| ShareAlike | **Yes.** Derivative works must be distributed under CC BY-SA 4.0. This applies to the exported mesh data, not to the app's own code. |
+| Objects used | Tongue, Prostate, Testis.l, Testis.r, Epididymis.l, Epididymis.r |
+| Modifications made | Selected 6 objects, applied modifiers, exported to glTF with Y-up, meshopt-compressed and quantized. No geometry was altered. |
