@@ -224,3 +224,4 @@ header.av-panel a:has(svg), header.av-panel a[aria-label] { min-height: 44px; di
   div:has(> [aria-label="Animated systems menu"]){top:132px !important;right:10px !important;z-index:8}
   .avx-cut-btn{top:180px}
 }
+html.avx-nav section .absolute.top-3.right-3 > button[aria-label="Animated systems menu"]{visibility:visible;pointer-events:auto}
