@@ -61,3 +61,10 @@ jobs:
         with:
           name: anatomyverse-debug-apk
           path: android-app/android/app/build/outputs/apk/debug/*.apk
+      - name: Verify the bundle is the real app
+        run: |
+          AAB=$(ls android-app/android/app/build/outputs/bundle/release/*.aab)
+          unzip -l "$AAB" | grep -E "base/assets/public/(index.html|ux.js|theme.css|icons/icon-512.png|models/lite/anatomyverse-limbs.glb)" || { echo "::error::app files missing from the bundle"; exit 1; }
+          unzip -p "$AAB" base/assets/public/ux.js | grep -q "avx-scrollx" || { echo "::error::bundle has an old ux.js"; exit 1; }
+          if jarsigner -verify "$AAB" 2>&1 | grep -q "jar verified"; then SIGN="signed"; else SIGN="NOT signed (keystore secrets missing)"; fi
+          echo "::notice title=Bundle check::$(basename "$AAB") $(du -h "$AAB" | cut -f1), app files present, $SIGN, sha256 $(sha256sum "$AAB" | cut -c1-12)"
