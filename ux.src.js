@@ -827,6 +827,13 @@
     });
     box.appendChild(btn); box.appendChild(pan); sec.appendChild(box);
   }
+  /* lessons and other pages that embed the viewer: keep the Female/Male switch small and out of the way */
+  function lessonTidy(sec) {
+    if (!sec) return;
+    if (!$('#avux-css-l')) document.head.appendChild(el('style', { id: 'avux-css-l', text: '@media(max-width:767px){.avx-sexl{position:absolute!important;left:8px!important;right:auto!important;top:auto!important;bottom:30px!important;transform:none!important;margin:0!important;padding:2px!important;gap:2px!important;z-index:15}.avx-sexl button{min-height:34px!important;padding:3px 10px!important;font-size:12px!important}}' }));
+    var fem = Array.prototype.find.call(sec.querySelectorAll('button'), function (b) { return /^\s*\u2640\s*Female\s*$/.test(b.textContent); });
+    if (fem && fem.parentElement && !fem.parentElement.classList.contains('avx-sexl') && !fem.parentElement.classList.contains('avx-sex')) fem.parentElement.classList.add('avx-sexl');
+  }
   function tick() {
     if (!globalThis.__avStore) return; S = globalThis.__avStore; F = globalThis.__avF;
     if (!DEF) DEF = { layerVisible: Object.assign({}, st().layerVisible), layerOpacity: Object.assign({}, st().layerOpacity) };
@@ -834,6 +841,7 @@
     var bar = $('#avux');
     if (!onLab) document.documentElement.classList.remove('avx-rail', 'avx-sheet-open');
     document.documentElement.classList.toggle('avx-onlab', onLab); if (!onLab) Array.prototype.forEach.call(document.querySelectorAll('div[style*="position: fixed"]'), function (d) { if (/Drag the title bar/.test(d.textContent || '') && d.style.display !== 'none') d.style.setProperty('display', 'none', 'important'); });
+    if (!onLab) { try { lessonTidy(sec); } catch (e) {} }
     if (!onLab || !row) { if (bar) { bar.remove(); B = {}; mounted = null; } var fb = $('#avux-fab'); if (fb) fb.remove(); var nv = $('#avux-nav'); if (nv) nv.remove(); document.documentElement.classList.remove('avx-nav'); closeSheet(); return; }
     mountFab(); markMobile(sec); applyRail(); mountNav(); try { labHeading(); } catch (e) {} try { mountScroll(); } catch (e) {} try { mountScrollX(); } catch (e) {} try { mountCut(); } catch (e) {} try { fitPlaceholders(); } catch (e) {}
     if (!bar || mounted !== row) { if (bar) bar.remove(); B = {}; mounted = row; css(); mountBar(row); last = JSON.stringify(snap()); }
