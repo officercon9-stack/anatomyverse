@@ -264,3 +264,39 @@ html.avx-xs div:has(> [aria-label="Animated systems menu"]),html.avx-xs .avx-cut
 .avx-cut-body{min-width:0;max-width:100%;width:100%}
 .avx-cut-parts{min-width:0;max-width:100%;width:100%}
 .avx-cut-chips{min-width:0;max-width:100%}
+
+/* Study panel */
+.avx-cut-btn.avx-study-btn{top:228px}
+@media (min-width:768px){.avx-cut-btn.avx-study-btn{top:124px}}
+html.avx-xs .avx-study-btn,html.avx-st .avx-study-btn{display:none !important}
+html.avx-st div:has(> [aria-label="Animated systems menu"]),html.avx-st .avx-cut-btn{display:none !important}
+.avx-study-pan .avx-st-body{display:block;max-height:min(42vh,320px);overflow-y:auto;overflow-x:hidden}
+.avx-st-h{font:700 14px system-ui,sans-serif;margin:4px 0 2px}
+.avx-st-h2{font:700 12px system-ui,sans-serif;opacity:.8;margin:8px 0 3px}
+.avx-st-n{font-size:12px;opacity:.8;line-height:1.35;margin:3px 0}
+.avx-st-k,.avx-st-a{font-size:13px;line-height:1.4;margin:6px 0}
+.avx-st-m{margin:6px 0 8px}
+.avx-st-w{display:flex;flex-wrap:wrap;gap:4px}
+.avx-st-w button,.avx-st-s,.avx-st-t{min-height:34px;padding:0 10px;border-radius:999px;border:1px solid var(--av-border,rgba(255,255,255,.25));background:transparent;color:inherit;font:13px system-ui,sans-serif;cursor:pointer;margin:2px 4px 2px 0}
+.avx-st-w button.ok{background:#30a46c;border-color:transparent;color:#fff}
+.avx-st-w button:disabled{opacity:.55;cursor:default}
+.avx-st-t[aria-pressed=true]{background:var(--av-accent,#7c5cff);border-color:transparent;color:#fff}
+.avx-st-q{font:700 16px system-ui,sans-serif;margin:8px 0 6px}
+.avx-st-ok{color:#4ade80;margin:4px 0}.avx-st-bad{color:#fca5a5;margin:4px 0}
+.avx-st-leg{display:flex;flex-wrap:wrap;gap:2px 10px;margin:4px 0}
+.avx-st-leg span{display:inline-flex;align-items:center;gap:4px;font-size:12px}.avx-st-leg i{width:10px;height:10px;border-radius:50%;display:inline-block}.avx-st-leg em{font-style:normal}
+.avx-study-pan select{min-height:34px;border-radius:10px;background:transparent;color:inherit;border:1px solid var(--av-border,rgba(255,255,255,.25));padding:0 8px;font:13px system-ui,sans-serif;max-width:100%;margin:4px 0}
+.avx-study-pan select option{color:#111}
+.avx-study-pan .avx-cut-go{margin:6px 0}
+#avx-dots{position:absolute;inset:0;pointer-events:none;z-index:6;overflow:hidden}
+.avx-dot{position:absolute;width:11px;height:11px;margin:-6px 0 0 -6px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.55)}
+.avx-dot.o{background:#ef4444}.avx-dot.i{background:#3b82f6}
+.avx-dot.inl{position:static;display:inline-block;margin:0 2px 0 0;vertical-align:middle;width:10px;height:10px}
+html.avx-sq .av-panel[aria-label="Structure details"],html.avx-sq #avux nav,html.avx-sq .av-label{display:none !important}
+.avx-cut-pan.avx-study-pan{top:auto !important;bottom:76px !important;left:34px;right:10px}
+@media (min-width:768px){.avx-cut-pan.avx-study-pan{top:auto !important;bottom:20px !important;left:56px;right:auto;width:min(560px,calc(100% - 56px - 170px))}}
+html.avx-st .av-panel[aria-label="Structure details"]{display:none !important}
+.avx-study-pan .avx-st-mn{right:46px}
+.avx-study-pan .avx-cut-head{padding-right:84px}
+.avx-study-pan.min .avx-st-body{display:none}
+.avx-study-pan .avx-st-body{max-height:min(34vh,270px)}

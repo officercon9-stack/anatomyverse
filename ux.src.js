@@ -99,7 +99,7 @@
       '@media(max-width:767px),(max-height:500px){#avux{gap:4px}#avux .r{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}#avux .r::-webkit-scrollbar{display:none}.avx-b{flex:none;min-height:36px}#avux .hm{display:none}#avux nav{flex:1;min-width:0;white-space:nowrap;overflow-x:auto}#avux nav ol{flex-wrap:nowrap}}'
     ].join('\n') }));
   }
-  var lastSide = null;
+  var lastSide = null, subDone = false;
   function st() { return S.getState(); }
   function snap() { var s = st(); return { hidden: s.hidden, isolated: s.isolated, layerVisible: s.layerVisible, layerOpacity: s.layerOpacity, systemFocus: s.systemFocus, xray: s.xray }; }
   function track() {
@@ -837,8 +837,238 @@
     var fem = Array.prototype.find.call(sec.querySelectorAll('button'), function (b) { return /^\s*\u2640\s*Female\s*$/.test(b.textContent); });
     if (fem && fem.parentElement && !fem.parentElement.classList.contains('avx-sexl') && !fem.parentElement.classList.contains('avx-sex')) fem.parentElement.classList.add('avx-sexl');
   }
+  /* ====================== Study panel: learn, find, name, progress ====================== */
+  var ST = { open: false, tab: 'learn', latin: false, scope: 'all', q: null, mas: null, show: false, xr: null, busy: false, dots: [], raf: 0, nb: {}, att: {}, attData: null, attLoading: false, lastQ: null, seenSel: null, lastRender: 0 };
+  var MASCOL = ['#e5484d', '#f5a524', '#30a46c'];
+  var SKIPB = /molar|premolar|incisor|canine|sinus|air-cells|tmj|disc|cartilage|malleus|incus|stapes|sesamoid/;
+  var MNEM = [
+    { key: 'carpals', title: 'Carpal bones (wrist)', note: 'Proximal row (thumb side to little-finger side), then distal row.', ids: ['scaphoid', 'lunate', 'triquetrum', 'pisiform', 'trapezium', 'trapezoid', 'capitate', 'hamate'], words: ['Some', 'Lovers', 'Try', 'Positions', 'That', 'They', 'Can’t', 'Handle'], hand: true },
+    { key: 'tarsals', title: 'Tarsal bones (ankle and heel)', note: 'M, I, L are the medial, intermediate and lateral cuneiforms; C is the cuboid.', ids: ['talus', 'calcaneus', 'navicular', 'medial-cuneiform', 'intermediate-cuneiform', 'lateral-cuneiform', 'cuboid'], words: ['Tiger', 'Cubs', 'Need', 'M', 'I', 'L', 'C'], foot: true },
+    { key: 'cranial', title: 'Cranial bones', note: 'Occipital, parietal, frontal, temporal, ethmoid, sphenoid.', ids: ['occipital-bone', 'parietal-bone', 'frontal-bone', 'temporal-bone', 'ethmoid-bone', 'sphenoid-bone'], words: ['Old', 'People', 'From', 'Texas', 'Eat', 'Spiders'] },
+    { key: 'facial', title: 'Facial bones', note: 'Vomer, inferior nasal concha, nasal, maxilla, mandible, palatine, zygomatic (the lacrimal bone is the extra one).', ids: ['vomer', 'inferior-nasal-concha', 'nasal-bone', 'maxilla', 'mandible', 'palatine-bone', 'zygomatic-bone'], words: ['Virgil', 'Can', 'Not', 'Make', 'My', 'Pet', 'Zebra'] }
+  ];
+  var HOOK = {
+    'scaphoid': 'The most commonly fractured carpal bone. Its blood supply enters from the far end, so a fracture at the waist can lead to avascular necrosis of the near part.',
+    'lunate': 'The most commonly dislocated carpal bone. A dislocation can press on the median nerve.',
+    'hamate': 'Its hook can fracture in golf and racket sports, and the ulnar nerve runs beside it.',
+    'pisiform': 'A sesamoid bone in the tendon of flexor carpi ulnaris, sitting on the front of the triquetrum.',
+    'capitate': 'Its head sits in the socket formed by the scaphoid and lunate, making it a key landmark on wrist X-rays.',
+    'trapezium': 'Its saddle joint with the first metacarpal, at the base of the thumb, is a common site of osteoarthritis.',
+    'clavicle': 'The most commonly fractured bone in children. Fractures usually occur where the middle and outer thirds meet.',
+    'scapula': 'Fractures are uncommon and usually mean high-energy trauma, so look for chest injuries too.',
+    'humerus': 'A fracture of the surgical neck can injure the axillary nerve; a shaft fracture can injure the radial nerve.',
+    'radius': 'A fracture of the lower end after a fall on an outstretched hand (Colles’ fracture) is one of the most common fractures.',
+    'ulna': 'The olecranon, the point of the elbow, is often fractured by a direct blow.',
+    'hip-bone': 'Three bones fused together: the ilium, ischium and pubis, which meet in the acetabulum.',
+    'neck-of-femur': 'Fractures here are common in older adults and can cut off the blood supply to the head of the femur.',
+    'head-of-femur': 'Most of its blood supply runs along the neck, so a fracture of the neck puts the head at risk.',
+    'body-of-femur': 'Shaft fractures need major force and can bleed heavily into the thigh.',
+    'patella': 'The largest sesamoid bone, held in the quadriceps tendon. It improves the pull of the quadriceps at the knee.',
+    'tibia': 'The shin bone lies just under the skin, so tibial fractures are often open fractures.',
+    'fibula': 'Its neck lies close to the common fibular nerve; an injury there causes foot drop.',
+    'calcaneus': 'The most commonly fractured tarsal bone, usually after a fall from a height.',
+    'talus': 'Much of its surface is cartilage with little blood supply, so fractures risk avascular necrosis.',
+    'navicular': 'Stress fractures happen in runners and athletes.',
+    'metatarsal-5': 'Fractures at its base are common foot injuries, including the Jones fracture.',
+    'sternum': 'The manubrium and body meet at the sternal angle, level with the 2nd rib, a landmark for counting ribs.',
+    'mandible': 'It is a ring of bone, so it is often fractured in two places.',
+    'temporal-bone': 'At the pterion, a blow can tear the middle meningeal artery underneath and cause an epidural haematoma.',
+    'sphenoid-bone': 'The pituitary gland sits in its sella turcica.'
+  };
+  function masLoad() { if (ST.mas) return ST.mas; try { ST.mas = JSON.parse(localStorage.getItem('avx-mastery') || '{}') || {}; } catch (e) { ST.mas = {}; } return ST.mas; }
+  function masSave() { try { localStorage.setItem('avx-mastery', JSON.stringify(ST.mas)); } catch (e) {} }
+  function masPaint() { try { S.setState({ avxMv: Date.now() }); } catch (e) {} }
+  globalThis.__avMasCol = function (id) { if (!ST.show) return null; var b = masLoad()[id]; return b ? MASCOL[Math.min(b, 3) - 1] : null; };
+  function baseOf(id) { return String(id || '').replace(/-(left|right)$/, ''); }
+  function cap(t) { return t ? t.charAt(0).toUpperCase() + t.slice(1) : t; }
+  function nm(id) { var r = F[id]; if (!r) return String(id); return (ST.latin && r.latinName) ? r.latinName : r.name; }
+  function inScope(id) {
+    var r = F[id], sc = ST.scope; if (sc === 'all') return true;
+    if (sc === 'hand') return /^hand-bones/.test(r.parentId || '');
+    if (sc === 'foot') return /^foot-bones/.test(r.parentId || '');
+    if (sc === 'head') return r.region === 'head';
+    if (sc === 'arm') return r.region === 'upper-limb' && !/^hand-bones/.test(r.parentId || '');
+    if (sc === 'leg') return r.region === 'lower-limb' && !/^foot-bones/.test(r.parentId || '');
+    if (sc === 'trunk') return r.region !== 'head' && r.region !== 'upper-limb' && r.region !== 'lower-limb';
+    return true;
+  }
+  function pool() { var sc = inScene(), out = []; for (var id in sc) { var r = F[id]; if (r && r.layer === 'bones' && !SKIPB.test(id) && inScope(id)) out.push(id); } return out; }
+  function pick(list) {
+    var m = masLoad(), w = list.map(function (id) { var b = m[id] || 0; return id === ST.lastQ ? 0 : (b === 0 ? 3 : b === 1 ? 5 : b === 2 ? 2 : 0.5); }), tot = w.reduce(function (a, c) { return a + c; }, 0), r = Math.random() * tot;
+    for (var i = 0; i < list.length; i++) { r -= w[i]; if (r <= 0) return list[i]; } return list[list.length - 1];
+  }
+  function mark(id, ok) { var m = masLoad(), b = m[id] || 0; m[id] = ok ? Math.min(3, Math.max(2, b + 1)) : 1; masSave(); masPaint(); }
+  function counts() { var m = masLoad(), p = pool(), c = [0, 0, 0, 0]; p.forEach(function (id) { c[Math.min(3, m[id] || 0)]++; }); return { n: p.length, none: c[0], red: c[1], amber: c[2], green: c[3] }; }
+  function silent(fn) { ST.busy = true; try { fn(); } catch (e) {} ST.busy = false; }
+  function sideOfSel() { var q = S.getState().selectedId && F[S.getState().selectedId]; return (q && q.side) || lastSide || 'left'; }
+  /* geometry helpers: sampled world-space vertices per mesh */
+  var SAMP = new WeakMap();
+  function samp(o) {
+    var e = o.matrixWorld.elements, k = e.join(), c = SAMP.get(o); if (c && c.k === k) return c.a;
+    var a = [], g = o.geometry; if (g && g.attributes && g.attributes.position) { var p = g.attributes.position, st2 = Math.max(1, Math.floor(p.count / 250)); for (var i = 0; i < p.count; i += st2) { var x = p.getX(i), y = p.getY(i), z = p.getZ(i); a.push(e[0] * x + e[4] * y + e[8] * z + e[12], e[1] * x + e[5] * y + e[9] * z + e[13], e[2] * x + e[6] * y + e[10] * z + e[14]); } }
+    SAMP.set(o, { k: k, a: a }); return a;
+  }
+  function under(id, anc) { var g = 0; while (id && g++ < 9) { if (id === anc) return true; var r = F[id]; id = r && r.parentId; } return false; }
+  function ptsOf(anc) { var out = [], n = 0; try { globalThis.__scn.updateMatrixWorld(true); globalThis.__scn.traverse(function (x) { var u = x.userData; if (x.isMesh && u && u.structureId && !/^lm_/.test(x.name) && under(u.structureId, anc)) { n++; var a = samp(x); for (var i = 0; i < a.length; i++) out.push(a[i]); } }); } catch (e) {} return { a: out, n: n }; }
+  function bbox(a) { var b = [1e9, 1e9, 1e9, -1e9, -1e9, -1e9]; for (var i = 0; i < a.length; i += 3) for (var k = 0; k < 3; k++) { if (a[i + k] < b[k]) b[k] = a[i + k]; if (a[i + k] > b[k + 3]) b[k + 3] = a[i + k]; } return b; }
+  function mind(a, b) { var best = 1e9; for (var i = 0; i < a.length; i += 3) for (var j = 0; j < b.length; j += 3) { var d = (a[i] - b[j]) * (a[i] - b[j]) + (a[i + 1] - b[j + 1]) * (a[i + 1] - b[j + 1]) + (a[i + 2] - b[j + 2]) * (a[i + 2] - b[j + 2]); if (d < best) best = d; } return Math.sqrt(best); }
+  function nextTo(sid) {
+    if (ST.nb[sid]) return ST.nb[sid]; var A = ptsOf(sid); if (!A.a.length || A.n > 40) return (ST.nb[sid] = []); var bA = bbox(A.a), M = 0.014, res = [], seen = {};
+    pool0().forEach(function (id) { if (under(id, sid) || under(sid, id) || seen[id]) return; var B = ptsOf(id); if (!B.a.length) return; var bB = bbox(B.a); for (var k = 0; k < 3; k++) if (bB[k] > bA[k + 3] + M || bB[k + 3] < bA[k] - M) return; var d = mind(A.a, B.a); if (d <= M) { seen[id] = 1; res.push({ id: id, d: d }); } });
+    res.sort(function (p, q) { return p.d - q.d; }); return (ST.nb[sid] = res.slice(0, 8));
+  }
+  function pool0() { var sc = inScene(), out = []; for (var id in sc) { var r = F[id]; if (r && r.layer === 'bones' && !SKIPB.test(id)) out.push(id); } return out; }
+  globalThis.__avSt = { ST: ST, muscles: function (id) { delete ST.att[id]; return muscles(id); } };
+  function loadAtt(cb) {
+    if (ST.attData) return cb(); if (ST.attLoading) return; ST.attLoading = true;
+    fetch('./models/muscle-attach.json').then(function (r) { return r.json(); }).then(function (j) { ST.attData = j; ST.attLoading = false; cb(); }).catch(function () { ST.attData = {}; ST.attLoading = false; cb(); });
+  }
+  function muscles(sid) {
+    if (ST.att[sid]) return ST.att[sid]; var A = ptsOf(sid), out = { o: [], i: [], dots: [] }; if (!ST.attData) return out; if (!A.a.length || A.n > 40) return (ST.att[sid] = out);
+    var bA = bbox(A.a), M = ST.M || 0.006;
+    Object.keys(ST.attData).forEach(function (m) {
+      ['o', 'i'].forEach(function (kind) {
+        var hit = false; (ST.attData[m][kind] || []).forEach(function (p) {
+          for (var k = 0; k < 3; k++) if (p[k] < bA[k] - M || p[k] > bA[k + 3] + M) return;
+          if (mind(p, A.a) <= M) { hit = true; out.dots.push({ p: p, kind: kind }); }
+        });
+        if (hit) out[kind].push(m);
+      });
+    });
+    return (ST.att[sid] = out);
+  }
+  /* dots drawn over the canvas at the origin (red) and insertion (blue) points */
+  function clearDots() { ST.dots = []; var d = $('#avx-dots'); if (d) d.innerHTML = ''; if (ST.raf) { cancelAnimationFrame(ST.raf); ST.raf = 0; } }
+  function setDots(list) {
+    clearDots(); if (!list || !list.length) return; var c = $('canvas'), sec = c && c.closest('section'); if (!sec) return;
+    var host = $('#avx-dots'); if (!host) { host = el('div', { id: 'avx-dots', 'aria-hidden': 'true' }); sec.appendChild(host); }
+    ST.dots = list.map(function (d) { var e = el('i', { class: 'avx-dot ' + (d.kind === 'o' ? 'o' : 'i') }); host.appendChild(e); return { p: d.p, e: e }; });
+    var loop = function () {
+      if (!ST.dots.length) return; try {
+        var s3 = globalThis.__r3s.get(), cam = s3.camera, W = c.clientWidth, Hh = c.clientHeight, cr = c.getBoundingClientRect(), sr = sec.getBoundingClientRect(), V = cam.matrixWorldInverse.elements, P = cam.projectionMatrix.elements;
+        ST.dots.forEach(function (d) {
+          var x = d.p[0], y = d.p[1], z = d.p[2], vx = V[0] * x + V[4] * y + V[8] * z + V[12], vy = V[1] * x + V[5] * y + V[9] * z + V[13], vz = V[2] * x + V[6] * y + V[10] * z + V[14];
+          var cx = P[0] * vx + P[4] * vy + P[8] * vz + P[12], cy = P[1] * vx + P[5] * vy + P[9] * vz + P[13], cw = P[3] * vx + P[7] * vy + P[11] * vz + P[15];
+          if (cw <= 0) { d.e.style.display = 'none'; return; } var nx = cx / cw, ny = cy / cw;
+          if (nx < -1 || nx > 1 || ny < -1 || ny > 1) { d.e.style.display = 'none'; return; }
+          d.e.style.display = 'block'; d.e.style.left = (cr.left - sr.left + (nx * 0.5 + 0.5) * W) + 'px'; d.e.style.top = (cr.top - sr.top + (-ny * 0.5 + 0.5) * Hh) + 'px';
+        });
+      } catch (e) {} ST.raf = requestAnimationFrame(loop);
+    };
+    ST.raf = requestAnimationFrame(loop);
+  }
+  /* ---- rendering ---- */
+  function chip(txt, on, fn, extra) { var b = el('button', { type: 'button', 'aria-pressed': on ? 'true' : 'false', text: txt }); if (extra) b.className = extra; b.addEventListener('click', fn); return b; }
+  function resolveWord(ids, i, side) { var base = ids[i], c = [base + '-' + side, base, base + '-left', base + '-right']; for (var k = 0; k < c.length; k++) if (F[c[k]]) return c[k]; return null; }
+  function mnemFor(sid) {
+    var b = baseOf(sid), r = F[sid]; var res = [];
+    MNEM.forEach(function (m) { var hit = m.ids.indexOf(b) >= 0 || (m.hand && /^hand-bones/.test(sid)) || (m.foot && /^foot-bones/.test(sid)) || (r && r.parentId && ((m.hand && /^hand-bones/.test(r.parentId)) || (m.foot && /^foot-bones/.test(r.parentId)))); if (hit) res.push(m); });
+    return res;
+  }
+  function mnemBlock(m, side) {
+    var box = el('div', { class: 'avx-st-m' }); box.appendChild(el('div', { class: 'avx-st-h', text: m.title }));
+    var row = el('div', { class: 'avx-st-w' });
+    m.words.forEach(function (w, i) { var id = resolveWord(m.ids, i, side), b = el('button', { type: 'button', text: w, title: id ? nm(id) : w }); if (id) b.addEventListener('click', function () { silent(function () { S.getState().select(id); }); renderStudy(); }); else b.disabled = true; row.appendChild(b); });
+    box.appendChild(row); box.appendChild(el('div', { class: 'avx-st-n', text: m.note })); return box;
+  }
+  function learnView(body) {
+    var sid = S.getState().selectedId, r = sid && F[sid];
+    if (!r || r.layer !== 'bones') {
+      body.appendChild(el('div', { class: 'avx-st-n', text: 'Tap a bone to see its memory aid, a clinical fact, the bones next to it and the muscles that attach to it. Or tap a word below to find that bone.' }));
+      MNEM.forEach(function (m) { body.appendChild(mnemBlock(m, sideOfSel())); }); clearDots(); return;
+    }
+    body.appendChild(el('div', { class: 'avx-st-h', text: nm(sid) + (F[sid].latinName && !ST.latin ? '  ·  ' + F[sid].latinName : '') }));
+    var hook = HOOK[baseOf(sid)] || HOOK[sid] || (r.parentId && (HOOK[baseOf(r.parentId)])); if (hook) body.appendChild(el('div', { class: 'avx-st-k' }, [el('b', { text: 'Clinical: ' }), el('span', { text: hook })]));
+    mnemFor(sid).forEach(function (m) { body.appendChild(mnemBlock(m, F[sid].side || sideOfSel())); });
+    var nb = nextTo(sid); if (nb.length) { body.appendChild(el('div', { class: 'avx-st-h2', text: 'Next to it' })); var rw = el('div', { class: 'avx-st-w' }); nb.forEach(function (x) { var b = el('button', { type: 'button', text: nm(x.id) }); b.addEventListener('click', function () { silent(function () { S.getState().select(x.id); }); renderStudy(); }); rw.appendChild(b); }); body.appendChild(rw); }
+    var mu = muscles(sid);
+    if (!ST.attData) { body.appendChild(el('div', { class: 'avx-st-n', text: 'Loading muscle attachments…' })); loadAtt(renderStudy); }
+    else if (mu.o.length || mu.i.length) {
+      var nmM = function (m) { return (F[m] && F[m].name) || m; };
+      if (mu.o.length) body.appendChild(el('div', { class: 'avx-st-a' }, [el('i', { class: 'avx-dot o inl' }), el('b', { text: ' Muscles that start here (approx.): ' }), el('span', { text: mu.o.map(nmM).join(', ') })]));
+      if (mu.i.length) body.appendChild(el('div', { class: 'avx-st-a' }, [el('i', { class: 'avx-dot i inl' }), el('b', { text: ' Muscles that end here (approx.): ' }), el('span', { text: mu.i.map(nmM).join(', ') })]));
+      body.appendChild(el('div', { class: 'avx-st-n', text: 'Red and blue dots on the model mark where these muscles start and end on this bone (taken from the model’s muscle ends).' }));
+      setDots(mu.dots);
+    } else { clearDots(); }
+  }
+  function options(id) {
+    var r = F[id], same = pool0().filter(function (x) { return x !== id && F[x] && ((F[x].parentId && F[x].parentId === r.parentId) || F[x].region === r.region) && baseOf(x) !== baseOf(id); });
+    same.sort(function () { return Math.random() - 0.5; }); var o = [id].concat(same.slice(0, 3)); if (o.length < 4) { var any = pool0().filter(function (x) { return o.indexOf(x) < 0 && baseOf(x) !== baseOf(id); }).sort(function () { return Math.random() - 0.5; }); o = o.concat(any.slice(0, 4 - o.length)); }
+    var seenN = {}; o = o.filter(function (x) { var n = nm(x).replace(/^(Left|Right) /, ''); if (seenN[n] && x !== id) return false; seenN[n] = 1; return true; });
+    return o.sort(function () { return Math.random() - 0.5; });
+  }
+  function nextQ() {
+    var p = pool(); if (!p.length) { ST.q = null; return renderStudy(); }
+    var id = pick(p); ST.lastQ = id; ST.q = { id: id, done: false, msg: '', ok: null, opts: ST.tab === 'name' ? options(id) : null };
+    silent(function () { var s0 = S.getState(); if (ST.tab === 'name') { if (ST.xr === null) ST.xr = !!s0.xray; s0.setXray(true); s0.select(id); s0.frame([id]); } else { s0.select(null); } });
+    renderStudy();
+  }
+  function quizView(body) {
+    var c = counts(); body.appendChild(el('div', { class: 'avx-st-n', text: c.green + ' known, ' + c.amber + ' learning, ' + c.red + ' to review, ' + c.none + ' new (of ' + c.n + ')' }));
+    var scope = el('select', { 'aria-label': 'Which bones to practise' }); [['all', 'All bones'], ['head', 'Skull and face'], ['arm', 'Arm and shoulder'], ['hand', 'Hand'], ['leg', 'Leg and hip'], ['foot', 'Foot'], ['trunk', 'Trunk']].forEach(function (o) { var op = el('option', { value: o[0], text: o[1] }); if (ST.scope === o[0]) op.selected = true; scope.appendChild(op); });
+    scope.addEventListener('change', function () { ST.scope = scope.value; ST.q = null; nextQ(); }); body.appendChild(scope);
+    if (!ST.q) { var go = el('button', { type: 'button', class: 'avx-cut-go', text: ST.tab === 'find' ? 'Start finding' : 'Start naming' }); go.addEventListener('click', nextQ); body.appendChild(go); return; }
+    var q = ST.q;
+    if (ST.tab === 'find') {
+      body.appendChild(el('div', { class: 'avx-st-q', text: 'Tap the ' + nm(q.id) })); if (q.msg) body.appendChild(el('div', { class: q.ok ? 'avx-st-ok' : 'avx-st-bad', text: q.msg }));
+      if (!q.done) { var sk = el('button', { type: 'button', class: 'avx-st-s', text: 'Skip' }); sk.addEventListener('click', nextQ); body.appendChild(sk); }
+    } else {
+      body.appendChild(el('div', { class: 'avx-st-q', text: 'Which bone is highlighted?' }));
+      var rw = el('div', { class: 'avx-st-w' }); q.opts.forEach(function (id) { var b = el('button', { type: 'button', text: cap(nm(id).replace(/^(Left|Right) /, '')) }); b.disabled = q.done; if (q.done && id === q.id) b.classList.add('ok'); b.addEventListener('click', function () { if (q.done) return; q.done = true; q.ok = id === q.id || baseOf(id) === baseOf(q.id) && false; q.ok = id === q.id; mark(q.id, q.ok); q.msg = q.ok ? 'Correct.' : 'It is the ' + cap(nm(q.id).replace(/^(Left|Right) /, '')) + '.'; renderStudy(); }); rw.appendChild(b); }); body.appendChild(rw);
+      if (q.msg) body.appendChild(el('div', { class: q.ok ? 'avx-st-ok' : 'avx-st-bad', text: q.msg }));
+    }
+    if (q.done) { var nx = el('button', { type: 'button', class: 'avx-cut-go', text: 'Next' }); nx.addEventListener('click', nextQ); body.appendChild(nx); }
+  }
+  function mineView(body) {
+    var c = counts(); body.appendChild(el('div', { class: 'avx-st-n', text: 'Your bones: ' + c.n + ' in the model.' }));
+    var leg = el('div', { class: 'avx-st-leg' }); [['#30a46c', c.green + ' known'], ['#f5a524', c.amber + ' learning'], ['#e5484d', c.red + ' to review'], ['#8a93a6', c.none + ' new']].forEach(function (x) { leg.appendChild(el('span', {}, [el('i', { style: 'background:' + x[0] }), el('em', { text: x[1] })])); }); body.appendChild(leg);
+    var t = chip(ST.show ? 'Colouring bones by progress: on' : 'Colour bones by progress', ST.show, function () { ST.show = !ST.show; masPaint(); renderStudy(); }, 'avx-st-t'); body.appendChild(t);
+    body.appendChild(el('div', { class: 'avx-st-n', text: 'Green, amber and red appear on the bones you have practised; bones you have not practised keep their normal colour. Nothing is hidden.' }));
+    var lt = chip('Names in Latin where available', ST.latin, function () { ST.latin = !ST.latin; renderStudy(); }, 'avx-st-t'); body.appendChild(lt);
+    var rs = el('button', { type: 'button', class: 'avx-st-s', text: 'Reset my progress' }); rs.addEventListener('click', function () { if (confirm('Reset all your progress?')) { ST.mas = {}; masSave(); masPaint(); renderStudy(); } }); body.appendChild(rs);
+  }
+  function renderStudy() {
+    var pan = $('#avx-study .avx-study-pan'); if (!pan || pan.hidden) return;
+    var head = pan.querySelector('.avx-cut-head'), body = pan.querySelector('.avx-cut-body'); head.textContent = ''; body.textContent = '';
+    var tabs = el('div', { class: 'avx-cut-chips' }); [['learn', 'Learn'], ['find', 'Find'], ['name', 'Name'], ['mine', 'Mine']].forEach(function (t) { tabs.appendChild(chip(t[1], ST.tab === t[0], function () { setTab(t[0]); })); }); head.appendChild(tabs);
+    html().classList.toggle('avx-sq', ST.tab === 'find' || ST.tab === 'name');
+    if (ST.tab === 'learn') learnView(body); else { clearDots(); if (ST.tab === 'mine') mineView(body); else quizView(body); }
+  }
+  function html() { return document.documentElement; }
+  function setTab(t) {
+    if (ST.tab === 'name' && t !== 'name') silent(function () { if (ST.xr !== null) { S.getState().setXray(ST.xr); ST.xr = null; } });
+    ST.tab = t; ST.q = null; if (t !== 'name' && t !== 'find') silent(function () { }); renderStudy();
+  }
+  function studyOnSel(s) {
+    if (!ST.open || ST.busy) return; var id = s.selectedId;
+    if (ST.tab === 'find' && ST.q && !ST.q.done && id && id !== ST.seenSel) {
+      ST.seenSel = id; var q = ST.q, ok = id === q.id; q.done = true; q.ok = ok; mark(q.id, ok);
+      q.msg = ok ? 'Correct: ' + nm(q.id) + '.' : 'That is the ' + cap(nm(id).replace(/^(Left|Right) /, '')) + '. The ' + cap(nm(q.id).replace(/^(Left|Right) /, '')) + ' is highlighted now.';
+      if (!ok) silent(function () { s.select(q.id); s.frame([q.id]); }); renderStudy(); return;
+    }
+    if (ST.tab === 'learn') { if (id !== ST.seenSel) { ST.seenSel = id; clearTimeout(ST.lt); ST.lt = setTimeout(renderStudy, 150); } }
+  }
+  function studyClose() {
+    var box = $('#avx-study'); if (!box) return; var pan = box.querySelector('.avx-study-pan'), btn = box.querySelector('.avx-study-btn'); pan.hidden = true; ST.open = false; btn.setAttribute('aria-expanded', 'false'); clearDots();
+    html().classList.remove('avx-st', 'avx-sq'); silent(function () { if (ST.xr !== null) { S.getState().setXray(ST.xr); ST.xr = null; } });
+  }
+  function mountStudy() {
+    var box = $('#avx-study');
+    if (!/#\/app\/lab/.test(location.hash)) { if (box) { studyClose(); box.remove(); } return; }
+    var c = $('canvas'); if (!c) return; var sec = c.closest('section'); if (!sec) return;
+    if (box && box.parentElement !== sec) { studyClose(); box.remove(); box = null; }
+    if (box) return;
+    box = el('div', { id: 'avx-study' });
+    var btn = el('button', { type: 'button', class: 'avx-cut-btn avx-study-btn', 'aria-expanded': 'false', title: 'Study tools: memory aids, find-the-bone practice and progress', text: 'Study' });
+    var pan = el('div', { class: 'avx-cut-pan avx-study-pan', hidden: 'hidden', role: 'region', 'aria-label': 'Study' });
+    var close = el('button', { type: 'button', class: 'avx-cut-x', 'aria-label': 'Close study tools', text: '×' }); close.addEventListener('click', studyClose);
+    var mn = el('button', { type: 'button', class: 'avx-cut-x avx-st-mn', 'aria-label': 'Shrink or expand study tools', text: '\u2013' }); mn.addEventListener('click', function () { pan.classList.toggle('min'); mn.textContent = pan.classList.contains('min') ? '+' : '\u2013'; });
+    pan.appendChild(close); pan.appendChild(mn); pan.appendChild(el('div', { class: 'avx-cut-head' })); pan.appendChild(el('div', { class: 'avx-cut-body avx-st-body' }));
+    btn.addEventListener('click', function () { if (!pan.hidden) return; try { if (XS.on) xsStop(); } catch (e) {} pan.hidden = false; ST.open = true; ST.seenSel = null; btn.setAttribute('aria-expanded', 'true'); html().classList.add('avx-st'); renderStudy(); });
+    box.appendChild(btn); box.appendChild(pan); sec.appendChild(box);
+  }
   function tick() {
-    if (!globalThis.__avStore) return; S = globalThis.__avStore; F = globalThis.__avF; try { S.subscribe(function (s) { var q = s.selectedId && F[s.selectedId]; if (q && q.side) lastSide = q.side; }); } catch (e) {}
+    if (!globalThis.__avStore) return; S = globalThis.__avStore; F = globalThis.__avF; if (!subDone) { subDone = true; try { S.subscribe(function (s) { var q = s.selectedId && F[s.selectedId]; if (q && q.side) lastSide = q.side; try { studyOnSel(s); } catch (e) {} }); } catch (e) {} }
     if (!DEF) DEF = { layerVisible: Object.assign({}, st().layerVisible), layerOpacity: Object.assign({}, st().layerOpacity) };
     var onLab = /#\/app\/lab/.test(location.hash), c = $('canvas'), sec = c && c.closest('section'), row = sec && sec.parentElement;
     var bar = $('#avux');
@@ -846,7 +1076,7 @@
     document.documentElement.classList.toggle('avx-onlab', onLab); if (!onLab) Array.prototype.forEach.call(document.querySelectorAll('div[style*="position: fixed"]'), function (d) { if (/Drag the title bar/.test(d.textContent || '') && d.style.display !== 'none') d.style.setProperty('display', 'none', 'important'); });
     if (!onLab) { try { lessonTidy(sec); } catch (e) {} }
     if (!onLab || !row) { if (bar) { bar.remove(); B = {}; mounted = null; } var fb = $('#avux-fab'); if (fb) fb.remove(); var nv = $('#avux-nav'); if (nv) nv.remove(); document.documentElement.classList.remove('avx-nav'); closeSheet(); return; }
-    mountFab(); markMobile(sec); applyRail(); mountNav(); try { labHeading(); } catch (e) {} try { mountScroll(); } catch (e) {} try { mountScrollX(); } catch (e) {} try { mountCut(); } catch (e) {} try { fitPlaceholders(); } catch (e) {}
+    mountFab(); markMobile(sec); applyRail(); mountNav(); try { labHeading(); } catch (e) {} try { mountScroll(); } catch (e) {} try { mountScrollX(); } catch (e) {} try { mountCut(); } catch (e) {} try { mountStudy(); } catch (e) {} try { fitPlaceholders(); } catch (e) {}
     if (!bar || mounted !== row) { if (bar) bar.remove(); B = {}; mounted = row; css(); mountBar(row); last = JSON.stringify(snap()); }
     light();
   }
