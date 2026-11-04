@@ -156,3 +156,8 @@ The BodyParts3D hand-bones and foot-bones meshes (CC BY-SA 2.1 Japan) are made o
 | ShareAlike | No |
 | Objects used | Body, fundus, cornua, lower segment, cervix and cervical os of the uterus; tubal isthmus, ampulla, infundibulum and fimbriae (both sides); both ovaries |
 | Modifications made | Uniform scale 0.94 and translation to fit the app's pelvis, normals recomputed, meshopt-compressed and quantized (lite version simplified). The duplicate anterior/posterior wall shells were not used. Source: `tools/addfemale.mjs`. |
+
+## Urinary bladder and rectum (added to zanatomy-organs2.glb, 4 November 2026)
+- Urinary bladder: Z-Anatomy `Startup.blend`, object "Urinary bladder" (subdivision modifier applied), CC BY-SA 4.0, used in place.
+- Rectum: BodyParts3D FMA14544 (CC BY-SA 2.1 Japan), converted (x, z, -y)/1000, welded, translated by (0, +0.0425, -0.1015) m to fit the Z-Anatomy pelvis, normals recomputed.
+- The older generated bladder and rectum in `anatomyverse-organs.glb` are no longer drawn.
