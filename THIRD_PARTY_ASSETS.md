@@ -203,3 +203,6 @@ Known limitation: the Visible Human atria carry their own short vein stumps; the
 
 ### Asset split (lod26)
 `zanatomy-joints.glb` was split into `zanatomy-joints-lower`, `zanatomy-joints-upper`, `zanatomy-bursae`, `zanatomy-lymph-upper`, `zanatomy-lymph-lower`. Source, licence (CC BY-SA 4.0 Z-Anatomy / CC BY-SA 2.1 JP BodyParts3D) and attribution are unchanged.
+
+### Video tour
+`tour.mp4` (50 s) is a screen capture of this app's own pages with captions; it contains model renderings that carry the Z-Anatomy / BodyParts3D / HuBMAP attributions listed above (CC BY-SA 4.0 / 2.1 JP / CC BY 4.0). `tour-video.js` adds the player to the Quick tour card and the Tools sheet.

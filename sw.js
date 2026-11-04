@@ -3,7 +3,7 @@
    - Unversioned /models and /data files: served from cache at once and refreshed in the background.
    - Pages: always fetched fresh so design updates show; cached copy used offline.
    - Other files (ux.js, theme.css, first-run.js, manifest): revalidated with the server, cached copy used offline. */
-const V = 'av-v49';
+const V = 'av-v50';
 // Models are cached under a URL that carries this token. Bump it in BOTH this
 // file and the viewer whenever a .glb changes, or returning users keep the old
 // file for ever: the rule below is cache-first and never revalidates.
@@ -25,6 +25,7 @@ function put(r, res) { if (res && res.ok && res.status === 200) { const c = res.
 self.addEventListener('fetch', e => {
   const r = e.request; if (r.method !== 'GET') return;
   const u = new URL(r.url); if (u.origin !== location.origin) return;
+  if (/\.mp4$/.test(u.pathname)) return; // let the browser stream video (range requests) itself
   const p = u.pathname;
   if (/\/(assets|fonts|icons)\//.test(p) || (/\/models\//.test(p) && /[?&]v=/.test(u.search))) {
     e.respondWith(caches.match(r).then(m => m || fetch(r).then(res => put(r, res))));
