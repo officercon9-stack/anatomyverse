@@ -142,3 +142,17 @@ The femur meshes in `anatomyverse-limbs.glb` / `zanatomy-limbbones.glb` (Z-Anato
 
 ## Individually named hand and foot bones
 The BodyParts3D hand-bones and foot-bones meshes (CC BY-SA 2.1 Japan) are made of separate pieces, one per bone. They were split into 27 (hand) and 28 (foot) separately selectable bones per side and named; geometry is otherwise unchanged. See `source/handsplit.mjs` and `source/footsplit.mjs`.
+
+## hubmap-female-repro.glb (added 4 November 2026)
+
+| | |
+|---|---|
+| Source | HuBMAP CCF 3D Reference Object Library v1.2, Visible Human Female (NLM): `VH_F_Uterus`, `VH_F_Ovary_L/R`, `VH_F_Fallopian_Tube_L/R` |
+| Repository | https://github.com/hubmapconsortium/ccf-releases |
+| Licence | CC BY 4.0 |
+| Commercial use | Permitted |
+| Modification | Permitted |
+| Attribution | Required: "HuBMAP CCF 3D Reference Object Library, Visible Human Female uterus, uterine tubes and ovaries, CC BY 4.0" |
+| ShareAlike | No |
+| Objects used | Body, fundus, cornua, lower segment, cervix and cervical os of the uterus; tubal isthmus, ampulla, infundibulum and fimbriae (both sides); both ovaries |
+| Modifications made | Uniform scale 0.94 and translation to fit the app's pelvis, normals recomputed, meshopt-compressed and quantized (lite version simplified). The duplicate anterior/posterior wall shells were not used. Source: `tools/addfemale.mjs`. |
