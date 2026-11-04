@@ -36,3 +36,7 @@ Not detectable by this check: duplicates of procedural schematic parts that have
 - None loads by default. Selecting a structure (or ticking joints / bursae / lymph nodes in the Lab menu) loads only the file(s) it needs.
 - Lite copies of the heart, abdominal organs and spinal cord were re-simplified (default triangles about 547k → 473k).
 - Measured in headless Chromium at 390 px with 4x CPU throttling: default scene 888 meshes / 473k triangles, ready in ~6 s. This is an emulation, not a real phone; the original failure on the user's device has not been reproduced.
+
+## Clinical review status (4 November 2026)
+
+On 4 November 2026 the app owner stated that all structure records, questions and lessons were reviewed by Dr. Aqsa Hameed Phulpoto, MBBS and Dr. Farhan Ali, MBBS. The records' `reviewStatus` was changed from `pending-expert-review` to `reviewed` and the on-screen badge now names both reviewers. This change records the owner's attestation; the review itself was not performed or observed by the tooling. Note that this is review of the written content; the geometric alignment of the 3D meshes has been checked by software tests, not by an anatomist's validation. If that distinction matters to the reviewers, record it separately.
