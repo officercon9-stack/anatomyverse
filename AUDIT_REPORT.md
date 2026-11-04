@@ -17,5 +17,5 @@ Each row: original mesh, replacement, source/licence, test. "Tested" means rende
 - Pharynx, oral and nasal cavities, both urethras, skin and hair shells, third molars, alveoli: still generated.
 - Spine, rib, jaw and laryngeal ligaments: app bones there are procedural or unaligned, not shipped.
 - Arm and hand: 24 structures integrated (see THIRD_PARTY_ASSETS.md); six small wrist/elbow ligaments missing (source meshes are blocks only).
-- Bursae, lymph node groups, fascia: not yet imported.
+- Lymph node groups and fascia: not yet imported. Bursae: 33 integrated as simplified ellipsoids.
 - All new records are pending expert review.
