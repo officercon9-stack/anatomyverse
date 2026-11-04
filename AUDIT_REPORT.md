@@ -19,3 +19,13 @@ Each row: original mesh, replacement, source/licence, test. "Tested" means rende
 - Arm and hand: 24 structures integrated (see THIRD_PARTY_ASSETS.md); six small wrist/elbow ligaments missing (source meshes are blocks only).
 - Fascia: not yet imported. Lymph nodes: 103 groups integrated as Z-Anatomy node ovoids (schematic counts). Bursae: 33 integrated as simplified ellipsoids.
 - All new records are pending expert review.
+
+## Duplication audit (4 November 2026)
+Checked: record ids, names, Latin names and synonyms across all 1,500 records; structures mapped by more than one asset; and, in the running app with every layer on, all 1,283 visible meshes for near-identical overlapping shapes.
+Fixed:
+- Renal pelvis had two complete records (base, left, right); the second set was removed.
+- Left lacrimal canaliculus was drawn twice (eye model and eye-detail model, 97% overlap); removed from the eye-detail model.
+- Paratracheal nodes were two records with one Latin name; merged into one record covering both meshes.
+Reviewed and kept (distinct structures that sit together): retina on vitreous, arachnoid on dura, capsule and collateral ligaments of the same finger joints, the three prepatellar bursae (subcutaneous, subfascial, subtendinous: three separate terminology entries), muscle belly with its tendon, generic tooth types with the individual teeth under them.
+Earlier fixes still in place: old bladder, rectum, trachea, larynx and thyroid hidden where the Z-Anatomy versions replace them.
+Not detectable by this check: duplicates of procedural schematic parts that have no mesh file; the id/overlay check found no joints, bursa or lymph structure mapped by another asset.
