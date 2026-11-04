@@ -161,3 +161,6 @@ The BodyParts3D hand-bones and foot-bones meshes (CC BY-SA 2.1 Japan) are made o
 - Urinary bladder: Z-Anatomy `Startup.blend`, object "Urinary bladder" (subdivision modifier applied), CC BY-SA 4.0, used in place.
 - Rectum: BodyParts3D FMA14544 (CC BY-SA 2.1 Japan), converted (x, z, -y)/1000, welded, translated by (0, +0.0425, -0.1015) m to fit the Z-Anatomy pelvis, normals recomputed.
 - The older generated bladder and rectum in `anatomyverse-organs.glb` are no longer drawn.
+
+## Larynx, thyroid gland and trachea (added to zanatomy-organs2.glb, 4 November 2026)
+Z-Anatomy `Startup.blend` (CC BY-SA 4.0): Thyroid cartilage, Cricoid cartilage, Epiglottis, Arytenoid cartilages (subdivision applied), Corniculate cartilages, Thyroid gland (mirror, solidify and subdivision applied; moved 12 mm down so it sits below the thyroid cartilage), Trachea. The generated larynx cylinder, trachea tube and three-ellipsoid thyroid are no longer drawn, nor are the older trachea pieces in the lung asset.
