@@ -164,3 +164,11 @@ The BodyParts3D hand-bones and foot-bones meshes (CC BY-SA 2.1 Japan) are made o
 
 ## Larynx, thyroid gland and trachea (added to zanatomy-organs2.glb, 4 November 2026)
 Z-Anatomy `Startup.blend` (CC BY-SA 4.0): Thyroid cartilage, Cricoid cartilage, Epiglottis, Arytenoid cartilages (subdivision applied), Corniculate cartilages, Thyroid gland (mirror, solidify and subdivision applied; moved 12 mm down so it sits below the thyroid cartilage), Trachea. The generated larynx cylinder, trachea tube and three-ellipsoid thyroid are no longer drawn, nor are the older trachea pieces in the lung asset.
+
+## hubmap-spinal-cord.glb (added 4 November 2026)
+| | |
+|---|---|
+| Source | HuBMAP CCF 3D Reference Object Library v1.2, `VH_M_Spinal_Cord` (NLM Visible Human Male), 30 segment meshes |
+| Repository | https://github.com/hubmapconsortium/ccf-releases |
+| Licence | CC BY 4.0 (commercial use and modification permitted; attribution required; no ShareAlike) |
+| Modifications made | Uniform scale 0.935, translation, and a height-dependent forward/back shift (`tools/addcord.mjs`) so the cord lies in the vertebral canal of the app's spine (checked by ray parity: almost no cord points lie inside bone). Normals recomputed, meshopt-compressed. |
