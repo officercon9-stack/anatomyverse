@@ -29,3 +29,10 @@ Fixed:
 Reviewed and kept (distinct structures that sit together): retina on vitreous, arachnoid on dura, capsule and collateral ligaments of the same finger joints, the three prepatellar bursae (subcutaneous, subfascial, subtendinous: three separate terminology entries), muscle belly with its tendon, generic tooth types with the individual teeth under them.
 Earlier fixes still in place: old bladder, rectum, trachea, larynx and thyroid hidden where the Z-Anatomy versions replace them.
 Not detectable by this check: duplicates of procedural schematic parts that have no mesh file; the id/overlay check found no joints, bursa or lymph structure mapped by another asset.
+
+## Mobile weight fix (lod26)
+
+- The single `zanatomy-joints` asset (3.19 MB full / 2.39 MB lite, ~343 meshes) is replaced by five on-demand region assets: `zanatomy-joints-lower`, `zanatomy-joints-upper`, `zanatomy-bursae`, `zanatomy-lymph-upper`, `zanatomy-lymph-lower` (0.36–0.65 MB each in the lite variant). No content was removed; the meshes were partitioned by region.
+- None loads by default. Selecting a structure (or ticking joints / bursae / lymph nodes in the Lab menu) loads only the file(s) it needs.
+- Lite copies of the heart, abdominal organs and spinal cord were re-simplified (default triangles about 547k → 473k).
+- Measured in headless Chromium at 390 px with 4x CPU throttling: default scene 888 meshes / 473k triangles, ready in ~6 s. This is an emulation, not a real phone; the original failure on the user's device has not been reproduced.

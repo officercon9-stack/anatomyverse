@@ -200,3 +200,6 @@ Known limitation: the Visible Human atria carry their own short vein stumps; the
 - Fit: limb and lacunar groups move with the fitted bones (distance-weighted blend of the three nearest bone transforms). All other groups use one rigid scale-and-shift chosen per group from three candidates (Z-Anatomy frame, the fit of Z-Anatomy abdominal organs to the app's organs, the skeleton frame), whichever puts the group closest to the app's vessels, organs and bones; chosen medians are 1-8 mm for most groups.
 - Limits: node shapes are small (about 4-8 mm), so they are hard to see at whole-body zoom; positions are approximate (centimetre level) because the app's organs, vessels and bones are not in one consistent frame.
 - Not imported: intrapulmonary nodes (lung frame not fitted), joiner objects with no geometry, and groups without a standard terminology name. Pharyngeal lymphoid ring is not a node group here.
+
+### Asset split (lod26)
+`zanatomy-joints.glb` was split into `zanatomy-joints-lower`, `zanatomy-joints-upper`, `zanatomy-bursae`, `zanatomy-lymph-upper`, `zanatomy-lymph-lower`. Source, licence (CC BY-SA 4.0 Z-Anatomy / CC BY-SA 2.1 JP BodyParts3D) and attribution are unchanged.
