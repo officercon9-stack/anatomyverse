@@ -172,3 +172,7 @@ Z-Anatomy `Startup.blend` (CC BY-SA 4.0): Thyroid cartilage, Cricoid cartilage, 
 | Repository | https://github.com/hubmapconsortium/ccf-releases |
 | Licence | CC BY 4.0 (commercial use and modification permitted; attribution required; no ShareAlike) |
 | Modifications made | Uniform scale 0.935, translation, and a height-dependent forward/back shift (`tools/addcord.mjs`) so the cord lies in the vertebral canal of the app's spine (checked by ray parity: almost no cord points lie inside bone). Normals recomputed, meshopt-compressed. |
+
+## zanatomy-heart.glb: ventricles, atria, valves and papillary muscles replaced (4 November 2026)
+The left and right ventricles, interventricular septum, both atria, the four valves and the papillary muscles now come from the HuBMAP CCF 3D Reference Library, Visible Human Male heart (`VH_M_Heart.glb`, CC BY 4.0, https://github.com/hubmapconsortium/ccf-releases), simplified to about 30% of the triangles and fitted to the existing Z-Anatomy great vessels by a similarity transform (scale 0.916) estimated from the valve and chamber centres (`tools/heartfit.mjs`, `tools/heartswap.mjs`). The Z-Anatomy coronary arteries, cardiac veins and great vessels (CC BY-SA 4.0) were kept and refitted to the new surface (radial offset mapping). The file therefore contains both CC BY-SA 4.0 and CC BY 4.0 material and is distributed under CC BY-SA 4.0.
+Known limitation: the Visible Human atria carry their own short vein stumps; the Z-Anatomy pulmonary vein stubs are not exactly coaxial with them.
