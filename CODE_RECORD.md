@@ -59,3 +59,10 @@ New asset zanatomy-nerves (see THIRD_PARTY_ASSETS.md). Two new structure records
 - Accessibility and touch polish in ux.js: larger hit area on the 3D badges, toolbar labels now start with their visible text, preview no longer role=img while holding controls, unique aside labels, an h1 role where a page has none, landing preview button no longer overlaps the credit line.
 - Cerebellum replaced from Z-Anatomy.
 - Not changed: 862 records without function text, 1,059 without Latin name, 105 very short descriptions (clinical text needs a clinician or a cited source, not generated text).
+
+## Generators for the 5 November 2026 repair pass
+`tools/session-2026-11/generators/` holds the scripts that built the new model files, so each can be rebuilt or reviewed:
+- Z-Anatomy extraction (run inside Blender's Python against Z-Anatomy `Startup.blend`, frame x, z, -y): `zv.py` (neck vessels), `zdd.py` (ductus deferens), `zur.py` (male urethra), `zo2.py` and `zo3.py` (gums, soft palate, uvula, tongue, glands, palate bone points), `zcl.py` (centrelines for registration).
+- Generated geometry: `mkphr.mjs` (phrenic nerves), `mkima.mjs` (mesenteric branches), `ext.mjs` (jugular and vertebral joining tubes), `link.mjs` (subclavian to axillary), `sdf.py` with `vulva.py` and `male.py` (signed-distance modelling of vulva and scrotum), `palate.py` (hard palate sheet fitted to the Z-Anatomy palate bones), `wn.mjs` (limb-nerve registration).
+- Packaging: `mkglb.mjs` and `mk_vessels.mjs` (weld, simplify, quantize, lite copy), `addasset.py` (add an asset and overlay to the manifest chunk).
+Procedure for a new model file: build the glb and its lite copy, add the asset with `addasset.py`, bump chunk names with `tools/session-2026-11/bump.py`, bump `MODEL_TOKEN` and the cache name in `sw.js`, then test in the browser.

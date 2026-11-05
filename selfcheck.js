@@ -66,7 +66,7 @@
       var list = by[id].filter(visibleChain); if (list.length < 2) return;
       var bx = list.map(function (o) { o.geometry.computeBoundingBox(); var b = o.geometry.boundingBox.clone().applyMatrix4(o.matrixWorld); return [b.min.x, b.min.y, b.min.z, b.max.x, b.max.y, b.max.z]; });
       for (var i = 0; i < bx.length; i++) for (var j = i + 1; j < bx.length; j++) {
-        var same = true; for (var k = 0; k < 6; k++) if (Math.abs(bx[i][k] - bx[j][k]) > 0.002) same = false;
+        var same = list[i].geometry.attributes.position.count === list[j].geometry.attributes.position.count; for (var k = 0; k < 6; k++) if (Math.abs(bx[i][k] - bx[j][k]) > 0.002) same = false;
         if (same) bad.push(id);
       }
     });
@@ -201,5 +201,5 @@
   }
   document.addEventListener('keydown', function (e) { if (e.ctrlKey && e.shiftKey && (e.key === 'K' || e.key === 'k')) { e.preventDefault(); openPanel(); } });
   globalThis.__avSelfCheck = { markers: function (ids) { var o = []; cancel = false; return checkMarkers(function (t, s, m) { o.push([t, s, m]); }, ids, function () {}).then(function () { return o; }); }, run: run, repairs: repairs, open: openPanel, pairs: PAIRS };
-  setInterval(function () { var onLab = /lab/.test(location.hash); var b = document.getElementById('avsc-open'); if (onLab && !b) addLauncher(); if (b) b.style.display = onLab ? '' : 'none'; }, 1500);
+  setInterval(function () { var onLab = /lab/.test(location.hash); var b = document.getElementById('avsc-open'); if (onLab && !b) addLauncher(); if (b) { b.style.display = onLab ? '' : 'none'; var nar = window.innerWidth < 768; b.style.bottom = nar ? '78px' : '2px'; b.style.left = nar ? '2px' : '10px'; b.style.padding = nar ? '0 4px' : '0 8px'; } }, 1500);
 })();
