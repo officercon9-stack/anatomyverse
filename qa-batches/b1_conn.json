@@ -1,0 +1,282 @@
+{
+ "anterior-branch-of-renal-artery": {
+  "e1": [
+   1.4,
+   "renal-pelvis-right"
+  ],
+  "e2": [
+   1,
+   "renal-pelvis-left"
+  ]
+ },
+ "anterior-tibial-artery-left": {
+  "e1": [
+   14.1,
+   "extensor-hallucis-longus-left"
+  ],
+  "e2": [
+   1.6,
+   "posterior-tibial-artery-left"
+  ]
+ },
+ "anterior-tibial-artery-right": {
+  "e1": [
+   11.7,
+   "extensor-digitorum-longus-right"
+  ],
+  "e2": [
+   1.8,
+   "posterior-tibial-artery-right"
+  ]
+ },
+ "aorta": {
+  "e1": [
+   5.2,
+   "common-iliac-artery"
+  ],
+  "e2": [
+   3.1,
+   "common-carotid-artery-right"
+  ]
+ },
+ "aortic-valve": {
+  "e1": [
+   3,
+   "pulmonary-trunk"
+  ],
+  "e2": [
+   3.6,
+   "coronary-arteries"
+  ]
+ },
+ "axillary-artery-left": {
+  "e1": [
+   1.6,
+   "brachial-artery-left"
+  ],
+  "e2": [
+   9.5,
+   "pectoralis-minor-left"
+  ]
+ },
+ "axillary-artery-right": {
+  "e1": [
+   1.9,
+   "brachial-artery-right"
+  ],
+  "e2": [
+   2.9,
+   "deltoid-right"
+  ]
+ },
+ "axillary-vein-left": {
+  "e1": [
+   2.4,
+   "basilic-vein-left"
+  ],
+  "e2": [
+   4.5,
+   "pectoralis-minor-left"
+  ]
+ },
+ "axillary-vein-right": {
+  "e1": [
+   2.6,
+   "basilic-vein-right"
+  ],
+  "e2": [
+   2.2,
+   "pectoralis-minor-right"
+  ]
+ },
+ "basilic-vein-left": {
+  "e1": [
+   3.7,
+   "abductor-digiti-minimi-hand-left"
+  ],
+  "e2": [
+   2.5,
+   "axillary-vein-left"
+  ]
+ },
+ "basilic-vein-right": {
+  "e1": [
+   3.3,
+   "abductor-digiti-minimi-hand-right"
+  ],
+  "e2": [
+   2.7,
+   "axillary-vein-right"
+  ]
+ },
+ "brachial-artery-left": {
+  "e1": [
+   2.1,
+   "radial-artery-left"
+  ],
+  "e2": [
+   1.6,
+   "axillary-artery-left"
+  ]
+ },
+ "brachial-artery-right": {
+  "e1": [
+   1.9,
+   "radial-artery-right"
+  ],
+  "e2": [
+   1.9,
+   "axillary-artery-right"
+  ]
+ },
+ "cardiac-veins": {
+  "e1": [
+   3,
+   "left-ventricle"
+  ],
+  "e2": [
+   1.6,
+   "coronary-arteries"
+  ]
+ },
+ "central-retinal-artery": {
+  "e1": [
+   0.4,
+   "central-retinal-vein"
+  ],
+  "e2": [
+   0.4,
+   "central-retinal-vein"
+  ]
+ },
+ "central-retinal-vein": {
+  "e1": [
+   0.4,
+   "central-retinal-artery"
+  ],
+  "e2": [
+   0.4,
+   "central-retinal-artery"
+  ]
+ },
+ "cephalic-vein-left": {
+  "e1": [
+   4.2,
+   "adductor-pollicis-left"
+  ],
+  "e2": [
+   3.8,
+   "deltoid-left"
+  ]
+ },
+ "cephalic-vein-right": {
+  "e1": [
+   0.4,
+   "adductor-pollicis-right"
+  ],
+  "e2": [
+   5.5,
+   "pectoralis-major-right"
+  ]
+ },
+ "coeliac-trunk": {
+  "e1": [
+   3.7,
+   "liver"
+  ],
+  "e2": [
+   1.2,
+   "splenic-vein"
+  ]
+ },
+ "common-carotid-artery-left": {
+  "e1": [
+   2.5,
+   "subclavian-artery-left"
+  ],
+  "e2": [
+   1.2,
+   "parathyroid-glands"
+  ]
+ },
+ "common-carotid-artery-right": {
+  "e1": [
+   1.8,
+   "subclavian-artery-right"
+  ],
+  "e2": [
+   0.4,
+   "parathyroid-glands"
+  ]
+ },
+ "common-iliac-artery": {
+  "e1": [
+   1.4,
+   "external-iliac-artery-right"
+  ],
+  "e2": [
+   1.8,
+   "external-iliac-artery-left"
+  ]
+ },
+ "coronary-arteries": {
+  "e1": [
+   1.5,
+   "right-ventricle"
+  ],
+  "e2": [
+   1.9,
+   "sternum"
+  ]
+ },
+ "external-iliac-artery-left": {
+  "e1": [
+   4.1,
+   "iliac-veins"
+  ],
+  "e2": [
+   0.9,
+   "common-iliac-artery"
+  ]
+ },
+ "external-iliac-artery-right": {
+  "e1": [
+   3.3,
+   "inguinal-ligament-right"
+  ],
+  "e2": [
+   1.8,
+   "common-iliac-artery"
+  ]
+ },
+ "femoral-artery-left": {
+  "e1": [
+   2.6,
+   "popliteal-artery-left"
+  ],
+  "e2": [
+   7.7,
+   "psoas-major-left"
+  ]
+ },
+ "femoral-artery-right": {
+  "e1": [
+   1.1,
+   "popliteal-artery-right"
+  ],
+  "e2": [
+   5.9,
+   "psoas-major-right"
+  ]
+ },
+ "femoral-vein-left": {
+  "e1": [
+   7.5,
+   "saphenous-nerve-left"
+  ],
+  "e2": [
+   5,
+   "external-iliac-artery-left"
+  ]
+ }
+}

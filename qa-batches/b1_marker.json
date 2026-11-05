@@ -1,0 +1,1222 @@
+{
+ "anterior-branch-of-renal-artery": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 112
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0.1,
+   "n": 112
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0.1,
+   "n": 112
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 112
+  }
+ ],
+ "anterior-cerebral-artery": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 1316
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 1316
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0.1,
+   "n": 1316
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 1316
+  }
+ ],
+ "anterior-cerebral-artery-left": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0.1,
+   "n": 193
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 193
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 193
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 193
+  }
+ ],
+ "anterior-cerebral-artery-right": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 194
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0.1,
+   "n": 194
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 194
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 194
+  }
+ ],
+ "anterior-choroidal-artery": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 459
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 459
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0.1,
+   "n": 459
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0.1,
+   "n": 459
+  }
+ ],
+ "anterior-choroidal-artery-left": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 169
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 169
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 169
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 169
+  }
+ ],
+ "anterior-choroidal-artery-right": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 170
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 170
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 170
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 170
+  }
+ ],
+ "anterior-inferior-cerebellar-artery": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0.1,
+   "n": 385
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0.1,
+   "n": 385
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 385
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 385
+  }
+ ],
+ "anterior-spinal-artery": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 107
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 107
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 107
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 107
+  }
+ ],
+ "anterior-tibial-artery": [
+  {
+   "pose": "default",
+   "dot": false
+  },
+  {
+   "pose": "rot90",
+   "dot": false
+  },
+  {
+   "pose": "zoomIn",
+   "dot": false
+  },
+  {
+   "pose": "zoomOut",
+   "dot": false
+  }
+ ],
+ "anterior-tibial-artery-left": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 191
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 191
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 191
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 191
+  }
+ ],
+ "anterior-tibial-artery-right": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 191
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0.1,
+   "n": 191
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0.1,
+   "n": 191
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 191
+  }
+ ],
+ "aorta": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 941
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 941
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 941
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0.1,
+   "n": 941
+  }
+ ],
+ "aortic-valve": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0.1,
+   "n": 125
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 125
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 125
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 125
+  }
+ ],
+ "axillary-artery": [
+  {
+   "pose": "default",
+   "dot": false
+  },
+  {
+   "pose": "rot90",
+   "dot": false
+  },
+  {
+   "pose": "zoomIn",
+   "dot": false
+  },
+  {
+   "pose": "zoomOut",
+   "dot": false
+  }
+ ],
+ "axillary-artery-left": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0.1,
+   "n": 108
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 108
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0.1,
+   "n": 108
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 108
+  }
+ ],
+ "axillary-artery-right": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 102
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0.1,
+   "n": 102
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 102
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 102
+  }
+ ],
+ "axillary-vein": [
+  {
+   "pose": "default",
+   "dot": false
+  },
+  {
+   "pose": "rot90",
+   "dot": false
+  },
+  {
+   "pose": "zoomIn",
+   "dot": false
+  },
+  {
+   "pose": "zoomOut",
+   "dot": false
+  }
+ ],
+ "axillary-vein-left": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 108
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 108
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0.1,
+   "n": 108
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 108
+  }
+ ],
+ "axillary-vein-right": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 102
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 102
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 102
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 102
+  }
+ ],
+ "basilar-artery": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 89
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0.1,
+   "n": 89
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0.1,
+   "n": 89
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 89
+  }
+ ],
+ "basilic-vein": [
+  {
+   "pose": "default",
+   "dot": false
+  },
+  {
+   "pose": "rot90",
+   "dot": false
+  },
+  {
+   "pose": "zoomIn",
+   "dot": false
+  },
+  {
+   "pose": "zoomOut",
+   "dot": false
+  }
+ ],
+ "basilic-vein-left": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 238
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 238
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 238
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0.1,
+   "n": 238
+  }
+ ],
+ "basilic-vein-right": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 238
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 238
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 238
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 238
+  }
+ ],
+ "brachial-artery": [
+  {
+   "pose": "default",
+   "dot": false
+  },
+  {
+   "pose": "rot90",
+   "dot": false
+  },
+  {
+   "pose": "zoomIn",
+   "dot": false
+  },
+  {
+   "pose": "zoomOut",
+   "dot": false
+  }
+ ],
+ "brachial-artery-left": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0.1,
+   "n": 105
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 105
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 105
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 105
+  }
+ ],
+ "brachial-artery-right": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0.1,
+   "n": 105
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 105
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 105
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 105
+  }
+ ],
+ "cardiac-veins": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0.1,
+   "n": 1796
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 1796
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 1796
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0.1,
+   "n": 1796
+  }
+ ],
+ "cavernous-sinus": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 96
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 96
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0.1,
+   "n": 96
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 96
+  }
+ ],
+ "central-retinal-artery": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0.1,
+   "n": 112
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0.1,
+   "n": 112
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0.1,
+   "n": 112
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 112
+  }
+ ],
+ "central-retinal-vein": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 112
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 112
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0.1,
+   "n": 112
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 112
+  }
+ ],
+ "cephalic-vein": [
+  {
+   "pose": "default",
+   "dot": false
+  },
+  {
+   "pose": "rot90",
+   "dot": false
+  },
+  {
+   "pose": "zoomIn",
+   "dot": false
+  },
+  {
+   "pose": "zoomOut",
+   "dot": false
+  }
+ ],
+ "cephalic-vein-left": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0.1,
+   "n": 252
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0.1,
+   "n": 252
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 252
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 252
+  }
+ ],
+ "cephalic-vein-right": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0.1,
+   "n": 252
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 252
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 252
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 252
+  }
+ ],
+ "cerebral-arterial-circle": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 77
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0.1,
+   "n": 77
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 77
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 77
+  }
+ ],
+ "cerebral-capillary-bed": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 23723
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 23723
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 23723
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 23723
+  }
+ ],
+ "coeliac-trunk": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 188
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 188
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 188
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 188
+  }
+ ],
+ "common-carotid-artery": [
+  {
+   "pose": "default",
+   "dot": false
+  },
+  {
+   "pose": "rot90",
+   "dot": false
+  },
+  {
+   "pose": "zoomIn",
+   "dot": false
+  },
+  {
+   "pose": "zoomOut",
+   "dot": false
+  }
+ ],
+ "common-carotid-artery-left": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 62
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 62
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 62
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 62
+  }
+ ],
+ "common-carotid-artery-right": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 62
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0.1,
+   "n": 62
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 62
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 62
+  }
+ ],
+ "common-iliac-artery": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 204
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 204
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 204
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 204
+  }
+ ],
+ "coronary-arteries": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 4020
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 4020
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 4020
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 4020
+  }
+ ],
+ "external-iliac-artery": [
+  {
+   "pose": "default",
+   "dot": false
+  },
+  {
+   "pose": "rot90",
+   "dot": false
+  },
+  {
+   "pose": "zoomIn",
+   "dot": false
+  },
+  {
+   "pose": "zoomOut",
+   "dot": false
+  }
+ ],
+ "external-iliac-artery-left": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 101
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 101
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 101
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 101
+  }
+ ],
+ "external-iliac-artery-right": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 102
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 102
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 102
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 102
+  }
+ ],
+ "femoral-artery": [
+  {
+   "pose": "default",
+   "dot": false
+  },
+  {
+   "pose": "rot90",
+   "dot": false
+  },
+  {
+   "pose": "zoomIn",
+   "dot": false
+  },
+  {
+   "pose": "zoomOut",
+   "dot": false
+  }
+ ],
+ "femoral-artery-left": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 146
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 146
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 146
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 146
+  }
+ ],
+ "femoral-artery-right": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0,
+   "n": 150
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0.1,
+   "n": 150
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0,
+   "n": 150
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 150
+  }
+ ],
+ "femoral-vein": [
+  {
+   "pose": "default",
+   "dot": false
+  },
+  {
+   "pose": "rot90",
+   "dot": false
+  },
+  {
+   "pose": "zoomIn",
+   "dot": false
+  },
+  {
+   "pose": "zoomOut",
+   "dot": false
+  }
+ ],
+ "femoral-vein-left": [
+  {
+   "pose": "default",
+   "dot": true,
+   "px": 0.1,
+   "n": 146
+  },
+  {
+   "pose": "rot90",
+   "dot": true,
+   "px": 0,
+   "n": 146
+  },
+  {
+   "pose": "zoomIn",
+   "dot": true,
+   "px": 0.1,
+   "n": 146
+  },
+  {
+   "pose": "zoomOut",
+   "dot": true,
+   "px": 0,
+   "n": 146
+  }
+ ]
+}

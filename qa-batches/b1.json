@@ -1,0 +1,1590 @@
+[
+ {
+  "id": "anterior-branch-of-renal-artery",
+  "name": "Anterior branch of the renal artery",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 112,
+  "tris": 168,
+  "comps": 2,
+  "openPct": 9.1,
+  "vol": -0.0000021,
+  "dimsCm": [
+   11.5,
+   2.6,
+   2.6
+  ],
+  "c": [
+   0.004,
+   1.115,
+   -0.004
+  ],
+  "mn": [
+   -0.05345139652490616,
+   1.1023166179656982,
+   -0.01698070578277111
+  ],
+  "mx": [
+   0.061358675360679626,
+   1.1278762817382812,
+   0.009181227535009384
+  ],
+  "sel": true,
+  "target": [
+   0.004,
+   1.115,
+   -0.004
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "anterior-cerebral-artery",
+  "name": "Anterior cerebral artery",
+  "sys": "cardiovascular",
+  "own": 0,
+  "sel": true,
+  "target": [
+   0.001,
+   1.679,
+   0.008
+  ]
+ },
+ {
+  "id": "anterior-cerebral-artery-left",
+  "name": "Left anterior cerebral artery",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 193,
+  "tris": 350,
+  "comps": 2,
+  "openPct": 2.3,
+  "vol": 0.0000028,
+  "dimsCm": [
+   1.4,
+   5.6,
+   9.2
+  ],
+  "c": [
+   0.009,
+   1.668,
+   -0.003
+  ],
+  "mn": [
+   0.0019812854006886482,
+   1.6399297714233398,
+   -0.048445917665958405
+  ],
+  "mx": [
+   0.01621113531291485,
+   1.6957085132598877,
+   0.043066494166851044
+  ],
+  "sel": true,
+  "target": [
+   0.009,
+   1.668,
+   -0.003
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "anterior-cerebral-artery-right",
+  "name": "Right anterior cerebral artery",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 194,
+  "tris": 354,
+  "comps": 2,
+  "openPct": 2.2,
+  "vol": 0.0000028,
+  "dimsCm": [
+   1.4,
+   5.6,
+   9.1
+  ],
+  "c": [
+   -0.007,
+   1.668,
+   -0.003
+  ],
+  "mn": [
+   -0.014542564749717712,
+   1.6399297714233398,
+   -0.048445869237184525
+  ],
+  "mx": [
+   -0.00035901457886211574,
+   1.6957141160964966,
+   0.042992040514945984
+  ],
+  "sel": true,
+  "target": [
+   -0.007,
+   1.668,
+   -0.003
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "anterior-choroidal-artery",
+  "name": "Anterior choroidal artery",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 120,
+  "tris": 220,
+  "comps": 2,
+  "openPct": 5.9,
+  "vol": 1e-7,
+  "dimsCm": [
+   6.8,
+   0.6,
+   1.6
+  ],
+  "c": [
+   0.001,
+   1.649,
+   -0.013
+  ],
+  "mn": [
+   -0.03315403684973717,
+   1.6456823348999023,
+   -0.020813973620533943
+  ],
+  "mx": [
+   0.0348813571035862,
+   1.6520569324493408,
+   -0.005242675077170134
+  ],
+  "sel": true,
+  "target": [
+   0.001,
+   1.645,
+   0.002
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "anterior-choroidal-artery-left",
+  "name": "Left anterior choroidal artery",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 169,
+  "tris": 169,
+  "comps": 1,
+  "openPct": 0,
+  "vol": 0,
+  "dimsCm": [
+   2.3,
+   1.4,
+   4.6
+  ],
+  "c": [
+   0.023,
+   1.645,
+   0.002
+  ],
+  "mn": [
+   0.011945035308599472,
+   1.638199806213379,
+   -0.02082214318215847
+  ],
+  "mx": [
+   0.03484473377466202,
+   1.6520497798919678,
+   0.025640854611992836
+  ],
+  "sel": true,
+  "target": [
+   0.023,
+   1.645,
+   0.002
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "anterior-choroidal-artery-right",
+  "name": "Right anterior choroidal artery",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 170,
+  "tris": 170,
+  "comps": 1,
+  "openPct": 0,
+  "vol": 0,
+  "dimsCm": [
+   2.3,
+   1.4,
+   4.6
+  ],
+  "c": [
+   -0.022,
+   1.645,
+   0.002
+  ],
+  "mn": [
+   -0.033222462981939316,
+   1.638199806213379,
+   -0.02082214318215847
+  ],
+  "mx": [
+   -0.01032276451587677,
+   1.6520497798919678,
+   0.025640854611992836
+  ],
+  "sel": true,
+  "target": [
+   -0.022,
+   1.645,
+   0.002
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "anterior-inferior-cerebellar-artery",
+  "name": "Anterior inferior cerebellar artery",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 385,
+  "tris": 459,
+  "comps": 2,
+  "openPct": 0,
+  "vol": 1e-7,
+  "dimsCm": [
+   7.1,
+   0.9,
+   2.8
+  ],
+  "c": [
+   0.001,
+   1.612,
+   -0.007
+  ],
+  "mn": [
+   -0.03487706556916237,
+   1.6069997549057007,
+   -0.021308444440364838
+  ],
+  "mx": [
+   0.03649933636188507,
+   1.616419792175293,
+   0.006753755733370781
+  ],
+  "sel": true,
+  "target": [
+   0.001,
+   1.612,
+   -0.007
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "anterior-spinal-artery",
+  "name": "Anterior spinal artery",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 107,
+  "tris": 120,
+  "comps": 1,
+  "openPct": 0,
+  "vol": 0,
+  "dimsCm": [
+   1.5,
+   2.8,
+   0.8
+  ],
+  "c": [
+   -0.006,
+   1.584,
+   -0.013
+  ],
+  "mn": [
+   -0.013687864877283573,
+   1.5704197883605957,
+   -0.017483044415712357
+  ],
+  "mx": [
+   0.001201013452373445,
+   1.5980497598648071,
+   -0.009138443507254124
+  ],
+  "sel": true,
+  "target": [
+   -0.006,
+   1.584,
+   -0.013
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "anterior-tibial-artery",
+  "name": "Anterior tibial artery",
+  "sys": "cardiovascular",
+  "own": 0,
+  "sel": true,
+  "target": [
+   -0.001,
+   0.275,
+   0.017
+  ]
+ },
+ {
+  "id": "anterior-tibial-artery-left",
+  "name": "Left anterior tibial artery",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 191,
+  "tris": 370,
+  "comps": 1,
+  "openPct": 2.1,
+  "vol": 0.0000054,
+  "dimsCm": [
+   3.6,
+   33.1,
+   14.3
+  ],
+  "c": [
+   0.12,
+   0.275,
+   0.017
+  ],
+  "mn": [
+   0.10174553841352463,
+   0.1094929426908493,
+   -0.054609157145023346
+  ],
+  "mx": [
+   0.1372697800397873,
+   0.440640926361084,
+   0.08808226883411407
+  ],
+  "sel": true,
+  "target": [
+   0.12,
+   0.275,
+   0.017
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "anterior-tibial-artery-right",
+  "name": "Right anterior tibial artery",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 191,
+  "tris": 370,
+  "comps": 1,
+  "openPct": 2.1,
+  "vol": 0.0000054,
+  "dimsCm": [
+   3.4,
+   33.1,
+   13.6
+  ],
+  "c": [
+   -0.121,
+   0.275,
+   0.02
+  ],
+  "mn": [
+   -0.13855431973934174,
+   0.10973133146762848,
+   -0.0477837398648262
+  ],
+  "mx": [
+   -0.10431043803691864,
+   0.4406319260597229,
+   0.08834943175315857
+  ],
+  "sel": true,
+  "target": [
+   -0.121,
+   0.275,
+   0.02
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "aorta",
+  "name": "Aorta",
+  "sys": "cardiovascular",
+  "own": 2,
+  "verts": 941,
+  "tris": 1800,
+  "comps": 6,
+  "openPct": 2.1,
+  "vol": 0.0005644,
+  "dimsCm": [
+   5.7,
+   39.4,
+   10.3
+  ],
+  "c": [
+   0.007,
+   1.227,
+   0.011
+  ],
+  "mn": [
+   -0.021847078576683998,
+   1.029847264289856,
+   -0.041125744581222534
+  ],
+  "mx": [
+   0.03515038266777992,
+   1.4237788915634155,
+   0.06221874803304672
+  ],
+  "sel": true,
+  "target": [
+   0.001,
+   1.231,
+   0.016
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "aortic-valve",
+  "name": "Aortic valve",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 125,
+  "tris": 239,
+  "comps": 1,
+  "openPct": 5.2,
+  "vol": -0.0000406,
+  "dimsCm": [
+   2.2,
+   2.3,
+   1.9
+  ],
+  "c": [
+   0.011,
+   1.336,
+   0.037
+  ],
+  "mn": [
+   -0.00043208751594647765,
+   1.3252146244049072,
+   0.02783975563943386
+  ],
+  "mx": [
+   0.022020885720849037,
+   1.3477528095245361,
+   0.04703514650464058
+  ],
+  "sel": true,
+  "target": [
+   0.011,
+   1.336,
+   0.037
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "axillary-artery",
+  "name": "Axillary artery",
+  "sys": "cardiovascular",
+  "own": 0,
+  "sel": true,
+  "target": [
+   0.001,
+   1.363,
+   0.003
+  ]
+ },
+ {
+  "id": "axillary-artery-left",
+  "name": "Left axillary artery",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 108,
+  "tris": 204,
+  "comps": 1,
+  "openPct": 3.8,
+  "vol": -0.0000072,
+  "dimsCm": [
+   4.6,
+   5.9,
+   1
+  ],
+  "c": [
+   0.172,
+   1.363,
+   0.003
+  ],
+  "mn": [
+   0.14913438260555267,
+   1.3330172300338745,
+   -0.0022277829702943563
+  ],
+  "mx": [
+   0.19496531784534454,
+   1.3920594453811646,
+   0.007733134087175131
+  ],
+  "sel": true,
+  "target": [
+   0.172,
+   1.363,
+   0.003
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "axillary-artery-right",
+  "name": "Right axillary artery",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 102,
+  "tris": 192,
+  "comps": 1,
+  "openPct": 4.1,
+  "vol": -0.0000078,
+  "dimsCm": [
+   4.6,
+   5.8,
+   1.2
+  ],
+  "c": [
+   -0.17,
+   1.363,
+   0.003
+  ],
+  "mn": [
+   -0.1928127110004425,
+   1.333884358406067,
+   -0.0036907994654029608
+  ],
+  "mx": [
+   -0.14686371386051178,
+   1.3918452262878418,
+   0.00876524206250906
+  ],
+  "sel": true,
+  "target": [
+   -0.17,
+   1.363,
+   0.003
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "axillary-vein",
+  "name": "Axillary vein",
+  "sys": "cardiovascular",
+  "own": 0,
+  "sel": true,
+  "target": [
+   0.001,
+   1.362,
+   -0.003
+  ]
+ },
+ {
+  "id": "axillary-vein-left",
+  "name": "Left axillary vein",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 108,
+  "tris": 204,
+  "comps": 1,
+  "openPct": 3.8,
+  "vol": -0.0000101,
+  "dimsCm": [
+   4.7,
+   6,
+   1.2
+  ],
+  "c": [
+   0.16,
+   1.362,
+   -0.003
+  ],
+  "mn": [
+   0.13646972179412842,
+   1.3324356079101562,
+   -0.00902702659368515
+  ],
+  "mx": [
+   0.18337245285511017,
+   1.3922549486160278,
+   0.0025331343058496714
+  ],
+  "sel": true,
+  "target": [
+   0.16,
+   1.362,
+   -0.003
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "axillary-vein-right",
+  "name": "Right axillary vein",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 102,
+  "tris": 192,
+  "comps": 1,
+  "openPct": 4.1,
+  "vol": -0.0000109,
+  "dimsCm": [
+   4.7,
+   5.9,
+   1.4
+  ],
+  "c": [
+   -0.158,
+   1.363,
+   -0.003
+  ],
+  "mn": [
+   -0.1812247633934021,
+   1.3332726955413818,
+   -0.010485541075468063
+  ],
+  "mx": [
+   -0.13419903814792633,
+   1.392040729522705,
+   0.0035652420483529568
+  ],
+  "sel": true,
+  "target": [
+   -0.158,
+   1.363,
+   -0.003
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "basilar-artery",
+  "name": "Basilar artery",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 89,
+  "tris": 150,
+  "comps": 2,
+  "openPct": 0,
+  "vol": 3e-7,
+  "dimsCm": [
+   0.3,
+   2.9,
+   1.4
+  ],
+  "c": [
+   0,
+   1.622,
+   0.008
+  ],
+  "mn": [
+   -0.0013688845792785287,
+   1.6078097820281982,
+   0.0010404560016468167
+  ],
+  "mx": [
+   0.0019719654228538275,
+   1.6370598077774048,
+   0.015458155423402786
+  ],
+  "sel": true,
+  "target": [
+   0,
+   1.622,
+   0.008
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "basilic-vein",
+  "name": "Basilic vein",
+  "sys": "cardiovascular",
+  "own": 0,
+  "sel": true,
+  "target": [
+   0,
+   1.088,
+   0.008
+  ]
+ },
+ {
+  "id": "basilic-vein-left",
+  "name": "Left basilic vein",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 238,
+  "tris": 464,
+  "comps": 1,
+  "openPct": 1.7,
+  "vol": 0.0000102,
+  "dimsCm": [
+   13.2,
+   50.1,
+   6.2
+  ],
+  "c": [
+   0.244,
+   1.087,
+   0.008
+  ],
+  "mn": [
+   0.178308367729187,
+   0.8368476629257202,
+   -0.022916603833436966
+  ],
+  "mx": [
+   0.31022554636001587,
+   1.3373596668243408,
+   0.038821861147880554
+  ],
+  "sel": true,
+  "target": [
+   0.244,
+   1.087,
+   0.008
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "basilic-vein-right",
+  "name": "Right basilic vein",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 238,
+  "tris": 464,
+  "comps": 1,
+  "openPct": 1.7,
+  "vol": 0.0000103,
+  "dimsCm": [
+   13.4,
+   50.1,
+   6
+  ],
+  "c": [
+   -0.243,
+   1.088,
+   0.008
+  ],
+  "mn": [
+   -0.3098151385784149,
+   0.8368430137634277,
+   -0.021604347974061966
+  ],
+  "mx": [
+   -0.17595836520195007,
+   1.3383039236068726,
+   0.03800566866993904
+  ],
+  "sel": true,
+  "target": [
+   -0.243,
+   1.088,
+   0.008
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "brachial-artery",
+  "name": "Brachial artery",
+  "sys": "cardiovascular",
+  "own": 0,
+  "sel": true,
+  "target": [
+   0,
+   1.077,
+   0.015
+  ]
+ },
+ {
+  "id": "brachial-artery-left",
+  "name": "Left brachial artery",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 105,
+  "tris": 198,
+  "comps": 1,
+  "openPct": 4,
+  "vol": 5e-7,
+  "dimsCm": [
+   8.1,
+   21,
+   2.4
+  ],
+  "c": [
+   0.231,
+   1.233,
+   -0.004
+  ],
+  "mn": [
+   0.19002500176429749,
+   1.1276726722717285,
+   -0.015898307785391808
+  ],
+  "mx": [
+   0.2714942693710327,
+   1.3376076221466064,
+   0.007953314110636711
+  ],
+  "sel": true,
+  "target": [
+   0.231,
+   1.233,
+   -0.004
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "brachial-artery-right",
+  "name": "Right brachial artery",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 105,
+  "tris": 198,
+  "comps": 1,
+  "openPct": 4,
+  "vol": 7e-7,
+  "dimsCm": [
+   7.7,
+   21.1,
+   2.3
+  ],
+  "c": [
+   -0.226,
+   1.233,
+   -0.003
+  ],
+  "mn": [
+   -0.2650814652442932,
+   1.1273120641708374,
+   -0.014630776830017567
+  ],
+  "mx": [
+   -0.18791650235652924,
+   1.338725209236145,
+   0.008204913698136806
+  ],
+  "sel": true,
+  "target": [
+   -0.226,
+   1.233,
+   -0.003
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "cardiac-veins",
+  "name": "Cardiac veins",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 1796,
+  "tris": 3429,
+  "comps": 21,
+  "openPct": 2.5,
+  "vol": -0.0000031,
+  "dimsCm": [
+   7,
+   7.4,
+   8.8
+  ],
+  "c": [
+   0.034,
+   1.3,
+   0.05
+  ],
+  "mn": [
+   -0.0010996400378644466,
+   1.2630923986434937,
+   0.005735951475799084
+  ],
+  "mx": [
+   0.0686466246843338,
+   1.3370881080627441,
+   0.09384240210056305
+  ],
+  "sel": true,
+  "target": [
+   0.034,
+   1.3,
+   0.05
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "cavernous-sinus",
+  "name": "Cavernous sinus",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 96,
+  "tris": 160,
+  "comps": 2,
+  "openPct": 12.5,
+  "vol": -0.0000031,
+  "dimsCm": [
+   3.8,
+   0.9,
+   1.4
+  ],
+  "c": [
+   0,
+   1.636,
+   0.022
+  ],
+  "mn": [
+   -0.019107216969132423,
+   1.631895661354065,
+   0.01539875753223896
+  ],
+  "mx": [
+   0.019107216969132423,
+   1.6409074068069458,
+   0.029189450666308403
+  ],
+  "sel": true,
+  "target": [
+   0,
+   1.636,
+   0.022
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "central-retinal-artery",
+  "name": "Central retinal artery",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 112,
+  "tris": 168,
+  "comps": 2,
+  "openPct": 9.1,
+  "vol": -5e-7,
+  "dimsCm": [
+   6.4,
+   0.6,
+   2.2
+  ],
+  "c": [
+   0,
+   1.588,
+   0.05
+  ],
+  "mn": [
+   -0.03190155699849129,
+   1.5846073627471924,
+   0.039312031120061874
+  ],
+  "mx": [
+   0.03190155699849129,
+   1.5905698537826538,
+   0.061510272324085236
+  ],
+  "sel": true,
+  "target": [
+   0,
+   1.588,
+   0.05
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "central-retinal-vein",
+  "name": "Central retinal vein",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 112,
+  "tris": 168,
+  "comps": 2,
+  "openPct": 9.1,
+  "vol": -3e-7,
+  "dimsCm": [
+   6.4,
+   0.7,
+   2.4
+  ],
+  "c": [
+   0,
+   1.588,
+   0.049
+  ],
+  "mn": [
+   -0.03195987641811371,
+   1.584510087966919,
+   0.037294693291187286
+  ],
+  "mx": [
+   0.03195987641811371,
+   1.5911710262298584,
+   0.06119280681014061
+  ],
+  "sel": true,
+  "target": [
+   0,
+   1.588,
+   0.049
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "cephalic-vein",
+  "name": "Cephalic vein",
+  "sys": "cardiovascular",
+  "own": 0,
+  "sel": true,
+  "target": [
+   0.002,
+   1.091,
+   0.025
+  ]
+ },
+ {
+  "id": "cephalic-vein-left",
+  "name": "Left cephalic vein",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 252,
+  "tris": 492,
+  "comps": 1,
+  "openPct": 1.6,
+  "vol": 0.0000173,
+  "dimsCm": [
+   16.4,
+   50.7,
+   4.2
+  ],
+  "c": [
+   0.28,
+   1.091,
+   0.025
+  ],
+  "mn": [
+   0.1981518268585205,
+   0.8374090790748596,
+   0.004192413296550512
+  ],
+  "mx": [
+   0.3622523248195648,
+   1.3444074392318726,
+   0.046018797904253006
+  ],
+  "sel": true,
+  "target": [
+   0.28,
+   1.091,
+   0.025
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "cephalic-vein-right",
+  "name": "Right cephalic vein",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 252,
+  "tris": 492,
+  "comps": 1,
+  "openPct": 1.6,
+  "vol": 0.0000175,
+  "dimsCm": [
+   16.2,
+   50.6,
+   3.4
+  ],
+  "c": [
+   -0.277,
+   1.091,
+   0.023
+  ],
+  "mn": [
+   -0.3585948646068573,
+   0.8378293514251709,
+   0.006067671813070774
+  ],
+  "mx": [
+   -0.1961800456047058,
+   1.3442236185073853,
+   0.03974953666329384
+  ],
+  "sel": true,
+  "target": [
+   -0.277,
+   1.091,
+   0.023
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "cerebral-arterial-circle",
+  "name": "Cerebral arterial circle",
+  "sys": "cardiovascular",
+  "own": 0,
+  "sel": true,
+  "target": [
+   0.001,
+   1.639,
+   0.022
+  ]
+ },
+ {
+  "id": "cerebral-capillary-bed",
+  "name": "Cerebral capillary bed",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 23723,
+  "tris": 36014,
+  "comps": 2672,
+  "openPct": 0,
+  "vol": 1e-7,
+  "dimsCm": [
+   14,
+   14,
+   18.2
+  ],
+  "c": [
+   0,
+   1.666,
+   -0.003
+  ],
+  "mn": [
+   -0.06980814039707184,
+   1.5958534479141235,
+   -0.09362182766199112
+  ],
+  "mx": [
+   0.07047481089830399,
+   1.7360713481903076,
+   0.0879657194018364
+  ],
+  "sel": true,
+  "target": [
+   0,
+   1.666,
+   -0.003
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "coeliac-trunk",
+  "name": "Coeliac trunk and branches",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 188,
+  "tris": 360,
+  "comps": 4,
+  "openPct": 0,
+  "vol": 0.0000036,
+  "dimsCm": [
+   11.1,
+   3.6,
+   6.8
+  ],
+  "c": [
+   0.038,
+   1.163,
+   0.032
+  ],
+  "mn": [
+   -0.017110249027609825,
+   1.1445879936218262,
+   -0.002275131642818451
+  ],
+  "mx": [
+   0.09354846924543381,
+   1.180814504623413,
+   0.06580135226249695
+  ],
+  "sel": true,
+  "target": [
+   0.038,
+   1.163,
+   0.032
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "common-carotid-artery",
+  "name": "Common carotid artery",
+  "sys": "cardiovascular",
+  "own": 0,
+  "sel": true,
+  "target": [
+   0.001,
+   1.422,
+   0.024
+  ]
+ },
+ {
+  "id": "common-carotid-artery-left",
+  "name": "Left common carotid artery",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 62,
+  "tris": 120,
+  "comps": 1,
+  "openPct": 0,
+  "vol": 0.0000038,
+  "dimsCm": [
+   1.4,
+   6.6,
+   1.8
+  ],
+  "c": [
+   0.018,
+   1.422,
+   0.02
+  ],
+  "mn": [
+   0.01142603438347578,
+   1.3887741565704346,
+   0.011639338918030262
+  ],
+  "mx": [
+   0.02544323354959488,
+   1.4550336599349976,
+   0.029303835704922676
+  ],
+  "sel": true,
+  "target": [
+   0.018,
+   1.422,
+   0.02
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "common-carotid-artery-right",
+  "name": "Right common carotid artery",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 62,
+  "tris": 120,
+  "comps": 1,
+  "openPct": 0,
+  "vol": 0.0000025,
+  "dimsCm": [
+   1.4,
+   4.4,
+   1.3
+  ],
+  "c": [
+   -0.017,
+   1.433,
+   0.029
+  ],
+  "mn": [
+   -0.023694371804594994,
+   1.410705804824829,
+   0.02197854407131672
+  ],
+  "mx": [
+   -0.009448722936213017,
+   1.4545600414276123,
+   0.035390570759773254
+  ],
+  "sel": true,
+  "target": [
+   -0.017,
+   1.433,
+   0.029
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "common-iliac-artery",
+  "name": "Common iliac artery",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 204,
+  "tris": 400,
+  "comps": 2,
+  "openPct": 0,
+  "vol": 0.0000194,
+  "dimsCm": [
+   8.3,
+   6.4,
+   2.5
+  ],
+  "c": [
+   0,
+   1.015,
+   0.037
+  ],
+  "mn": [
+   -0.04186469689011574,
+   0.9829156994819641,
+   0.024006305262446404
+  ],
+  "mx": [
+   0.04150436818599701,
+   1.0466585159301758,
+   0.0493176132440567
+  ],
+  "sel": true,
+  "target": [
+   0.001,
+   0.971,
+   0.009
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "coronary-arteries",
+  "name": "Coronary arteries",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 4020,
+  "tris": 7665,
+  "comps": 40,
+  "openPct": 2.8,
+  "vol": -9e-7,
+  "dimsCm": [
+   9.6,
+   9.6,
+   8.5
+  ],
+  "c": [
+   0.02,
+   1.309,
+   0.053
+  ],
+  "mn": [
+   -0.028010878711938858,
+   1.2608215808868408,
+   0.010808790102601051
+  ],
+  "mx": [
+   0.06754069775342941,
+   1.3571796417236328,
+   0.09546451270580292
+  ],
+  "sel": true,
+  "target": [
+   0.02,
+   1.309,
+   0.053
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "external-iliac-artery",
+  "name": "External iliac artery",
+  "sys": "cardiovascular",
+  "own": 0,
+  "sel": true,
+  "target": [
+   0.001,
+   0.944,
+   0.047
+  ]
+ },
+ {
+  "id": "external-iliac-artery-left",
+  "name": "Left external iliac artery",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 101,
+  "tris": 198,
+  "comps": 1,
+  "openPct": 0,
+  "vol": 0.0000134,
+  "dimsCm": [
+   3,
+   9.1,
+   6.9
+  ],
+  "c": [
+   0.045,
+   0.942,
+   0.047
+  ],
+  "mn": [
+   0.02980014495551586,
+   0.8962628245353699,
+   0.012156596407294273
+  ],
+  "mx": [
+   0.05981156975030899,
+   0.9875020384788513,
+   0.08115842938423157
+  ],
+  "sel": true,
+  "target": [
+   0.045,
+   0.942,
+   0.047
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "external-iliac-artery-right",
+  "name": "Right external iliac artery",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 102,
+  "tris": 200,
+  "comps": 1,
+  "openPct": 0,
+  "vol": 0.0000135,
+  "dimsCm": [
+   2.9,
+   9.5,
+   6.3
+  ],
+  "c": [
+   -0.044,
+   0.944,
+   0.05
+  ],
+  "mn": [
+   -0.05876028537750244,
+   0.8964253664016724,
+   0.01879511959850788
+  ],
+  "mx": [
+   -0.030037906020879745,
+   0.991654634475708,
+   0.08210565894842148
+  ],
+  "sel": true,
+  "target": [
+   -0.044,
+   0.944,
+   0.05
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "femoral-artery",
+  "name": "Femoral artery",
+  "sys": "cardiovascular",
+  "own": 0,
+  "sel": true,
+  "target": [
+   -0.001,
+   0.506,
+   0.014
+  ]
+ },
+ {
+  "id": "femoral-artery-left",
+  "name": "Left femoral artery",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 146,
+  "tris": 280,
+  "comps": 1,
+  "openPct": 2.8,
+  "vol": 0.0000119,
+  "dimsCm": [
+   4.5,
+   31.2,
+   5.5
+  ],
+  "c": [
+   0.082,
+   0.76,
+   0.034
+  ],
+  "mn": [
+   0.058904681354761124,
+   0.6039295792579651,
+   0.007051813881844282
+  ],
+  "mx": [
+   0.10413125902414322,
+   0.9155620336532593,
+   0.061845045536756516
+  ],
+  "sel": true,
+  "target": [
+   0.082,
+   0.76,
+   0.034
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "femoral-artery-right",
+  "name": "Right femoral artery",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 150,
+  "tris": 288,
+  "comps": 1,
+  "openPct": 2.7,
+  "vol": 0.0000114,
+  "dimsCm": [
+   5.4,
+   31.3,
+   7
+  ],
+  "c": [
+   -0.081,
+   0.76,
+   0.029
+  ],
+  "mn": [
+   -0.10819221287965775,
+   0.6036436557769775,
+   -0.006450912449508905
+  ],
+  "mx": [
+   -0.05390942469239235,
+   0.9167048335075378,
+   0.06361141055822372
+  ],
+  "sel": true,
+  "target": [
+   -0.081,
+   0.76,
+   0.029
+  ],
+  "targetInBox": true
+ },
+ {
+  "id": "femoral-vein",
+  "name": "Femoral vein",
+  "sys": "cardiovascular",
+  "own": 0,
+  "sel": true,
+  "target": [
+   -0.002,
+   0.76,
+   0.019
+  ]
+ },
+ {
+  "id": "femoral-vein-left",
+  "name": "Left femoral vein",
+  "sys": "cardiovascular",
+  "own": 1,
+  "verts": 146,
+  "tris": 280,
+  "comps": 1,
+  "openPct": 2.8,
+  "vol": 0.0000153,
+  "dimsCm": [
+   4.6,
+   31.2,
+   5.6
+  ],
+  "c": [
+   0.07,
+   0.76,
+   0.024
+  ],
+  "mn": [
+   0.04640087112784386,
+   0.6038686633110046,
+   -0.003542791586369276
+  ],
+  "mx": [
+   0.09267305582761765,
+   0.9157757759094238,
+   0.052415624260902405
+  ],
+  "sel": true,
+  "target": [
+   0.07,
+   0.76,
+   0.024
+  ],
+  "targetInBox": true
+ }
+]
