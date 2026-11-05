@@ -133,7 +133,7 @@
       if (cancel) break; if (k % 8 === 0) { progress('Loose vessels and nerves ' + k + ' / ' + ids.length); await wait(5); }
       var id = ids[k], tot = 0, air = 0, mn = [1e9, 1e9, 1e9], mx = [-1e9, -1e9, -1e9];
       W[id].forEach(function (a) { for (var q = 0; q < a.length; q += 3) for (var j = 0; j < 3; j++) { if (a[q + j] < mn[j]) mn[j] = a[q + j]; if (a[q + j] > mx[j]) mx[j] = a[q + j]; } });
-      var ext = [mx[0] - mn[0], mx[1] - mn[1], mx[2] - mn[2]].sort(function (a, b) { return b - a; }); if (ext[1] > 0.04) continue; /* only thin, tube-like structures */
+      var ext = [mx[0] - mn[0], mx[1] - mn[1], mx[2] - mn[2]].sort(function (a, b) { return b - a; }); if (ext[2] > 0.04) continue; /* only thin, tube-like structures */
       W[id].forEach(function (a) { var st = 3 * Math.max(1, Math.floor(a.length / 3 / 60)); for (var i = 0; i < a.length; i += st) { tot++; if (near(id, a[i], a[i + 1], a[i + 2]) > 12) air++; } });
       n++; if (tot && air / tot >= 0.25) bad.push(id + ' ' + Math.round(100 * air / tot) + '%');
     }
