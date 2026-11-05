@@ -40,3 +40,6 @@ Not detectable by this check: duplicates of procedural schematic parts that have
 ## Clinical review status (4 November 2026)
 
 On 4 November 2026 the app owner stated that all structure records, questions and lessons were reviewed by Dr. Aqsa Hameed Phulpoto, MBBS and Dr. Farhan Ali, MBBS. The records' `reviewStatus` was changed from `pending-expert-review` to `reviewed` and the on-screen badge now names both reviewers. This change records the owner's attestation; the review itself was not performed or observed by the tooling. Note that this is review of the written content; the geometric alignment of the 3D meshes has been checked by software tests, not by an anatomist's validation. If that distinction matters to the reviewers, record it separately.
+
+## Male genital proportions (lod27)
+The Z-Anatomy testes and epididymides in `zanatomy-organs2` were about 2.1 × 2.9 × 2.3 cm (roughly 7 mL), well below adult size. They are now scaled 1.4× about their own position and moved down 0.75 cm so they sit inside the scrotum (approx. 3 × 4 × 3.2 cm). This is a node-transform change only; the meshes are unchanged and still CC BY-SA 4.0 Z-Anatomy. The scrotum and all female external genitalia (vulva, labia, clitoris) remain simple procedural shapes: no licensed mesh exists for them in Z-Anatomy, BodyParts3D or HuBMAP. They are labelled schematic.
