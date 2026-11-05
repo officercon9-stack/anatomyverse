@@ -212,3 +212,6 @@ Source: Z-Anatomy (CC BY-SA 4.0), nerve curves evaluated to tube meshes and simp
 
 ## zanatomy-brainstem.glb (2026-11-05)
 Source: Z-Anatomy (CC BY-SA 4.0): midbrain, pons and medulla oblongata merged as one brainstem, and adenohypophysis plus neurohypophysis merged as the pituitary gland. Replaces the procedural brainstem (112 triangles) and pituitary ellipsoid.
+
+## zanatomy-cerebrum.glb (2026-11-05)
+Source: Z-Anatomy (CC BY-SA 4.0): "White matter of telencephalon" left and right (the cerebral hemispheres with their gyral surface), merged and simplified from 135k to about 16k vertices. Replaces the procedural cerebrum (300 triangles).
