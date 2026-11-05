@@ -54,7 +54,7 @@
       'html.avx-rail aside.av-panel.lg\\:flex .av-nav-link{flex-direction:column;justify-content:center;gap:4px;padding:8px 2px!important;font-size:10.5px;line-height:1.15;text-align:center;height:auto!important;min-height:54px}',
       'html.avx-rail aside.av-panel.lg\\:flex .av-nav-link span{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;flex:none!important}',
       'html.avx-rail aside.av-panel.lg\\:flex > div:last-child p{display:none}',
-      '.av-panel.avx-peek{height:76px!important;overflow:hidden;touch-action:none}.av-panel.avx-peek > div:last-child{overflow:hidden!important;pointer-events:none}',
+      '.av-panel.avx-peek{height:76px!important;overflow:hidden;touch-action:none}.av-panel.fixed.inset-x-0.bottom-0 > div:first-child{touch-action:none;min-height:44px}#avux-sheet .gr{touch-action:none;box-sizing:content-box;padding:8px 0}.av-panel.avx-peek > div:last-child{overflow:hidden!important;pointer-events:none}',
       '#avux-fail{position:absolute;left:10px;right:10px;top:118px;z-index:26;display:flex;gap:8px;align-items:center;padding:10px 12px;border-radius:14px;background:rgba(60,20,40,.92);border:1px solid rgba(255,107,139,.6);color:#ffe4ea;font:500 12.5px/1.35 var(--font-sans,system-ui)}#avux-fail span{flex:1}#avux-fail .avx-b{min-height:34px}@media(min-width:768px){#avux-fail{top:auto;bottom:60px;left:50%;right:auto;transform:translateX(-50%);max-width:560px}}',
       '#avux-nav{display:none}',
       '@media (max-width:767px) and (min-height:501px){html.avx-nav #avux-nav{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:35;height:calc(72px + env(safe-area-inset-bottom));padding:8px 4px env(safe-area-inset-bottom);background:linear-gradient(180deg,#1b3672,#152c60);border-top:1px solid rgba(120,160,240,.28);box-shadow:0 -10px 24px -14px #000c}',
@@ -342,16 +342,45 @@
     var want = h ? Math.max(0, h - 8) + 'px' : '';
     if (sec.style.paddingBottom !== want) { sec.style.paddingBottom = want; sec.style.boxSizing = 'border-box'; setTimeout(function () { var s = r3(); if (s && s.invalidate) s.invalidate(); }, 60); }
   }
-  function wireSheet(sh) {
-    var y0 = null, t0 = 0, fromHd = false, scrolled = false;
-    function innerScrolled(t) { for (var n = t; n && n !== sh; n = n.parentNode) { if (n.scrollTop > 0) return true; } return false; }
-    sh.addEventListener('touchstart', function (e) { var hd = sh.firstElementChild; y0 = e.touches[0].clientY; t0 = Date.now(); fromHd = !!(hd && hd.contains(e.target)); scrolled = innerScrolled(e.target); }, { passive: true });
-    sh.addEventListener('touchend', function (e) { if (y0 == null) return; var dy = (e.changedTouches[0] || {}).clientY - y0; y0 = null; var peeked = sh.classList.contains('avx-peek');
-      if (dy > 40 && !peeked && (fromHd || !scrolled)) { peek = true; }
-      else if (peeked && (dy < -30 || (Math.abs(dy) < 10 && Date.now() - t0 < 500 && !(e.target.closest && e.target.closest('button'))))) { peek = false; }
-      else return; soonFull(); }, { passive: true });
-    sh.addEventListener('click', function (e) { if (sh.classList.contains('avx-peek') && !(e.target.closest && e.target.closest('button[aria-label^="Close"]'))) { peek = false; soonFull(); } }, true);
-  }
+  function wireSheet() {}
+  /* one touch handler for every panel that can cover the 3D view: the details sheet (collapse to a bar / reopen),
+     the View and Tools sheets (swipe down to close) and the structure drawer (swipe left to close).
+     It acts while the finger is moving, so it still works when the browser takes over the gesture. */
+  (function () {
+    var g = null;
+    function inner(t, root) { for (var n = t; n && n !== root; n = n.parentNode) { if (n.scrollTop > 0) return true; } return false; }
+    function kind(t) {
+      if (!t || !t.closest) return null;
+      var d = t.closest('.av-panel.fixed.inset-x-0.bottom-0'); if (d && isMob() && innerWidth < 768) return { k: 'det', r: d };
+      var v = t.closest('#avux-sheet .sh'); if (v) return { k: 'sheet', r: v };
+      var w = t.closest('div.fixed.inset-0.z-40 > .av-panel'); if (w) return { k: 'drawer', r: w };
+      return null;
+    }
+    document.addEventListener('touchstart', function (e) {
+      var c = e.touches.length === 1 && kind(e.target); if (!c) { g = null; return; }
+      var hd = c.k === 'det' && c.r.firstElementChild;
+      g = { k: c.k, r: c.r, x: e.touches[0].clientX, y: e.touches[0].clientY, t: Date.now(), hd: !!(hd && hd.contains(e.target)), sc: inner(e.target, c.r), done: false, peeked: c.r.classList.contains('avx-peek'), tgt: e.target };
+    }, { passive: true, capture: true });
+    document.addEventListener('touchmove', function (e) {
+      if (!g || g.done || !e.touches[0]) return;
+      var dx = e.touches[0].clientX - g.x, dy = e.touches[0].clientY - g.y;
+      if (g.k === 'det') {
+        if (!g.peeked && dy > 36 && Math.abs(dy) > Math.abs(dx) && (g.hd || !g.sc)) { g.done = true; peek = true; soonFull(); }
+        else if (g.peeked && dy < -26 && Math.abs(dy) > Math.abs(dx)) { g.done = true; peek = false; soonFull(); }
+      } else if (g.k === 'sheet') {
+        if (dy > 50 && Math.abs(dy) > Math.abs(dx) * 1.2 && !g.sc) { g.done = true; closeSheet(); }
+      } else if (g.k === 'drawer') {
+        if (dx < -50 && Math.abs(dx) > Math.abs(dy) * 1.2) { g.done = true; var b = g.r.querySelector('button[aria-label="Close panel"]'); if (b) b.click(); }
+      }
+    }, { passive: true, capture: true });
+    function end(e) {
+      var q = g; g = null; if (!q || q.done) return;
+      var c = (e.changedTouches || [])[0]; if (!c) return;
+      if (q.k === 'det' && q.peeked && Math.abs(c.clientY - q.y) < 10 && Math.abs(c.clientX - q.x) < 10 && Date.now() - q.t < 500 && !(q.tgt.closest && q.tgt.closest('button'))) { peek = false; soonFull(); }
+    }
+    document.addEventListener('touchend', end, { passive: true, capture: true });
+    document.addEventListener('touchcancel', function () { g = null; }, { passive: true, capture: true });
+  })();
   function soonFull() { try { tick(); } catch (e) {} setTimeout(function () { try { tick(); } catch (e) {} }, 120); }
   /* after choosing a part from the search box on a phone, close the keyboard so the 3D view is not hidden */
   var lastSid = null;
