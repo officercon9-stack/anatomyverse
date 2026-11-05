@@ -110,3 +110,25 @@ along the limbs. Known remaining: musculocutaneous nerve starts about 10 cm belo
 at 6 mm); phrenic nerve and inferior mesenteric artery still have about 28% of their length unsupported; basilic veins 22% (not yet investigated).
 The Self-check now includes a "Loose vessels and nerves" test (tube-like structures with 25% or more of their length over 12 mm from any other structure).
 Not yet checked: Z-Anatomy joint capsules, ligaments and bursae in the limbs against the displayed bones.
+
+## Repair pass, 5 November 2026 (carotid/jugular, phrenic, mesenteric, genitalia)
+
+What was wrong, what was done, and how it was checked. All checks below are technical checks in a desktop browser at the sizes stated. None is expert anatomical validation and none was run on a physical phone.
+
+1. Neck vessels were truncated. The common carotid arteries and internal jugular veins were short blunt tubes ending in the lower neck. There were no meshes at all for the internal carotid, external carotid or vertebral arteries unless the detailed brain was on.
+   - Fix: new assets `zanatomy-neckvessels` and `zanatomy-neckvessels-skull` from Z-Anatomy curves (CC BY-SA 4.0). The short BodyParts3D tubes were removed. A generated joining tube closes the jugular-to-subclavian and vertebral-to-subclavian gaps.
+   - Check: minimum distances 0.8 to 1.0 mm for common carotid to aorta, common carotid to internal and external carotid, jugular to subclavian vein. Side and front screenshots show continuous vessels to the skull base. New record `external-carotid-artery`.
+2. Phrenic nerve was a thick generated rod floating 3 cm from its roots, with a second schematic copy on the diaphragm.
+   - Fix: new generated course (`anatomyverse-phrenic`), roots to diaphragm with three terminal branches per side, thin like a real nerve. Both old copies removed.
+   - Check: 0.7 mm from the brachial plexus, 0.9 mm from the diaphragm; screenshots with the heart, great vessels and diaphragm isolated.
+3. Inferior mesenteric artery ended 42 mm from the colon (27% of its length unsupported).
+   - Fix: generated left colic and sigmoid branches snapped to the displayed colon.
+   - Check: now 0.6 mm from the large intestine. Whole-body loose-vessel test: 0 of 82 structures with 25% or more of their length more than 12 mm from anything.
+4. Female external genitalia were pill-shaped ellipsoids and tubes.
+   - Fix: generated labia majora, labia minora, clitoral glans, body, crura and hood, and mons pubis (`anatomyverse-vulva`). No third-party source exists: Z-Anatomy and BodyParts3D are male-based. Flagged for expert review.
+5. Male: the scrotum was a translucent sphere, the spermatic cords were thick tan rods ending in space, and the male urethra started 6 cm above the bladder.
+   - Fix: generated bilobed scrotum with median raphe; spermatic cord rebuilt around the Z-Anatomy ductus deferens with generated sheath, testicular artery and pampiniform plexus; urethra replaced by the Z-Anatomy urethra from the bladder neck (new record `male-urethra`).
+   - Check: front, side and oblique screenshots. The cord and ductus reach the testis and the pelvis.
+6. Loading failure handling: a deliberately broken asset (a syntax error in a build script left a missing file) showed the app's own message "Some detailed parts could not load. Simplified shapes are shown" with Retry, and the rest of the app kept working.
+
+Not yet done or not verified: see the final report.

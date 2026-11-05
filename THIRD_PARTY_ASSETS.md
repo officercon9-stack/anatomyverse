@@ -218,3 +218,31 @@ Source: Z-Anatomy (CC BY-SA 4.0): "White matter of telencephalon" left and right
 
 ## zanatomy-cerebellum.glb (2026-11-05)
 Source: Z-Anatomy (CC BY-SA 4.0): cerebellar hemisphere lobules, vermis lobules, tonsils and flocculi merged and simplified. Replaces the procedural cerebellum.
+
+## zanatomy-pituitary.glb (2026-11-05)
+Source: Z-Anatomy (CC BY-SA 4.0), split out of the brainstem file so the brainstem and pituitary can be gated separately. Licence and attribution unchanged.
+
+## zanatomy-neckvessels.glb and zanatomy-neckvessels-skull.glb (2026-11-05)
+Source: Z-Anatomy (CC BY-SA 4.0), curve objects evaluated to tube meshes: left and right common carotid, external carotid, internal carotid (neck part, plus the skull-base part in the `-skull` file, hidden when the detailed BodyParts3D brain supplies it), internal jugular vein and vertebral artery. They replace the short common carotid and internal jugular tubes in `anatomyverse-organs.glb`.
+Generated part (original 3D Anatomy work, no third-party mesh): a short connecting tube from the lower end of each internal jugular vein to the subclavian vein, and from each vertebral artery to the subclavian artery, because the two sources sit in slightly different frames.
+
+## anatomyverse-organs.glb: subclavian to axillary connection (2026-11-05)
+Generated part (original work): a tapered tube joining the end of each subclavian artery and vein to the start of the axillary vessel (5.6 to 7.2 cm). Gaps after joining: 0.4 to 1.4 mm. Approximation; pending expert review.
+
+## anatomyverse-phrenic.glb (2026-11-05)
+Generated (original work, no third-party mesh). Z-Anatomy has no phrenic nerve. The course (roots at C3 to C5, in front of the subclavian artery, beside the heart, to the diaphragm, with three terminal branches per side) was built from published anatomical descriptions and placed against the displayed heart, great vessels and diaphragm. Approximation; pending expert review. Replaces the procedural rod and the schematic `phrenic_nerve_dia` in `anatomyverse-diasupply.glb`.
+
+## anatomyverse-mesenteric.glb (2026-11-05)
+Generated (original work). Left colic and sigmoid branches of the inferior mesenteric artery, snapped to the displayed descending and sigmoid colon. Approximation; pending expert review.
+
+## anatomyverse-vulva.glb (2026-11-05)
+Generated (original work, no third-party mesh). Z-Anatomy and BodyParts3D are male-based and contain no female external genitalia. Labia majora, labia minora, clitoral glans, body, crura and hood, and the mons pubis were modelled with signed-distance shapes from published anatomical descriptions and fitted to the displayed vagina, urethral orifice and pelvis. Approximation; pending expert review. Replaces the procedural ellipsoid and tube shapes.
+
+## anatomyverse-scrotum.glb (2026-11-05)
+Mixed. The ductus deferens is from Z-Anatomy (CC BY-SA 4.0, derived from BodyParts3D CC BY-SA 2.1 Japan), thickened for display. The scrotal sac, cord sheath, testicular artery and pampiniform plexus are generated original work (no third-party mesh), fitted around the displayed testes. Approximation; pending expert review. Replaces the procedural scrotum and cord tubes.
+
+## zanatomy-male-urethra.glb (2026-11-05)
+Source: Z-Anatomy (CC BY-SA 4.0): the urethra curve, thickened for display. It starts at the bladder neck. It replaces the procedural urethra, which began 6 cm above the bladder. New record `male-urethra` added; `external-carotid-artery` added as a record for the new external carotid mesh.
+
+## Share-alike note for generated parts
+Generated parts were built independently and contain no third-party vertices. Where a generated part is merged into the same glb file as a Z-Anatomy mesh (the scrotum file), the whole file is distributed under CC BY-SA 4.0 and listed on the credits page.
