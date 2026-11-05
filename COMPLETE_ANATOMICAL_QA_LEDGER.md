@@ -4,6 +4,8 @@ Every record (1751). Status values: Not inspected; Inspected - passed; Inspected
 
 Technical verification (mesh metrics, selection, screenshots by the developer) is NOT anatomical validation by a qualified expert. No row is marked as expert-validated.
 
+The ledger was created with 1,751 records. Nine records were added on 5 November 2026 (external-carotid-artery, male-urethra, gingiva, hard-palate, soft-palate, uvula, parotid-gland, submandibular-gland, sublingual-gland) and are not listed yet; the app now holds 1,760.
+
 Order: system, then id. Batches of 50. Batch 1 was inspected row by row (camera poses and screenshots). For every other row the Notes column holds the result of an automated whole-scene scan run on 5 November 2026 (mesh present, vertex count, source by node name). The scan is not a visual inspection, so those rows stay "Not inspected".
 
 | # | Batch | System | Id | Name | Status | Notes |

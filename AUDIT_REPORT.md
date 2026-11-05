@@ -131,4 +131,27 @@ What was wrong, what was done, and how it was checked. All checks below are tech
    - Check: front, side and oblique screenshots. The cord and ductus reach the testis and the pelvis.
 6. Loading failure handling: a deliberately broken asset (a syntax error in a build script left a missing file) showed the app's own message "Some detailed parts could not load. Simplified shapes are shown" with Retry, and the rest of the app kept working.
 
-Not yet done or not verified: see the final report.
+7. Mouth: the app had no gums, hard palate, soft palate, uvula or salivary glands, the tongue was a 343-vertex block, the "taste buds" and "oral cavity" shapes floated 3 to 5 cm above the mouth in the nasal region, and the third molars were white ellipsoids.
+   - Fix: new asset `zanatomy-oral` (Z-Anatomy gingiva, soft palate, uvula, parotid, submandibular and sublingual glands; tongue smoothed by subdivision; generated hard-palate mucosa fitted to the Z-Anatomy palate bones) with seven new records. New asset `anatomyverse-oral2`: generated circumvallate, fungiform and foliate papillae snapped to the tongue surface, and a translucent oral-cavity space. New asset `anatomyverse-thirdmolars`: four third molars adapted from the Z-Anatomy second molars (copied, scaled to 88%, moved behind the second molar). Z-Anatomy has no third molar, so position and size are approximate.
+   - Check: isolated screenshots of tongue, gums, palate and all teeth with roots from three angles.
+8. Marker anchors for the aggregate records left lung, right lung, hand bones and foot bones (their parts carry other ids). Self-check duplicate-mesh test now compares vertex counts, so components of one structure that share a bounding box (spermatic cord) are not reported as duplicates.
+9. Phone layout: the Self-check link covered the bottom "View" button at 390 px width; moved.
+
+## Tests run on 5 November 2026 (desktop Chromium via Playwright, software rendering; not a physical phone)
+- In-app Self-check, quick run: records 1,760 with no duplicate names; no structure drawn twice (728 checked); 28 known vessel and nerve joins within 15 mm; 0 of 82 vessels and nerves with 25% or more of their length more than 12 mm from anything. Marker check on 88 structures: pass except two structures that exist only when the Detailed brain is on (right deep cerebral structures, left posterior cerebral artery): selecting them in normal mode shows no marker because no mesh is loaded.
+- Scripted click-through at 1280 x 800: search and select, info panel, isolate, show all, hide and undo, reset view, seven camera views (opposite sides confirmed), male and female, Clean/Smart/Index, visibility menu, fade others, nine app pages (dashboard, lab, systems, lessons, quiz, flashcards, clinical, dictionary, progress), theme toggle. 0 page errors.
+- Muscular system through the real interface: choosing Muscular keeps the whole body with its translucent silhouette; selecting biceps brachii highlights it with origin and insertion markers and fades the rest; the info card, Hide, Isolate, Reveal, Fade others, Undo and Reset view are in the top bar.
+- Phone size (390 x 844, touch, lite models forced): 26 lite files and 1 full file (skull) loaded, 0 failed requests, 0 page errors, no overlapping controls after the fix; View, Layers, Tools and Info sheets open; search selects; dragging rotates the camera.
+- Tablet size (820 x 1180): loads, 0 errors. One cosmetic overlap remains: the last toolbar icon sits under the Animate button.
+- Axe accessibility scan earlier in the session: clean on `/`, `/app/lab`, `/app/admin`.
+- Loading failure: a missing model file showed the app's own message with Retry and the rest of the app kept working.
+
+## Not done, not verified, or needs a person
+- No test on a physical Android phone and no APK build: the sandbox has Java and Gradle but no Android SDK and cannot reach the Google Maven repository. The Capacitor project (target and compile SDK 36, minimum SDK 24) exists but `www` has not been synced or built.
+- No expert anatomical validation. Every generated part (phrenic nerves, mesenteric branches, vulva, scrotum and cord sheath, taste papillae, oral cavity, hard palate, third molars, joining tubes) is labelled in `THIRD_PARTY_ASSETS.md` and on the credits page as a generated approximation for expert review. The reviewer text on records is the owner's attestation and was not changed.
+- 1,059 records have no Latin name, 862 have no function text and 386 have very short descriptions. Writing these needs a qualified author or cited sources; none were auto-generated.
+- Ledger rows 51 onward are "Not inspected": they carry an automated scan note only. 413 are flagged as low-vertex shapes and 46 have no mesh found.
+- Still generated or schematic, not replaced: eye nerves and vessels (ciliary ganglion, short ciliary nerves, central retinal artery and vein, posterior ciliary arteries, pupil), parathyroids, mammary gland, olfactory epithelium, lymph node spheres, female urethra and external urethral orifice, vaginal opening, vagina tube. The arm veins (cephalic, basilic) are straight schematic tubes attached to the limb vessels.
+- Detailed-brain-only structures give no marker in normal mode.
+- Tablet toolbar overlap (cosmetic).
+- Licence position: assets are CC BY-SA 4.0, CC BY-SA 2.1 Japan, CC BY 4.0 (HuBMAP) and original work. Commercial use is allowed with attribution and share-alike on adapted meshes. Whether the app as a whole must be offered under share-alike is a legal question for a lawyer. Google Play health-app policies and the accuracy of the "Reviewed by" badge are the owner's responsibility.

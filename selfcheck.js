@@ -104,7 +104,7 @@
         var cv = document.querySelector('canvas'), cr = cv && cv.getBoundingClientRect(), svg = dot.ownerSVGElement.getBoundingClientRect(), dx = +dot.getAttribute('cx') + svg.left, dy = +dot.getAttribute('cy') + svg.top, best = 1e9, any = false;
         r.scene.updateMatrixWorld(true); var cam = r.camera, ce = cam.matrixWorldInverse.elements, pe = cam.projectionMatrix.elements;
         r.scene.traverse(function (o) {
-          if (!o.isMesh || !o.userData) return; var sid = o.userData.structureId; if (!sid || !(sid === id || sid.indexOf(id + '-') === 0)) return;
+          if (!o.isMesh || !o.userData) return; var sid = o.userData.structureId; if (!sid || !(sid === id || sid.indexOf(id + '-') === 0 || (globalThis.__avAliasKid && globalThis.__avAliasKid(id, sid)))) return;
           var p = o.geometry.attributes.position, e = o.matrixWorld.elements, step = Math.max(1, Math.floor(p.count / 800));
           for (var i = 0; i < p.count; i += step) {
             var x = p.getX(i), y = p.getY(i), z = p.getZ(i), wx = e[0] * x + e[4] * y + e[8] * z + e[12], wy = e[1] * x + e[5] * y + e[9] * z + e[13], wz = e[2] * x + e[6] * y + e[10] * z + e[14];
