@@ -120,6 +120,25 @@
     if (s0) store().focusStructure(s0);
     add('Selection and markers', bad.length ? 'fail' : 'pass', n + ' structures tested' + (cancel ? ' (stopped early)' : '') + '; ' + bad.length + ' problems' + (bad.length ? ': ' + bad.slice(0, 12).join('; ') : ''));
   }
+
+  async function checkAirborne(add, by, progress) {
+    var rec = R(), C = 0.01, grid = new Map(), key = function (x, y, z) { return x + ',' + y + ',' + z; }, W = {};
+    Object.keys(by).forEach(function (id) { W[id] = cat(by[id]); W[id].forEach(function (a) { for (var i = 0; i < a.length; i += 3 * Math.max(1, Math.floor(a.length / 3 / 400))) { var k = key(Math.floor(a[i] / C), Math.floor(a[i + 1] / C), Math.floor(a[i + 2] / C)), c = grid.get(k); if (!c) grid.set(k, c = []); c.push(id, a[i], a[i + 1], a[i + 2]); } }); });
+    var rel = function (a, b) { return a === b || a.indexOf(b + '-') === 0 || b.indexOf(a + '-') === 0; };
+    function near(id, x, y, z) { var best = 1e9, cx = Math.floor(x / C), cy = Math.floor(y / C), cz = Math.floor(z / C);
+      for (var R2 = 1; R2 <= 2; R2++) { for (var dx = -R2; dx <= R2; dx++) for (var dy = -R2; dy <= R2; dy++) for (var dz = -R2; dz <= R2; dz++) { var c = grid.get(key(cx + dx, cy + dy, cz + dz)); if (!c) continue; for (var i = 0; i < c.length; i += 4) { if (rel(c[i], id)) continue; var d = Math.hypot(c[i + 1] - x, c[i + 2] - y, c[i + 3] - z); if (d < best) best = d; } } if (best < R2 * C) break; }
+      return best * 1000; }
+    var bad = [], n = 0, ids = Object.keys(by).filter(function (id) { var sys = rec[id] && rec[id].system; return sys === 'cardiovascular' || sys === 'nervous'; });
+    for (var k = 0; k < ids.length; k++) {
+      if (cancel) break; if (k % 8 === 0) { progress('Loose vessels and nerves ' + k + ' / ' + ids.length); await wait(5); }
+      var id = ids[k], tot = 0, air = 0, mn = [1e9, 1e9, 1e9], mx = [-1e9, -1e9, -1e9];
+      W[id].forEach(function (a) { for (var q = 0; q < a.length; q += 3) for (var j = 0; j < 3; j++) { if (a[q + j] < mn[j]) mn[j] = a[q + j]; if (a[q + j] > mx[j]) mx[j] = a[q + j]; } });
+      var ext = [mx[0] - mn[0], mx[1] - mn[1], mx[2] - mn[2]].sort(function (a, b) { return b - a; }); if (ext[1] > 0.04) continue; /* only thin, tube-like structures */
+      W[id].forEach(function (a) { var st = 3 * Math.max(1, Math.floor(a.length / 3 / 60)); for (var i = 0; i < a.length; i += st) { tot++; if (near(id, a[i], a[i + 1], a[i + 2]) > 12) air++; } });
+      n++; if (tot && air / tot >= 0.25) bad.push(id + ' ' + Math.round(100 * air / tot) + '%');
+    }
+    add('Loose vessels and nerves', bad.length ? 'fail' : 'pass', n + ' vessels and nerves tested; ' + bad.length + ' have 25% or more of their length more than 12 mm from any other structure' + (bad.length ? ': ' + bad.join(', ') : ''));
+  }
   function checkState(add) {
     var s = store(), notes = [];
     if (s.isolated && s.isolated.length) notes.push('isolation is on (' + s.isolated.length + ')'); if (s.hidden && s.hidden.length) notes.push(s.hidden.length + ' structures hidden');
@@ -132,8 +151,8 @@
     try {
       progress('Reading records'); checkRecords(add); await wait(20);
       checkState(add); progress('Scanning the 3D scene'); var by = meshesById(); checkSceneDuplicates(add, by); await wait(20);
-      progress('Checking vessel and nerve joins'); await wait(20); checkContinuity(add, by);
-      var ids = Object.keys(R()).sort(); if (mode === 'quick') ids = ids.filter(function (_, i) { return i % 20 === 0; }); await checkMarkers(add, ids, progress);
+      progress('Checking vessel and nerve joins'); await wait(20); checkContinuity(add, by); await checkAirborne(add, by, progress);
+      var ids = Object.keys(R()).sort(); if (mode === 'aironly') ids = []; if (mode === 'quick') ids = ids.filter(function (_, i) { return i % 20 === 0; }); await checkMarkers(add, ids, progress);
     } catch (e) { add('Self-check error', 'fail', String(e && e.message || e)); }
     running = false; progress(cancel ? 'Stopped' : 'Finished'); report = { when: new Date().toISOString(), mode: mode, note: 'Technical (software) checks only. Not validation by an anatomical expert.', results: out }; if (globalThis.__avSelfCheck) globalThis.__avSelfCheck.last = report;
   }

@@ -93,3 +93,20 @@ Quick run (88 records, 3 min): 1751 records, no duplicate names or meshes; joins
 markers: 83 of 88 on the structure; 5 with no marker shown (deep cerebral structures right, foot bones right,
 musculophrenic artery, right lung, thalamic perforating arteries left) - not yet investigated.
 Also fixed: aggregate records with left/right children (e.g. Femoral artery) now get a marker anchored on their children.
+
+## Loose limb nerves (owner report, Nov 2026)
+Defect: the arm and leg nerves imported from Z-Anatomy (median, ulnar, radial, musculocutaneous, axillary, sciatic,
+femoral, tibial, common fibular) ran through empty space, 8-11 cm medial to the limb bones the app displays
+(e.g. at y=1.20 m: displayed humerus x=0.263, median nerve x=0.183). 43-49% of the length of the median, ulnar,
+musculocutaneous and tibial nerves was more than 12 mm from any other structure. Earlier checks missed it because they only tested
+chosen joins and nerve ends, not the whole path.
+Cause: Z-Anatomy nerves fit Z-Anatomy bones; the displayed limb bones are from a wider, longer body (the leg is 5 cm higher at the knee).
+Correction: each nerve was moved by the measured difference between the Z-Anatomy bone centreline (humerus, radius/ulna; femur, tibia)
+and the displayed bone centreline at the same level, with the y levels mapped between landmarks (shoulder, elbow, wrist; hip, knee, ankle).
+The shoulder and hip ends are held fixed (smoothstep taper), so the plexus and cauda equina joins are kept. Originals backed up.
+Verification (technical): airborne length of those nerves now under 10%; nerve-to-companion-vessel distances 1.9 mm (median / brachial artery),
+2.2 mm (tibial / posterior tibial artery); plexus joins 0.0-0.3 mm; sciatic to cauda equina 0.2-0.5 mm; front-view screenshot shows the nerves
+along the limbs. Known remaining: musculocutaneous nerve starts about 10 cm below the Z-Anatomy plexus mesh (a gap in the source; it touches the median nerve
+at 6 mm); phrenic nerve and inferior mesenteric artery still have about 28% of their length unsupported; basilic veins 22% (not yet investigated).
+The Self-check now includes a "Loose vessels and nerves" test (tube-like structures with 25% or more of their length over 12 mm from any other structure).
+Not yet checked: Z-Anatomy joint capsules, ligaments and bursae in the limbs against the displayed bones.
