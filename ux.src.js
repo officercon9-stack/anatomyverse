@@ -1116,7 +1116,7 @@
     document.documentElement.classList.toggle('avx-onlab', onLab); if (!onLab) Array.prototype.forEach.call(document.querySelectorAll('div[style*="position: fixed"]'), function (d) { if (/Drag the title bar/.test(d.textContent || '') && d.style.display !== 'none') d.style.setProperty('display', 'none', 'important'); });
     if (!onLab) { try { lessonTidy(sec); } catch (e) {} }
     if (!onLab || !row) { if (bar) { bar.remove(); B = {}; mounted = null; } var fb = $('#avux-fab'); if (fb) fb.remove(); var nv = $('#avux-nav'); if (nv) nv.remove(); document.documentElement.classList.remove('avx-nav'); closeSheet(); return; }
-    mountFab(); markMobile(sec); applyRail(); mountNav(); try { labHeading(); } catch (e) {} try { mountScroll(); } catch (e) {} try { mountScrollX(); } catch (e) {} try { mountCut(); } catch (e) {} try { mountStudy(); } catch (e) {} try { fitPlaceholders(); } catch (e) {}
+    mountFab(); markMobile(sec); applyRail(); mountNav(); try { labHeading(); } catch (e) {} try { mountScroll(); } catch (e) {} try { mountScrollX(); } catch (e) {} try { fitPlaceholders(); } catch (e) {}
     if (!bar || mounted !== row) { if (bar) bar.remove(); B = {}; mounted = row; css(); mountBar(row); last = JSON.stringify(snap()); }
     light();
   }
