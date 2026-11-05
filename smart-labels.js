@@ -147,6 +147,20 @@
       if (restrictSys && R[id].system !== restrictSys) return;
       (by[id] = by[id] || []).push(o);
     });
+    /* aggregate records (e.g. "Femoral artery") have no mesh of their own: anchor the selected one on its left/right children */
+    try {
+      var sel = globalThis.__avStore && globalThis.__avStore.getState().selectedId;
+      if (sel && R[sel] && !by[sel] && (!restrictSys || R[sel].system === restrictSys)) {
+        var kids = [];
+        s.scene.traverse(function (o) {
+          if (!o.isMesh || !o.userData) return;
+          var id = o.userData.structureId; if (!id || id.indexOf(sel + '-') !== 0) return;
+          if (!chainVisible(o) || !meshOpaque(o)) return;
+          kids.push(o);
+        });
+        if (kids.length) by[sel] = kids;
+      }
+    } catch (e) {}
     return by;
   }
 

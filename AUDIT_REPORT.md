@@ -84,3 +84,12 @@ Verification: scene mesh counts per structure with the detailed brain off, on, o
 cerebellum (one each, no duplicates); frontal lobe top 1.701 m under the skull top 1.705 m; pituitary now 1.594-1.606 m
 against the Z-Anatomy pituitary at 1.595-1.608 m; screenshots from front and side show a single cerebellum.
 Not yet checked: other detailed-brain layers (vessels, CSF, tracts, meninges) against the skull, by eye.
+
+## In-app Self-check (Nov 2026)
+selfcheck.js adds a "Self-check" link on the lab page (also Ctrl+Shift+K). It runs technical checks: duplicate record names,
+duplicate meshes, 28 known vessel/nerve joins (15 mm tolerance), selection and marker position, view state.
+Safe repairs only: reset view and visibility; clear cached app files. It never edits anatomy and is not expert validation.
+Quick run (88 records, 3 min): 1751 records, no duplicate names or meshes; joins: subclavian-axillary gap 61/64 mm (known defect);
+markers: 83 of 88 on the structure; 5 with no marker shown (deep cerebral structures right, foot bones right,
+musculophrenic artery, right lung, thalamic perforating arteries left) - not yet investigated.
+Also fixed: aggregate records with left/right children (e.g. Femoral artery) now get a marker anchored on their children.
