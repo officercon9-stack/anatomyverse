@@ -378,6 +378,15 @@
       var c = (e.changedTouches || [])[0]; if (!c) return;
       if (q.k === 'det' && q.peeked && Math.abs(c.clientY - q.y) < 10 && Math.abs(c.clientX - q.x) < 10 && Date.now() - q.t < 500 && !(q.tgt.closest && q.tgt.closest('button'))) { peek = false; soonFull(); }
     }
+    /* taps: the grey handle toggles the bar; the chevron on the tall sheet collapses all the way to the bar */
+    document.addEventListener('click', function (e) {
+      var d = e.target.closest && e.target.closest('.av-panel.fixed.inset-x-0.bottom-0'); if (!d || !isMob() || innerWidth >= 768) return;
+      var hd = d.firstElementChild; if (!hd || !hd.contains(e.target) || e.target.closest('button[aria-label^="Close"]')) return;
+      var btn = e.target.closest('button');
+      if (d.classList.contains('avx-peek')) return;
+      if (!btn) { peek = true; soonFull(); return; }
+      if (/collapse/i.test(btn.getAttribute('aria-label') || '')) { peek = true; soonFull(); }
+    }, true);
     document.addEventListener('touchend', end, { passive: true, capture: true });
     document.addEventListener('touchcancel', function () { g = null; }, { passive: true, capture: true });
   })();
