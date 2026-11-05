@@ -49,3 +49,6 @@ Pharynx (Z-Anatomy nasopharynx, oropharynx, laryngopharynx), nasal cavity (Z-Ana
 
 ## 2026-11-05 female external genitalia (procedural)
 No licensed vulva, labia or clitoris mesh exists (Z-Anatomy and HuBMAP have none), so these remain schematic parts. Their shape was reworked: smooth labia majora and minora tubes that start at the mons pubis and meet at the vestibule, replacing the stacked-capsule shapes and the oversized flat mons disc. Ids unchanged.
+
+## 2026-11-05 nerves from Z-Anatomy
+New asset zanatomy-nerves (see THIRD_PARTY_ASSETS.md). Two new structure records were added: cauda-equina and spinal-nerve-roots (no reviewStatus, the named reviewers have not yet reviewed these two texts). Measured gaps after import: sciatic to cauda equina 0.1 mm, brachial plexus to spinal roots 0, spinal roots to spinal cord 0.2 mm, cauda equina to cord 1.3 cm (the HuBMAP cord ends above the Z-Anatomy conus), vagus to brainstem 1.4 cm, phrenic to roots 3.3 cm (no licensed source).
