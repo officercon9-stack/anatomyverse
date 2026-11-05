@@ -215,3 +215,6 @@ Source: Z-Anatomy (CC BY-SA 4.0): midbrain, pons and medulla oblongata merged as
 
 ## zanatomy-cerebrum.glb (2026-11-05)
 Source: Z-Anatomy (CC BY-SA 4.0): "White matter of telencephalon" left and right (the cerebral hemispheres with their gyral surface), merged and simplified from 135k to about 16k vertices. Replaces the procedural cerebrum (300 triangles).
+
+## zanatomy-cerebellum.glb (2026-11-05)
+Source: Z-Anatomy (CC BY-SA 4.0): cerebellar hemisphere lobules, vermis lobules, tonsils and flocculi merged and simplified. Replaces the procedural cerebellum.

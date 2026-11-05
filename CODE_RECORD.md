@@ -52,3 +52,10 @@ No licensed vulva, labia or clitoris mesh exists (Z-Anatomy and HuBMAP have none
 
 ## 2026-11-05 nerves from Z-Anatomy
 New asset zanatomy-nerves (see THIRD_PARTY_ASSETS.md). Two new structure records were added: cauda-equina and spinal-nerve-roots (no reviewStatus, the named reviewers have not yet reviewed these two texts). Measured gaps after import: sciatic to cauda equina 0.1 mm, brachial plexus to spinal roots 0, spinal roots to spinal cord 0.2 mm, cauda equina to cord 1.3 cm (the HuBMAP cord ends above the Z-Anatomy conus), vagus to brainstem 1.4 cm, phrenic to roots 3.3 cm (no licensed source).
+
+## 2026-11-05 defect fixes
+- Removed duplicate records: inferior-concha (kept inferior-nasal-concha and its left/right children; the BodyParts3D concha nodes now map to the left/right ids), and the first copy of hyoid-bone, mandible, ophthalmic-artery and internal-jugular-vein (the second copy was already the one shown). Structures: 1751 records, 1751 unique ids.
+- Admin status list no longer offers "Pending expert review".
+- Accessibility and touch polish in ux.js: larger hit area on the 3D badges, toolbar labels now start with their visible text, preview no longer role=img while holding controls, unique aside labels, an h1 role where a page has none, landing preview button no longer overlaps the credit line.
+- Cerebellum replaced from Z-Anatomy.
+- Not changed: 862 records without function text, 1,059 without Latin name, 105 very short descriptions (clinical text needs a clinician or a cited source, not generated text).

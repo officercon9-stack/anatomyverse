@@ -1193,4 +1193,31 @@
     var n = 0, h = setInterval(function () { n++; if (st().selectedId !== id) { clearInterval(h); return; } if (hasMesh(id) || n > 40) { clearInterval(h); if (hasMesh(id)) { try { st().focusStructure(id); } catch (e) {} } } }, 400);
   }
   var iv = setInterval(function () { if (globalThis.__avStore) { clearInterval(iv); wrapHover(); globalThis.__avStore.subscribe(function () { try { gateSel(); } catch (e) {} }); wrapSex(); restoreSel(); globalThis.__avStore.subscribe(soon); tick(); } }, 200);
+
+  /* accessibility and touch polish: larger hit areas for the small 3D badges, labels that contain their visible text,
+     a preview that is not marked as an image while it holds controls, and a main heading on every page */
+  (function () {
+    var st = document.createElement('style');
+    st.textContent = 'button.av-badge{position:relative}button.av-badge::after{content:"";position:absolute;inset:-9px -6px}' +
+      'a.av-btn.av-btn--sm.absolute.bottom-3.right-3{bottom:1.9rem}';
+    document.head.appendChild(st);
+    function fix() {
+      try {
+        var tools = document.querySelectorAll('.av-tool[aria-label]');
+        for (var i = 0; i < tools.length; i++) {
+          var b = tools[i], lab = b.getAttribute('aria-label') || '', raw = (b.textContent || '').replace(/\s+/g, ' ').trim();
+          if (b.dataset.avxLab === lab) continue;
+          var name = raw === '\u2640' ? 'Female' : raw === '\u2642' ? 'Male' : raw.replace(/[^A-Za-z0-9 ]/g, '').trim();
+          if (!name) continue;
+          var re = new RegExp('^' + name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(\\s|:|$)', 'i');
+          if (!re.test(lab)) { var nl = name + ': ' + lab; b.setAttribute('aria-label', nl); b.dataset.avxLab = nl; }
+        }
+        var imgs = document.querySelectorAll('div[role=img]');
+        for (var j = 0; j < imgs.length; j++) { if (imgs[j].querySelector('button,a,input,[tabindex]')) imgs[j].setAttribute('role', 'group'); }
+        var as = document.querySelectorAll('aside:not([aria-label]):not([aria-labelledby])'); if (as.length > 1) for (var q = 0; q < as.length; q++) as[q].setAttribute('aria-label', q === 0 ? 'Side panel' : 'Side panel ' + (q + 1));
+        if (!document.querySelector('h1')) { var h = document.querySelector('main h2, h2'); if (h && !h.getAttribute('role')) { h.setAttribute('role', 'heading'); h.setAttribute('aria-level', '1'); } }
+      } catch (e) {}
+    }
+    setInterval(function () { if (!document.hidden) fix(); }, 1500); setTimeout(fix, 600);
+  })();
 })();
