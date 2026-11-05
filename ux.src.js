@@ -54,7 +54,7 @@
       'html.avx-rail aside.av-panel.lg\\:flex .av-nav-link{flex-direction:column;justify-content:center;gap:4px;padding:8px 2px!important;font-size:10.5px;line-height:1.15;text-align:center;height:auto!important;min-height:54px}',
       'html.avx-rail aside.av-panel.lg\\:flex .av-nav-link span{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;flex:none!important}',
       'html.avx-rail aside.av-panel.lg\\:flex > div:last-child p{display:none}',
-      '.av-panel.avx-peek{height:132px!important;overflow:hidden}.av-panel.avx-peek > div:last-child{overflow:hidden!important;pointer-events:none}',
+      '.av-panel.avx-peek{height:76px!important;overflow:hidden;touch-action:none}.av-panel.avx-peek > div:last-child{overflow:hidden!important;pointer-events:none}',
       '#avux-fail{position:absolute;left:10px;right:10px;top:118px;z-index:26;display:flex;gap:8px;align-items:center;padding:10px 12px;border-radius:14px;background:rgba(60,20,40,.92);border:1px solid rgba(255,107,139,.6);color:#ffe4ea;font:500 12.5px/1.35 var(--font-sans,system-ui)}#avux-fail span{flex:1}#avux-fail .avx-b{min-height:34px}@media(min-width:768px){#avux-fail{top:auto;bottom:60px;left:50%;right:auto;transform:translateX(-50%);max-width:560px}}',
       '#avux-nav{display:none}',
       '@media (max-width:767px) and (min-height:501px){html.avx-nav #avux-nav{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:35;height:calc(72px + env(safe-area-inset-bottom));padding:8px 4px env(safe-area-inset-bottom);background:linear-gradient(180deg,#1b3672,#152c60);border-top:1px solid rgba(120,160,240,.28);box-shadow:0 -10px 24px -14px #000c}',
@@ -343,10 +343,12 @@
     if (sec.style.paddingBottom !== want) { sec.style.paddingBottom = want; sec.style.boxSizing = 'border-box'; setTimeout(function () { var s = r3(); if (s && s.invalidate) s.invalidate(); }, 60); }
   }
   function wireSheet(sh) {
-    var y0 = null, t0 = 0;
-    sh.addEventListener('touchstart', function (e) { var hd = sh.firstElementChild; if (!hd || !hd.contains(e.target) && !sh.classList.contains('avx-peek')) return; y0 = e.touches[0].clientY; t0 = Date.now(); }, { passive: true });
-    sh.addEventListener('touchend', function (e) { if (y0 == null) return; var dy = (e.changedTouches[0] || {}).clientY - y0; y0 = null;
-      if (dy > 40) { peek = true; } else if (dy < -40 || (Math.abs(dy) < 8 && peek && Date.now() - t0 < 400 && !(e.target.closest && e.target.closest('button')))) { peek = false; }
+    var y0 = null, t0 = 0, fromHd = false, scrolled = false;
+    function innerScrolled(t) { for (var n = t; n && n !== sh; n = n.parentNode) { if (n.scrollTop > 0) return true; } return false; }
+    sh.addEventListener('touchstart', function (e) { var hd = sh.firstElementChild; y0 = e.touches[0].clientY; t0 = Date.now(); fromHd = !!(hd && hd.contains(e.target)); scrolled = innerScrolled(e.target); }, { passive: true });
+    sh.addEventListener('touchend', function (e) { if (y0 == null) return; var dy = (e.changedTouches[0] || {}).clientY - y0; y0 = null; var peeked = sh.classList.contains('avx-peek');
+      if (dy > 40 && !peeked && (fromHd || !scrolled)) { peek = true; }
+      else if (peeked && (dy < -30 || (Math.abs(dy) < 10 && Date.now() - t0 < 500 && !(e.target.closest && e.target.closest('button'))))) { peek = false; }
       else return; soonFull(); }, { passive: true });
     sh.addEventListener('click', function (e) { if (sh.classList.contains('avx-peek') && !(e.target.closest && e.target.closest('button[aria-label^="Close"]'))) { peek = false; soonFull(); } }, true);
   }
