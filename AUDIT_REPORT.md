@@ -50,3 +50,24 @@ Cause of the label pile-up: with the Labels switch on (the default), choosing a 
 
 ## 2026-11-05 upper airway and tonsils
 Pharynx (Z-Anatomy nasopharynx, oropharynx, laryngopharynx), nasal cavity (Z-Anatomy mucosa of nasal cavity) and palatine tonsils now come from Z-Anatomy (CC BY-SA 4.0) in `zanatomy-organs2.glb`, replacing the procedural tube and ellipsoids. Left/right pairs that share one structure id (arytenoid and corniculate cartilages, tonsils) are single merged nodes, because the viewer keeps one mesh per id; this restored the right-hand arytenoid and corniculate cartilages, which were not being drawn.
+
+## Final-audit batch (Nov 2026): cord/brainstem, landmarks, admin heading
+
+**Spinal cord to brainstem (Phase 6).** Measured in the app frame: both meshes share the same axes and
+compatible scale (cord top 1.3 x 1.1 cm, medulla base 1.5 x 1.4 cm). The gap was positional, not geometric.
+The skull's foramen magnum (Z-Anatomy occipital bone) is centred at z = -2.9 cm and the Z-Anatomy medulla
+base at z = -3.0 cm, but the HuBMAP cord top was at z = -1.2 cm, i.e. 1.7 cm too far forward (at the
+anterior rim of the foramen). Correction: a smooth (smoothstep) posterior displacement of the cord vertices
+between C4 (y = 1.40) and the top (y = 1.535), 1.79 cm at the top, zero below C4. The rest of the cord is
+unchanged. Result: nearest cord-top to brainstem distance 0.74 cm -> 0.40 cm (residual is the vertical
+gap between the two meshes, about 5 mm). Cord-to-vertebral-column vertex clearance was not reduced
+(min 0.04/0.06/0.21 cm before vs 0.06/0.09/0.16 cm after, by band). Point-cloud check only; no ray-cast
+containment test. Originals are kept under scratchpad/backup. Needs anatomical review by the doctors.
+
+**Accessibility (Phase 9).** The credits link now sits in a labelled region ("3D model credits"); the admin
+"Administrators only" notice is an h1. axe-core (desktop and phone widths) on /, /app/lab and /app/admin
+reports no violations. THREE.Clock deprecation warning remains as documented harmless technical debt.
+
+**Muscles and skeleton (Phase 7).** Focusing the muscular system leaves the bones layer visible at full
+opacity (checked via the store). Muscle attachment geometry for calcaneal tendon, rhomboids, popliteus,
+gracilis and coracobrachialis has not been inspected.
