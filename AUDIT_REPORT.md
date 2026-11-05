@@ -71,3 +71,16 @@ reports no violations. THREE.Clock deprecation warning remains as documented har
 **Muscles and skeleton (Phase 7).** Focusing the muscular system leaves the bones layer visible at full
 opacity (checked via the store). Muscle attachment geometry for calcaneal tendon, rhomboids, popliteus,
 gracilis and coracobrachialis has not been inspected.
+
+## Duplicate brain meshes and detailed-brain position (reported by the owner, Nov 2026)
+Defect: selecting any brain structure switches on the detailed brain (BodyParts3D), but the Z-Anatomy cerebrum,
+cerebellum, brainstem and pituitary stayed on too, so two cerebella (and cerebrum/brainstem/pituitary) showed.
+Also the detailed brain sat 3.4 cm too high for the Z-Anatomy skull (brain top 1.735 m vs skull top 1.705 m;
+BodyParts3D pituitary 3 cm above the sella turcica).
+Correction: Z-Anatomy cerebrum, cerebellum, brainstem and pituitary overlays are hidden while the detailed brain is
+on (new negated gate `!ld_brain`); the pituitary became its own asset file so it follows the same rule. All six
+detailed-brain layers and the brain-flow particles moved down 3.4 cm (offset y 1.655 -> 1.621).
+Verification: scene mesh counts per structure with the detailed brain off, on, off and after selecting the
+cerebellum (one each, no duplicates); frontal lobe top 1.701 m under the skull top 1.705 m; pituitary now 1.594-1.606 m
+against the Z-Anatomy pituitary at 1.595-1.608 m; screenshots from front and side show a single cerebellum.
+Not yet checked: other detailed-brain layers (vessels, CSF, tracts, meninges) against the skull, by eye.
