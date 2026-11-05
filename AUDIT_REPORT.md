@@ -14,7 +14,7 @@ Each row: original mesh, replacement, source/licence, test. "Tested" means rende
 
 ## Open gaps (no replacement imported)
 - Vulva, labia, clitoris, vaginal and urethral openings, scrotum, spermatic cords, vas deferens: no licensed mesh found.
-- Pharynx, oral and nasal cavities, both urethras, skin and hair shells, third molars, alveoli: still generated.
+- Oral cavity (Z-Anatomy has no mouth-lining mesh), both urethras, skin and hair shells, third molars, alveoli: still generated.
 - Spine, rib, jaw and laryngeal ligaments: app bones there are procedural or unaligned, not shipped.
 - Arm and hand: 24 structures integrated (see THIRD_PARTY_ASSETS.md); six small wrist/elbow ligaments missing (source meshes are blocks only).
 - Fascia: not yet imported. Lymph nodes: 103 groups integrated as Z-Anatomy node ovoids (schematic counts). Bursae: 33 integrated as simplified ellipsoids.
@@ -46,3 +46,7 @@ The Z-Anatomy testes and epididymides in `zanatomy-organs2` were about 2.1 × 2.
 
 ## Label management (5 November 2026)
 Cause of the label pile-up: with the Labels switch on (the default), choosing a body system turned every top-level structure of that system into a permanent label (274 for the Muscular system), each placed at one point with no collision handling, and left and right copies doubled the names. No name or record was lost. `smart-labels.js` replaces that layer: Clean shows only the selected structure, Smart places collision-free labels in edge columns with leader lines (count set by screen size and zoom, the rest grouped into region chips such as "Forearm muscles (32)"), and Index lists all 1,750 records by region (448 head and neck, 444 shoulder and upper limb, 103 thorax, 89 abdomen, 6 back, 125 pelvis, 529 lower limb, 6 whole body). Tested in a headless browser at 390 x 844 and 1280 x 720; not tested on a physical phone.
+
+
+## 2026-11-05 upper airway and tonsils
+Pharynx (Z-Anatomy nasopharynx, oropharynx, laryngopharynx), nasal cavity (Z-Anatomy mucosa of nasal cavity) and palatine tonsils now come from Z-Anatomy (CC BY-SA 4.0) in `zanatomy-organs2.glb`, replacing the procedural tube and ellipsoids. Left/right pairs that share one structure id (arytenoid and corniculate cartilages, tonsils) are single merged nodes, because the viewer keeps one mesh per id; this restored the right-hand arytenoid and corniculate cartilages, which were not being drawn.

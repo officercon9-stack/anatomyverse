@@ -34,7 +34,7 @@ Z-Anatomy `Startup.blend` (CC BY-SA 4.0) is exported with Blender (`bpy`), re-fi
 
 ## State of the data
 - Structure records (names, Latin names, system, parent, side, source) are in the manifest. Their `reviewStatus` is now `reviewed`, shown as "Reviewed by Dr. Aqsa Hameed Phulpoto and Dr. Farhan Ali" (owner's statement of 4 Nov 2026; see `AUDIT_REPORT.md`).
-- Known gaps: vulva, labia, clitoris, scrotum, spermatic cords and vas deferens; pharynx, oral and nasal cavities, urethras, skin and hair, third molars, alveoli; spinal, rib and jaw ligaments; fascia. 
+- Known gaps: vulva, labia, clitoris, scrotum, spermatic cords and vas deferens; oral cavity, urethras, skin and hair, third molars, alveoli; spinal, rib and jaw ligaments; fascia. 
 - Open issue: the app is reported not to load on some phones; not reproduced in emulation. A start-up message with a "Clear cache and reload" button now appears on failure.
 
 ## Recent commits (4 Nov 2026)
@@ -42,3 +42,7 @@ Z-Anatomy `Startup.blend` (CC BY-SA 4.0) is exported with Blender (`bpy`), re-fi
 
 ## Licences
 3D models are CC BY-SA 4.0 (Z-Anatomy), CC BY-SA 2.1 JP (BodyParts3D) and CC BY 4.0 (HuBMAP); keep their attribution and licence when redistributing. App text was written from cited open textbooks. Have the licence terms checked by a lawyer before selling the app.
+
+
+## 2026-11-05 upper airway and tonsils
+Pharynx (Z-Anatomy nasopharynx, oropharynx, laryngopharynx), nasal cavity (Z-Anatomy mucosa of nasal cavity) and palatine tonsils now come from Z-Anatomy (CC BY-SA 4.0) in `zanatomy-organs2.glb`, replacing the procedural tube and ellipsoids. Left/right pairs that share one structure id (arytenoid and corniculate cartilages, tonsils) are single merged nodes, because the viewer keeps one mesh per id; this restored the right-hand arytenoid and corniculate cartilages, which were not being drawn.
