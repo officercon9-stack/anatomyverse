@@ -46,3 +46,6 @@ Z-Anatomy `Startup.blend` (CC BY-SA 4.0) is exported with Blender (`bpy`), re-fi
 
 ## 2026-11-05 upper airway and tonsils
 Pharynx (Z-Anatomy nasopharynx, oropharynx, laryngopharynx), nasal cavity (Z-Anatomy mucosa of nasal cavity) and palatine tonsils now come from Z-Anatomy (CC BY-SA 4.0) in `zanatomy-organs2.glb`, replacing the procedural tube and ellipsoids. Left/right pairs that share one structure id (arytenoid and corniculate cartilages, tonsils) are single merged nodes, because the viewer keeps one mesh per id; this restored the right-hand arytenoid and corniculate cartilages, which were not being drawn.
+
+## 2026-11-05 female external genitalia (procedural)
+No licensed vulva, labia or clitoris mesh exists (Z-Anatomy and HuBMAP have none), so these remain schematic parts. Their shape was reworked: smooth labia majora and minora tubes that start at the mons pubis and meet at the vestibule, replacing the stacked-capsule shapes and the oversized flat mons disc. Ids unchanged.
