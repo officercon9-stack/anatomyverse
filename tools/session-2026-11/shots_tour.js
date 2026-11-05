@@ -1,0 +1,22 @@
+const H=require('./h');const fs=require('fs');H.serve('ghclone',9870);
+(async()=>{fs.rmSync('tv',{recursive:true,force:true});fs.mkdirSync('tv');
+const {b,pg,errs}=await H.open(9870,1280,720,'/',3500);
+await pg.addStyleTag({content:'#avux,#avx-tip{display:none!important}'});
+let n=0;const snap=async(cap,w=800)=>{await pg.waitForTimeout(w);await pg.evaluate(t=>{let d=document.getElementById('tourcap');if(!d){d=document.createElement('div');d.id='tourcap';d.style.cssText='position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:2147483647;background:rgba(15,33,73,.94);color:#fff;font:600 24px system-ui,sans-serif;padding:12px 26px;border-radius:12px;pointer-events:none;max-width:84%;text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.4)';document.body.appendChild(d)}d.textContent=t},cap);await pg.waitForTimeout(150);await pg.screenshot({path:`tv/${String(++n).padStart(2,'0')}.png`})};
+const go=async(r,w)=>{await pg.goto('http://localhost:9870/#'+r);await pg.waitForTimeout(w||2500)};
+const S=f=>pg.evaluate(f);
+await snap('3D Anatomy: learn the human body in interactive 3D',500);
+await pg.evaluate(()=>window.scrollTo(0,650));await snap('Structures, lessons, quizzes and clinical cases in one place',900);
+await go('/app/lab',13000);await pg.evaluate(()=>[...document.querySelectorAll('button')].filter(b=>/got it/i.test(b.textContent)).forEach(b=>b.click()));
+await snap('The 3D Lab: a full body you can rotate and zoom',1200);
+for(const dx of [90,90,90]){await pg.mouse.move(520,380);await pg.mouse.down();await pg.mouse.move(520+dx,380,{steps:8});await pg.mouse.up();await snap('Drag to rotate, scroll to zoom',1500)}
+await pg.evaluate(()=>__avStore.getState().select('heart'));await snap('Tap any structure: name, Latin name, function, clinical notes',7000);
+await pg.evaluate(()=>{const S=__avStore.getState();S.select(null);S.select('medial-meniscus-left')});await snap('Joints, ligaments, bursae and lymph nodes appear when selected',8000);
+await go('/app/systems',3000);await snap('Browse by body system',500);
+await go('/app/dictionary',3000);await pg.fill('input','femur').catch(()=>{});await snap('Dictionary: 7,000+ terms in seven languages',1500);
+await go('/app/quiz',3000);await snap('Quizzes and exam practice',500);
+await go('/app/flashcards',3000);await snap('Flashcards with spaced repetition',500);
+await go('/app/lessons',3000);await snap('Guided lessons that move the 3D camera for you',500);
+await go('/app/clinical',3000);await snap('Clinical anatomy cases',500);
+await go('/app/tutor',3000);await snap('Tutor: ask anatomy questions, answers cite the structure records',500);
+console.log(n,errs.slice(0,3));await b.close();process.exit(0)})();
