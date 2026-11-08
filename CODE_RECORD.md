@@ -10,13 +10,12 @@ Record date: 5 November 2026. Live: https://officercon9-stack.github.io/anatomyv
 ## Layout
 | Path | Contents |
 |---|---|
-| `index.html` | page shell; start-up safety net script; loads `first-run.js`, `ux.js`, `tour-video.js` |
+| `index.html` | page shell; start-up safety net script; loads `first-run.js`, `ux.js` |
 | `assets/*-bNNN.js` | compiled chunks. `NNN` is the cache-bust number (now **b115**). Key chunks: `index-*` (app, routes, legal text, review badge), `assetManifest-*` (all 3D assets, `objectMap`, overlays, ~1,750 structure records), `AnatomyViewer-*` (3D viewer, selection, load flags), `LabPage-*` (Lab UI and layer toggles) |
 | `models/`, `models/lite/` | `.glb` meshes. Joints, bursae and lymph nodes are five on-demand files: `zanatomy-joints-lower/-upper`, `zanatomy-bursae`, `zanatomy-lymph-upper/-lower` |
 | `sw.js` | service worker. Bump `V` (now `av-v51`) and `MODEL_TOKEN` (now `lod26`, also in the viewer chunk) together whenever a `.glb`, the manifest or the viewer changes |
 | `ux.js`, `ux.src.js` | mobile and tools-sheet enhancements (`ux.js` is the minified build of `ux.src.js`) |
 | `smart-labels.js` | label management for the Lab: Clean (default), Smart (collision-free labels with leader lines and region clusters) and Index (searchable list of all structures). The old per-structure label component in the viewer chunk is switched off (`globalThis.__avSL`); the viewer exposes the record map as `globalThis.__avRec` |
-| `tour-video.js`, `tour.mp4`, `tour.html` | video tour player (Quick tour card and Tools sheet), the 51 s video, and a standalone page |
 | `data/` | translated structure names (`i18n-structures.json`), Terminologia Anatomica data |
 | `tools/session-2026-11/` | scripts used in the November 2026 work (see below) |
 | `MODEL_SOURCES_AND_LICENSES.md`, `THIRD_PARTY_ASSETS.md`, `AUDIT_REPORT.md` | sources, licences and audit of every 3D asset |
