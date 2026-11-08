@@ -4,9 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="3D Anatomy — interactive 3D human anatomy learning for medical and health-science students." />
-    <link rel="icon" type="image/svg+xml" href="./icons/logo.svg" />
-    <link rel="stylesheet" href="./fonts/fonts.css" />
-    <meta name="theme-color" content="#0f2149" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%277%27 fill=%27%230f2149%27/%3E%3Ccircle cx=%2716%27 cy=%2716%27 r=%279%27 fill=%27%2377d3ff%27/%3E%3C/svg%3E" />
+        <meta name="theme-color" content="#0f2149" />
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="apple-touch-icon" href="./icons/icon-192.png" />
     <title>3D Anatomy</title>
@@ -29,7 +28,15 @@ document.addEventListener('webglcontextlost',function(){show('The graphics memor
 </script>
   </head>
   <body>
-    <div id="root"><div id="av-boot" style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:#0f2149;color:#e6edf7;font:15px/1.4 system-ui,sans-serif;text-align:center;padding:24px"><img src="./icons/logo.svg" width="56" height="56" alt="" style="border-radius:14px"><div style="font-weight:700;font-size:18px">3D Anatomy</div><div id="av-boot-msg">Loading… the first visit downloads about 1.5 MB, then it opens fast.</div></div></div><script>setTimeout(function(){var m=document.getElementById("av-boot-msg");if(m)m.textContent="Still loading. Your connection looks slow. Please keep this page open; it only does this once."},9000)</script>
-      <script src="./first-run.js"></script><script src="./ux.js?v=66" defer></script><script src="./smart-labels.js?v=62" defer></script><script src="./selfcheck.js?v=10" defer></script>
+    <div id="root"><div id="av-boot" style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:#0f2149;color:#e6edf7;font:15px/1.4 system-ui,sans-serif;text-align:center;padding:24px"><div style="width:56px;height:56px;border-radius:14px;background:#2f6bff"></div><div style="font-weight:700;font-size:18px">3D Anatomy</div><div style="width:180px;height:4px;border-radius:2px;background:#ffffff26;overflow:hidden"><div style="width:40%;height:100%;background:#77d3ff;animation:avb 1.4s ease-in-out infinite alternate"></div></div><style>@keyframes avb{from{margin-left:0}to{margin-left:60%}}</style><div id="av-boot-msg">Loading… the first visit downloads about 1.5 MB, then it opens fast.</div></div></div><script>setTimeout(function(){var m=document.getElementById("av-boot-msg");if(m)m.textContent="Still loading. Your connection looks slow. Please keep this page open; it only does this once."},9000)</script>
+      <script src="./first-run.js"></script><script>
+/* Secondary scripts and fonts load only after the app has drawn, so the first visit on a slow connection downloads the app first. */
+(function(){var done=0;function go(){if(done)return;done=1;try{var l=document.createElement('link');l.rel='stylesheet';l.href='./fonts/fonts.css';document.head.appendChild(l)}catch(e){}
+['./ux.js?v=66','./smart-labels.js?v=62','./selfcheck.js?v=10'].forEach(function(s){var e=document.createElement('script');e.src=s;e.async=false;document.body.appendChild(e)})}
+var r=document.getElementById('root');if(!r)return go();
+if(!document.getElementById('av-boot'))return go();
+new MutationObserver(function(m,o){if(!document.getElementById('av-boot')){o.disconnect();go()}}).observe(r,{childList:true});
+setTimeout(go,90000)})();
+</script>
   </body>
 </html>

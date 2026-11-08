@@ -109,3 +109,7 @@ In the shared question component, touching an option in practice mode (clinical 
 
 ## Slow-connection start-up (sw av-v109)
 - Safety banner now waits 60 s (was 15 s) and counts the loading placeholder as 'not ready'; three.js is no longer preloaded on the home page (it is only needed once a 3D view opens).
+
+## Start-up order on slow connections (sw av-v110)
+- index.html: fonts, ux.js, smart-labels.js and selfcheck.js now load after the app has drawn (they used to compete with the app download). Loading screen no longer fetches logo.svg (38 KB gzipped) and shows an animated bar.
+- Measured with a gzip server and CDP throttling (Pixel 5): start-up transfer 828 KB -> 744 KB; first render 18 s -> 16 s at 400 kbps, 45 s -> 41 s at 150 kbps. The remaining cost is the three start-up chunks (react+three 353 KB, records 210 KB, app 175 KB gzipped). Not tested on a physical phone.
