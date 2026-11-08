@@ -135,3 +135,9 @@ In the shared question component, touching an option in practice mode (clinical 
 - Batch 4 added 387 hand-written questions (anatomy 70, physiology 72, biochemistry 69, pathology 76, pharmacology 100). Pool is now 864 (anatomy 201, physiology 152, biochemistry 148, pathology 163, pharmacology 200). Target of 2,000 per subject is NOT reached; it is about 10 percent of the way.
 - Not reviewed by a clinician. Written from standard textbook knowledge; the owner should have them checked.
 - Tested: bank loads on the FCPS route only, drills and the question bank show the new questions with the correct answer marked, no page errors.
+
+## FCPS question bank, batch 5 (2026-11-08)
+- Added hand-written FCPS Part I MCQs (batch 5) for all five subjects; duplicates of existing prompts were dropped by build.py.
+- Pool is now 1,335 FCPS questions: anatomy 295, physiology 231, biochemistry 223, pathology 260, pharmacology 326.
+- Target of 2,000 per subject is NOT reached (about 12 to 16 percent). Questions are not clinician-reviewed; this is technical verification only (syntax, loading, no page errors), not expert validation.
+- Service worker cache av-v120; QuizPage b156.
