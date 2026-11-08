@@ -155,3 +155,15 @@ What was wrong, what was done, and how it was checked. All checks below are tech
 - Detailed-brain-only structures give no marker in normal mode.
 - Tablet toolbar overlap (cosmetic).
 - Licence position: assets are CC BY-SA 4.0, CC BY-SA 2.1 Japan, CC BY 4.0 (HuBMAP) and original work. Commercial use is allowed with attribution and share-alike on adapted meshes. Whether the app as a whole must be offered under share-alike is a legal question for a lawyer. Google Play health-app policies and the accuracy of the "Reviewed by" badge are the owner's responsibility.
+
+## 8 November 2026: blood supply, venous drainage and nerve supply on every record
+
+Request: ensure blood and nerve supply is in the description of every organ of each system.
+
+Done: every one of the 1,760 records now shows three labelled rows in the info panel: Blood supply (arterial), Venous drainage and Innervation. About 1,750 records had at least one of these missing. The app already had the three fields; they were empty for almost all organs, bones, vessels, nodes and brain structures. Existing text (122 muscles and a few organs) was kept and not overwritten.
+
+How the text was made: written by Claude from standard anatomy teaching knowledge, by organ for organs, glands, muscles, ligaments, brain and cord, and by rule for repeated groups (left and right copies, individual teeth, lymph-node groups by drained region, bones and joint structures by region). Generic wording is used where no specific named artery or nerve exists, and it says so (for example the vasa vasorum of vessels, nervi nervorum of nerves, avascular structures such as cornea, lens, epidermis, valve leaflets, hyaline cartilage and inner disc).
+
+What this is not: the added text has not been reviewed by the named reviewers or any clinician. The records still carry the earlier "Reviewed by" badge, which covers the earlier text only. `SUPPLY_TEXT_FOR_REVIEW.csv` lists every added field, record by record, for review. Vascular variants (for example coronary dominance, the origin of the sinoatrial nodal artery, bronchial artery origins) are described as the usual pattern.
+
+Self-check: new test "Blood and nerve supply" fails if any record lacks one of the three fields.

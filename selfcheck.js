@@ -51,13 +51,14 @@
 
   /* ---------- checks ---------- */
   function checkRecords(add) {
-    var rec = R(), ids = Object.keys(rec), names = {}, noLatin = 0, noFn = 0, shortDesc = 0;
+    var rec = R(), ids = Object.keys(rec), names = {}, noLatin = 0, noFn = 0, shortDesc = 0, noSup = [];
     ids.forEach(function (id) {
       var r = rec[id], n = (r.name || '').trim().toLowerCase(); (names[n] = names[n] || []).push(id);
-      if (!r.latinName) noLatin++; if (!(r.function && String(r.function).trim())) noFn++; if (!r.description || String(r.description).length < 60) shortDesc++;
+      if (!(r.bloodSupply && r.venousDrainage && r.innervation)) noSup.push(id); if (!r.latinName) noLatin++; if (!(r.function && String(r.function).trim())) noFn++; if (!r.description || String(r.description).length < 60) shortDesc++;
     });
     var dups = Object.keys(names).filter(function (n) { return names[n].length > 1; });
     add('Records', dups.length ? 'fail' : 'pass', ids.length + ' records; ' + dups.length + ' duplicated names' + (dups.length ? ': ' + dups.slice(0, 8).join(', ') : ''));
+    add('Blood and nerve supply', noSup.length ? 'fail' : 'pass', noSup.length ? noSup.length + ' records lack arterial supply, venous drainage or nerve supply text: ' + noSup.slice(0, 8).join(', ') : 'All ' + ids.length + ' records have arterial supply, venous drainage and nerve supply text (written from standard references; not yet reviewed by the named reviewers)');
     add('Content gaps', 'info', noLatin + ' without Latin name, ' + noFn + ' without function text, ' + shortDesc + ' with very short descriptions (needs expert-written or cited text; not auto-repaired)');
   }
   function checkSceneDuplicates(add, by) {
