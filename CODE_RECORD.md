@@ -121,3 +121,10 @@ In the shared question component, touching an option in practice mode (clinical 
 - `index` preload lists (`__vite__mapDeps`) corrected so Quiz, Dictionary, Tutor and Admin do not preload the 3D engine.
 - Measured (Playwright, Pixel 5 emulation, gzip server): home, FCPS, quiz, dictionary and tutor load no 3D code; the lab, the home 3D preview (on tap) and the identification-practice 3D panel still render. Start-up transfer 744 KB -> 463 KB; first render 16 s -> 10 s at 400 kbps and 41 s -> 26 s at 150 kbps.
 - Not done: `assetManifest` (anatomy records, 1.6 MB raw, 212 KB gzipped) is still imported statically by `index`; making it lazy would need every reader changed. Not tested on a physical phone.
+
+## Anatomy lab: staged detail models, no stuck "Loading 3D model" (sw av-v118, AnatomyViewer b154)
+- Symptom (reviewer phone, weak signal): the lab showed "Loading 3D model…" for the whole time all 29 detail overlays (about 10 MB of lite models) downloaded at once, while the base schematic body was already drawn.
+- Overlays are now loaded in priority order (heart, organs, brain, limb bones, nerves, neck vessels first), at most 8 at a time (3 on slow connections) instead of all at once. The "Loading 3D model…" pill is no longer shown for the schematic body; a small "Adding detail N of M" chip shows progress.
+- Slow-connection detection (`_slowNet`): `navigator.connection` saveData / 2g / 3g / downlink under 1 Mbps, or measured throughput of the app scripts under 700 kbps. In that case no overlay downloads until the user taps "Slow connection. Tap for detailed models" or selects a structure.
+- Tested with Playwright (Pixel 5 emulation, CDP throttling): fast = all 29 load, no errors; slow = 0 overlays, button shown, tap loads all 29. Not tested on a physical phone; throttling does not reproduce a real weak mobile network exactly.
+- Known trade-off: until detail models load, structures that only exist in an overlay (for example coronary arteries) are shown by the simpler schematic parts.
