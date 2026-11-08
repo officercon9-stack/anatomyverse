@@ -89,3 +89,6 @@ Subject tiles are labelled "Practice <subject>". After an answer is revealed (dr
 
 ### FCPS Preparation: pool expanded to 477 (8 November 2026)
 Added 264 hand-written questions (ids q-fcps-<area>3-NN): anatomy 62, physiology 44, biochemistry 43, pathology 51, pharmacology 64. Sources: tools/session-2026-11/generators/fcps_batch3/. Pool per area: anatomy 131, physiology 80, biochemistry 79, pathology 87, pharmacology 100. Still not reviewed by a clinician.
+
+### FCPS mock exam results (8 November 2026)
+The results page now opens with an answer key grid (question number, correct letter, your answer) and lists every question with all four options, the correct one marked, your choice marked, the explanation, reading reference and 3D link. The default review filter is "All with answers".
