@@ -92,3 +92,6 @@ Added 264 hand-written questions (ids q-fcps-<area>3-NN): anatomy 62, physiology
 
 ### FCPS mock exam results (8 November 2026)
 The results page now opens with an answer key grid (question number, correct letter, your answer) and lists every question with all four options, the correct one marked, your choice marked, the explanation, reading reference and 3D link. The default review filter is "All with answers".
+
+### FCPS 3D links: related structures (8 November 2026)
+When the correct answer names no structure that the app models, the question text and explanation are scanned and the button is labelled "Related structure in 3D (the exact structure is not modelled)" (for example the larynx for the thyrohyoid membrane). Wrong-answer feedback now reads "Incorrect. The correct answer is X: ...". About 111 of 477 questions carry a 3D button; physiology, biochemistry and most pharmacology questions have no structure to show.
