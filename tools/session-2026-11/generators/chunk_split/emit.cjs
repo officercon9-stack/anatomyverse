@@ -1,0 +1,15 @@
+const {src,units,declUnit,ast}=require('./an3.cjs');const fs=require('fs');
+const P=JSON.parse(fs.readFileSync('plan.json'));const impU=units.findIndex(u=>u.kind==='ImportDeclaration');P.need=P.need.filter(n=>declUnit[n]!==impU);const core=new Set(P.core);
+const A='../ghclone/assets/';
+const stmtKind=new Map();for(const s of ast.body)if(s.type==='VariableDeclaration')s.declarations.forEach(d=>stmtKind.set(d.start,s.kind));
+const emit=i=>{const u=units[i];const t=src.slice(u.start,u.end);return u.kind==='decl'?stmtKind.get(u.start)+' '+t+';':(u.kind==='fn'?t:t+';')};
+const coreTxt=[],threeTxt=[];units.forEach((u,i)=>{if(u.kind==='ImportDeclaration'||u.kind==='ExportNamedDeclaration')return;(core.has(i)?coreTxt:threeTxt).push(emit(i))});
+const CORE_EXP=new Set(['A','N','M','j']);
+const coreExports=P.exports.filter(e=>CORE_EXP.has(e.exported));const threeExports=P.exports.filter(e=>!CORE_EXP.has(e.exported));
+const NEWV='b71',CORE='reactcore-Kq3vN8dT-'+NEWV+'.js',THREE='three-Bl2eHk-_-'+NEWV+'.js';
+const spec=a=>a.map(e=>e.local===e.exported?e.local:e.local+' as '+e.exported).join(',');
+const coreOut=P.impText+'\n'+coreTxt.join('\n')+'\nexport{'+spec(coreExports)+(P.need.length?','+P.need.join(','):'')+'};\n';
+const threeOut=P.impText+'\nimport{'+P.need.join(',')+'}from"./'+CORE+'";\n'+threeTxt.join('\n')+'\nexport{'+spec(threeExports)+'};\n';
+fs.writeFileSync(A+CORE,coreOut);fs.writeFileSync(A+THREE,threeOut);
+console.log(CORE,coreOut.length,THREE,threeOut.length,'need',P.need.join(','));
+fs.writeFileSync('names.json',JSON.stringify({CORE,THREE,coreExp:coreExports.map(e=>e.exported)}));

@@ -113,3 +113,11 @@ In the shared question component, touching an option in practice mode (clinical 
 ## Start-up order on slow connections (sw av-v110)
 - index.html: fonts, ux.js, smart-labels.js and selfcheck.js now load after the app has drawn (they used to compete with the app download). Loading screen no longer fetches logo.svg (38 KB gzipped) and shows an animated bar.
 - Measured with a gzip server and CDP throttling (Pixel 5): start-up transfer 828 KB -> 744 KB; first render 18 s -> 16 s at 400 kbps, 45 s -> 41 s at 150 kbps. The remaining cost is the three start-up chunks (react+three 353 KB, records 210 KB, app 175 KB gzipped). Not tested on a physical phone.
+
+## Chunk split: home page and quiz no longer download the 3D engine (sw av-v111)
+- The old `three-...-b70.js` (1.29 MB raw, react + react-dom + three + react-three-fiber) was split with a scope-aware parser (`tools/session-2026-11/generators/chunk_split/`: `an3.cjs` dependency graph, `split.cjs` plan, `emit.cjs` output). Verified: the React part (18 declarations, 220 KB raw, 68 KB gzipped) has no references to the 3D part and no cross-boundary writes.
+- New files: `reactcore-Kq3vN8dT-b71.js` (React; imported by every page) and `three-Bl2eHk-_-b71.js` (three + react-three-fiber + loaders; imported only by the viewer chunks). Every importer's `import{...}from three` was rewritten into two imports; chunk names were bumped to b148 with `source/bump.py` so cached copies cannot go stale.
+- QuizPage no longer imports AnatomyViewer statically: it declares the one icon it used and loads the 3D viewer with `React.lazy` only when "Identification practice" opens its 3D panel.
+- `index` preload lists (`__vite__mapDeps`) corrected so Quiz, Dictionary, Tutor and Admin do not preload the 3D engine.
+- Measured (Playwright, Pixel 5 emulation, gzip server): home, FCPS, quiz, dictionary and tutor load no 3D code; the lab, the home 3D preview (on tap) and the identification-practice 3D panel still render. Start-up transfer 744 KB -> 463 KB; first render 16 s -> 10 s at 400 kbps and 41 s -> 26 s at 150 kbps.
+- Not done: `assetManifest` (anatomy records, 1.6 MB raw, 212 KB gzipped) is still imported statically by `index`; making it lazy would need every reader changed. Not tested on a physical phone.
