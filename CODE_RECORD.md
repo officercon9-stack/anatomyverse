@@ -101,3 +101,8 @@ The mock exam now shows the correct answer, explanation, reading reference and 3
 
 ### Instant answers in practice questions (8 November 2026)
 In the shared question component, touching an option in practice mode (clinical case revision questions, quiz practice, lessons) now submits immediately and shows Correct or Incorrect, the correct answer and the explanation. The "Submit answer" button remains for fill-in, matching and click-structure questions and in exam mode.
+
+## Lighter first load for phones (sw av-v108)
+- Landing page: the 3D preview (which pulled all lite models, about 12 MB raw) is no longer mounted automatically on low-power/mobile devices. A "Load the 3D preview" button mounts it on tap. Desktop is unchanged.
+- index.html: instant "Loading 3D Anatomy" placeholder inside #root, with a slow-connection message after 9 s.
+- Measured with Playwright (Pixel 5 emulation): landing page 1.4 MB transferred, no page errors. Not tested on a physical phone.
