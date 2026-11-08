@@ -74,3 +74,6 @@ Added to the viewer's Animate menu ("Cardiovascular — Angina pain (4D)"). Stor
 
 ### FCPS Preparation: generated pool
 In addition to the 37 hand-written MCQs, the index chunk builds about 2,140 questions at load time from the structure records (generator: tools/session-2026-11/generators/fcps_generated_questions.js). Types: Latin name both ways, function to structure, muscle origin, insertion and action. Distractors come from the same region or system; ids are stable (q-fcps-g-...). Blood and nerve supply questions were deliberately left out because their distractors can be partly correct. Questions are flagged `generated` and have not been checked individually or by a clinician. The quiz page says so. Session cap raised from 30 to 100 questions.
+
+### FCPS Preparation hub (route /app/fcps)
+Dedicated page in the QuizPage chunk (source: tools/session-2026-11/generators/fcps_hub.js). Home with day streak, questions seen, accuracy and a days-to-1-January-2027 count; daily drill that weights questions you got wrong; revision cards with known/review marking; timed mock exam (palette, flagging, optional negative marking, area breakdown, answer review); weak-area drills. Progress is stored only in the browser (localStorage key av.fcps.v1). The January 2027 exam date and paper format are not asserted; the page tells users to check the CPSP notice.
