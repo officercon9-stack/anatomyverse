@@ -68,3 +68,6 @@ Procedure for a new model file: build the glb and its lite copy, add the asset w
 
 ## Angina pain 4D animation (session 2026-11)
 Added to the viewer's Animate menu ("Cardiovascular — Angina pain (4D)"). Store flags `anginaActive` and `anginaStage`; panel `_AnginaPanel` in the AnatomyViewer chunk (source copy: tools/session-2026-11/generators/angina_panel.js). Five stages (rest, effort, oxygen mismatch, pain signal, rest or nitroglycerin) drive the real heart beat rate and highlight the coronary arteries, left ventricle, spinal cord and brain. Gauges, plaque and referred-pain map are schematic. The text is an illustrative teaching summary and has not been reviewed by a clinician. Technically tested on desktop and 390px phone emulation only.
+
+## FCPS Preparation quiz topic (session 2026-11)
+37 original exam-style MCQs (ids q-fcps-01 to q-fcps-37) on head and neck venous drainage, dural sinuses and their clinical points, written from standard anatomy and cited to OpenStax A&P 2e chapter 20. They appear under a "FCPS Preparation" topic in the Quiz. Generator: tools/session-2026-11/generators/fcps_questions.py. Not reviewed by any clinician and carry no "Reviewed by" badge.
