@@ -106,3 +106,6 @@ In the shared question component, touching an option in practice mode (clinical 
 - Landing page: the 3D preview (which pulled all lite models, about 12 MB raw) is no longer mounted automatically on low-power/mobile devices. A "Load the 3D preview" button mounts it on tap. Desktop is unchanged.
 - index.html: instant "Loading 3D Anatomy" placeholder inside #root, with a slow-connection message after 9 s.
 - Measured with Playwright (Pixel 5 emulation): landing page 1.4 MB transferred, no page errors. Not tested on a physical phone.
+
+## Slow-connection start-up (sw av-v109)
+- Safety banner now waits 60 s (was 15 s) and counts the loading placeholder as 'not ready'; three.js is no longer preloaded on the home page (it is only needed once a 3D view opens).

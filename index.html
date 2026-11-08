@@ -12,7 +12,6 @@
     <title>3D Anatomy</title>
     <script type="module" crossorigin src="./assets/index-DAxCahJm-b147.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/rolldown-runtime-XKyaHtl9.js">
-    <link rel="modulepreload" crossorigin href="./assets/three-Bl2eHk-_-b70.js">
     <link rel="modulepreload" crossorigin href="./assets/assetManifest-D3o27EUe-b144.js">
     <link rel="stylesheet" crossorigin href="./assets/index-D5yXBwUi-b65.css"><link rel="stylesheet" href="./theme.css">
   <script>
@@ -24,7 +23,7 @@ b.onclick=function(){var p=[];try{if(navigator.serviceWorker)p.push(navigator.se
 d.appendChild(b);document.body.appendChild(d)}catch(e){}}
 window.addEventListener('error',function(e){if(e&&e.message&&!/ResizeObserver/.test(e.message))show('('+String(e.message).slice(0,120)+')')});
 window.addEventListener('unhandledrejection',function(e){var m=e&&e.reason&&(e.reason.message||e.reason);if(m&&!/AbortError/.test(String(m)))show('('+String(m).slice(0,120)+')')});
-window.addEventListener('load',function(){setTimeout(function(){var r=document.getElementById('root');if(r&&!r.children.length)show('The page stayed empty.')},15000)});
+window.addEventListener('load',function(){setTimeout(function(){var r=document.getElementById('root');if(r&&(!r.children.length||(r.children.length==1&&r.firstChild.id=='av-boot')))show('The page is still not ready. On a slow connection, wait a little longer, or tap the button.')},60000)});
 document.addEventListener('webglcontextlost',function(){show('The graphics memory ran out.')},true);
 })();
 </script>
