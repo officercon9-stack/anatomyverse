@@ -95,3 +95,6 @@ The results page now opens with an answer key grid (question number, correct let
 
 ### FCPS 3D links: related structures (8 November 2026)
 When the correct answer names no structure that the app models, the question text and explanation are scanned and the button is labelled "Related structure in 3D (the exact structure is not modelled)" (for example the larynx for the thyrohyoid membrane). Wrong-answer feedback now reads "Incorrect. The correct answer is X: ...". About 111 of 477 questions carry a 3D button; physiology, biochemistry and most pharmacology questions have no structure to show.
+
+### FCPS mock exam: instant answers (8 November 2026)
+The mock exam now shows the correct answer, explanation, reading reference and 3D link as soon as an option is touched, and locks that answer. It is on by default. A checkbox in the mock setup ("Show the correct answer ... straight after each answer") turns it off for an exam-style paper with feedback only after submission.
