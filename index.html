@@ -17,11 +17,11 @@
   <script>
 /* Start-up safety net: if the app errors or the screen stays empty, show what happened and a clean-reload button. */
 (function(){var shown=0;function show(msg){if(shown)return;shown=1;try{var d=document.createElement('div');d.setAttribute('role','alert');d.style.cssText='position:fixed;left:12px;right:12px;bottom:12px;z-index:2147483647;background:#0f2149;color:#fff;font:14px/1.4 system-ui,sans-serif;padding:12px 14px;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.4)';
-var t=document.createElement('div');t.textContent='3D Anatomy had trouble starting. '+msg;d.appendChild(t);
+var t=document.createElement('div');var ua=(navigator.userAgent.match(/(Chrome|SamsungBrowser|Firefox|Version|OPR|UCBrowser)\/[\d.]+/)||['unknown browser'])[0];t.textContent='3D Anatomy had trouble starting. '+msg+' ['+ua+(navigator.onLine?'':', offline')+']';d.appendChild(t);
 var b=document.createElement('button');b.textContent='Clear cache and reload';b.style.cssText='margin-top:8px;padding:8px 12px;border:0;border-radius:8px;background:#fff;color:#0f2149;font:600 14px system-ui';
 b.onclick=function(){var p=[];try{if(navigator.serviceWorker)p.push(navigator.serviceWorker.getRegistrations().then(function(r){return Promise.all(r.map(function(x){return x.unregister()}))}))}catch(e){}try{if(window.caches)p.push(caches.keys().then(function(k){return Promise.all(k.map(function(x){return caches.delete(x)}))}))}catch(e){}Promise.all(p).catch(function(){}).then(function(){location.reload()})};
 d.appendChild(b);document.body.appendChild(d)}catch(e){}}
-window.addEventListener('error',function(e){if(e&&e.message&&!/ResizeObserver/.test(e.message))show('('+String(e.message).slice(0,120)+')')});
+window.addEventListener('error',function(e){var tg=e&&e.target;if(tg&&tg!==window&&(tg.src||tg.href)){show('(could not download '+String(tg.src||tg.href).split('/').pop().slice(0,60)+')');return}if(e&&e.message&&!/ResizeObserver/.test(e.message))show('('+String(e.message).slice(0,120)+')')},true);
 window.addEventListener('unhandledrejection',function(e){var m=e&&e.reason&&(e.reason.message||e.reason);if(m&&!/AbortError/.test(String(m)))show('('+String(m).slice(0,120)+')')});
 window.addEventListener('load',function(){setTimeout(function(){var r=document.getElementById('root');if(r&&(!r.children.length||(r.children.length==1&&r.firstChild.id=='av-boot')))show('The page is still not ready. On a slow connection, wait a little longer, or tap the button.')},60000)});
 document.addEventListener('webglcontextlost',function(){show('The graphics memory ran out.')},true);
