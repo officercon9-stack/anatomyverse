@@ -6,7 +6,7 @@ var _FK=`av.fcps.v1`,_FG=`#d4af37`,_FCATS=[`Anatomy`,`Physiology`,`Biochemistry`
 function _fLoad(){let d={q:{},att:[],days:[],rev:{}};try{let s=JSON.parse(localStorage.getItem(_FK)||`{}`);return{q:s.q||{},att:s.att||[],days:s.days||[],rev:s.rev||{}}}catch(e){return d}}
 function _fSave(s){try{localStorage.setItem(_FK,JSON.stringify(s))}catch(e){}}
 function _fToday(){let d=new Date();return d.getFullYear()+`-`+String(d.getMonth()+1).padStart(2,`0`)+`-`+String(d.getDate()).padStart(2,`0`)}
-function _fCat(q){let m=/^q-fcps-(phy|bio|pat|pha)2?-/.exec(q.id);return m?_FCATS[{phy:1,bio:2,pat:3,pha:4}[m[1]]]:_FCATS[0]}
+function _fCat(q){let m=/^q-fcps-(phy|bio|pat|pha)[23]?-/.exec(q.id);return m?_FCATS[{phy:1,bio:2,pat:3,pha:4}[m[1]]]:_FCATS[0]}
 function _fPool(){return p.filter(q=>q.topic===`fcps`)}
 function _fRec(list){let s=_fLoad(),t=_fToday();list.forEach(([id,ok])=>{let x=s.q[id]||{c:0,w:0};ok?x.c++:x.w++;s.q[id]=x});if(!s.days.includes(t))s.days.push(t);s.days=s.days.slice(-400);_fSave(s);return s}
 function _fStreak(days){let set=new Set(days),n=0,d=new Date();if(!set.has(_fToday()))d.setDate(d.getDate()-1);for(;;){let k=d.getFullYear()+`-`+String(d.getMonth()+1).padStart(2,`0`)+`-`+String(d.getDate()).padStart(2,`0`);if(!set.has(k))break;n++;d.setDate(d.getDate()-1)}return n}

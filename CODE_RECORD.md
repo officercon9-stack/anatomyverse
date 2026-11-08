@@ -86,3 +86,6 @@ Removed all auto-generated questions (function, muscle attachment) because they 
 
 ### FCPS Preparation: sources and 3D links (8 November 2026)
 Subject tiles are labelled "Practice <subject>". After an answer is revealed (drill, revision card, question bank, mock review) each question shows a "Where to read more" line naming standard textbooks for the subject (not claimed as the source of the question text) and, when the correct answer names a structure that exists in the app's records, a "See it in 3D" link to /app/lab?structure=<id>. Matching is by name at runtime, with a guard against modifier mismatches (for example "medial circumflex femoral artery" does not link to the femoral artery). Structures the app has no model for (for example the facial vein) get no 3D link.
+
+### FCPS Preparation: pool expanded to 477 (8 November 2026)
+Added 264 hand-written questions (ids q-fcps-<area>3-NN): anatomy 62, physiology 44, biochemistry 43, pathology 51, pharmacology 64. Sources: tools/session-2026-11/generators/fcps_batch3/. Pool per area: anatomy 131, physiology 80, biochemistry 79, pathology 87, pharmacology 100. Still not reviewed by a clinician.
