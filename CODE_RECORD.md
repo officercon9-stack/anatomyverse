@@ -98,3 +98,6 @@ When the correct answer names no structure that the app models, the question tex
 
 ### FCPS mock exam: instant answers (8 November 2026)
 The mock exam now shows the correct answer, explanation, reading reference and 3D link as soon as an option is touched, and locks that answer. It is on by default. A checkbox in the mock setup ("Show the correct answer ... straight after each answer") turns it off for an exam-style paper with feedback only after submission.
+
+### Instant answers in practice questions (8 November 2026)
+In the shared question component, touching an option in practice mode (clinical case revision questions, quiz practice, lessons) now submits immediately and shows Correct or Incorrect, the correct answer and the explanation. The "Submit answer" button remains for fill-in, matching and click-structure questions and in exam mode.
