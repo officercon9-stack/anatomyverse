@@ -80,3 +80,6 @@ Dedicated page in the QuizPage chunk (source: tools/session-2026-11/generators/f
 
 ### FCPS Preparation update (8 November 2026)
 Latin-term questions removed from the generated pool. Added 81 hand-written MCQs in physiology (21), biochemistry (20), pathology (20) and pharmacology (20) (ids q-fcps-phy/bio/pat/pha-NN; generator tools/session-2026-11/generators/fcps_basic_sciences.py). They are standard textbook facts, not reviewed by a clinician. Drills and mock exams now draw evenly across the selected areas.
+
+### FCPS Preparation rework (8 November 2026)
+Removed all auto-generated questions (function, muscle attachment) because they were too easy. The pool is now 213 hand-written questions in five areas: Anatomy 69, Physiology 36, Biochemistry 36, Pathology 36, Pharmacology 36. 95 of them are clinical-vignette style (ids q-fcps-<area>2-NN, generator tools/session-2026-11/generators/fcps_vignette_questions.py). None has been reviewed by a clinician. The hub UI was simplified: one start button, subject tiles that start a 10-question drill, compact rows for the other modes, and a sticky Next button during drills and mock exams.

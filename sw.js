@@ -3,7 +3,7 @@
    - Unversioned /models and /data files: served from cache at once and refreshed in the background.
    - Pages: always fetched fresh so design updates show; cached copy used offline.
    - Other files (ux.js, theme.css, first-run.js, manifest): revalidated with the server, cached copy used offline. */
-const V = 'av-v100';
+const V = 'av-v101';
 // Models are cached under a URL that carries this token. Bump it in BOTH this
 // file and the viewer whenever a .glb changes, or returning users keep the old
 // file for ever: the rule below is cache-first and never revalidates.
