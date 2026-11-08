@@ -77,3 +77,6 @@ In addition to the 37 hand-written MCQs, the index chunk builds about 2,140 ques
 
 ### FCPS Preparation hub (route /app/fcps)
 Dedicated page in the QuizPage chunk (source: tools/session-2026-11/generators/fcps_hub.js). Home with day streak, questions seen, accuracy and a days-to-1-January-2027 count; daily drill that weights questions you got wrong; revision cards with known/review marking; timed mock exam (palette, flagging, optional negative marking, area breakdown, answer review); weak-area drills. Progress is stored only in the browser (localStorage key av.fcps.v1). The January 2027 exam date and paper format are not asserted; the page tells users to check the CPSP notice.
+
+### FCPS Preparation update (8 November 2026)
+Latin-term questions removed from the generated pool. Added 81 hand-written MCQs in physiology (21), biochemistry (20), pathology (20) and pharmacology (20) (ids q-fcps-phy/bio/pat/pha-NN; generator tools/session-2026-11/generators/fcps_basic_sciences.py). They are standard textbook facts, not reviewed by a clinician. Drills and mock exams now draw evenly across the selected areas.
