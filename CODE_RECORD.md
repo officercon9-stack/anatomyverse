@@ -154,3 +154,8 @@ In the shared question component, touching an option in practice mode (clinical 
 - Service worker cache av-v122; QuizPage b158.
 
 - Update: on the owner's request the answer shows only "Mechanism of action"; the per-option "why wrong" text stays in the notes files but is not displayed. av-v123, QuizPage b159.
+
+## Play Store readiness (2026-11-09)
+- Android workflow now also copies smart-labels.js and selfcheck.js (index.html loads them after start-up; they were missing from the bundle) and checks the bundle for them, fonts.css and the FCPS bank chunks.
+- Assembled the Android web folder locally the same way as the workflow (19 MB) and loaded home, FCPS, lab and quiz at Pixel 5 size: no failed requests, no page errors, FCPS bank loads (1,806 questions). Not tested inside a real Android WebView or on a phone.
+- Listing text updated (FCPS question bank; practice-question disclaimer).

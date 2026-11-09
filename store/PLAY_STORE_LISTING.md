@@ -20,12 +20,12 @@ WHAT YOU CAN DO
 - Study the ear, from the outer ear and eardrum to the three tiny middle-ear bones, the cochlea and balance canals.
 - Use See-through, Explode and Labels tools to understand how parts fit together.
 - Tap any structure to read its location, function and a short clinical note.
-- Practise with quizzes, flashcards and guided lessons.
+- Practise with quizzes, flashcards and guided lessons, plus an FCPS Part I question bank (anatomy, physiology, biochemistry, pathology and pharmacology) with explanations.
 - Look up Latin anatomical terms in the dictionary.
 - Works offline once installed. No account, no ads and no tracking.
 
 FOR EDUCATION ONLY
-3D Anatomy is a learning aid. It is not medical advice and does not diagnose or treat any condition. Models are simplified for teaching and some structures are schematic. Explanatory text is pending expert review; always check facts against your course materials.
+3D Anatomy is a learning aid. It is not medical advice and does not diagnose or treat any condition. Models are simplified for teaching and some structures are schematic. Practice questions are study aids and are not official exam questions; always check facts against your course materials and standard textbooks.
 
 CREDITS
 Many 3D models are derived from Z-Anatomy and BodyParts3D, licensed under Creative Commons Attribution-ShareAlike (CC BY-SA 4.0 and 2.1 Japan), and were modified for this app. Full credits and licences are in the app under Content sources.

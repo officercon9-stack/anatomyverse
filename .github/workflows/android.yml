@@ -17,7 +17,7 @@ jobs:
       - name: Assemble web content
         run: |
           mkdir -p android-app/www
-          cp index.html manifest.webmanifest first-run.js ux.js theme.css android-app/www/
+          cp index.html manifest.webmanifest first-run.js ux.js smart-labels.js selfcheck.js theme.css android-app/www/
           cp -r assets models data fonts icons android-app/www/
           # the app uses the phone-optimised (lite) models, except the full-detail skull (jaw/teeth), so other full desktop copies are left out
           find android-app/www/models -maxdepth 1 -name '*.glb' ! -name 'zanatomy-skull.glb' -delete
@@ -64,7 +64,8 @@ jobs:
       - name: Verify the bundle is the real app
         run: |
           AAB=$(ls android-app/android/app/build/outputs/bundle/release/*.aab)
-          unzip -l "$AAB" | grep -E "base/assets/public/(index.html|ux.js|theme.css|icons/icon-512.png|models/lite/anatomyverse-limbs.glb)" || { echo "::error::app files missing from the bundle"; exit 1; }
+          unzip -l "$AAB" | grep -E "base/assets/public/(index.html|ux.js|smart-labels.js|selfcheck.js|theme.css|fonts/fonts.css|icons/icon-512.png|models/lite/anatomyverse-limbs.glb)" || { echo "::error::app files missing from the bundle"; exit 1; }
           unzip -p "$AAB" base/assets/public/ux.js | grep -q "avx-scrollx" || { echo "::error::bundle has an old ux.js"; exit 1; }
+          [ "$(unzip -l "$AAB" | grep -c 'base/assets/public/assets/FcpsBank-')" -ge 5 ] || { echo "::error::FCPS question bank chunks missing from the bundle"; exit 1; }
           if jarsigner -verify "$AAB" 2>&1 | grep -q "jar verified"; then SIGN="signed"; else SIGN="NOT signed (keystore secrets missing)"; fi
           echo "::notice title=Bundle check::$(basename "$AAB") $(du -h "$AAB" | cut -f1), app files present, $SIGN, sha256 $(sha256sum "$AAB" | cut -c1-12)"
