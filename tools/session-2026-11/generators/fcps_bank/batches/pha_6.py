@@ -41,7 +41,7 @@ Q = [
  "It is used in acute heart failure and cardiogenic shock."),
 ("Noradrenaline infusion results in:",
  ["Rise in blood pressure with reflex bradycardia", "Fall in blood pressure", "Tachycardia with vasodilation", "Bronchodilation"],
- "Adrenaline at low doses causes beta-2 mediated vasodilation in muscle."),
+ "Unlike adrenaline, which can lower diastolic pressure through beta-2 vasodilation at low doses, noradrenaline has little beta-2 action."),
 ("Dopamine at low doses (1 to 3 microgram/kg/min) acts on:",
  ["D1 receptors, causing renal vasodilation", "Beta-1 receptors", "Alpha-1 receptors", "Muscarinic receptors"],
  "At high doses alpha-1 vasoconstriction predominates."),

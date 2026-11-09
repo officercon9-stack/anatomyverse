@@ -147,3 +147,8 @@ In the shared question component, touching an option in practice mode (clinical 
 - Pool is now 1,806 FCPS questions: anatomy 390, physiology 323, biochemistry 307, pathology 353, pharmacology 433.
 - Target of 2,000 per subject NOT reached (about 15 to 22 percent). Not clinician-reviewed; checks were technical only (syntax, lazy loading, no page errors).
 - Service worker cache av-v121; QuizPage b157.
+
+## FCPS mechanism notes (2026-11-09)
+- New optional overlay files batches/notes_<cat>_<n>.py give each answer a mechanism paragraph and a one-line reason each wrong option is wrong (aligned by index to the batch file). build.py merges them; QuizPage composes the explanation with real shuffled option letters and shows it with white-space pre-line.
+- Done so far: first 60 questions of pharmacology batch 6. Remaining questions keep their original explanation. Not clinician-reviewed.
+- Service worker cache av-v122; QuizPage b158.
