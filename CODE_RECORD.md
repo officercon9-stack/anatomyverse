@@ -141,3 +141,9 @@ In the shared question component, touching an option in practice mode (clinical 
 - Pool is now 1,335 FCPS questions: anatomy 295, physiology 231, biochemistry 223, pathology 260, pharmacology 326.
 - Target of 2,000 per subject is NOT reached (about 12 to 16 percent). Questions are not clinician-reviewed; this is technical verification only (syntax, loading, no page errors), not expert validation.
 - Service worker cache av-v120; QuizPage b156.
+
+## FCPS question bank, batch 6 (2026-11-09)
+- Added hand-written FCPS Part I MCQs (batch 6), all five subjects; duplicates dropped by build.py.
+- Pool is now 1,806 FCPS questions: anatomy 390, physiology 323, biochemistry 307, pathology 353, pharmacology 433.
+- Target of 2,000 per subject NOT reached (about 15 to 22 percent). Not clinician-reviewed; checks were technical only (syntax, lazy loading, no page errors).
+- Service worker cache av-v121; QuizPage b157.
