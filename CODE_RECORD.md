@@ -152,3 +152,5 @@ In the shared question component, touching an option in practice mode (clinical 
 - New optional overlay files batches/notes_<cat>_<n>.py give each answer a mechanism paragraph and a one-line reason each wrong option is wrong (aligned by index to the batch file). build.py merges them; QuizPage composes the explanation with real shuffled option letters and shows it with white-space pre-line.
 - Done so far: first 60 questions of pharmacology batch 6. Remaining questions keep their original explanation. Not clinician-reviewed.
 - Service worker cache av-v122; QuizPage b158.
+
+- Update: on the owner's request the answer shows only "Mechanism of action"; the per-option "why wrong" text stays in the notes files but is not displayed. av-v123, QuizPage b159.
