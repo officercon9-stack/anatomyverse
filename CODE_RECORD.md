@@ -159,3 +159,9 @@ In the shared question component, touching an option in practice mode (clinical 
 - Android workflow now also copies smart-labels.js and selfcheck.js (index.html loads them after start-up; they were missing from the bundle) and checks the bundle for them, fonts.css and the FCPS bank chunks.
 - Assembled the Android web folder locally the same way as the workflow (19 MB) and loaded home, FCPS, lab and quiz at Pixel 5 size: no failed requests, no page errors, FCPS bank loads (1,806 questions). Not tested inside a real Android WebView or on a phone.
 - Listing text updated (FCPS question bank; practice-question disclaimer).
+
+## Screen-size and slow-network check (2026-11-09)
+- Playwright, 5 screen sizes (320x568, 360x640, 412x915, 768x1024, 1280x800) x 7 routes (home, lab, FCPS, quiz, dictionary, tutor, lessons): 35 of 35 with no horizontal overflow, no page errors, no failed requests, no stuck start-up screen.
+- Throttled start-up (Pixel 5 emulation, 463 KB): 25.9 s at 150 kbps, 10.4 s at 400 kbps. Not tested on a physical phone.
+- Fixed: at 320 px the app title overlapped the language selector in the lab header (theme.css, narrow-screen rule). av-v124.
+- Known small items: the floating "Self-check" label sits over the credits line at the bottom of the lab on a 320 px phone.

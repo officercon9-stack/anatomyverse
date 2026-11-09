@@ -300,3 +300,9 @@ html.avx-st .av-panel[aria-label="Structure details"]{display:none !important}
 .avx-study-pan .avx-cut-head{padding-right:84px}
 .avx-study-pan.min .avx-st-body{display:none}
 .avx-study-pan .avx-st-body{max-height:min(34vh,270px)}
+
+/* Very narrow phones (320 px): the app title overlapped the language selector, so show the logo only. */
+@media (max-width: 359px) {
+  header[class*="lg:hidden"] a[aria-label="3D Anatomy home"] span > span { display: none; }
+  header[class*="lg:hidden"] select { max-width: 96px; }
+}
