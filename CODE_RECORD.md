@@ -165,3 +165,12 @@ In the shared question component, touching an option in practice mode (clinical 
 - Throttled start-up (Pixel 5 emulation, 463 KB): 25.9 s at 150 kbps, 10.4 s at 400 kbps. Not tested on a physical phone.
 - Fixed: at 320 px the app title overlapped the language selector in the lab header (theme.css, narrow-screen rule). av-v124.
 - Known small items: the floating "Self-check" label sits over the credits line at the bottom of the lab on a 320 px phone.
+
+## Play listing readiness audit (2026-11-10)
+Checked by reading the repo and running the Android web folder in a browser at Pixel 5 size. Not checked: the signed bundle itself (artifact download is blocked from the work environment), a real phone, Play Console.
+- Fixed: store screenshots and feature graphic were from 29 October and showed the old name "AnatomyVerse 3D" and removed features; replaced with 8 current 1080x1920 screenshots and a new 1024x500 graphic.
+- Fixed: added privacy.html (plain copy of the in-app privacy text) for the Play Console privacy URL.
+- Fixed: listing disclaimer now uses Google's health-app wording and says the app is not affiliated with CPSP.
+- OPEN, licence: models/zanatomy-kidney.glb (Z-Anatomy kidneys, pelvis, ureters, suprarenals, intrarenal vessels) is loaded by the app, but THIRD_PARTY_ASSETS.md says no Z-Anatomy kidney is used because of a possible CC BY-NC upstream. The file has no ledger entry. Unresolved.
+- OPEN: release bundle is unsigned (keystore secrets not set); Z-Anatomy maintainer confirmation still outstanding; FCPS questions not clinician-reviewed; /app/admin shows a dead "Administrators only" page; in-app FCPS screen has no "not affiliated with CPSP" line.
+- Passed: no external network requests and no /api calls on 17 routes; no page errors; INTERNET is the only permission; allowBackup false; target SDK 36; listing text within limits (short 73/80, full under 4000).

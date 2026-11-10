@@ -4,7 +4,7 @@ App name (max 30): **3D Anatomy**
 Package name: `com.officercon9.anatomyverse` (cannot change after the first upload)
 Category: Education (or Medical; Education is safer for a study tool)
 Contact email: officercon9@gmail.com
-Privacy policy URL: https://officercon9-stack.github.io/anatomyverse/#/legal/privacy
+Privacy policy URL: https://officercon9-stack.github.io/anatomyverse/privacy.html (plain page with the same text as the in-app policy; use this one in Play Console because Google's checker may not read the in-app page)
 Content sources and licences URL: https://officercon9-stack.github.io/anatomyverse/#/legal/sources
 
 ## Short description (max 80)
@@ -25,7 +25,7 @@ WHAT YOU CAN DO
 - Works offline once installed. No account, no ads and no tracking.
 
 FOR EDUCATION ONLY
-3D Anatomy is a learning aid. It is not medical advice and does not diagnose or treat any condition. Models are simplified for teaching and some structures are schematic. Practice questions are study aids and are not official exam questions; always check facts against your course materials and standard textbooks.
+3D Anatomy is a learning aid. It is not a medical device and does not diagnose, treat, cure, or prevent any medical condition. Always consult a healthcare professional for medical advice, diagnosis, or treatment. Models are simplified for teaching and some structures are schematic. Practice questions are study aids and are not official exam questions; this app is not affiliated with or endorsed by the College of Physicians and Surgeons Pakistan (CPSP); always check facts against your course materials and standard textbooks.
 
 CREDITS
 Many 3D models are derived from Z-Anatomy and BodyParts3D, licensed under Creative Commons Attribution-ShareAlike (CC BY-SA 4.0 and 2.1 Japan), and were modified for this app. Full credits and licences are in the app under Content sources.
