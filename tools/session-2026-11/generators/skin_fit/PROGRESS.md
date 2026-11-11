@@ -2,3 +2,4 @@
 - 2026-11-11T20:16Z Male body now natural except neck (per-body-part enclosure, hands by landmarks). Neck cross-section fit being added. Female first run pending review.
 - 2026-11-11T20:33Z Male fit looks natural (no neck collar). Female natural except small flaps beside the breasts/armpits; smoothing those next. Then export + wire into app.
 - 2026-11-11T20:45Z Both sexes fitted and smooth (contact-zone guard, coarse+fine enclosure, flank relax). Final touch-up running; next: export GLB and wire into app.
+- 2026-11-11T20:53Z DONE: both skins exported, wired into the app per sex, tested on desktop and phone emulation, deployed (chunks b162, av-v127).

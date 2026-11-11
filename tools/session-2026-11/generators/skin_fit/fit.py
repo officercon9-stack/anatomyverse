@@ -167,7 +167,7 @@ def anatomy(L,sex):
         if sex=='m' and (nm.startswith(male) or mod in('anatomyverse-scrotum','zanatomy-male-urethra')): continue
         Q.append((m['P'],m['F']))
     return Q
-def enclose(V,F,A,Q,alm,names,Wt,margin=0.003):
+def enclose(V,F,A,Q,alm,names,Wt,margin=0.003,guard=None):
     rng=np.random.default_rng(3);pts=np.vstack([sample(P,Fq,max(300,int(len(Fq)*1.5)),rng)[0] for P,Fq in Q]+[P for P,_ in Q])
     _,ui=np.unique(np.round(pts/0.004).astype(np.int64),axis=0,return_index=True);pts=pts[ui]
     for S in 'LR':
@@ -189,6 +189,10 @@ def enclose(V,F,A,Q,alm,names,Wt,margin=0.003):
     cm=contact.astype(float)
     for _ in range(3):cm=np.maximum(cm,A.multiply(cm[None,:]).max(axis=1).toarray().ravel())
     for _ in range(6):cm=(A@cm+cm)/(deg+1)
+    if guard is not None:   # breasts are fat over the chest wall: leave the scan's own shape
+        gm=((np.abs(V[:,0])>0.02)&(np.abs(V[:,0])<0.18)&(V[:,1]>1.13)&(V[:,1]<1.31)&(V[:,2]>guard)).astype(float)
+        for _ in range(6):gm=(A@gm+gm)/(deg+1)
+        cm=np.maximum(cm,gm)
     keep=1-np.clip(cm*1.5,0,1);print('   contact-zone vertices',int(contact.sum()),flush=True)
     def passes(rounds,cap,reach,total,dil,avg,tag):
         nonlocal V
@@ -223,11 +227,11 @@ def enclose(V,F,A,Q,alm,names,Wt,margin=0.003):
     d=np.linalg.norm(V-np.array([0,1.47,0.06]),axis=1);w=np.maximum(w,0.6*np.clip((0.07-d)/0.03,0,1))
     for _ in range(40):V=V+(0.6*w)[:,None]*((A@V)/deg[:,None]-V)
     return V
-CFG={'m':dict(chest_max=1.15,sy=0.894,pelvis_min=[0.95,0.95],r_arm=1.0,r_leg=1.0),'f':dict(chest_max=1.24,sy=0.931,pelvis_min=[0.95,0.95],r_arm=1.0,r_leg=1.0)}
+CFG={'m':dict(chest_max=1.15,sy=0.894,pelvis_min=[0.95,0.95],r_arm=1.0,r_leg=1.0),'f':dict(breast_guard=0.05,chest_max=1.24,sy=0.931,pelvis_min=[0.95,0.95],r_arm=1.0,r_leg=1.0)}
 if __name__=='__main__':
     for sex in sys.argv[1:]:
         V,F,L,A,info,names,Wt=run(sex,CFG[sex]);print(sex)
-        Q=anatomy(L,sex);V0=V.copy();V=enclose(V,F,A,Q,pickle.load(open('app_lm.pkl','rb')),names,Wt)
+        Q=anatomy(L,sex);V0=V.copy();V=enclose(V,F,A,Q,pickle.load(open('app_lm.pkl','rb')),names,Wt,guard=CFG[sex].get('breast_guard'))
         print('  moved mean mm',round(np.linalg.norm(V-V0,axis=1).mean()*1000,2),'p95',round(np.quantile(np.linalg.norm(V-V0,axis=1),0.95)*1000,1))
         pickle.dump((V,F,V0),open('fit_%s.pkl'%sex,'wb'))
         b=(-0.5,0.5,0.0,1.8);bs=(-0.3,0.3,0,1.8);sk=(214,170,140)

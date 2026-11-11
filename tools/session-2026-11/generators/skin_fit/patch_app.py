@@ -23,6 +23,20 @@ if 'hubmap-skin-male' not in v:
     v=v.replace(a,a+'.filter(_p=>!(e.id===`hubmap-skin-male`&&_jsx!==`male`)&&!(e.id===`hubmap-skin-female`&&_jsx!==`female`))')
     v=v.replace('lod50','lod51')
     open(V,'w',encoding='utf-8').write(v)
+# solid skin hides what is underneath (nothing inside is visible anyway; stops parts poking through)
+v=open(V,encoding='utf-8').read()
+if '_skSolid' not in v:
+    a=":me(t,e,w,i);c&&n.visible";assert v.count(a)==1
+    v=v.replace(a,":me(t,e,w,i);let _skSolid=w[t]?.layer!==`skin`&&e.layerVisible?.skin!==!1&&(e.layerOpacity?.skin??0)>=.95&&(!e.selectedId||e.selectedId===`skin`)&&!(e.isolated&&e.isolated.length)&&!e.systemFocus&&!e.heartBeating;_skSolid&&n.visible&&Object.assign(n,{visible:!1,pickable:!1});c&&n.visible")
+    open(V,'w',encoding='utf-8').write(v)
+v=open(V,encoding='utf-8').read()
+if '_skGhost' not in v:
+    # a solid skin turns see-through while something underneath is selected or a system is in focus
+    a="_skSolid&&n.visible&&Object.assign(n,{visible:!1,pickable:!1});";assert v.count(a)==1
+    v=v.replace(a,a+"let _skGhost=w[t]?.layer===`skin`&&n.visible&&((e.selectedId&&w[e.selectedId]?.layer!==`skin`)||e.systemFocus);_skGhost&&Object.assign(n,{opacity:Math.min(n.opacity,.12),pickable:!1});")
+    a="limbs, organs and skull are scan-derived models; the trunk outline is schematic"
+    if a in v: v=v.replace(a,"limbs, organs, skull and body surface are scan-derived models")
+    open(V,'w',encoding='utf-8').write(v)
 sw=open(ROOT+'/sw.js').read();sw=sw.replace("'lod50'","'lod51'");n=int(re.search(r"av-v(\d+)",sw).group(1));sw=sw.replace('av-v%d'%n,'av-v%d'%(n+1));open(ROOT+'/sw.js','w').write(sw)
 import os
 print(subprocess.run(['python3',ROOT+'/tools/session-2026-11/bump.py',ROOT,NEW,os.path.basename(M),os.path.basename(V)],capture_output=True,text=True).stdout[-600:])
