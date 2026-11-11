@@ -174,3 +174,11 @@ Checked by reading the repo and running the Android web folder in a browser at P
 - OPEN, licence: models/zanatomy-kidney.glb (Z-Anatomy kidneys, pelvis, ureters, suprarenals, intrarenal vessels) is loaded by the app, but THIRD_PARTY_ASSETS.md says no Z-Anatomy kidney is used because of a possible CC BY-NC upstream. The file has no ledger entry. Unresolved.
 - OPEN: release bundle is unsigned (keystore secrets not set); Z-Anatomy maintainer confirmation still outstanding; FCPS questions not clinician-reviewed; /app/admin shows a dead "Administrators only" page; in-app FCPS screen has no "not affiliated with CPSP" line.
 - Passed: no external network requests and no /api calls on 17 routes; no page errors; INTERNET is the only permission; allowBackup false; target SDK 36; listing text within limits (short 73/80, full under 4000).
+
+## Realistic male and female body surface (2026-11-12)
+- New overlays `hubmap-skin-male` and `hubmap-skin-female` (HuBMAP Visible Human skin, CC BY 4.0), each loaded only for its sex (`_c0` filter in `Et`, plus a filter in `jt`); they replace all procedural skin and hair parts. Structure id stays `skin`.
+- Fitting pipeline and how to rerun it: `tools/session-2026-11/generators/skin_fit/README.md`. Ledger entry in THIRD_PARTY_ASSETS.md (modifications are substantial; read the accuracy note).
+- Viewer rules added in `xt`: when the skin layer is solid (opacity >= 0.95) and nothing underneath is selected, isolated or in system focus, non-skin parts are not drawn (`_skSolid`); when something underneath is selected or a system is in focus, the skin drops to 0.12 opacity (`_skGhost`).
+- Default skin opacity is unchanged (0.12), so the first view still shows muscles with a faint body outline; Layers > Skin makes the body solid.
+- Tested with Playwright (software GL): desktop 1100x900 and Pixel 5 emulation, both sexes; skin loads per sex, 0 inner meshes drawn when solid, tapping the solid body selects Skin, selecting Liver shows the inside, no page errors, no failed requests. Not tested on a physical phone.
+- Chunks b162, sw cache av-v127, model token lod51.

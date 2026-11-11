@@ -246,3 +246,18 @@ Source: Z-Anatomy (CC BY-SA 4.0): the urethra curve, thickened for display. It s
 
 ## Share-alike note for generated parts
 Generated parts were built independently and contain no third-party vertices. Where a generated part is merged into the same glb file as a Z-Anatomy mesh (the scrotum file), the whole file is distributed under CC BY-SA 4.0 and listed on the credits page.
+
+## hubmap-skin-male.glb and hubmap-skin-female.glb (added 12 November 2026)
+
+| | |
+|---|---|
+| Source | HuBMAP CCF 3D Reference Object Library: "3D Reference Organ for Skin, Male" (https://doi.org/10.48539/HBM369.SBSP.863) and "3D Reference Organ for Skin, Female" (https://doi.org/10.48539/HBM466.LKPQ.876), created from the NLM Visible Human Male and Female by Kristen Browne and Heidi Schlehlein. Meshes read from the v2.0 united models, nodes `VH_M_skin` (92,659 vertices) and `VH_F_skin` (191,322 vertices). |
+| Repository | https://github.com/hubmapconsortium/ccf-releases (`v2.0/models/3d-vh-m-united.glb.zip`, `3d-vh-f-united.glb.7z`; licence stated in `v2.0/markdown/ref-organs/3d-vh-m-skin.md` and `3d-vh-f-skin.md`) |
+| Licence | CC BY 4.0 |
+| Commercial use | Permitted |
+| Modification | Permitted |
+| Attribution | Required: "HuBMAP CCF 3D Reference Object Library, 3D Reference Organ for Skin, Male / Female (Kristen Browne, Heidi Schlehlein), CC BY 4.0", with a note that it was modified |
+| ShareAlike | No |
+| Modifications made | Substantial. The surface was re-posed and re-proportioned to this app's skeleton: per-segment transforms (pelvis, chest, head, face, upper arm, forearm, hand, thigh, leg, foot) from joint landmarks, blended with harmonic skin weights; arms lengthened about 22 percent; limb girth, chest and head size rescaled to cover the app's muscles and skull; then pushed outward by up to about 2 to 4 cm where muscles still protruded, and smoothed. Simplified to about 40,000 triangles (phone version about 16,000), meshopt-compressed. Scripts: `tools/session-2026-11/generators/skin_fit/` (`fit.py`, `export.py`, `patch_app.py`). |
+| Accuracy note | The result is NOT a measurement of either Visible Human subject. The app's muscles and skeleton are the same (male-derived) for both sexes, so the female surface was widened at the shoulders and chest to cover them. The female breast shape is the scan's own. Hands are fitted by landmarks only (finger bones are not individually enclosed). Technical verification only; no anatomist has reviewed the fitted surfaces. |
+| Replaces | The procedural skin shapes (`skin_head`, `skin_neck`, `skin_torso`, `skin_torso_female`, `skin_arm_*`, `skin_forearm_*`, `skin_hand_*`, `skin_thigh_*`, `skin_leg_*`, `skin_foot_*`, `skin_breast_*`, `hair_male`, `hair_female`). No hair is drawn now. |
