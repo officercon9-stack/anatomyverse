@@ -25,6 +25,20 @@ def vnormals(V,F):
     n=np.cross(V[F[:,1]]-V[F[:,0]],V[F[:,2]]-V[F[:,0]]);N=np.zeros_like(V)
     for k in range(3):np.add.at(N,F[:,k],n)
     return N/np.maximum(np.linalg.norm(N,axis=1),1e-12)[:,None]
+GROUPS=['trunk','armL','armR','legL','legR']
+def poly_dist(p,pl):
+    best=np.full(len(p),1e9)
+    for a,b in zip(pl[:-1],pl[1:]):
+        ab=b-a;t=np.clip((p-a)@ab/(ab@ab),0,1);best=np.minimum(best,np.linalg.norm(p-(a+t[:,None]*ab),axis=1))
+    return best
+def group_of(pts,alm):
+    top=np.array([0,1.75,-0.01]);bot=np.array([0,0.80,-0.01]);pl={'trunk':([bot,top],0.15)}
+    for S in 'LR':
+        pl['arm'+S]=([alm['shoulder_'+S],alm['elbow2_'+S],alm['wrist_'+S],alm['tip_middle_'+S]],0.05)
+        pl['leg'+S]=([alm['hip_'+S],alm['knee2_'+S],alm['ankle_'+S],alm['toe1_'+S]],0.085)
+    return np.stack([poly_dist(pts,np.array(pl[g][0]))/pl[g][1] for g in GROUPS],1).argmin(1)
+def ext(P,y,h=0.006):
+    b=P[np.abs(P[:,1]-y)<h];return b.min(0),b.max(0)
 def run(sex,cfg):
     lm,arms,feet,P,F,A,U=all_skin_landmarks(sex);anc=pickle.load(open('vh/united_anc_%s.pkl'%sex,'rb'))
     alm=pickle.load(open('app_lm.pkl','rb'));L=pickle.load(open('app_%s.pkl'%('male' if sex=='m' else 'female'),'rb'));by={m['name']:m for m in L}
@@ -36,15 +50,38 @@ def run(sex,cfg):
     armany=arms['L']['arm_mask']|arms['R']['arm_mask']
     hipmid=(lm['hip_L']+lm['hip_R'])/2;ahip=(alm['hip_L']+alm['hip_R'])/2
     eye_y=(lm['eye_L'][1]+lm['eye_R'][1])/2
-    Sd=np.array(cfg['pelvis']);bones['pelvis']=(np.diag(Sd),ahip-Sd*hipmid)
     X='VH_%s_'%sex.upper()
-    vth=U[X+'thyroid_cartilage'][0].mean(0);vcs=np.vstack([U[X+'cervical_vertebra_%d'%i][0] for i in (3,4,5,6)]).mean(0)
-    ath=by['za2_thyroid_cartilage']['P'].mean(0);vc=by['vertebral_column']['P'];acs=vc[np.abs(vc[:,1]-ath[1])<0.03].mean(0)
-    aP=np.vstack([p for p,_ in anatomy(L,sex)]);bd=aP[(np.abs(aP[:,1]-ath[1])<0.015)&(np.abs(aP[:,0])<0.12)];alo,ahi=bd.min(0),bd.max(0)
-    vb=P[(np.abs(P[:,1]-vth[1])<0.017)&(np.abs(P[:,0]-mid)<0.13)&~armany];vlo,vhi=vb.min(0),vb.max(0)
-    Sn=np.array([(ahi[0]-alo[0]+0.012)/(vhi[0]-vlo[0]),cfg['pelvis'][1],(ahi[2]-alo[2]+0.012)/(vhi[2]-vlo[2])])
-    vcn=(vlo+vhi)/2;vcn[1]=vth[1];acn=(alo+ahi)/2;acn[1]=ath[1];bones['neck']=(np.diag(Sn),acn-Sn*vcn);print('  neck scale',Sn.round(3))
-    info={}
+    aP=np.vstack([p for p,_ in anatomy(L,sex)]);aG=group_of(aP,alm);aT=aP[aG==0]
+    Pt=P[~armany]
+    sy=cfg['sy'];yv=hipmid[1]+0.05;ya=ahip[1]+0.05*sy
+    vlo,vhi=ext(Pt,yv);alo,ahi_=ext(aT,ya)
+    Sd=np.array([max(cfg['pelvis_min'][0],(ahi_[0]-alo[0]+0.016)/(vhi[0]-vlo[0])),sy,max(cfg['pelvis_min'][1],(ahi_[2]-alo[2]+0.016)/(vhi[2]-vlo[2]))])
+    tp=ahip-Sd*hipmid;tp[2]=(alo[2]+ahi_[2])/2-Sd[2]*(vlo[2]+vhi[2])/2;bones['pelvis']=(np.diag(Sd),tp);print('  pelvis scale',Sd.round(3))
+    sk=np.vstack([m['P'] for m in L if m['chain'][1]=='zanatomy-skull'])
+    scl=by['za_sclera_1']['P'];aeye=scl.mean(0);vtop=P[:,1].max();atop=sk[:,1].max()+0.006
+    lv=eye_y+0.35*(vtop-eye_y);la=aeye[1]+0.35*(atop-aeye[1]);vlo,vhi=ext(P[np.abs(P[:,0]-mid)<0.12],lv);alo,ahi_=ext(sk,la)
+    kk=H/1.75;ez=(lm['eye_L'][2]+lm['eye_R'][2])/2;ml=P[np.abs(P[:,0]-mid)<0.01];ys=np.arange(eye_y-0.06*kk,eye_y-0.20*kk,-0.004)
+    zf=np.array([ml[np.abs(ml[:,1]-yy)<0.003][:,2].max() for yy in ys]);vchin=ys[-1]
+    for i_ in range(8,len(ys)):
+        if zf[i_]<zf[i_-8:i_].max()-0.025:vchin=ys[i_]+0.004;break
+    achin=sk[:,1].min()-0.006
+    Sh=np.array([(ahi_[0]-alo[0]+0.012)/(vhi[0]-vlo[0]),(atop-aeye[1])/(vtop-eye_y),(ahi_[2]-alo[2]+0.012)/(vhi[2]-vlo[2])])
+    tz=(alo[2]+ahi_[2])/2-Sh[2]*(vlo[2]+vhi[2])/2
+    bones['head']=(np.diag(Sh),np.array([-Sh[0]*mid,aeye[1]-Sh[1]*eye_y,tz]))
+    Sf=Sh.copy();Sf[1]=max(0.92,(aeye[1]-achin)/(eye_y-vchin));bones['face']=(np.diag(Sf),np.array([-Sf[0]*mid,aeye[1]-Sf[1]*eye_y,tz]));print('  head scale',Sh.round(3),'face sy',round(Sf[1],3))
+    vth=U[X+'thyroid_cartilage'][0].mean(0);ath=by['za2_thyroid_cartilage']['P'].mean(0)
+    def narrow(Pp,y0,cx):
+        best=None
+        for y in np.arange(y0-0.03,y0+0.005,0.004):
+            b=Pp[(np.abs(Pp[:,1]-y)<0.005)&(np.abs(Pp[:,0]-cx)<0.13)]
+            if len(b)<20:continue
+            w=np.ptp(b[:,0])
+            if best is None or w<best[0]:best=(w,y,b.min(0),b.max(0))
+        return best
+    wv,yvn,vlo,vhi=narrow(Pt,vth[1],mid);wa,yan,alo,ahi_=narrow(aT,ath[1],0)
+    Sn=np.array([max(0.85,(wa+0.012)/wv),sy,max(0.85,(ahi_[2]-alo[2]+0.012)/(vhi[2]-vlo[2]))])
+    bones['neck']=(np.diag(Sn),np.array([-Sn[0]*mid,yan-Sn[1]*yvn,(alo[2]+ahi_[2])/2-Sn[2]*(vlo[2]+vhi[2])/2]));print('  neck scale',Sn.round(3),'levels',round(yvn,3),round(yan,3))
+    info={'vchin':vchin}
     for S,sg in (('L',1),('R',-1)):
         a=arms[S];u=a['u'];Ax=a['axilla'];tt=a['cl_t'];cen=a['cl_c'];tw=a['t_wrist']
         # elbow from width profile
@@ -80,14 +117,32 @@ def run(sex,cfg):
         seeds['hand_'+S]=am&(ta>tw+0.03)
     axy=max(arms['L']['axilla'][1],arms['R']['axilla'][1]);sx=min(abs(info['arm_L']['S'][0]-mid),abs(info['arm_R']['S'][0]-mid))
     y=P[:,1]
-    aSd=abs(alm['shoulder_L'][0]-alm['shoulder_R'][0]);vSd=abs(info['arm_L']['S'][0]-info['arm_R']['S'][0])
-    Sc=np.array([cfg['chest_k']*aSd/vSd,cfg['pelvis'][1],cfg['chest_z']]);Mp,tp=bones['pelvis']
-    # chest shares the pelvis map at the waist midpoint so the two meet without a step
-    wpt=np.array([mid,(hipmid[1]+axy)/2,hipmid[2]]);bones['chest']=(np.diag(Sc),(Mp@wpt+tp)-Sc*wpt)
+    Mp,tp=bones['pelvis'];wy=(hipmid[1]+axy)/2;wya=Mp[1,1]*wy+tp[1]
+    y1=axy-0.05;y1a=wya+sy*(y1-wy);vlo,vhi=ext(Pt,y1);alo,ahi_=ext(aT,y1a);sxc=(ahi_[0]-alo[0]+0.016)/(vhi[0]-vlo[0])
+    y2=axy+0.06;y2a=wya+sy*(y2-wy);lim=sx-0.03;vb=Pt[np.abs(Pt[:,0]-mid)<lim];ab_=aT[np.abs(aT[:,0])<lim*sxc];vlo,vhi=ext(vb,y2);alo,ahi_=ext(ab_,y2a)
+    sxc=min(sxc,cfg['chest_max']);Sc=np.array([sxc,sy,max(0.95,(ahi_[2]-alo[2]+0.016)/(vhi[2]-vlo[2]))])
+    bones['chest']=(np.diag(Sc),np.array([-Sc[0]*mid,wya-Sc[1]*wy,(alo[2]+ahi_[2])/2-Sc[2]*(vlo[2]+vhi[2])/2]));print('  chest scale',Sc.round(3))
     seeds['pelvis']=~armany&(y>hipmid[1]-0.02)&(y<hipmid[1]+0.12)
     seeds['chest']=~armany&(y>=axy-0.06)&(y<axy+0.10)&((np.abs(P[:,0]-mid)<sx-0.05)|(y<axy-0.02))
-    seeds['neck']=~armany&(y>vth[1]-0.02)&(y<vth[1]+0.03)
-    seeds['head']=y>eye_y-0.085*H/1.75
+    seeds['neck']=~armany&(y>yvn-0.015)&(y<yvn+0.015)
+    seeds['head']=(y>eye_y+0.005)
+    seeds['face']=(y<=eye_y-0.02)&(y>vchin+0.005)&(P[:,2]>ez-0.06*kk)&(np.abs(P[:,0]-mid)<0.065*kk)
+    for k in list(bones):
+        if k.split('_')[0] not in('uarm','farm','thigh','shank'):continue
+        S=k[-1];g=GROUPS.index(('arm' if k[0] in 'uf' else 'leg')+S);M,t=bones[k]
+        ends={'uarm':('shoulder_','elbow2_'),'farm':('elbow2_','wrist_'),'thigh':('hip_','knee2_'),'shank':('knee2_','ankle_')}[k.split('_')[0]]
+        o=alm[ends[0]+S];e=alm[ends[1]+S];a1=unit(e-o)
+        h=np.array([0,0,1.]);a2=unit(h-(h@a1)*a1);a3=np.cross(a1,a2)
+        def cyl(Pp):
+            d=Pp-o;t_=d@a1;return t_,np.hypot(d@a2,d@a3),np.arctan2(d@a3,d@a2)
+        ts,rs,ths=cyl(P[seeds[k]]@M.T+t);ta_,ra,tha=cyl(aP[aG==g]);m=(ta_>ts.min())&(ta_<ts.max())&(ra<0.2)
+        rat=[]
+        for c in np.linspace(-np.pi,np.pi,13)[:-1]:
+            ms=(ths>=c)&(ths<c+np.pi/6);ma=m&(tha>=c)&(tha<c+np.pi/6)
+            if ms.sum()>5 and ma.sum()>5:rat.append((np.quantile(ra[ma],0.95)+0.004)/rs[ms].mean())
+        sr=float(np.clip(np.quantile(rat,0.75),0.85,1.7))
+        Sx=np.outer(a1,a1)+sr*(np.eye(3)-np.outer(a1,a1));bones[k]=(Sx@M,o+Sx@(t-o));print('  radial',k,round(sr,2))
+    if not cfg.get('neck'):bones.pop('neck',None)
     names=list(bones);lab=-np.ones(n,int)
     for i,k in enumerate(names):lab[seeds[k]&(lab<0)]=i
     # harmonic weights
@@ -106,17 +161,12 @@ def anatomy(L,sex):
         nm=m['name'];mod=m['chain'][1] if len(m['chain'])>1 else ''
         if not m['vis'] or len(m['F'])==0: continue
         if nm.startswith(('skin_','hair_','za_auricle','alveoli','skin')) or m['sid'] in('skin','epidermis','dermis','hypodermis','skin-appendages'): continue
-        if mod=='anatomyverse-vulva' and sex=='m': continue
+        if mod in('anatomyverse-vulva','zanatomy-eye','zanatomy-eyedetail','schematic-body-v1'): continue
         if sex=='f' and (mod in('anatomyverse-scrotum','zanatomy-male-urethra') or nm.startswith(male)): continue
         if sex=='m' and mod=='hubmap-female-repro': continue
         if sex=='m' and (nm.startswith(male) or mod in('anatomyverse-scrotum','zanatomy-male-urethra')): continue
         Q.append((m['P'],m['F']))
     return Q
-def poly_dist(p,pl):
-    best=np.full(len(p),1e9)
-    for a,b in zip(pl[:-1],pl[1:]):
-        ab=b-a;t=np.clip((p-a)@ab/(ab@ab),0,1);best=np.minimum(best,np.linalg.norm(p-(a+t[:,None]*ab),axis=1))
-    return best
 def enclose(V,F,A,Q,alm,names,Wt,margin=0.003):
     rng=np.random.default_rng(3);pts=np.vstack([sample(P,Fq,max(300,int(len(Fq)*1.5)),rng)[0] for P,Fq in Q]+[P for P,_ in Q])
     _,ui=np.unique(np.round(pts/0.004).astype(np.int64),axis=0,return_index=True);pts=pts[ui]
@@ -124,15 +174,10 @@ def enclose(V,F,A,Q,alm,names,Wt,margin=0.003):
         a=alm['wrist_'+S];b=alm['tip_middle_'+S];u=unit(b-a);t=(pts-a)@u;rd=np.linalg.norm((pts-a)-t[:,None]*u,axis=1)
         pts=pts[~((t>-0.005)&(rd<0.1))]
     # body-part groups, so one limb's skin never reacts to another part's anatomy
-    G=['trunk','armL','armR','legL','legR'];top=np.array([0,1.75,-0.01]);bot=np.array([0,0.80,-0.01])
-    pl={'trunk':([bot,top],0.15)}
-    for S in 'LR':
-        pl['arm'+S]=([alm['shoulder_'+S],alm['elbow2_'+S],alm['wrist_'+S],alm['tip_middle_'+S]],0.05)
-        pl['leg'+S]=([alm['hip_'+S],alm['knee2_'+S],alm['ankle_'+S],alm['toe1_'+S]],0.085)
-    nd=np.stack([poly_dist(pts,np.array(pl[g][0]))/pl[g][1] for g in G],1);pg=nd.argmin(1)
+    G=GROUPS;pg=group_of(pts,alm)
     gw=np.zeros((len(V),len(G)))
     for i,k in enumerate(names):
-        g='trunk' if k in('pelvis','chest','neck','head') else ('arm' if k.split('_')[0] in('uarm','farm','hand') else 'leg')+k[-1]
+        g='trunk' if k in('pelvis','chest','neck','head','face') else ('arm' if k.split('_')[0] in('uarm','farm','hand') else 'leg')+k[-1]
         gw[:,G.index(g)]+=Wt[:,i]
     vg=gw.argmax(1)
     A=A.copy();A.data[:]=1;deg=np.asarray(A.sum(1)).ravel();V=V.copy()
@@ -146,25 +191,23 @@ def enclose(V,F,A,Q,alm,names,Wt,margin=0.003):
             for gi in range(len(G)):
                 vi=np.flatnonzero(vg==gi);q=pts[pg==gi]
                 if len(q)==0:continue
-                d,ix=cKDTree(V[vi]).query(q,k=8,distance_upper_bound=reach+0.012);ok=np.isfinite(d);ix=np.where(ok,ix,0)
-                vv=V[vi][ix];nn=N[vi][ix];vec=q[:,None,:]-vv;sd=(vec*nn).sum(2);lat=np.linalg.norm(vec-sd[...,None]*nn,axis=2)
-                val=ok&(sd>-margin)&(sd<reach)&(lat<0.006+0.6*np.maximum(sd,0))&((nn*N0[vi][ix]).sum(2)>0.3)
-                lat=np.where(val,lat,1e9);j=lat.argmin(1);has=val.any(1);rows=np.flatnonzero(has)
-                np.maximum.at(need,vi[ix[rows,j[rows]]],np.minimum(sd[rows,j[rows]]+margin,cap));nb_+=len(rows)
+                d,ix=cKDTree(V[vi]).query(q);gv=vi[ix];sd=np.einsum('ij,ij->i',q-V[gv],N[gv])
+                val=(sd>-margin)&(d<reach)&(np.einsum('ij,ij->i',N[gv],N0[gv])>0.8)
+                np.maximum.at(need,gv[val],np.minimum(sd[val]+margin,cap));nb_+=int(val.sum())
             if r%4==0 or r==rounds-1: print('   ',tag,r,'violations',nb_,flush=True)
             if nb_<30:break
             for _ in range(dil):
                 nb=A.multiply(need[None,:]).max(axis=1).toarray().ravel();need=np.maximum(need,nb)
             for _ in range(avg):need=(A@need+need)/(deg+1)
             step=np.minimum(1.5*need,total-acc);acc+=step;V+=N0*step[:,None]
-    passes(16,0.005,0.02,0.03,4,12,'main')
+    passes(16,0.004,0.015,0.02,4,12,'main')
     for _ in range(3):V=0.5*V+0.5*(A@V)/deg[:,None]
     passes(6,0.004,0.012,0.012,2,5,'final')
     return V
-CFG={'m':dict(pelvis=[1.0,0.894,1.0],chest_k=1.08,chest_z=1.03,r_arm=1.2,r_leg=1.0),'f':dict(pelvis=[0.95,0.931,1.0],chest_k=1.06,chest_z=1.0,r_arm=1.15,r_leg=1.0)}
+CFG={'m':dict(chest_max=1.15,sy=0.894,pelvis_min=[0.95,0.95],r_arm=1.0,r_leg=1.0),'f':dict(chest_max=1.18,sy=0.931,pelvis_min=[0.95,0.95],r_arm=1.0,r_leg=1.0)}
 if __name__=='__main__':
     for sex in sys.argv[1:]:
-        V,F,L,A,info,names,Wt=run(sex,CFG[sex]);print(sex,{k:(round(v['te'],3),v['S'].round(3)) for k,v in info.items()})
+        V,F,L,A,info,names,Wt=run(sex,CFG[sex]);print(sex)
         Q=anatomy(L,sex);V0=V.copy();V=enclose(V,F,A,Q,pickle.load(open('app_lm.pkl','rb')),names,Wt)
         print('  moved mean mm',round(np.linalg.norm(V-V0,axis=1).mean()*1000,2),'p95',round(np.quantile(np.linalg.norm(V-V0,axis=1),0.95)*1000,1))
         pickle.dump((V,F,V0),open('fit_%s.pkl'%sex,'wb'))
