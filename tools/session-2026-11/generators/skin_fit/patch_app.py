@@ -6,7 +6,7 @@ m=open(M,encoding='utf-8').read();v=open(V,encoding='utf-8').read()
 parts=['skin_head','skin_neck','skin_torso','skin_torso_female','hair_male','hair_female','skin_breast_L','skin_breast_R']+['skin_%s_%s'%(p,s) for p in('arm','forearm','hand','thigh','leg','foot') for s in 'LR']
 if 'hubmap-skin-male' not in m:
     ents=[]
-    for name,who,doi in (('male','Male','https://doi.org/10.48539/HBM724.SQKH.975'),('female','Female','https://doi.org/10.48539/HBM466.LKPQ.876')):
+    for name,who,doi in (('male','Male','https://doi.org/10.48539/HBM369.SBSP.863'),('female','Female','https://doi.org/10.48539/HBM466.LKPQ.876')):
         ents.append(json.dumps({"id":"hubmap-skin-"+name,"name":"Body surface, %s (HuBMAP / NLM Visible Human)"%name,"kind":"gltf","url":"./models/hubmap-skin-%s.glb"%name,"fidelity":"anatomical","license":"CC BY 4.0 - HuBMAP CCF 3D Reference Library (NLM Visible Human %s)"%who,"attribution":"HuBMAP CCF 3D Reference Object Library, 3D Reference Organ for Skin, %s (Kristen Browne, Heidi Schlehlein), CC BY 4.0 (https://github.com/hubmapconsortium/ccf-releases). Modified: re-posed and scaled to this app's skeleton and pushed outward where muscles protruded; simplified."%who,"description":"Whole-body skin surface from the Visible Human %s, re-posed to this app's skeleton. The pose, proportions and local thickness were changed to fit; it is not a measurement of any person."%who,"objectMap":{"skin_body_"+name:"skin"}}))
     a='"hm_ovary_r": "ovary"}},';assert m.count(a)==1
     m=m.replace(a,a+','.join(ents)+',')

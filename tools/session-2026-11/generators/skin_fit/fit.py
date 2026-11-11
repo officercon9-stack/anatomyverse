@@ -123,7 +123,7 @@ def run(sex,cfg):
     sxc=min(sxc,cfg['chest_max']);Sc=np.array([sxc,sy,max(0.95,(ahi_[2]-alo[2]+0.016)/(vhi[2]-vlo[2]))])
     bones['chest']=(np.diag(Sc),np.array([-Sc[0]*mid,wya-Sc[1]*wy,(alo[2]+ahi_[2])/2-Sc[2]*(vlo[2]+vhi[2])/2]));print('  chest scale',Sc.round(3))
     seeds['pelvis']=~armany&(y>hipmid[1]-0.02)&(y<hipmid[1]+0.12)
-    seeds['chest']=~armany&(y>=axy-0.06)&(y<axy+0.10)&((np.abs(P[:,0]-mid)<sx-0.05)|(y<axy-0.02))
+    seeds['chest']=~armany&(y>=axy-0.06)&(y<axy+0.10)&(np.abs(P[:,0]-mid)<0.6*sx)
     seeds['neck']=~armany&(y>yvn-0.015)&(y<yvn+0.015)
     seeds['head']=(y>eye_y+0.005)
     seeds['face']=(y<=eye_y-0.02)&(y>vchin+0.005)&(P[:,2]>ez-0.06*kk)&(np.abs(P[:,0]-mid)<0.065*kk)
@@ -181,6 +181,15 @@ def enclose(V,F,A,Q,alm,names,Wt,margin=0.003):
         gw[:,G.index(g)]+=Wt[:,i]
     vg=gw.argmax(1)
     A=A.copy();A.data[:]=1;deg=np.asarray(A.sum(1)).ravel();V=V.copy()
+    # creases and near-contact zones (armpit, under the breast, between the thighs): never push skin there,
+    # because moving one side outward only drives it into the facing side
+    Nc=vnormals(V,F);trc=cKDTree(V);contact=np.zeros(len(V),bool)
+    for dd in (0.008,0.014,0.02,0.028):
+        d_,j_=trc.query(V+Nc*dd);contact|=(d_<0.5*dd)&(np.einsum('ij,ij->i',Nc[j_],Nc)<0.2)
+    cm=contact.astype(float)
+    for _ in range(3):cm=np.maximum(cm,A.multiply(cm[None,:]).max(axis=1).toarray().ravel())
+    for _ in range(6):cm=(A@cm+cm)/(deg+1)
+    keep=1-np.clip(cm*1.5,0,1);print('   contact-zone vertices',int(contact.sum()),flush=True)
     def passes(rounds,cap,reach,total,dil,avg,tag):
         nonlocal V
         N0=vnormals(V,F)
@@ -193,18 +202,28 @@ def enclose(V,F,A,Q,alm,names,Wt,margin=0.003):
                 if len(q)==0:continue
                 d,ix=cKDTree(V[vi]).query(q);gv=vi[ix];sd=np.einsum('ij,ij->i',q-V[gv],N[gv])
                 val=(sd>-margin)&(d<reach)&(np.einsum('ij,ij->i',N[gv],N0[gv])>0.8)
-                np.maximum.at(need,gv[val],np.minimum(sd[val]+margin,cap));nb_+=int(val.sum())
+                val&=keep[gv]>0.5;np.maximum.at(need,gv[val],np.minimum(sd[val]+margin,cap));nb_+=int(val.sum())
             if r%4==0 or r==rounds-1: print('   ',tag,r,'violations',nb_,flush=True)
             if nb_<30:break
             for _ in range(dil):
                 nb=A.multiply(need[None,:]).max(axis=1).toarray().ravel();need=np.maximum(need,nb)
             for _ in range(avg):need=(A@need+need)/(deg+1)
-            step=np.minimum(1.5*need,total-acc);acc+=step;V+=N0*step[:,None]
-    passes(16,0.004,0.015,0.02,4,12,'main')
-    for _ in range(3):V=0.5*V+0.5*(A@V)/deg[:,None]
-    passes(6,0.004,0.012,0.012,2,5,'final')
+            step=np.minimum(1.5*need*keep,total-acc);acc+=step;V+=N0*step[:,None]
+    passes(10,0.006,0.03,0.04,6,40,'coarse')
+    passes(12,0.004,0.015,0.02,4,12,'main')
+    for _ in range(12):   # Taubin smoothing: removes creases and flaps without shrinking
+        V=V+0.5*((A@V)/deg[:,None]-V);V=V-0.53*((A@V)/deg[:,None]-V)
+    passes(4,0.003,0.008,0.006,2,6,'final')
+    for _ in range(4):
+        V=V+0.5*((A@V)/deg[:,None]-V);V=V-0.53*((A@V)/deg[:,None]-V)
+    # flank under each armpit: the edge of latissimus dorsi leaves a ridge; relax it
+    w=np.zeros(len(V))
+    for sg in (1,-1):
+        d=poly_dist(V,np.array([[sg*0.165,1.08,-0.01],[sg*0.165,1.38,-0.01]]));w=np.maximum(w,np.clip((0.105-d)/0.04,0,1))
+    d=np.linalg.norm(V-np.array([0,1.47,0.06]),axis=1);w=np.maximum(w,0.6*np.clip((0.07-d)/0.03,0,1))
+    for _ in range(40):V=V+(0.6*w)[:,None]*((A@V)/deg[:,None]-V)
     return V
-CFG={'m':dict(chest_max=1.15,sy=0.894,pelvis_min=[0.95,0.95],r_arm=1.0,r_leg=1.0),'f':dict(chest_max=1.18,sy=0.931,pelvis_min=[0.95,0.95],r_arm=1.0,r_leg=1.0)}
+CFG={'m':dict(chest_max=1.15,sy=0.894,pelvis_min=[0.95,0.95],r_arm=1.0,r_leg=1.0),'f':dict(chest_max=1.24,sy=0.931,pelvis_min=[0.95,0.95],r_arm=1.0,r_leg=1.0)}
 if __name__=='__main__':
     for sex in sys.argv[1:]:
         V,F,L,A,info,names,Wt=run(sex,CFG[sex]);print(sex)
