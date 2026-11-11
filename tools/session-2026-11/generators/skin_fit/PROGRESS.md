@@ -1,1 +1,2 @@
 - 2026-11-11T20:03Z First joint-by-joint warp of the male scan works (dbg_m.png: skin wraps the app body; muscles still poke through at neck, shoulders, forearms, hands). enclose() step is unstable and being reworked. Female not run yet. Nothing wired into the app.
+- 2026-11-11T20:16Z Male body now natural except neck (per-body-part enclosure, hands by landmarks). Neck cross-section fit being added. Female first run pending review.
