@@ -63,7 +63,7 @@ Non-commercial material cannot be used in a paid app. Because the provenance of
 Z-Anatomy's individual inner-ear meshes is not stated, **we removed all
 Z-Anatomy inner-ear meshes** (cochlea, vestibule and semicircular canals,
 vestibulocochlear/cochlear/vestibular nerves) and replaced them with simplified
-original drawings (`source/ear/mkinner.py`). No Z-Anatomy kidney is used (kidneys
+original drawings (`source/ear/mkinner.py`). No Z-Anatomy kidney is used (the `zanatomy-kidney.glb` overlay that was still being loaded was removed on 12 Nov 2026) (kidneys
 come from BodyParts3D). Still taken from Z-Anatomy and awaiting the maintainers'
 confirmation of origin: auditory ossicles, tympanic membrane, chorda tympani,
 eyelid tarsal plates, zonular fibres, optic nerves, and the heart, skull and
@@ -261,3 +261,15 @@ Generated parts were built independently and contain no third-party vertices. Wh
 | Modifications made | Substantial. The surface was re-posed and re-proportioned to this app's skeleton: per-segment transforms (pelvis, chest, head, face, upper arm, forearm, hand, thigh, leg, foot) from joint landmarks, blended with harmonic skin weights; arms lengthened about 22 percent; limb girth, chest and head size rescaled to cover the app's muscles and skull; then pushed outward by up to about 2 to 4 cm where muscles still protruded, and smoothed. Simplified to about 40,000 triangles (phone version about 16,000), meshopt-compressed. Scripts: `tools/session-2026-11/generators/skin_fit/` (`fit.py`, `export.py`, `patch_app.py`). |
 | Accuracy note | The result is NOT a measurement of either Visible Human subject. The app's muscles and skeleton are the same (male-derived) for both sexes, so the female surface was widened at the shoulders and chest to cover them. The female breast shape is the scan's own. Hands are fitted by landmarks only (finger bones are not individually enclosed). Technical verification only; no anatomist has reviewed the fitted surfaces. |
 | Replaces | The procedural skin shapes (`skin_head`, `skin_neck`, `skin_torso`, `skin_torso_female`, `skin_arm_*`, `skin_forearm_*`, `skin_hand_*`, `skin_thigh_*`, `skin_leg_*`, `skin_foot_*`, `skin_breast_*`, `hair_male`, `hair_female`). No hair is drawn now. |
+
+
+## Renal pelvis, calyces and renal medulla (added 12 Nov 2026)
+
+- Files: `models/hubmap-kidney.glb`, `models/lite/hubmap-kidney.glb`
+- Source: HuBMAP CCF 3D Reference Object Library, Visible Human male kidney, left (https://doi.org/10.48539/HBM562.JGPS.244) and right (https://doi.org/10.48539/HBM272.ZVPQ.979), Kristen Browne and Heidi Schlehlein. Licence: CC BY 4.0.
+- Changes: renal pelvis merged with major and minor calyces; renal pyramids merged with papillae; simplified; one similarity transform per side to fit the BodyParts3D kidneys shown in the app (surface fit median 3.6 mm left, 4.5 mm right). Technical fit only, not expert-validated.
+- Replaces: `models/zanatomy-kidney.glb`, removed because (a) it drew a second kidney, adrenal gland and ureter on top of the BodyParts3D ones and (b) its internal parts are not in BodyParts3D and may come from the non-commercial kidney model listed in the Z-Anatomy credits.
+
+## Intrarenal vessels (generated, 12 Nov 2026)
+
+- Files: `models/anatomyverse-renal-vessels.glb` (+ lite). Original generated tubes, not a scan: anterior and posterior divisions of the renal artery, interlobar arteries and veins routed between the scan-derived pyramids. Marked schematic in the app. Approximation pending expert review.
