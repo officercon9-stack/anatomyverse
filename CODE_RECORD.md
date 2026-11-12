@@ -182,3 +182,12 @@ Checked by reading the repo and running the Android web folder in a browser at P
 - Default skin opacity is unchanged (0.12), so the first view still shows muscles with a faint body outline; Layers > Skin makes the body solid.
 - Tested with Playwright (software GL): desktop 1100x900 and Pixel 5 emulation, both sexes; skin loads per sex, 0 inner meshes drawn when solid, tapping the solid body selects Skin, selecting Liver shows the inside, no page errors, no failed requests. Not tested on a physical phone.
 - Chunks b162, sw cache av-v127, model token lod51.
+
+## Mixed male/female parts fixed (2026-11-12)
+- Reported from a phone: the female body (breasts) showed a scrotum and spermatic cords. Cause: the overlays `anatomyverse-scrotum`, `zanatomy-male-urethra` and `anatomyverse-vulva` (added 5 November) replaced procedural parts that carried a `sex` tag, and the overlays themselves had no sex filter. So the female showed scrotum, spermatic cords and male urethra, and the male showed the vulva. It predates the new skin; the new skin made it obvious.
+- Fix 1 (general): `_sexOf(structureId)` walks the record and its parents for a `sex` field; `xt` never draws a structure whose sex differs from the selected sex. This covers any current or future sex-tagged structure, whichever model it comes from.
+- Fix 2: those three overlays are not downloaded for the other sex (`_c0` filter).
+- Fix 3: selecting the skin hides what is underneath (before, selected skin was 0.9 opaque and muscles showed through at the hands and under the breasts).
+- Test (Playwright, Pixel 5 emulation, software GL): in each sex, every drawn mesh was checked against the records; 0 wrong-sex meshes in female, male, and after switching back; first load requests only the female skin and vulva models; skin selected draws 1 mesh; selecting Prostate from the female view switches to male. No page errors. Not tested on a physical phone.
+- Not changed: the skeleton and muscles are the same male-derived set for both sexes (pelvis shape included).
+- Chunks b163, sw cache av-v128.

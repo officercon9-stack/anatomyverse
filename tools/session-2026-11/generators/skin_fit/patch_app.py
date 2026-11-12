@@ -37,6 +37,20 @@ if '_skGhost' not in v:
     a="limbs, organs and skull are scan-derived models; the trunk outline is schematic"
     if a in v: v=v.replace(a,"limbs, organs, skull and body surface are scan-derived models")
     open(V,'w',encoding='utf-8').write(v)
+v=open(V,encoding='utf-8').read()
+if '_sexOf' not in v:
+    # 1. any structure whose record (or an ancestor) is marked for one sex is never drawn in the other sex
+    a="function xt({name:e,structureId:t,geometry:n,";assert v.count(a)==1
+    v=v.replace(a,"function _sexOf(t){let i=0;for(let r=w[t];r&&i<8;r=w[r.parentId],i++)if(r.sex)return r.sex;return null}\n"+a)
+    a=":me(t,e,w,i);let _skSolid=";assert v.count(a)==1
+    v=v.replace(a,":me(t,e,w,i);{let _so=_sexOf(t);_so&&_so!==e.sex&&Object.assign(n,{visible:!1,pickable:!1})}let _skSolid=")
+    # 2. selecting the skin itself also hides what is underneath
+    a="(e.layerOpacity?.skin??0)>=.95&&(!e.selectedId||e.selectedId===`skin`)";assert v.count(a)==1
+    v=v.replace(a,"((e.layerOpacity?.skin??0)>=.95&&!e.selectedId||e.selectedId===`skin`)")
+    # 3. do not even download the other sex's genital overlays
+    a="&&!(e.assetId===`hubmap-skin-female`&&_sx!==`female`)),[_mn,_smn]";assert v.count(a)==1
+    v=v.replace(a,"&&!(e.assetId===`hubmap-skin-female`&&_sx!==`female`)&&!((e.assetId===`anatomyverse-scrotum`||e.assetId===`zanatomy-male-urethra`)&&_sx!==`male`)&&!(e.assetId===`anatomyverse-vulva`&&_sx!==`female`)),[_mn,_smn]")
+    open(V,'w',encoding='utf-8').write(v)
 sw=open(ROOT+'/sw.js').read();sw=sw.replace("'lod50'","'lod51'");n=int(re.search(r"av-v(\d+)",sw).group(1));sw=sw.replace('av-v%d'%n,'av-v%d'%(n+1));open(ROOT+'/sw.js','w').write(sw)
 import os
 print(subprocess.run(['python3',ROOT+'/tools/session-2026-11/bump.py',ROOT,NEW,os.path.basename(M),os.path.basename(V)],capture_output=True,text=True).stdout[-600:])
