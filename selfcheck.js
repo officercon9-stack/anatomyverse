@@ -77,6 +77,43 @@
     Object.keys(shown).forEach(function (n) { if (shown[n].length > 1) tw.push(n + ' [' + shown[n].join(' + ') + ']'); });
     add('Same name shown by two ids', tw.length ? 'fail' : 'pass', tw.length ? tw.slice(0, 8).join('; ') : 'None');
   }
+  /* Integrity checks added by the Nov 2026 master audit (technical only). */
+  function checkIntegrity(add, by) {
+    var rec = R(), ids = Object.keys(rec), badParent = [], cyc = [], noSys = [], noName = [];
+    ids.forEach(function (id) {
+      var r = rec[id]; if (!r.name || !String(r.name).trim()) noName.push(id); if (!r.system) noSys.push(id);
+      if (r.parentId && !rec[r.parentId]) badParent.push(id);
+      var seen = {}, q = r, n = 0; while (q && q.parentId && n++ < 40) { if (seen[q.parentId]) { cyc.push(id); break; } seen[q.parentId] = 1; q = rec[q.parentId]; }
+    });
+    var bad = badParent.length + cyc.length + noSys.length + noName.length;
+    add('Names, systems and parents', bad ? 'fail' : 'pass', noName.length + ' without a name, ' + noSys.length + ' without a system, ' + badParent.length + ' with a missing parent, ' + cyc.length + ' in a parent loop' + (bad ? ': ' + noName.concat(noSys, badParent, cyc).slice(0, 8).join(', ') : ''));
+    var s = sc(), empty = [], nan = [], tiny = [], huge = [], out = [], unmapped = 0, two = [];
+    if (!s) return;
+    s.scene.traverse(function (o) {
+      if (!o.isMesh || o.isInstancedMesh) return; var g = o.geometry, p = g && g.attributes && g.attributes.position; var nm = o.name || '(unnamed)';
+      if (!p || !p.count) { empty.push(nm); return; }
+      var sid = o.userData && o.userData.structureId; if (!sid) { if (o.parent && /^(schematic|zanatomy|bodyparts3d|anatomyverse|hubmap)/.test(o.parent.name || '')) unmapped++; return; }
+      if (!g.boundingBox) g.computeBoundingBox(); var b = g.boundingBox.clone().applyMatrix4(o.matrixWorld), mn = b.min, mx = b.max;
+      if (!(isFinite(mn.x + mn.y + mn.z + mx.x + mx.y + mx.z))) { nan.push(nm); return; }
+      var d = Math.max(mx.x - mn.x, mx.y - mn.y, mx.z - mn.z);
+      if (d < 0.0004) tiny.push(nm); if (d > 1.9) huge.push(nm);
+      if (mn.y < -0.05 || mx.y > 1.85 || mn.x < -1.05 || mx.x > 1.05 || mn.z < -0.5 || mx.z > 0.5) out.push(nm);
+    });
+    Object.keys(by).forEach(function (id) {
+      var m = {}; by[id].forEach(function (o) { if (!visibleChain(o)) return; var k = o.parent && o.parent.name || '?'; if (!o.geometry.boundingBox) o.geometry.computeBoundingBox(); var b = o.geometry.boundingBox.clone().applyMatrix4(o.matrixWorld); m[k] = m[k] ? m[k].union(b) : b; });
+      var ks = Object.keys(m);
+      for (var i = 0; i < ks.length; i++) for (var j = i + 1; j < ks.length; j++) {
+        var a = m[ks[i]], c = m[ks[j]], x = Math.min(a.max.x, c.max.x) - Math.max(a.min.x, c.min.x), y = Math.min(a.max.y, c.max.y) - Math.max(a.min.y, c.min.y), z = Math.min(a.max.z, c.max.z) - Math.max(a.min.z, c.min.z);
+        if (x <= 0 || y <= 0 || z <= 0) continue; var sa = a.max.clone().sub(a.min), sb = c.max.clone().sub(c.min), v = Math.min(sa.x * sa.y * sa.z, sb.x * sb.y * sb.z);
+        if (v > 0 && x * y * z / v > 0.8) two.push(id);
+      }
+    });
+    var gbad = empty.length + nan.length + out.length;
+    add('Mesh geometry', gbad ? 'fail' : (tiny.length || huge.length ? 'warn' : 'pass'), empty.length + ' empty, ' + nan.length + ' with invalid coordinates, ' + out.length + ' outside the body bounds, ' + tiny.length + ' extremely small, ' + huge.length + ' oversized' + (gbad + tiny.length + huge.length ? ': ' + empty.concat(nan, out, tiny, huge).slice(0, 8).join(', ') : ''));
+    add('Structure drawn twice', two.length ? 'warn' : 'pass', two.length + ' structures are drawn by two models in the same place' + (two.length ? ': ' + two.slice(0, 10).join(', ') : '') + '; ' + unmapped + ' meshes without a structure id');
+    var have = 0, none = 0; ids.forEach(function (id) { (by[id] ? have++ : none++); });
+    add('Mesh references', 'info', have + ' structures have their own mesh loaded now; ' + none + ' are text-only or shown through their parts');
+  }
   function checkContinuity(add, by) {
     var bad = [], n = 0, skipped = 0, cache = {};
     var get = function (id) { if (!by[id]) return null; return cache[id] || (cache[id] = cat(by[id])); };
@@ -151,7 +188,7 @@
     running = true; cancel = false; var out = [], add = function (t, s, m) { out.push({ check: t, status: s, detail: m }); render(out); };
     try {
       progress('Reading records'); checkRecords(add); await wait(20);
-      checkState(add); progress('Scanning the 3D scene'); var by = meshesById(); checkSceneDuplicates(add, by); await wait(20);
+      checkState(add); progress('Scanning the 3D scene'); var by = meshesById(); checkSceneDuplicates(add, by); checkIntegrity(add, by); await wait(20);
       progress('Checking vessel and nerve joins'); await wait(20); checkContinuity(add, by); await checkAirborne(add, by, progress);
       var ids = Object.keys(R()).sort(); if (mode === 'aironly') ids = []; if (mode === 'quick') ids = ids.filter(function (_, i) { return i % 20 === 0; }); await checkMarkers(add, ids, progress);
     } catch (e) { add('Self-check error', 'fail', String(e && e.message || e)); }
