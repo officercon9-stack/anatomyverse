@@ -1,0 +1,1658 @@
+[
+{
+"severity": "MEDIUM",
+"check": "duplicate-latin-name",
+"id": "central-incisor",
+"detail": "dens incisivus centralis: central-incisor, upper-left-central-incisor, upper-right-central-incisor, lower-left-central-incisor, lower-right-central-incisor"
+},
+{
+"severity": "MEDIUM",
+"check": "duplicate-latin-name",
+"id": "lateral-incisor",
+"detail": "dens incisivus lateralis: lateral-incisor, upper-left-lateral-incisor, upper-right-lateral-incisor, lower-left-lateral-incisor, lower-right-lateral-incisor"
+},
+{
+"severity": "MEDIUM",
+"check": "duplicate-latin-name",
+"id": "canine",
+"detail": "dens caninus: canine, upper-left-canine, upper-right-canine, lower-left-canine, lower-right-canine"
+},
+{
+"severity": "MEDIUM",
+"check": "duplicate-latin-name",
+"id": "upper-left-first-premolar",
+"detail": "dens premolaris primus: upper-left-first-premolar, upper-right-first-premolar, lower-left-first-premolar, lower-right-first-premolar, first-premolar"
+},
+{
+"severity": "MEDIUM",
+"check": "duplicate-latin-name",
+"id": "upper-left-second-premolar",
+"detail": "dens premolaris secundus: upper-left-second-premolar, upper-right-second-premolar, lower-left-second-premolar, lower-right-second-premolar, second-premolar"
+},
+{
+"severity": "MEDIUM",
+"check": "duplicate-latin-name",
+"id": "upper-left-first-molar",
+"detail": "dens molaris primus: upper-left-first-molar, upper-right-first-molar, lower-left-first-molar, lower-right-first-molar, first-molar"
+},
+{
+"severity": "MEDIUM",
+"check": "duplicate-latin-name",
+"id": "upper-left-second-molar",
+"detail": "dens molaris secundus: upper-left-second-molar, upper-right-second-molar, lower-left-second-molar, lower-right-second-molar, second-molar"
+},
+{
+"severity": "MEDIUM",
+"check": "mesh-without-structure",
+"id": "",
+"detail": "model brain-flow"
+},
+{
+"severity": "MEDIUM",
+"check": "oversized-mesh",
+"id": "cst",
+"detail": "1.29 m (corticospinal-tract)"
+},
+{
+"severity": "HIGH",
+"check": "region-vs-position",
+"id": "corticospinal-tract",
+"detail": "region=head but centroid height 1.32 m"
+},
+{
+"severity": "HIGH",
+"check": "region-vs-position",
+"id": "dorsal-column-medial-lemniscus-pathway",
+"detail": "region=head but centroid height 1.24 m"
+},
+{
+"severity": "HIGH",
+"check": "region-vs-position",
+"id": "psoas-major-right",
+"detail": "region=lower-limb but centroid height 1.05 m"
+},
+{
+"severity": "HIGH",
+"check": "region-vs-position",
+"id": "rhomboid-major-right",
+"detail": "region=upper-limb but |x|=0.06 m (midline)"
+},
+{
+"severity": "HIGH",
+"check": "region-vs-position",
+"id": "levator-scapulae-left",
+"detail": "region=upper-limb but |x|=0.06 m (midline)"
+},
+{
+"severity": "HIGH",
+"check": "region-vs-position",
+"id": "trapezius-left",
+"detail": "region=upper-limb but |x|=0.07 m (midline)"
+},
+{
+"severity": "HIGH",
+"check": "region-vs-position",
+"id": "rhomboid-minor-left",
+"detail": "region=upper-limb but |x|=0.04 m (midline)"
+},
+{
+"severity": "HIGH",
+"check": "region-vs-position",
+"id": "trapezius",
+"detail": "region=upper-limb but |x|=0.05 m (midline)"
+},
+{
+"severity": "HIGH",
+"check": "region-vs-position",
+"id": "subclavius-right",
+"detail": "region=upper-limb but |x|=0.07 m (midline)"
+},
+{
+"severity": "HIGH",
+"check": "region-vs-position",
+"id": "rhomboid-minor-right",
+"detail": "region=upper-limb but |x|=0.03 m (midline)"
+},
+{
+"severity": "HIGH",
+"check": "region-vs-position",
+"id": "levator-scapulae-right",
+"detail": "region=upper-limb but |x|=0.05 m (midline)"
+},
+{
+"severity": "HIGH",
+"check": "region-vs-position",
+"id": "rhomboid-major-left",
+"detail": "region=upper-limb but |x|=0.07 m (midline)"
+},
+{
+"severity": "HIGH",
+"check": "region-vs-position",
+"id": "trapezius-right",
+"detail": "region=upper-limb but |x|=0.07 m (midline)"
+},
+{
+"severity": "HIGH",
+"check": "near-identical-overlap",
+"id": "zj_subfascial_prepatellar_bursa_r_1",
+"detail": "male: zanatomy-bursae/zj_subfascial_prepatellar_bursa_r_1[subfascial-prepatellar-bursa-right] vs zanatomy-bursae/zj_subtendinous_prepatellar_bursa_r_1[subtendinous-prepatellar-bursa-right], size 3.1 cm"
+},
+{
+"severity": "HIGH",
+"check": "near-identical-overlap",
+"id": "central_retinal_artery_L",
+"detail": "male: schematic-body-v1/central_retinal_artery_L[central-retinal-artery] vs schematic-body-v1/central_retinal_vein_L[central-retinal-vein], size 6.8 cm"
+},
+{
+"severity": "HIGH",
+"check": "near-identical-overlap",
+"id": "zj_subfascial_prepatellar_bursa_r_1",
+"detail": "female: zanatomy-bursae/zj_subfascial_prepatellar_bursa_r_1[subfascial-prepatellar-bursa-right] vs zanatomy-bursae/zj_subtendinous_prepatellar_bursa_r_1[subtendinous-prepatellar-bursa-right], size 3.1 cm"
+},
+{
+"severity": "HIGH",
+"check": "near-identical-overlap",
+"id": "central_retinal_artery_L",
+"detail": "female: schematic-body-v1/central_retinal_artery_L[central-retinal-artery] vs schematic-body-v1/central_retinal_vein_L[central-retinal-vein], size 6.8 cm"
+},
+{
+"severity": "HIGH",
+"check": "near-identical-overlap",
+"id": "central_retinal_artery_L",
+"detail": "male_bp3d: schematic-body-v1/central_retinal_artery_L[central-retinal-artery] vs schematic-body-v1/central_retinal_vein_L[central-retinal-vein], size 6.8 cm"
+},
+{
+"severity": "HIGH",
+"check": "near-identical-overlap",
+"id": "zj_subfascial_prepatellar_bursa_r_1",
+"detail": "male_bp3d: zanatomy-bursae/zj_subfascial_prepatellar_bursa_r_1[subfascial-prepatellar-bursa-right] vs zanatomy-bursae/zj_subtendinous_prepatellar_bursa_r_1[subtendinous-prepatellar-bursa-right], size 3.1 cm"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "aorta",
+"detail": "male: zanatomy-heart(1), anatomyverse-organs(1)"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "inferior-vena-cava",
+"detail": "male: zanatomy-heart(1), anatomyverse-organs(1)"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "kidney-right",
+"detail": "male: anatomyverse-organs(1), zanatomy-kidney(1)"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "kidney-left",
+"detail": "male: anatomyverse-organs(1), zanatomy-kidney(1)"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "adrenal-gland-right",
+"detail": "male: anatomyverse-organs(1), zanatomy-kidney(1)"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "adrenal-gland-left",
+"detail": "male: anatomyverse-organs(1), zanatomy-kidney(1)"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "ureter-right",
+"detail": "male: anatomyverse-organs(1), zanatomy-kidney(1)"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "ureter-left",
+"detail": "male: anatomyverse-organs(1), zanatomy-kidney(1)"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "inferior-mesenteric-artery",
+"detail": "male: anatomyverse-organs(1), anatomyverse-mesenteric(1)"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "sternum",
+"detail": "male: anatomyverse-organs(1), zanatomy-limbbones(1)"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "internal-carotid-artery-left",
+"detail": "male: zanatomy-neckvessels(1), zanatomy-neckvessels-skull(1), bodyparts3d-brain-vessels(1)"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "internal-carotid-artery-right",
+"detail": "male: zanatomy-neckvessels(1), zanatomy-neckvessels-skull(1), bodyparts3d-brain-vessels(1)"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "vertebral-artery",
+"detail": "male: zanatomy-neckvessels(1), zanatomy-neckvessels-skull(1), bodyparts3d-brain-vessels(1)"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "alveoli",
+"detail": "male: bodyparts3d-lungs(1), schematic-body-v1(1)"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "aorta",
+"detail": "female: zanatomy-heart(1), anatomyverse-organs(1)"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "inferior-vena-cava",
+"detail": "female: zanatomy-heart(1), anatomyverse-organs(1)"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "kidney-right",
+"detail": "female: anatomyverse-organs(1), zanatomy-kidney(1)"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "kidney-left",
+"detail": "female: anatomyverse-organs(1), zanatomy-kidney(1)"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "adrenal-gland-right",
+"detail": "female: anatomyverse-organs(1), zanatomy-kidney(1)"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "adrenal-gland-left",
+"detail": "female: anatomyverse-organs(1), zanatomy-kidney(1)"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "ureter-right",
+"detail": "female: anatomyverse-organs(1), zanatomy-kidney(1)"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "ureter-left",
+"detail": "female: anatomyverse-organs(1), zanatomy-kidney(1)"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "inferior-mesenteric-artery",
+"detail": "female: anatomyverse-organs(1), anatomyverse-mesenteric(1)"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "sternum",
+"detail": "female: anatomyverse-organs(1), zanatomy-limbbones(1)"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "internal-carotid-artery-left",
+"detail": "female: zanatomy-neckvessels(1), zanatomy-neckvessels-skull(1), bodyparts3d-brain-vessels(1)"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "internal-carotid-artery-right",
+"detail": "female: zanatomy-neckvessels(1), zanatomy-neckvessels-skull(1), bodyparts3d-brain-vessels(1)"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "vertebral-artery",
+"detail": "female: zanatomy-neckvessels(1), zanatomy-neckvessels-skull(1), bodyparts3d-brain-vessels(1)"
+},
+{
+"severity": "MEDIUM",
+"check": "structure-from-two-models",
+"id": "alveoli",
+"detail": "female: bodyparts3d-lungs(1), schematic-body-v1(1)"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "pleura",
+"detail": "respiratory"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "central-incisor",
+"detail": "digestive"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "lateral-incisor",
+"detail": "digestive"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "canine",
+"detail": "digestive"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "first-premolar",
+"detail": "digestive"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "second-premolar",
+"detail": "digestive"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "first-molar",
+"detail": "digestive"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "second-molar",
+"detail": "digestive"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "external-surface-of-frontal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "foramen-caecum-of-frontal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "glabella",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "internal-surface-of-squamous-part-of-frontal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "nasal-margin-of-frontal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "nasal-part-of-frontal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "nasal-spine-of-frontal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "orbital-part-of-frontal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "orbital-plate-of-frontal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "orbital-surface-of-frontal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "parietal-margin-of-frontal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "sphenoidal-margin-of-frontal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "squamous-part-of-frontal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "supra-orbital-notch",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "temporal-surface-of-frontal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "zygomatic-process-of-frontal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "base-of-mandible",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "body-of-mandible",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "mental-foramen",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "oblique-line-of-mandible",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "basilar-part-of-occipital-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "external-occipital-crest",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "external-occipital-protuberance",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "foramen-magnum",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "lateral-part-of-occipital-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "mastoid-border-of-occipital-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "occipital-condyle",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "squamous-part-of-occipital-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "external-surface-of-parietal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "frontal-angle-of-parietal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "frontal-border-of-parietal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "internal-surface-of-parietal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "mastoid-angle-of-parietal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "occipital-angle-of-parietal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "occipital-border-of-parietal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "parietal-eminence",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "parietal-foramen",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "sagittal-border-of-parietal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "sphenoidal-angle-of-parietal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "squamosal-border-of-parietal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "body-of-sphenoid-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "foramen-ovale",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "foramen-rotundum",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "foramen-spinosum",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "groove-of-pterygoid-hamulus",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "lateral-pterygoid-plate",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "medial-pterygoid-plate",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "optic-canal",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "pterygoid-canal",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "pterygoid-fossa",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "pterygoid-hamulus",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "pterygoid-notch",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "sella-turcica",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "sphenoidal-crest",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "sphenoidal-lingula",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "spine-of-sphenoid-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "vaginal-process-of-sphenoid-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "mastoid-notch",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "mastoid-process",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "occipital-margin-of-temporal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "petrous-part-of-temporal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "squamous-part-of-temporal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "styloid-process-of-temporal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "tympanic-part-of-temporal-bone",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "body-of-clavicle",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "body-of-femur",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "greater-trochanter",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "head-of-femur",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "lateral-condyle-of-femur",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "lateral-epicondyle-of-femur",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "lesser-trochanter",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "linea-aspera",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "medial-condyle-of-femur",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "medial-epicondyle-of-femur",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "neck-of-femur",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "patellar-surface-of-femur",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "pectineal-line-of-femur",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "popliteal-surface-of-femur",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "anterior-border-of-fibula",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "anteromedial-surface-of-fibula",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "apex-of-head-of-fibula",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "articular-facet-of-head-of-fibula",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "body-of-fibula",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "head-of-fibula",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "interosseous-crest-of-fibula",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "lateral-malleolus",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "lateral-surface-of-fibula",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "malleolar-groove-of-fibula",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "medial-border-of-fibula",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "medial-surface-of-fibula",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "neck-of-fibula",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "posterior-border-of-fibula",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "posterior-surface-of-fibula",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "posteromedial-surface-of-fibula",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "acetabulum",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "ala-of-ilium",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "anterior-inferior-iliac-spine",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "anterior-superior-iliac-spine",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "arcuate-line-of-ilium",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "auricular-surface-of-ilium",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "body-of-ilium",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "body-of-ischium",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "body-of-pubis",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "gluteal-surface-of-ilium",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "greater-sciatic-notch",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "iliac-crest",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "iliac-fossa",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "iliac-tubercle",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "iliac-tuberosity",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "inner-lip-of-iliac-crest",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "ischial-spine",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "ischial-tuberosity",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "lesser-sciatic-notch",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "obturator-foramen",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "outer-lip-of-iliac-crest",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "posterior-inferior-iliac-spine",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "posterior-superior-iliac-spine",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "sacropelvic-surface-of-ilium",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "symphysial-surface-of-pubis",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "anatomical-neck-of-humerus",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "anterior-border-of-humerus",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "anterolateral-surface-of-humerus",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "anteromedial-surface-of-humerus",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "body-of-humerus",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "capitulum-of-humerus",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "condyle-of-humerus",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "coronoid-fossa",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "deltoid-tuberosity",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "greater-tubercle",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "head-of-humerus",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "lateral-border-of-humerus",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "lateral-epicondyle-of-humerus",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "lesser-tubercle",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "medial-border-of-humerus",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "medial-epicondyle-of-humerus",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "olecranon-fossa",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "posterior-surface-of-humerus",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "radial-fossa",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "surgical-neck-of-humerus",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "trochlea-of-humerus",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "anterior-border-of-radius",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "anterior-surface-of-radius",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "articular-circumference-of-head-of-radius",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "articular-facet-of-head-of-radius",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "body-of-radius",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "head-of-radius",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "interosseous-border-of-radius",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "lateral-surface-of-radius",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "neck-of-radius",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "posterior-border-of-radius",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "posterior-surface-of-radius",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "radial-tuberosity",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "acromion",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "coracoid-process",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "costal-surface-of-scapula",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "glenoid-process-of-scapula",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "inferior-angle-of-scapula",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "infraglenoid-tubercle",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "lateral-angle-of-scapula",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "lateral-border-of-scapula",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "medial-border-of-scapula",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "neck-of-scapula",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "posterior-surface-of-scapula",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "spine-of-scapula",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "superior-angle-of-scapula",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "superior-border-of-scapula",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "supraglenoid-tubercle",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "sternal-angle",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "xiphoid-process",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "anterior-border-of-tibia",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "body-of-tibia",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "inferior-articular-surface-of-tibia",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "interosseous-border-of-tibia",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "lateral-condyle-of-tibia",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "lateral-surface-of-tibia",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "malleolar-groove-of-tibia",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "medial-border-of-tibia",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "medial-condyle-of-tibia",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "medial-malleolus",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "medial-surface-of-tibia",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "posterior-surface-of-tibia",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "superior-articular-surfaces-of-tibia",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "tibial-tuberosity",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "anterior-border-of-ulna",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "articular-circumference-of-head-of-ulna",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "body-of-ulna",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "coronoid-process-of-ulna",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "head-of-ulna",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "interosseous-border-of-ulna",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "medial-surface-of-ulna",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "olecranon",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "posterior-border-of-ulna",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "posterior-surface-of-ulna",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "trochlear-notch",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "tuberosity-of-ulna",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "choroid",
+"detail": "special-senses"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "macula-fovea",
+"detail": "special-senses"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "optic-disc",
+"detail": "special-senses"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "epidermis",
+"detail": "integumentary"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "dermis",
+"detail": "integumentary"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "hypodermis",
+"detail": "integumentary"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "skin-appendages",
+"detail": "integumentary"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "external-ear",
+"detail": "special-senses"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "nasal-cartilages",
+"detail": "skeletal"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "nasalis",
+"detail": "muscular"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "respiratory-bronchiole",
+"detail": "respiratory"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "alveolar-duct",
+"detail": "respiratory"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "pulmonary-capillaries",
+"detail": "respiratory"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "pulmonary-arteriole",
+"detail": "respiratory"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "pulmonary-venule",
+"detail": "respiratory"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "type-ii-pneumocyte",
+"detail": "respiratory"
+},
+{
+"severity": "LOW",
+"check": "record-without-mesh",
+"id": "alveolar-macrophage",
+"detail": "respiratory"
+}
+]

@@ -1,0 +1,77 @@
+{
+"reproductive": [
+"spermatic-cord",
+"scrotum",
+"labia-majora",
+"labia-minora",
+"clitoris",
+"mons-pubis",
+"mammary-gland",
+"vagina",
+"vaginal-opening"
+],
+"special-senses": [
+"taste-buds",
+"olfactory-epithelium",
+"pupil"
+],
+"digestive": [
+"oral-cavity"
+],
+"nervous": [
+"phrenic-nerve",
+"saphenous-nerve-right",
+"saphenous-nerve-left",
+"ciliary-ganglion",
+"short-ciliary-nerves"
+],
+"respiratory": [
+"inferior-phrenic-artery",
+"superior-phrenic-artery",
+"musculophrenic-artery",
+"pericardiophrenic-artery",
+"lower-intercostal-nerves"
+],
+"cardiovascular": [
+"axillary-artery-right",
+"brachial-artery-right",
+"radial-artery-right",
+"ulnar-artery-right",
+"axillary-vein-right",
+"basilic-vein-right",
+"cephalic-vein-right",
+"femoral-artery-right",
+"popliteal-artery-right",
+"anterior-tibial-artery-right",
+"posterior-tibial-artery-right",
+"femoral-vein-right",
+"great-saphenous-vein-right",
+"axillary-artery-left",
+"brachial-artery-left",
+"radial-artery-left",
+"ulnar-artery-left",
+"axillary-vein-left",
+"basilic-vein-left",
+"cephalic-vein-left",
+"femoral-artery-left",
+"popliteal-artery-left",
+"anterior-tibial-artery-left",
+"posterior-tibial-artery-left",
+"femoral-vein-left",
+"great-saphenous-vein-left",
+"ophthalmic-artery",
+"central-retinal-artery",
+"posterior-ciliary-arteries",
+"central-retinal-vein"
+],
+"endocrine": [
+"parathyroid-glands"
+],
+"lymphatic": [
+"lymph-nodes"
+],
+"urinary": [
+"external-urethral-orifice",
+"urethra"
+]
+}
