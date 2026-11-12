@@ -1,0 +1,25 @@
+PASS default view shows the body - 899 meshes visible
+PASS sex switch female: no wrong-sex parts - 899 visible; wrong-sex: none
+PASS sex switch male: no wrong-sex parts - 899 visible; wrong-sex: none
+PASS system skeletal - 187 solid (187 in system), 712 faint context meshes
+PASS system muscular - 452 solid (452 in system), 447 faint context meshes
+PASS system cardiovascular - 82 solid (82 in system), 817 faint context meshes
+PASS system nervous - 46 solid (46 in system), 853 faint context meshes
+PASS system respiratory - 19 solid (18 in system), 880 faint context meshes
+PASS system digestive - 53 solid (52 in system), 846 faint context meshes
+PASS system urinary - 10 solid (8 in system), 889 faint context meshes
+PASS system reproductive - 13 solid (12 in system), 886 faint context meshes
+PASS system endocrine - 7 solid (5 in system), 892 faint context meshes
+PASS system special-senses - 20 solid (20 in system), 879 faint context meshes
+PASS system lymphatic - 4 solid (4 in system), 895 faint context meshes
+PASS system integumentary - 1 solid (1 in system), 898 faint context meshes
+PASS isolate - 9 solid (lateral-condyle-of-femur-left,medial-condyle-of-femur-left,body-of-femur-left,patellar-surface-of-femur-left), body outline meshes 1
+PASS hide and show - hidden=true, back after reset=true
+PASS select by id - 196 ids selected, 0 failed; panel shows name=true
+FAIL tap picking - 36 points, 19 on a structure, 9 selected exactly that structure; mismatches: external-oblique-right->platysma-right; sternum->nasal-cavity; empty->external-oblique-right; empty->pectoralis-major-left; costal-cartilages-left->lacrimal-gland
+PASS search - clicked LI; selected gallbladder
+PASS label modes - Smart=true Index=true Clean=true
+PASS rotate, zoom and reset camera - moved 0.80 m, reset button clicked=true, distance from start after reset 0.000 m
+PASS parent and child selection - kidney then kidney-left
+PASS no page errors - 0 errors 
+TOTAL 23/24

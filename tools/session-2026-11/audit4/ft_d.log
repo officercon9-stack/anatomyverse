@@ -1,0 +1,11 @@
+PASS default view shows the body - 899 meshes visible
+node:internal/process/promises:394
+    triggerUncaughtException(err, true /* fromPromise */);
+    ^
+
+page.waitForTimeout: Target page, context or browser has been closed
+    at /tmp/claude-0/-home-claude/f7d7ef6f-0b20-52fe-a210-678745f291ac/scratchpad/audit4/ftest.js:18:112 {
+  log: []
+}
+
+Node.js v22.22.0
