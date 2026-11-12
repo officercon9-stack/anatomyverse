@@ -191,3 +191,7 @@ Checked by reading the repo and running the Android web folder in a browser at P
 - Test (Playwright, Pixel 5 emulation, software GL): in each sex, every drawn mesh was checked against the records; 0 wrong-sex meshes in female, male, and after switching back; first load requests only the female skin and vulva models; skin selected draws 1 mesh; selecting Prostate from the female view switches to male. No page errors. Not tested on a physical phone.
 - Not changed: the skeleton and muscles are the same male-derived set for both sexes (pelvis shape included).
 - Chunks b163, sw cache av-v128.
+
+## 12 Nov 2026 - realistic body surface (MakeHuman, CC0)
+- Replaced the HuBMAP Visible Human skin (crude 1990s scan look) with MakeHuman 1.1 male and female bodies (CC0): posed with MakeHuman's own skeleton and skin weights to the app's limb landmarks, scaled to the skeleton, no push-out (which ballooned the limbs). Scripts in tools/session-2026-11/generators/mh_skin/.
+- Labelled "schematic" (artist-made, not a scan). Penis and scrotum stay visible when the skin is solid.

@@ -273,3 +273,11 @@ Generated parts were built independently and contain no third-party vertices. Wh
 ## Intrarenal vessels (generated, 12 Nov 2026)
 
 - Files: `models/anatomyverse-renal-vessels.glb` (+ lite). Original generated tubes, not a scan: anterior and posterior divisions of the renal artery, interlobar arteries and veins routed between the scan-derived pyramids. Marked schematic in the app. Approximation pending expert review.
+
+
+## Body surface (skin), male and female - replaced 12 Nov 2026
+
+- Files: `models/mh-skin-male.glb`, `models/mh-skin-female.glb` (+ `models/lite/`). They replace the HuBMAP Visible Human skin files, which looked crude (1990s scans of heavy-set donors, no ears or lips, simplified).
+- Source: MakeHuman 1.1 base mesh, ethnic/gender macro targets (young adult, average muscle and weight), female breast targets, default skeleton and skin weights. Licence: CC0 1.0 (assets explicitly released as CC0 in September 2020, see LICENSE.ASSETS.md in the MakeHuman repository). Attribution is not required but is given.
+- Changes: posed with the MakeHuman skeleton so the arms, hands, legs and feet match this app's skeleton landmarks; scaled to the app's height; limbs and trunk fitted by blended joint transforms. Scripts: `tools/session-2026-11/generators/mh_skin/`.
+- Honesty note: artist-made, not anatomical scan data; labelled "schematic" in the app. Some muscles lie up to 1-3 cm outside it in places; this is invisible when the skin is solid (inner structures are hidden then) and harmless when it is see-through.
