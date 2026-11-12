@@ -72,7 +72,7 @@ def pose(sex):
         if len(f)==4:tri.append([f[0],f[2],f[3]])
     tri=np.array(tri);used=np.unique(tri);remap=-np.ones(n,int);remap[used]=np.arange(len(used))
     EY={}
-    for g_ in ('helper-l-eye','helper-r-eye'):
+    for g_ in ('helper-l-eye','helper-r-eye','helper-genital'):
         fs=G[g_];tt=[]
         for f in fs:
             tt.append([f[0],f[1],f[2]])
