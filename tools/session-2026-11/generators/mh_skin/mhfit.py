@@ -106,6 +106,7 @@ def run(sex):
     Wt/=Wt.sum(1,keepdims=True)
     V=Wt[:,[0]]*trunk(P)
     for i,k in enumerate(names[1:],1):M,t=bones[k];V+=Wt[:,[i]]*(P@M.T+t)
+    EY=pickle.load(open('eyes_%s.pkl'%sex,'rb'));pickle.dump({k:(trunk(v),f) for k,(v,f) in EY.items()},open('eyesfit_%s.pkl'%sex,'wb'))
     return V,F,L,A,names,Wt,Q,alm
 if __name__=='__main__':
     for sex in sys.argv[1:]:

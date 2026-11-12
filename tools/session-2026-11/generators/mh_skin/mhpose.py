@@ -71,6 +71,14 @@ def pose(sex):
         tri.append([f[0],f[1],f[2]])
         if len(f)==4:tri.append([f[0],f[2],f[3]])
     tri=np.array(tri);used=np.unique(tri);remap=-np.ones(n,int);remap[used]=np.arange(len(used))
+    EY={}
+    for g_ in ('helper-l-eye','helper-r-eye'):
+        fs=G[g_];tt=[]
+        for f in fs:
+            tt.append([f[0],f[1],f[2]])
+            if len(f)==4:tt.append([f[0],f[2],f[3]])
+        tt=np.array(tt);u=np.unique(tt);rm=-np.ones(n,int);rm[u]=np.arange(len(u));EY[g_]=(Vp[u],rm[tt])
+    pickle.dump(EY,open('eyes_%s.pkl'%sex,'wb'))
     return Vp[used],remap[tri],Jp,s
 if __name__=='__main__':
     sys.path.insert(0,SW);from rnd import render,sheet
