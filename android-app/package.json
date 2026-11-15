@@ -8,10 +8,12 @@
   },
   "keywords": [],
   "author": "",
-  "license": "UNLICENSED","private": true,
+  "license": "UNLICENSED",
+  "private": true,
   "dependencies": {
     "@capacitor/android": "^8.6.0",
     "@capacitor/cli": "^8.6.0",
-    "@capacitor/core": "^8.6.0"
+    "@capacitor/core": "^8.6.0",
+    "@capgo/native-purchases": "8.9.6"
   }
 }
