@@ -287,7 +287,7 @@ Q = [
  "Autoimmune adrenalitis is the commonest cause of Addison disease in the West; tuberculosis is common in developing countries."),
 ("Conn syndrome is due to:",
  ["Aldosterone-secreting adenoma, with hypertension and hypokalaemia", "Cortisol excess", "ACTH excess", "Catecholamine excess"],
- "Renin is low."),
+ "Primary hyperaldosteronism from an adrenal adenoma: aldosterone retains sodium and wastes potassium, causing hypertension and hypokalaemia, with suppressed renin."),
 ("The most common cause of Cushing syndrome overall is:",
  ["Exogenous steroids", "Pituitary adenoma", "Adrenal adenoma", "Ectopic ACTH"],
  "Cushing disease refers to a pituitary ACTH-secreting tumour."),

@@ -4,6 +4,7 @@ App name (max 30): **3D Anatomy**
 Package name: `com.officercon9.anatomyverse` (cannot change after the first upload)
 Category: Education (or Medical; Education is safer for a study tool)
 Contact email: officercon9@gmail.com
+Price: **Paid, Rs 1,500 one-time** (set in Monetize > App pricing BEFORE the first release; never choose Free: a free app can never become paid). No in-app purchases, no subscriptions, no ads.
 Privacy policy URL: https://officercon9-stack.github.io/anatomyverse/privacy.html (plain page with the same text as the in-app policy; use this one in Play Console because Google's checker may not read the in-app page)
 Content sources and licences URL: https://officercon9-stack.github.io/anatomyverse/#/legal/sources
 
@@ -22,13 +23,14 @@ WHAT YOU CAN DO
 - Tap any structure to read its location, function and a short clinical note.
 - Practise with quizzes, flashcards and guided lessons, plus an FCPS Part I question bank (anatomy, physiology, biochemistry, pathology and pharmacology) with explanations.
 - Look up Latin anatomical terms in the dictionary.
+- All 1,806 FCPS Part I questions included. One-time price, no subscription, no in-app purchases.
 - Works offline once installed. No account, no ads and no tracking.
 
 FOR EDUCATION ONLY
 3D Anatomy is a learning aid. It is not a medical device and does not diagnose, treat, cure, or prevent any medical condition. Always consult a healthcare professional for medical advice, diagnosis, or treatment. Models are simplified for teaching and some structures are schematic. Practice questions are study aids and are not official exam questions; this app is not affiliated with or endorsed by the College of Physicians and Surgeons Pakistan (CPSP); always check facts against your course materials and standard textbooks.
 
 CREDITS
-Many 3D models are derived from Z-Anatomy and BodyParts3D, licensed under Creative Commons Attribution-ShareAlike (CC BY-SA 4.0 and 2.1 Japan), and were modified for this app. Full credits and licences are in the app under Content sources.
+Many 3D models are derived from Z-Anatomy and BodyParts3D (Creative Commons Attribution-ShareAlike, CC BY-SA 4.0 and 2.1 Japan), the HuBMAP Visible Human reference library (CC BY 4.0) and MakeHuman (CC0), and were modified for this app. Full credits and licences are in the app under Content sources.
 
 ## Graphics
 - App icon 512x512: `store/playstore-icon-512.png`
@@ -37,10 +39,13 @@ Many 3D models are derived from Z-Anatomy and BodyParts3D, licensed under Creati
 - Tablet screenshots are optional.
 
 ## Content rating (IARC questionnaire)
-Category: Reference, News or Educational. Answer "No" to violence, sexual content, language, controlled substances, gambling, user-generated content, location sharing and online purchases. Expect "Everyone". Say the app shows anatomical 3D models of the human body (non-sexual, educational). Re-check if wording on the form differs.
+Category: Reference, News or Educational. The app shows realistic unclothed male and female 3D bodies, including genitals, in a purely educational, non-sexual context. If the form asks about nudity, answer honestly that it contains non-sexual anatomical nudity for education; answer "No" to sexual content, violence, language, controlled substances, gambling, user-generated content, location sharing and in-app purchases. The rating may come out higher than "Everyone"; that is fine for a medical study app. Keep the store screenshots free of genitals (the current set is).
 
 ## Target audience
 Select 18 and over (or 13 and over). Do NOT select under-13 groups: that would trigger the Families policy.
+
+## Payments
+Google Play handles the purchase. The app contains no billing code and collects no payment data.
 
 ## Data safety form
 - Does your app collect or share any of the required user data types? **No.**
